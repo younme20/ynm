@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="study">
+
+
+	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ 
+			SELECT IDX
+				 , TITLE
+				 , HITCNT
+				 , DATE_FORMAT(NOW(), '%y/%m/%d') AS  CREATE_DATETIME
+			  FROM board 
+			 ORDER BY IDX DESC 
+		]]> 
+	</select>
+	
+	<select id="selectDetail" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ 
+			SELECT IDX
+				 , TITLE
+				 , CONTENTS
+				 , HITCNT
+				 , CREATE_ID
+				 , DATE_FORMAT(NOW(), '%y/%m/%d') AS  CREATE_DATETIME 
+			  FROM board 
+			 WHERE IDX = #{IDX}  
+		]]> 
+	</select>
+	
+    <insert id="insertBoard" parameterType="hashmap">
+        <selectKey keyProperty="IDX" resultType="int">
+        	SELECT MAX(IDX) + 1 FROM board
+        </selectKey>
+        INSERT INTO board
+             ( IDX, TITLE, CONTENTS, CREATE_ID, CREATE_DATETIME   
+             )
+        VALUES
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, 'testid', SYSDATE()
+             
+             ) 
+    </insert>
+    
+    <update id="updateBoard" parameterType="hashmap">
+        UPDATE board
+           SET TITLE = #{TITLE}
+             , CONTENTS = #{CONTENTS}
+             , UPDATE_ID = 'testid2'
+             , UPDATE_DATETIME = SYSDATE()
+         WHERE IDX = #{IDX}
+    </update>
+    
+    <delete id="deleteBoard" parameterType="hashmap">
+        DELETE FROM board
+         WHERE IDX = #{IDX}
+    </delete>
+
+
+</mapper>
