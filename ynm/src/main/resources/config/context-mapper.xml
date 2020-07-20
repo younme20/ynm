@@ -19,9 +19,8 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 		
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		
-		<property name="mapperLocations" value="classpath*:kr/ko/ym/**/*domain*/*.xml" />
+		<property name="dataSource" ref="dataSource" />		
+		<property name="mapperLocations" value="classpath*:*mapper*/**/*.xml" />
 	</bean>
 	
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
