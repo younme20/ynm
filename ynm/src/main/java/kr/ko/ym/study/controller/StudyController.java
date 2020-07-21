@@ -19,12 +19,10 @@ import kr.ko.ym.study.service.StudyService;
 
 /*
  * 2020. 07. 15
- * 스터디관리 > 스터디관리 게시판
  */
 @Controller
 public class StudyController {
 	
-	/* ���� ���� */
 	@Autowired
 	private StudyService studyService;
 	
@@ -74,18 +72,21 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/study/insert", method=RequestMethod.POST)
+	@ResponseBody
 	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {		
-		studyService.insertBoard(param) ;
+		studyService.insertBoard(param);
 		
 	}
 	
 	@RequestMapping(value="/study/update", method=RequestMethod.POST)
+	@ResponseBody
 	public void updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.updateBoard(param);
 		
 	}
 	
 	@RequestMapping(value="/study/delete", method=RequestMethod.POST)
+	@ResponseBody
 	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.deleteBoard(param);
 		
