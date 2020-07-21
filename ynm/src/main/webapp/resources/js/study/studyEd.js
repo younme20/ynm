@@ -59,13 +59,16 @@ function studyEdit() {
 			type : "POST",                               
 			url : "/ynm/study/insert",                   
 			json : true,                           
-			data : data,                 
+			data : data,      
+			async: false,
 			success : function(result, textStatus, jqXHR){
-				alert('전송성공!');
+				alert('성공적으로 저장되었습니다.');
+				var idx = $("#IDX").val()*1;
+				movePage("/ynm/study/view/"+idx);
 			},
 			error   : function(result, textStatus, jqXHR){
-				//alert('전송실패!');
-				movePage("/ynm");
+				console.log(result, textStatus, jqXHR);
+				//movePage("/ynm");
 			}
 		});		
 	},
@@ -81,7 +84,9 @@ function studyEdit() {
 			json : true,                           
 			data : data,                 
 			success : function(result, textStatus, jqXHR){
-				alert('전송성공!');
+				alert('성공적으로 수정되었습니다.');
+				var idx = $("#IDX").val()*1;
+				movePage("/ynm/study/view/"+idx);
 			},
 			error   : function(result, textStatus, jqXHR){
 				movePage("/ynm");
@@ -98,7 +103,8 @@ function studyEdit() {
 			json : true,                           
 			data : data,                 
 			success : function(result, textStatus, jqXHR){
-				alert('전송성공!');
+				alert('삭제되었습니다.');
+				movePage("/ynm");
 			},
 			error   : function(result, textStatus, jqXHR){
 				movePage("/ynm");
