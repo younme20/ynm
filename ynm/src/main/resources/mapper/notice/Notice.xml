@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="notice">
+	<!-- 게시글 목록 -->
+	<select id="noticeList" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, TITLE, HITCNT, CREATE_DATETIME, CREATE_ID
+		FROM board;
+	</select>
+	<!-- 게시글 상세보기 -->
+	<select id="noticeDetail" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, TITLE, CONTENTS, HITCNT, CREATE_DATETIME, CREATE_ID, UPDATE_DATETIME, UPDATE_ID
+		FROM board
+		WHERE IDX = #{IDX};
+	</select>
+	<!--게시글  조회수 증가 -->
+	<update id="noticeHitcnt" parameterType="hashmap">
+	  UPDATE board SET HITCNT = HITCNT + 1 WHERE IDX = #{IDX};
+	</update>
+	
+   	<!-- 게시글 수정 -->
+   	<update id="noticeUpdate" parameterType="hashmap">
+        UPDATE board SET
+            TITLE = #{TITLE}
+            , CONTENTS = #{CONTENTS}
+            , UPDATE_ID = #{UPDATE_ID}
+            , UPDATE_DATETIME = now()
+        WHERE
+            IDX = #{IDX}
+    </update>
+    
+
+	<!-- 게시글 삭제  -->
+	<delete id="noticeDelete" parameterType="hashmap">
+		DELETE FROM board WHERE IDX = #{IDX}
+	</delete>
+	
+	<!-- 게시글 등록  -->
+ 	<insert id="noticeInsert" parameterType="hashmap">
+       INSERT INTO
+       board(
+           TITLE
+           , CONTENTS
+           , CREATE_ID
+           , CREATE_DATETIME)
+       VALUES(
+           #{TITLE}
+           , #{CONTENTS}
+           , #{CREATE_ID}
+           , now())
+   	</insert>
+   	
+
+    <!-- 게시글 삭제  -->
+     <delete id="deleteBoard" parameterType="hashmap">
+        DELETE FROM board
+        WHERE
+            IDX = #{IDX}
+     </delete>
+   
+</mapper>
