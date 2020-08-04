@@ -9,5 +9,11 @@
 </head>
 <body>
 	<!-- left page -->
+	<div>
+		<ul>
+			<li><a href="/ynm">study</a></li>
+			<li><a href="/ynm/notice">notice</a></li>
+		</ul>
+	</div>
 </body>
 </html>
