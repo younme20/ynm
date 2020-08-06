@@ -1,18 +1,20 @@
 package kr.ko.ym.notice.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.notice.service.NoticeService;
-import kr.ko.ym.notice.service.NoticeServiceImpl;
 @Controller
-public class noticeController {
+public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
@@ -23,16 +25,17 @@ public class noticeController {
 	@RequestMapping(value="/notice")
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/notice/noticeLs");
-		
 		mv.addObject("list", noticeService.selectList(param));				
 		return mv;		
 	}
 	/*
 	 * 게시글 상세보기
 	 * */
-	@RequestMapping(value="/noticeDetail" )
-	public ModelAndView noticeDetail(@RequestParam Map<String,Object>param) throws Exception {
+	@RequestMapping(value="/notice/detail/{idx}" )
+	public ModelAndView noticeDetail(@PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw");
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("IDX", idx);			
 		
 		mv.addObject("data", noticeService.noticeDetail(param));		
 		noticeService.noticeHitcnt(param);
@@ -42,7 +45,7 @@ public class noticeController {
 	/*
 	 * 글쓰기 폼
 	 * */
-	@RequestMapping(value="/writeForm")
+	@RequestMapping(value="/notice/form")
 	public String boardWrite() throws Exception {
 		return "notice/noticeEd";
 	}
@@ -50,7 +53,8 @@ public class noticeController {
 	/*
 	 * 새 글 등록
 	 * */
-	@RequestMapping(value="/noticeInsert")
+	@ResponseBody
+	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	public ModelAndView noticeInsert(@RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeLs");
 		mv.addObject("data", noticeService.noticeInsert(param));				
@@ -71,7 +75,7 @@ public class noticeController {
 	/*
 	 * 게시글 수정
 	 * */
-	@RequestMapping(value="/noticeUpdate")
+	@RequestMapping(value="/notice/Update")
 	public String noticeUpdate(@RequestParam Map<String,Object>param) throws Exception {
 		noticeService.noticeUpdate(param);
 		return "notice/noticeLs";
@@ -79,7 +83,7 @@ public class noticeController {
 	/*
 	 * 게시글 삭제
 	 * */
-	@RequestMapping(value="/noticeDelete", method = RequestMethod.GET)
+	@RequestMapping(value="/notice/Delete", method = RequestMethod.GET)
 	public String noticeDelete(@RequestParam Map<String,Object>param) throws Exception {
 		noticeService.noticeDelete(param);
 		return "notice/noticeLs";

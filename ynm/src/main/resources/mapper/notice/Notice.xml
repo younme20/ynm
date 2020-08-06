@@ -43,7 +43,7 @@
            , CREATE_ID
            , CREATE_DATETIME)
        VALUES(
-           #{TITLE}
+           	#{TITLE}
            , #{CONTENTS}
            , #{CREATE_ID}
            , now())
