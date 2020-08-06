@@ -29,7 +29,7 @@ public class StudyController {
 	private StudyService studyService;
 	
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value={"/","/study"})
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/study/studyLs");
 		

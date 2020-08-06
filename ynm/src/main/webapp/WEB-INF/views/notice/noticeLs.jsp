@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
-<script src="<c:url value='/resources/js/notice/noticeEd.js'/>"charset="utf-8"></script>
+<script src="<c:url value='/resources/js/notice/notice.js'/>"charset="utf-8"></script>
 </head>
 <body>
 	공지사항 게시판 목록
@@ -34,11 +34,11 @@
 	    <tbody>
 	        <c:choose>
 	            <c:when test="${fn:length(list) > 0}">
-	                <c:forEach items="${list }" var="row">
+	                <c:forEach items="${list}" var="row">
 	                    <tr>
 	                        <td>${row.IDX }</td>
 	                        <td>
-	                        	<a href='<c:url value='/noticeDetail?IDX=${row.IDX }'/>'>
+	                        	<a href="<c:url value='/notice/detail/${row.IDX}'/>">
 									${row.TITLE }
 	                        	</a>
 	                        </td>
@@ -57,9 +57,7 @@
 	          
 	    </tbody>
 	</table>
-	
-	<a href='<c:url value='writeForm'/>'>글쓰기</a>
-
-	</form>  
+	</form>
+	<button type="button" id="write">글쓰기</button>  
 </body>
 </html>
