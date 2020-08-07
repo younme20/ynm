@@ -20,7 +20,7 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"/> 
-		<property name="url" value="jdbc:mysql://3.20.212.220/ynm"/> 
+		<property name="url" value="jdbc:mysql://3.20.212.220/ynm?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/> 
 		<property name="username" value="ynm"/> 
 		<property name="password" value="Lca5534@!"/> 
 	</bean>

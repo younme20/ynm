@@ -21,11 +21,12 @@ public class StudyServiceImpl implements StudyService {
 		return commonDao.selectList("study.selectList", param);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> selectDetail(Map<String, Object> param) throws Exception {
 		Map<String,Object>map = new HashMap<String,Object>();
 		if(commonDao.selectOne("study.selectDetail", param) != null) {
+			commonDao.insert("study.updateBoardHit", param);
+
 			map = commonDao.selectOne("study.selectDetail", param);
 		}
 		return map;
