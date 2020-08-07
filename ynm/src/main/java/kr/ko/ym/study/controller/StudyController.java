@@ -29,7 +29,7 @@ public class StudyController {
 	
 	@RequestMapping(value="/")
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
-		ModelAndView mv = new ModelAndView("/study/studyLs");
+		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
 		mv.addObject("list", studyService.selectList(param));				
 		return mv;		
@@ -37,7 +37,7 @@ public class StudyController {
 	
 	@RequestMapping(value="/study/view/{idx}")
 	public ModelAndView selectViewPage(@PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("/study/studyEd");
+		ModelAndView mv = new ModelAndView("/study/studyEd.tiles");
 		
 		Map<String,Object>param = new HashMap<String,Object>();
 		
@@ -50,7 +50,7 @@ public class StudyController {
 	
 	@RequestMapping(value="/study/edit/{idx}")
 	public ModelAndView selectDetailInfo(@PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("/study/studyEd");
+		ModelAndView mv = new ModelAndView("/study/studyEd.tiles");
 		
 		Map<String,Object>param = new HashMap<String,Object>();
 		

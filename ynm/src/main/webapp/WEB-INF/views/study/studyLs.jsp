@@ -5,12 +5,8 @@
 <title>first</title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" />
-<!-- <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css"> -->
-<!-- jQuery --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
-<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
+ <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" />
+
 </head>
 <body>
 	<h2>스터디 관리 게시판 목록</h2>
@@ -33,11 +29,11 @@
 		<tbody>
 			<c:choose>
 				<c:when test="${fn:length(list) > 0}">
-					<c:forEach items="${list}" var="row">
+					<c:forEach items="${list}" var="row" varStatus="status">
 						<tr>
-							<td>${row.IDX}</td>
+							<td>${(fn:length(list)+1) - status.count}</td>
 							<td class="title">
-								<a href="#this" name="title" idx="${row.IDX}">${row.TITLE}</a>
+								<a href="#this" name="title" idx="${(fn:length(list)+1) - status.count}">${row.TITLE}</a>
 							</td>
 							<td>${row.HITCNT }</td>
 							<td>${row.CREATE_DATETIME }</td>
@@ -53,4 +49,6 @@
 		</tbody>
 	</table>
 </body>
+<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
 </html>

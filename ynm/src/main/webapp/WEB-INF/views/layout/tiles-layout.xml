@@ -20,15 +20,15 @@
     </definition>
     
     <!-- 동적 매핑 -->
-    <definition name="*.jsp" extends="default">
+    <definition name="*.tiles" extends="default">
         <put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
     </definition>
  
-     <definition name="*/*.jsp" extends="default">
+     <definition name="*/*.tiles" extends="default">
          <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
      </definition>
     
-    <definition name="*/*/*.jsp" extends="default">
+    <definition name="*/*/*.tiles" extends="default">
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>
 
