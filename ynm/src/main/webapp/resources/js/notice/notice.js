@@ -22,17 +22,6 @@ $(document).ready(function(){
 		movePage("/ynm/notice/detail/"+idx);
 	});
 
-/*	$("#modifyFrom").on("click", function(){
-		alert('수정폼 이동');
-		//movePage("/ynm/modifyForm");
-
-	});
-
-	$("#delete").on("click", function(){
-		alert('삭제 이동');
-		//movePage("/ynm/noticeDelete");
-
-	});*/
 	notice = new noticeEdit();	
 });
 
@@ -41,15 +30,17 @@ function noticeEdit() {
 		
 	},
 	this.insertBoard = function(){ 
-		var data = $("#form").serialize();
+		var data = $("#form").serializeObject();
+		//data = JSON.stringify(data)
 		alert(data);
 		
 		$.ajax({
 			type : "POST",                               
 			url : "/ynm/notice/insert",                         
-			data : JSON.stringify(data),
-			dataType: "json", 
-			contentType: "application/json",
+			data : data,
+			//dataType: "json", 
+			//contentType: "application/json",
+			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('전송성공!');
 			},
@@ -58,25 +49,6 @@ function noticeEdit() {
 				movePage("/ynm/notice");
 			}
 		});
-	},
-	this.updateBoard = function(){ 
-		var data = {
-			"IDX": $("#IDX").val(),
-			"TITLE": $("#TITLE").val(),
-			"CONTENTS": $('#summernote').summernote('code')
-		};
-		$.ajax({
-			type : "POST",                               
-			url : "/ynm/study/update",                   
-			json : true,                           
-			data : data,                 
-			success : function(result, textStatus, jqXHR){
-				alert('전송성공!');
-			},
-			error   : function(result, textStatus, jqXHR){
-				movePage("/ynm");
-			}
-		});		
 	}
-	
+
 }
