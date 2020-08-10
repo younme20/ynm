@@ -3,9 +3,12 @@ package kr.ko.ym.notice.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,10 +56,12 @@ public class NoticeController {
 	/*
 	 * 새 글 등록
 	 * */
-	@ResponseBody
+	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
-	public ModelAndView noticeInsert(@RequestParam Map<String,Object>param) throws Exception {
+	@ResponseBody
+	public ModelAndView noticeInsert(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeLs");
+	
 		mv.addObject("data", noticeService.noticeInsert(param));				
 		return mv;		
 	}

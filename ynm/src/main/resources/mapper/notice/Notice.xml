@@ -35,19 +35,18 @@
 	</delete>
 	
 	<!-- 게시글 등록  -->
- 	<insert id="noticeInsert" parameterType="hashmap">
-       INSERT INTO
-       board(
-           TITLE
-           , CONTENTS
-           , CREATE_ID
-           , CREATE_DATETIME)
-       VALUES(
-           	#{TITLE}
-           , #{CONTENTS}
-           , #{CREATE_ID}
-           , now())
-   	</insert>
+ 	 <insert id="insertBoard" parameterType="hashmap">
+        <selectKey keyProperty="IDX" resultType="int">
+        	SELECT MAX(IDX) + 1 FROM board
+        </selectKey>
+        INSERT INTO board
+             ( IDX, TITLE, CONTENTS, CREATE_ID, CREATE_DATETIME   
+             )
+        VALUES
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, 'testid', SYSDATE()
+             
+             ) 
+    </insert>
    	
 
     <!-- 게시글 삭제  -->

@@ -36,7 +36,7 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public Object noticeInsert(Map<String, Object> param) throws Exception {
 		
-		return commonDao.insert("notice.noticeInsert",param);
+		return commonDao.insert("notice.insertBoard",param);
 	}
 
 	@Override

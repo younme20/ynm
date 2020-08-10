@@ -11,12 +11,14 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/notice.js'/>"charset="utf-8"></script>
+<script src="<c:url value='/resources/js/common/jquery.serializeObject.min.js'/>"charset="utf-8"></script>
+
 <title>Insert title here</title>
 </head>
 <body>
 	<div>
 	    <form name="form" id="form" method="post">
-	    	<input type="hidden" name="IDX" value="${data.IDX }">
+	    <!-- 	<input type="hidden" name="IDX" > -->
 	        <div class="form-group">
 	            <label for="exampleFormControlInput1">제목</label>
 	            <input type="text" name="TITLE" value="${data.TITLE }">
