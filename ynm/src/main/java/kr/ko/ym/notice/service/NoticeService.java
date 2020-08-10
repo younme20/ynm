@@ -8,8 +8,6 @@ public interface NoticeService {
 
 	Map<String,Object> noticeDetail(Map<String, Object> param) throws Exception;
 
-	Map<String,Object> noticeSelect(Map<String, Object> param) throws Exception;
-
 	Object noticeInsert(Map<String, Object> param) throws Exception;
 
 	void noticeHitcnt(Map<String, Object> param) throws Exception;
