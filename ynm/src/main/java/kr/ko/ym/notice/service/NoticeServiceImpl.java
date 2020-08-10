@@ -18,30 +18,24 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
 		
-		return commonDao.selectList("notice.noticeList", param);
+		return commonDao.selectList("notice.selectBoard", param);
 	}
 
 	@Override
 	public Map<String, Object> noticeDetail(Map<String, Object> param) throws Exception {
 	
-		return commonDao.selectOne("notice.noticeDetail",param);
-	}
-
-	@Override
-	public Map<String, Object> noticeSelect(Map<String, Object> param) throws Exception {
-		
-		return commonDao.selectOne("notice.noticeSelect",param);
+		return commonDao.selectOne("notice.detailBoard",param);
 	}
 
 	@Override
 	public Object noticeInsert(Map<String, Object> param) throws Exception {
-		
-		return commonDao.insert("notice.insertBoard",param);
+		commonDao.insert("notice.insertBoard",param);
+		return param;
 	}
 
 	@Override
 	public void noticeHitcnt(Map<String, Object> param) throws Exception {
-		commonDao.update("notice.noticeHitcnt",param);
+		commonDao.update("notice.updateCount",param);
 	}
 
 	@Override
@@ -51,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void noticeDelete(Map<String, Object> param) throws Exception {
-		commonDao.delete("notice.noticeDelete", param);
+		commonDao.delete("notice.deleteBoard", param);
 	}
 
 

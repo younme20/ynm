@@ -48,8 +48,8 @@ public class NoticeController {
 	/*
 	 * 글쓰기 폼
 	 * */
-	@RequestMapping(value="/notice/form")
-	public String boardWrite() throws Exception {
+	@RequestMapping(value="/notice/write")
+	public String writeForm() throws Exception {
 		return "notice/noticeEd";
 	}
 	
@@ -59,17 +59,16 @@ public class NoticeController {
 	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView noticeInsert(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView boardInsert(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeLs");
-	
-		mv.addObject("data", noticeService.noticeInsert(param));				
+		noticeService.noticeInsert(param);			
 		return mv;		
 	}
 
 	/*
 	 * 게시글 수정 폼
 	 * */
-	@RequestMapping(value="/modifyForm")
+	@RequestMapping(value="/notice/modify")
 	public ModelAndView modifyForm(@RequestParam Map<String,Object>param) throws Exception {
 		System.out.println("픔오르 이동");
 		ModelAndView mv = new ModelAndView("notice/noticeEd");
@@ -80,16 +79,16 @@ public class NoticeController {
 	/*
 	 * 게시글 수정
 	 * */
-	@RequestMapping(value="/notice/Update")
-	public String noticeUpdate(@RequestParam Map<String,Object>param) throws Exception {
+	@RequestMapping(value="/notice/update")
+	public String updateBoard(@RequestParam Map<String,Object>param) throws Exception {
 		noticeService.noticeUpdate(param);
 		return "notice/noticeLs";
 	}
 	/*
 	 * 게시글 삭제
 	 * */
-	@RequestMapping(value="/notice/Delete", method = RequestMethod.GET)
-	public String noticeDelete(@RequestParam Map<String,Object>param) throws Exception {
+	@RequestMapping(value="/notice/delete", method = RequestMethod.GET)
+	public String deleteBoard(@RequestParam Map<String,Object>param) throws Exception {
 		noticeService.noticeDelete(param);
 		return "notice/noticeLs";
 	}
