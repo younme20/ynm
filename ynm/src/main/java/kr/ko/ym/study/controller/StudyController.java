@@ -1,6 +1,7 @@
 package kr.ko.ym.study.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,6 +90,14 @@ public class StudyController {
 	@ResponseBody
 	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.deleteBoard(param);
+		
+	}
+	
+	@RequestMapping(value="/study/search", method=RequestMethod.POST)
+	@ResponseBody
+	public List<HashMap<String,Object>> searchBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+		List<HashMap<String,Object>>list = studyService.selectSearchList(param);
+		return list;
 		
 	}
 

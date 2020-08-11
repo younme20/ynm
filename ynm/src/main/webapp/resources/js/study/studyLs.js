@@ -14,6 +14,25 @@ $(document).ready(function(){
 		movePage("/ynm/study/edit/"+(length+1));
 	});
 	
+	$("#btnSearch").on("click", function(e){
+		var data = {
+			"searchTitle" : $("#searchText").val()
+		};
+		$.ajax({
+			type : "POST",                               
+			url : "/ynm/study/search",                   
+			json : true,                           
+			data : data,                 
+			success : function(result, textStatus, jqXHR){
+				
+			},
+			error   : function(result, textStatus, jqXHR){
+				
+			}
+		});		
+		
+	});
+	
 
 });
 

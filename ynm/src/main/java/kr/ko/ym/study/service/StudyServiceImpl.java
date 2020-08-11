@@ -48,4 +48,11 @@ public class StudyServiceImpl implements StudyService {
 		commonDao.delete("study.deleteBoard", param);			
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HashMap<String, Object>> selectSearchList(Map<String, Object> param) throws Exception {
+		List<HashMap<String,Object>>list = commonDao.selectList("study.selectList", param);;
+		return list;
+	}
+
 }

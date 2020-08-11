@@ -49,6 +49,9 @@
 		</tbody>
 	</table>
 </body>
+<form id="searchForm" style="margin-left: 10%; margin-top: 30px;">
+Search : <input type="text" id="searchText" name="searchText" style="margin-right: 10px;"></input><button id="btnSearch" type="button" class="btn">검색</button>
+</form>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
 </html>

@@ -4,14 +4,16 @@
 
 
 	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
-		<![CDATA[ 
+		 
 			SELECT IDX
 				 , TITLE
 				 , HITCNT
-				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME
+				 , <![CDATA[ DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME ]]>
 			  FROM board 
+		<if test="searchText != ''">
+			WHERE TITLE LIKE 
+		</if>
 			 ORDER BY IDX DESC 
-		]]> 
 	</select>
 	
 	<select id="selectDetail" parameterType="hashmap" resultType="hashmap"> 
