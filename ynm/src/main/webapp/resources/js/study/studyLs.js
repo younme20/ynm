@@ -10,13 +10,14 @@ $(document).ready(function(){
 	});
 	
 	$("#btnWrite").on("click", function(e){ 
-		var length = $(this).attr("length") * 1;
+		var idx = 
 		movePage("/ynm/study/edit/"+(length+1));
 	});
 	
 	$("#btnSearch").on("click", function(e){
 		var data = {
-			"searchTitle" : $("#searchText").val()
+			"searchText" : $("#searchText").val(),
+			"searchCondition" : $("#searchCondition option:selected").val(),
 		};
 		$.ajax({
 			type : "POST",                               

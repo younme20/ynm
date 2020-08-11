@@ -30,10 +30,11 @@
 			<c:choose>
 				<c:when test="${fn:length(list) > 0}">
 					<c:forEach items="${list}" var="row" varStatus="status">
+						<input type="hidden" id="idx_${status.count}" name="idx" value="${row.IDX}"></input>
 						<tr>
 							<td>${(fn:length(list)+1) - status.count}</td>
 							<td class="title">
-								<a href="#this" name="title" idx="${(fn:length(list)+1) - status.count}">${row.TITLE}</a>
+								<a href="#this" name="title" idx="${row.IDX}">${row.TITLE}</a>
 							</td>
 							<td>${row.HITCNT }</td>
 							<td>${row.CREATE_DATETIME }</td>
@@ -50,7 +51,13 @@
 	</table>
 </body>
 <form id="searchForm" style="margin-left: 10%; margin-top: 30px;">
-Search : <input type="text" id="searchText" name="searchText" style="margin-right: 10px;"></input><button id="btnSearch" type="button" class="btn">검색</button>
+Search : 
+<select id="searchCondition">
+	<option value="T" selected>제목</option>
+	<option value="C">내용</option>
+	<option value="A">전체</option>
+</select>
+<input type="text" id="searchText" name="searchText" style="margin-right: 10px;"></input><button id="btnSearch" type="button" class="btn">검색</button>
 </form>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>

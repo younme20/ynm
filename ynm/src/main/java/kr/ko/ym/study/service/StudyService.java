@@ -16,6 +16,4 @@ public interface StudyService {
 
 	void deleteBoard(Map<String, Object> param) throws Exception;
 
-	List<HashMap<String, Object>> selectSearchList(Map<String, Object> param) throws Exception;
-
 }

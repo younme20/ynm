@@ -4,14 +4,21 @@
 
 
 	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
-		 
 			SELECT IDX
 				 , TITLE
 				 , HITCNT
 				 , <![CDATA[ DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME ]]>
 			  FROM board 
-		<if test="searchText != ''">
-			WHERE TITLE LIKE 
+		<if test='searchText != ""'>
+			<if test='searchCondition != "" and searchCondition == "T" '>
+				WHERE INSTR(TITLE, #{searchText}) > 0
+			</if>
+		<!--  	<if test='searchCondition != "" and searchCondition == "C" '>
+				WHERE CONTENTS LIKE '%' || #{searchText} || '%'
+			</if>		
+			<if test='searchCondition != "" and (searchCondition == "T" or searchCondition == "C") '>
+			 	WHERE TITLE LIKE '%' || #{searchText} || '%' OR CONTENTS LIKE '%' || #{searchText} || '%' 
+			</if>	-->	
 		</if>
 			 ORDER BY IDX DESC 
 	</select>
