@@ -20,6 +20,7 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
 		PagingUtil paging = new PagingUtil();
+		
 		int index = 1;
 		if(param.containsKey("pageIndex")) {
 			index = Integer.parseInt(param.get("pageIndex").toString());
@@ -57,6 +58,12 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public void deleteBoard(Map<String, Object> param) throws Exception {
 		commonDao.delete("study.deleteBoard", param);			
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> selectTotalCount() throws Exception {
+		return commonDao.selectOne("study.selectTotalCount");
 	}
 
 

@@ -3,6 +3,14 @@
  */
 $(document).ready(function(){ 
 	
+	$("a[name='index']").each(function(){
+		var idx = $(this);
+		
+		if(idx.attr("pageidx") === idx.text()) {
+			$("#index_"+idx.text()).css("font-weight", "bold");
+		}
+	});
+	
 	$("a[name='title']").on("click", function(e){ 
 		//e.preventDefault();
 		var idx = $(this).attr("idx");
@@ -24,7 +32,7 @@ $(document).ready(function(){
 			"searchText" : $("#searchText").val(),
 			"searchCondition" : $("#searchCondition option:selected").val(),
 		};
-		movePage("/ynm/study?searchCondition="+data.searchCondition+"&searchText="+data.searchText);		
+		movePage("/ynm/study?pageIndex=1&searchCondition="+data.searchCondition+"&searchText="+data.searchText);		
 	});
 	
 

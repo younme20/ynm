@@ -1,6 +1,7 @@
 package kr.ko.ym.study.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +32,15 @@ public class StudyController {
 
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
-		mv.addObject("list", studyService.selectList(param));		
+		List<Map<String,Object>>list = studyService.selectList(param);
+		Map<String,Object>map = studyService.selectTotalCount();
+		
+		mv.addObject("list", list);		
 		mv.addObject("param", param);		
+		
+		//페이징 관련
 		mv.addObject("page", param.get("page"));
+		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
 
 		return mv;		
 	}

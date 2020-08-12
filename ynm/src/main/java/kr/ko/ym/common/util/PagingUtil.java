@@ -40,16 +40,16 @@ public class PagingUtil {
 	    return totalCount;
 	}
 	
-	//pageIndex : ÆäÀÌÁö ÀÎµ¦½º
-	//pageSize : ¸î ÁÙ±îÁö º¸¿©ÁÙÁö..
+	//pageIndex : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½
+	//pageSize : ï¿½ï¿½ ï¿½Ù±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½..
 	public void countPaging(int pageIndex, int pageSize) {
 		this.pageIndex = this.pageIndex < 1 ? 1 : this.pageIndex;
 		this.pageSize = pageSize;
-		this.startRow = (pageIndex-1)*pageIndex;
+		this.startRow = (pageIndex-1)*pageSize;
 		this.endRow = startRow + pageSize;		
 	}
 	
-	//°á°ú°ª ´ã±â
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 	public void countPagingList(List<?>resultList, int totalCount) {
 		this.resultList = resultList;
 		this.totalCount = totalCount;
