@@ -30,8 +30,8 @@
 			</td>
 		</tr>
 	</table>
-	<button type="button" id="modify" id="${data.IDX}">수정</button>
-	<button type="button" id="delete" id="${data.IDX}">삭제</button>
+	<button type="button" id="modify" data="${data.IDX}">수정</button>
+	<button type="button" id="delete" data="${data.IDX}">삭제</button>
 	<button type="button" id="list">목록</button>
 </body>
 </html>

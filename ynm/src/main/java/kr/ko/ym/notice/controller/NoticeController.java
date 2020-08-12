@@ -23,7 +23,7 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	/*
-	 * 게시글 목록
+	 * list
 	 * */
 	@RequestMapping(value="/notice")
 	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
@@ -32,9 +32,9 @@ public class NoticeController {
 		return mv;		
 	}
 	/*
-	 * 게시글 상세보기
+	 * view
 	 * */
-	@RequestMapping(value="/notice/detail/{idx}" )
+	@RequestMapping(value="/notice/detail/{idx}" , method = RequestMethod.GET)
 	public ModelAndView selectDetail( HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw");
 		Map<String,Object>param = new HashMap<String,Object>();
@@ -46,15 +46,17 @@ public class NoticeController {
 	}
 	
 	/*
-	 * 글쓰기 폼
+	 * write form
 	 * */
 	@RequestMapping(value="/notice/write")
-	public String writeForm() throws Exception {
-		return "notice/noticeEd";
+	public ModelAndView  writeForm() throws Exception {
+		ModelAndView mv = new ModelAndView("notice/noticeEd");
+		mv.addObject("mode", "new");	
+		return mv;
 	}
 	
 	/*
-	 * 새 글 등록
+	 * insert
 	 * */
 	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
@@ -62,36 +64,40 @@ public class NoticeController {
 	public String insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.insertBoard(param);	
 		Map<String,Object> map =  noticeService.selectMaxIdx();
-		return "redirect:/notice/detail/"+ map.get("IDX");	
+		return "detail/"+ map.get("IDX");	
 	}
 
 	/*
-	 * 게시글 수정 폼
+	 * modify form
 	 * */
-	@RequestMapping(value="/notice/modify/{idx}")
+	@RequestMapping(value="/notice/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeEd");
 		Map<String,Object>param = new HashMap<String,Object>();
 		param.put("IDX", idx);	
-		mv.addObject("data", noticeService.selectDetail(param));				
+		mv.addObject("data", noticeService.selectDetail(param));	
+		mv.addObject("mode", "modify");		
 		return mv;		
 	}
 	
 	/*
-	 * 게시글 수정
+	 * update
 	 * */
-	@RequestMapping(value="/notice/update")
-	public String updateBoard(@RequestParam Map<String,Object>param) throws Exception {
+	@RequestMapping(value="/notice/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.updateBoard(param);
-		return "notice/noticeLs";
+		return "detail/"+param.get("IDX");
 	}
 	/*
-	 * 게시글 삭제
+	 * delete
 	 * */
-	@RequestMapping(value="/notice/delete", method = RequestMethod.GET)
-	public String deleteBoard(@RequestParam Map<String,Object>param) throws Exception {
+	@RequestMapping(value="/notice/delete/{idx}" , method = RequestMethod.GET)
+	public String deleteBoard(HttpServletRequest request, @PathVariable int idx) throws Exception {
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("IDX", idx);	
 		noticeService.deleteBoard(param);
-		return "notice/noticeLs";
+		return "redirect:/notice";	
 	}
 	
 	

@@ -17,7 +17,8 @@
 <body>
 	<div>
 	    <form name="form" id="form" method="post">
-	    	<input type="hidden" name="IDX">
+	    
+	    	<input type="hidden" name="IDX" value="${data.IDX}">
 	        <div class="form-group">
 	            <label for="exampleFormControlInput1">제목</label>
 	            <input type="text" name="TITLE" value="${data.TITLE }">
@@ -30,8 +31,12 @@
 	            <label for="exampleFormControlTextarea1">내용</label>
 	            <textarea rows="10" name="CONTENTS">${data.CONTENTS}</textarea>
 	        </div>
-	        
-		    <button type="button" id="save">등록</button>
+	         <c:if test="${mode eq 'new' }"> 
+	           <button type="button" id="save">등록</button>
+	        </c:if>
+	         <c:if test="${mode eq 'modify' }"> 
+	           <button type="button" id="update">수정</button>
+	        </c:if>
 			<button type="button" id="list" >목록</button>
 	    </form>
 	</div>

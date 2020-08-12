@@ -9,16 +9,20 @@ $(document).ready(function(){
 		notice.insertBoard();
 	});
 	
-	//수정
+	//수정폼
 	$("#modify").on("click", function(e){ 
-		var idx = $(this).attr("id");
+		var idx = $(this).attr("data");
 		movePage("/ynm/notice/modify/"+idx);
 	});
+	//수정
+	$("#update").on("click", function(e){ 
+		notice.updateBoard();
+	});
 	
-	//글삭제
-	$("#delet").on("click", function(e){ 
-		var idx = $(this).attr("id");
-		movePage("/ynm/notice/detail/"+idx);
+	//삭제
+	$("#delete").on("click", function(e){ 
+		var idx = $(this).attr("data");
+		movePage("/ynm/notice/delete/"+idx);
 	});
 	notice = new noticeEdit();	
 });
@@ -29,16 +33,31 @@ function noticeEdit() {
 	},
 	this.insertBoard = function(){ 
 		var data = $("#form").serializeObject();
-		alert(data);
-		
 		$.ajax({
 			type : "POST",                               
 			url : "/ynm/notice/insert",                         
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){
-				console.log("idx:"+result);
-				alert('등록되었습니다.');
+				alert('등록되었습니다.'+result);
+				movePage(result);
+			},
+			error   : function(result, textStatus, jqXHR){
+				//alert('전송실패!');
+				movePage("/ynm/notice");
+			}
+		});
+	},
+	this.updateBoard = function(){ 
+		var data = $("#form").serializeObject();
+		$.ajax({
+			type : "POST",                               
+			url : "/ynm/notice/update/",                         
+			data : data,
+			json:true,
+			success : function(result, textStatus, jqXHR){
+				alert('수정되었습니다.'+result);
+				movePage(result);
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
@@ -46,5 +65,4 @@ function noticeEdit() {
 			}
 		});
 	}
-
 }
