@@ -26,12 +26,15 @@ public class StudyController {
 	private StudyService studyService;
 	
 	
-	@RequestMapping(value="/study")
+	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
-		mv.addObject("list", studyService.selectList(param));				
+		mv.addObject("list", studyService.selectList(param));		
+		mv.addObject("param", param);		
+		mv.addObject("page", param.get("page"));
+
 		return mv;		
 	}
 	

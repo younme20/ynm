@@ -9,6 +9,11 @@ $(document).ready(function(){
 		movePage("/ynm/study/view/"+idx);
 	});
 	
+	$("a[name='index']").on("click", function(e){ 
+		var idx = $(this).text();
+		movePage("/ynm/study?pageIndex="+idx);
+	});
+	
 	$("#btnWrite").on("click", function(e){ 
 		var idx = 
 		movePage("/ynm/study/edit/"+(length+1));
@@ -19,19 +24,7 @@ $(document).ready(function(){
 			"searchText" : $("#searchText").val(),
 			"searchCondition" : $("#searchCondition option:selected").val(),
 		};
-		$.ajax({
-			type : "POST",                               
-			url : "/ynm/study/search",                   
-			json : true,                           
-			data : data,                 
-			success : function(result, textStatus, jqXHR){
-				
-			},
-			error   : function(result, textStatus, jqXHR){
-				
-			}
-		});		
-		
+		movePage("/ynm/study?searchCondition="+data.searchCondition+"&searchText="+data.searchText);		
 	});
 	
 

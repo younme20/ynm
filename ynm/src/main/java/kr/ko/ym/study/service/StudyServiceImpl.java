@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ko.ym.common.dao.CommonDao;
+import kr.ko.ym.common.util.PagingUtil;
 
 @Service("studyService")
 public class StudyServiceImpl implements StudyService {
@@ -18,6 +19,16 @@ public class StudyServiceImpl implements StudyService {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
+		PagingUtil paging = new PagingUtil();
+		int index = 1;
+		if(param.containsKey("pageIndex")) {
+			index = Integer.parseInt(param.get("pageIndex").toString());
+		}
+		
+		paging.countPaging(index, 10);
+		
+		param.put("page", paging);		
+		
 		return commonDao.selectList("study.selectList", param);
 	}
 

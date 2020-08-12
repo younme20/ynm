@@ -53,12 +53,16 @@
 <form id="searchForm" style="margin-left: 10%; margin-top: 30px;">
 Search : 
 <select id="searchCondition">
-	<option value="T" selected>제목</option>
-	<option value="C">내용</option>
-	<option value="A">전체</option>
+	<option value="T" ${param.searchCondition eq 'T' or param.searchCondition eq '' ? 'selected' : ''}>제목</option>
+	<option value="C" ${param.searchCondition eq 'C' ? 'selected'  : ''}>내용</option>
+	<option value="A" ${param.searchCondition eq 'A' ? 'selected'  : ''}>전체</option>
 </select>
-<input type="text" id="searchText" name="searchText" style="margin-right: 10px;"></input><button id="btnSearch" type="button" class="btn">검색</button>
+<input type="text" id="searchText" name="searchText" style="margin-right: 10px;" value="${param.searchText}"></input><button id="btnSearch" type="button" class="btn">검색</button>
 </form>
+${param}, ${page.totalCount}
+<c:forEach var="i" begin="1" end="5">
+    <p style="float: left; margin-left: 5px; margin-bottom: 20px;"><a href="#this" name="index">${i}</a></p>
+</c:forEach>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
 </html>
