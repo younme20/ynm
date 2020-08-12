@@ -4,15 +4,17 @@ import java.util.List;
 import java.util.Map;
 
 public interface NoticeService {
-	List<Map<String,Object>>selectList(Map<String, Object> param) throws Exception;
+	List<Map<String,Object>>selectBoard(Map<String, Object> param) throws Exception;
 
-	Map<String,Object> noticeDetail(Map<String, Object> param) throws Exception;
+	Map<String,Object> selectDetail(Map<String, Object> param) throws Exception;
 
-	Object noticeInsert(Map<String, Object> param) throws Exception;
+	Object insertBoard(Map<String, Object> param) throws Exception;
 
-	void noticeHitcnt(Map<String, Object> param) throws Exception;
+	void updateCount(Map<String, Object> param) throws Exception;
 
-	void noticeUpdate(Map<String, Object> param) throws Exception;
+	void updateBoard(Map<String, Object> param) throws Exception;
 
-	void noticeDelete(Map<String, Object> param) throws Exception;
+	void deleteBoard(Map<String, Object> param) throws Exception;
+
+	Map<String, Object> selectMaxIdx()throws Exception;
 }

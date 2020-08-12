@@ -16,36 +16,42 @@ public class NoticeServiceImpl implements NoticeService{
 	//공지사항 목록 조회
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
+	public List<Map<String, Object>> selectBoard(Map<String, Object> param) throws Exception {
 		
 		return commonDao.selectList("notice.selectBoard", param);
 	}
 
 	@Override
-	public Map<String, Object> noticeDetail(Map<String, Object> param) throws Exception {
+	public Map<String, Object> selectDetail(Map<String, Object> param) throws Exception {
 	
 		return commonDao.selectOne("notice.detailBoard",param);
 	}
 
 	@Override
-	public Object noticeInsert(Map<String, Object> param) throws Exception {
-		commonDao.insert("notice.insertBoard",param);
-		return param;
+	public Object insertBoard(Map<String, Object> param) throws Exception {
+		
+		return commonDao.insert("notice.insertBoard",param);
 	}
 
 	@Override
-	public void noticeHitcnt(Map<String, Object> param) throws Exception {
+	public void updateCount(Map<String, Object> param) throws Exception {
 		commonDao.update("notice.updateCount",param);
 	}
 
 	@Override
-	public void noticeUpdate(Map<String, Object> param) throws Exception {
+	public void updateBoard(Map<String, Object> param) throws Exception {
 		commonDao.update("notice.updateBoard",param);
 	}
 
 	@Override
-	public void noticeDelete(Map<String, Object> param) throws Exception {
+	public void deleteBoard(Map<String, Object> param) throws Exception {
 		commonDao.delete("notice.deleteBoard", param);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public  Map<String, Object> selectMaxIdx() throws Exception {
+		return commonDao.selectOne("notice.selectMaxIdx");
 	}
 
 

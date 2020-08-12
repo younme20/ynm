@@ -26,22 +26,22 @@ public class NoticeController {
 	 * 게시글 목록
 	 * */
 	@RequestMapping(value="/notice")
-	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/notice/noticeLs");
-		mv.addObject("list", noticeService.selectList(param));				
+		mv.addObject("list", noticeService.selectBoard(param));				
 		return mv;		
 	}
 	/*
 	 * 게시글 상세보기
 	 * */
 	@RequestMapping(value="/notice/detail/{idx}" )
-	public ModelAndView noticeDetail(@PathVariable int idx) throws Exception {
+	public ModelAndView selectDetail( HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw");
 		Map<String,Object>param = new HashMap<String,Object>();
 		param.put("IDX", idx);			
 		
-		mv.addObject("data", noticeService.noticeDetail(param));		
-		noticeService.noticeHitcnt(param);
+		mv.addObject("data", noticeService.selectDetail(param));		
+		noticeService.updateCount(param);
 		return mv;		
 	}
 	
@@ -59,20 +59,21 @@ public class NoticeController {
 	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView boardInsert(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeLs");
-		noticeService.noticeInsert(param);			
-		return mv;		
+	public String insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+		noticeService.insertBoard(param);	
+		Map<String,Object> map =  noticeService.selectMaxIdx();
+		return "redirect:/notice/detail/"+ map.get("IDX");	
 	}
 
 	/*
 	 * 게시글 수정 폼
 	 * */
-	@RequestMapping(value="/notice/modify")
-	public ModelAndView modifyForm(@RequestParam Map<String,Object>param) throws Exception {
-		System.out.println("픔오르 이동");
+	@RequestMapping(value="/notice/modify/{idx}")
+	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeEd");
-		mv.addObject("data", noticeService.noticeDetail(param));				
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("IDX", idx);	
+		mv.addObject("data", noticeService.selectDetail(param));				
 		return mv;		
 	}
 	
@@ -81,7 +82,7 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice/update")
 	public String updateBoard(@RequestParam Map<String,Object>param) throws Exception {
-		noticeService.noticeUpdate(param);
+		noticeService.updateBoard(param);
 		return "notice/noticeLs";
 	}
 	/*
@@ -89,7 +90,7 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice/delete", method = RequestMethod.GET)
 	public String deleteBoard(@RequestParam Map<String,Object>param) throws Exception {
-		noticeService.noticeDelete(param);
+		noticeService.deleteBoard(param);
 		return "notice/noticeLs";
 	}
 	

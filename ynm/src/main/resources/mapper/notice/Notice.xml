@@ -15,6 +15,12 @@
 		WHERE IDX = #{IDX};
 	</select>
 	
+	<!-- select one -->
+	<select id="selectMaxIdx" parameterType="hashmap" resultType="hashmap">
+		SELECT MAX(IDX) AS IDX FROM board
+	</select>
+	
+	
 	<!-- hit -->
 	<update id="updateCount" parameterType="hashmap">
 	  UPDATE board SET HITCNT = HITCNT + 1 WHERE IDX = #{IDX};

@@ -9,6 +9,12 @@ $(document).ready(function(){
 		notice.insertBoard();
 	});
 	
+	//수정
+	$("#modify").on("click", function(e){ 
+		var idx = $(this).attr("id");
+		movePage("/ynm/notice/modify/"+idx);
+	});
+	
 	//글삭제
 	$("#delet").on("click", function(e){ 
 		var idx = $(this).attr("id");
@@ -31,7 +37,8 @@ function noticeEdit() {
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){
-				alert('전송성공!');
+				console.log("idx:"+result);
+				alert('등록되었습니다.');
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
