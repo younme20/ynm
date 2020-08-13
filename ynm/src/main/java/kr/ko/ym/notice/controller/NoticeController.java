@@ -87,7 +87,8 @@ public class NoticeController {
 	@ResponseBody
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.updateBoard(param);
-		return "detail/"+param.get("IDX");
+		String idx = (String) param.get("IDX");
+		return idx;
 	}
 	/*
 	 * delete

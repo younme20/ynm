@@ -56,8 +56,8 @@ function noticeEdit() {
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){
-				alert('수정되었습니다.'+result);
-				movePage(result);
+				alert('수정되었습니다.');
+				movePage("/ynm/notice/detail/"+result);
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
