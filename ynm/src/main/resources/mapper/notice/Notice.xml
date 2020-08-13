@@ -45,7 +45,7 @@
         UPDATE board SET
             TITLE = #{TITLE}
             , CONTENTS = #{CONTENTS}
-            , UPDATE_ID = #{UPDATE_ID}
+            , UPDATE_ID = #{CREATE_ID}
             , UPDATE_DATETIME = NOW()
         WHERE
             IDX = #{IDX}
