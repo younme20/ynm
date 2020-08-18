@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="notice">
 
-	<!-- list -->
+	<!-- list 
 	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
 		SELECT IDX, TITLE, HITCNT, CREATE_DATETIME, CREATE_ID
 		FROM board;
+	</select>-->
+
+	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, TITLE, HITCNT, CREATE_DATETIME, CREATE_ID
+		FROM board
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType == 'title' and keyword != null and keyword != '' ">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+				AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'user' and keyword != null and keyword != '' ">
+				AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+		</trim> 
+		
 	</select>
 	
 	<!-- select one -->

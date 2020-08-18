@@ -12,4 +12,11 @@ $(document).ready(function(){
 		var idx = $(this).attr("id");
 		movePage("/ynm/notice/detail/"+idx);
 	});
+	
+	//검색
+	$("#btnSerch").on("click", function(){
+		var keyword = $("#keyword").val();
+		var type = $("#searchType").val();
+		movePage("/ynm/notice/serch/"+type +"/"+keyword);
+	});
 });

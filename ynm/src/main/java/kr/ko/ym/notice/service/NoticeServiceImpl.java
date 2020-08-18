@@ -54,5 +54,11 @@ public class NoticeServiceImpl implements NoticeService{
 		return commonDao.selectOne("notice.selectMaxIdx");
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> serchBoard(Map<String, Object> param) throws Exception {
+		return commonDao.selectList("notice.selectBoard", param);
+	}
+
 
 }

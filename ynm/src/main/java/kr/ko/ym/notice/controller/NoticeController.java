@@ -102,6 +102,19 @@ public class NoticeController {
 	}
 	
 	
+	/*
+	 * serch
+	 * */
+	@RequestMapping(value="/notice/serch/{searchType}/{keyword}" , method = RequestMethod.GET)
+	public ModelAndView serchBoard(HttpServletRequest request, @PathVariable String searchType, @PathVariable String keyword) throws Exception {
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("searchType", searchType);	
+		param.put("keyword", keyword);	
+		
+		ModelAndView mv = new ModelAndView("/notice/noticeLs");
+		mv.addObject("list", noticeService.serchBoard(param));				
+		return mv;
+	}
 	
 
 }
