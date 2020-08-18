@@ -2,15 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-	공지사항 게시판 목록
+	<h1>스터디 게시판</h1>
 	<form id="form" method="post">
-	<table style="border:1px solid #ccc">
+	<div class="table-responsive">
+	<table  class="table">
 	    <colgroup>
-	        <col width="10%"/>
-	        <col width="*"/>
-	        <col width="15%"/>
-	        <col width="20%"/>
-	        <col width="15%"/>
+	        <col width="10%"/><col width="*"/><col width="15%"/><col width="20%"/><col width="15%"/>
 	    </colgroup>
 	    <thead>
 	        <tr>
@@ -47,5 +44,6 @@
 	          
 	    </tbody>
 	</table>
+	</div>
 	</form>
-	<button type="button" id="write">글쓰기</button>  
+	<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
