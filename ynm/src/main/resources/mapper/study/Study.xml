@@ -12,6 +12,10 @@
 	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
 	</sql>
 	
+	<select id="selectTotalCount" parameterType="hashmap" resultType="hashmap"> 
+		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board
+	</select>
+	
 	<!-- 리스트 조회 -->
 	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
 		<include refid="COMMON_PAGING_HEADER"/>	
