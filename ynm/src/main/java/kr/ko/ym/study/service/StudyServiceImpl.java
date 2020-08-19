@@ -14,7 +14,7 @@ import kr.ko.ym.common.util.PagingUtil;
 public class StudyServiceImpl implements StudyService {
 	
 	@Autowired
-	private CommonDao commonDao;	
+	private CommonDao commonDao;	  
 
 	@SuppressWarnings("unchecked")
 	@Override
