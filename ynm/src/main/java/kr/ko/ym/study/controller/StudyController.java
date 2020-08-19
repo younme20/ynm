@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,8 @@ public class StudyController {
 	
 	@Autowired
 	private StudyService studyService;
+	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
 	
 	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})

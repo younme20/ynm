@@ -31,9 +31,9 @@
 					<c:forEach items="${list}" var="row" varStatus="status">
 						<input type="hidden" id="idx_${status.count}" name="idx" value="${row.IDX}"></input>
 						<tr>
-							<td>${(fn:length(list)+1) - status.count}</td>
+							<td>${row.IDX}</td>
 							<td class="title">
-								<a href="#this" name="title" idx="${row.IDX}">${row.TITLE}</a>
+								<a href="#this" name="title" idx="${row.IDX}" cnt="${(fn:length(list)+1) - status.count}" >${row.TITLE}</a>
 							</td>
 							<td>${row.HITCNT }</td>
 							<td>${row.CREATE_DATETIME }</td>

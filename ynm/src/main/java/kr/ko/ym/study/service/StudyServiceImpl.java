@@ -26,7 +26,7 @@ public class StudyServiceImpl implements StudyService {
 			index = Integer.parseInt(param.get("pageIndex").toString());
 		}
 		
-		paging.countPaging(index, 10);
+		paging.countPaging(index, 5);
 		
 		param.put("page", paging);		
 		
