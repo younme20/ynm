@@ -4,15 +4,20 @@
 
 	<h1>스터디 게시판</h1>
 	<form id="form" method="post">
-	<div class="table-responsive">
-		<select class="form-control" name="searchType" id="searchType">
+	 <div class="input-group">
+		 <select name="searchType" id="searchType" >
 			<option value="title">제목</option>
 			<option value="content">본문</option>
 			<option value="user">작성자</option>
 		</select>
-		 <input type="text" id="keyword">
-		 <button type="button" id="btnSerch">검색</button>
-	</div>
+	    <input type="text" id="keyword" placeholder="Search">
+	    <div class="input-group-btn">
+	      <button class="btn" type="button" id="btnSerch">
+	        <i class="glyphicon glyphicon-search"></i>
+	      </button>
+	    </div>
+	  </div>
+  
 	<div class="table-responsive">
 	<table  class="table">
 	    <colgroup>
