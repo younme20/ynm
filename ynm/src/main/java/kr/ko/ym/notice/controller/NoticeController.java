@@ -23,14 +23,33 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	/*
-	 * list
+	 * list serch
 	 * */
 	@RequestMapping(value="/notice")
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView selectBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+
 		ModelAndView mv = new ModelAndView("/notice/noticeLs");
-		mv.addObject("list", noticeService.selectBoard(param));				
-		return mv;		
+		mv.addObject("list", noticeService.selectBoard(param));	
+					
+		return mv;
 	}
+	/*
+	 * list serch
+	 * */
+	@RequestMapping(value="/notice/serch/{searchType}/{keyword}" , method = RequestMethod.GET)
+	public ModelAndView serchBoard(HttpServletRequest request, @RequestParam String searchType, @RequestParam String keyword) throws Exception {
+		
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("searchType", searchType);	
+		param.put("keyword", keyword);	
+		
+		ModelAndView mv = new ModelAndView("/notice/noticeLs");
+		mv.addObject("list", noticeService.serchBoard(param));	
+					
+		return mv;
+	}
+	
+	
 	/*
 	 * view
 	 * */
@@ -102,19 +121,6 @@ public class NoticeController {
 	}
 	
 	
-	/*
-	 * serch
-	 * */
-	@RequestMapping(value="/notice/serch/{searchType}/{keyword}" , method = RequestMethod.GET)
-	public ModelAndView serchBoard(HttpServletRequest request, @PathVariable String searchType, @PathVariable String keyword) throws Exception {
-		Map<String,Object>param = new HashMap<String,Object>();
-		param.put("searchType", searchType);	
-		param.put("keyword", keyword);	
-		
-		ModelAndView mv = new ModelAndView("/notice/noticeLs");
-		mv.addObject("list", noticeService.serchBoard(param));				
-		return mv;
-	}
-	
+
 
 }
