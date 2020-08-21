@@ -37,17 +37,16 @@ public class StudyController {
 
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
-		List<Map<String,Object>>list = studyService.selectList(param);
-		Map<String,Object>map = studyService.selectTotalCount();
+ 		List<Map<String,Object>>list = studyService.selectList(param);
+		Map<String,Object>map = studyService.selectTotalCount(param);
 		
 		mv.addObject("list", list);		
 		mv.addObject("param", param);		
 		
-		//페이징 관련
 		mv.addObject("page", param.get("page"));
 		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
 
-		return mv;		
+ 		return mv;		
 	}
 	
 	@RequestMapping(value="/study/view/{idx}")

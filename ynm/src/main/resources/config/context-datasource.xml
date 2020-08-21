@@ -20,7 +20,7 @@
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"> 
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/> 
-		<property name="url" value="jdbc:log4jdbc:mysql://3.20.212.220/ynm?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/> 
+		<property name="url" value="jdbc:log4jdbc:mysql://3.20.212.220/ynm?useUnicode=yes&amp;characterEncoding=UTF-8&amp;autoReconnect=true&amp;serverTimezone=UTC"/> 
 		<property name="username" value="ynm"/> 
 		<property name="password" value="Lca5534@!"/> 
 	</bean>

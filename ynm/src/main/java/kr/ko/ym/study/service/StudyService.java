@@ -16,6 +16,6 @@ public interface StudyService {
 
 	void deleteBoard(Map<String, Object> param) throws Exception;
 
-	Map<String,Object> selectTotalCount() throws Exception;
+	Map<String,Object> selectTotalCount(Map<String, Object> param) throws Exception;
 
 }

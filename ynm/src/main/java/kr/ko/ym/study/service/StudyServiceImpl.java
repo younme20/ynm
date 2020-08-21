@@ -24,7 +24,7 @@ public class StudyServiceImpl implements StudyService {
 		int index = 1;
 		if(param.containsKey("pageIndex")) {
 			index = Integer.parseInt(param.get("pageIndex").toString());
-		}
+		}		
 		
 		paging.countPaging(index, 5);
 		
@@ -59,11 +59,10 @@ public class StudyServiceImpl implements StudyService {
 	public void deleteBoard(Map<String, Object> param) throws Exception {
 		commonDao.delete("study.deleteBoard", param);			
 	}
-
-	@SuppressWarnings("unchecked")
+	
 	@Override
-	public Map<String, Object> selectTotalCount() throws Exception {
-		return commonDao.selectOne("study.selectTotalCount");
+	public Map<String, Object> selectTotalCount(Map<String, Object> param) throws Exception {
+		return commonDao.selectOne("study.selectTotalCount", param);
 	}
 
 

@@ -12,18 +12,8 @@
 	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
 	</sql>
 	
-	<select id="selectTotalCount" parameterType="hashmap" resultType="hashmap"> 
-		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board
-	</select>
-	
-	<!-- 리스트 조회 -->
-	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
-		<include refid="COMMON_PAGING_HEADER"/>	
-			SELECT IDX
-				 , TITLE
-				 , HITCNT
-				 , <![CDATA[ DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME ]]>
-			  FROM board 
+	<!-- 검색 공통 -->
+	<sql id="COMMON_SEARCH">
 		<if test='searchText != ""'>
 			<if test='searchCondition != "" and searchCondition == "T" '>
 				WHERE INSTR(TITLE, #{searchText}) > 0
@@ -35,6 +25,21 @@
 			 	WHERE INSTR(TITLE, #{searchText}) > 0 OR INSTR(CONTENTS, #{searchText}) > 0
 			</if>		
 		</if>
+	</sql>
+	
+	<select id="selectTotalCount" parameterType="hashmap" resultType="hashmap"> 
+		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board <include refid="COMMON_SEARCH"/>	
+	</select>
+	
+	<!-- 리스트 조회 -->
+	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
+		<include refid="COMMON_PAGING_HEADER"/>	
+			SELECT IDX
+				 , TITLE
+				 , HITCNT
+				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 		
+			  FROM board 
+			  <include refid="COMMON_SEARCH"/>
 			 ORDER BY IDX DESC 
 		<include refid="COMMON_PAGING_TAIL"/>	 
 	</select>

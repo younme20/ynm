@@ -113,9 +113,3 @@ function studyEdit() {
 	}
 	
 }
-
-
-
-
-
-
