@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	//목록
 	$("#list").on("click", function(){
+		console.log("목록");
 		movePage("/ynm/notice");
 	});
 	

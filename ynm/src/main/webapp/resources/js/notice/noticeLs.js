@@ -14,16 +14,11 @@ $(document).ready(function(){
 	});
 	
 	//검색
-	$("#btnSerch").on("click", function(e){
-		var keyword = $("#keyword").val();
-		var searchType = $("#searchType").val();
-		
-		if(keyword == ""){
-			alert("검색 단어를 입력하세요");
-			$("#keyword").focus();
-			return false;
-		}
-		
-		movePage("/ynm/notice/serch/"+searchType +"/"+keyword);
-	});
+	/*var emptyCheck = function(frm){
+		if(form.keyword.value == ""){
+		    alert("검색어 입력 해주세요.");
+		    return false;
+		  }
+		  return true;
+	}*/
 });

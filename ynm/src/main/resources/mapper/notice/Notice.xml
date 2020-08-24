@@ -22,7 +22,7 @@
 				AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
 			</if>	
 		</trim> 
-		
+		ORDER BY IDX DESC
 	</select>
 	
 	<!-- select one -->

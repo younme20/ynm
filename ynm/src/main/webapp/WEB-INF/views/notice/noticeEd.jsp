@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-	
+<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
 	    <form name="form" id="form" method="post">
 	    	<input type="hidden" name="IDX" value="${data.IDX}">
 	        <div class="form-group">
