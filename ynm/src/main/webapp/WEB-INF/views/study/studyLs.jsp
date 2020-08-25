@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>스터디 관리 게시판 목록</h2>	
-	<div class="row" style="margin-top: 5%">
+	<div class="row" style="margin-top: 3%">
 		<div class="col-sm-4">
 			<div id='calendar'></div>
 		</div>
@@ -70,6 +70,27 @@
 		</div>
 	</div>	
 </body>
+<div class="modal fade" id="planModal" tabindex="-1" role="dialog" aria-labelledby="planModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<h4 class="modal-title" id="planModalLabel">일정 추가</h4>
+			</div>
+			<div class="modal-body">
+				<div class="col-xs-12">
+					<div class="col-xs-6">
+						
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary">확인</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
 </html>
