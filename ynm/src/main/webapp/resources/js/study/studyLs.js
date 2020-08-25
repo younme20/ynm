@@ -24,7 +24,7 @@ $(document).ready(function(){
 	
 	$("#btnWrite").on("click", function(e){ 
 		var length = $(this).attr("length") * 1;
-		movePage("/ynm/study/edit/"+(length+2));
+		movePage("/ynm/study/edit/"+(length+1));
 	});
 	
 	$("#btnSearch").on("click", function(e){

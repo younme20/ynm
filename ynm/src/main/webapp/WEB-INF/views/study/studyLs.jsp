@@ -8,8 +8,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" />
 </head>
 <body>
-	<h2>스터디 관리 게시판 목록</h2>
-	<button id="btnWrite" type="button" class="btn btn_left" length="${fn:length(list)}">글쓰기</button>
+	<h2>스터디 관리 게시판 목록</h2><h5>* 읽지않은 글이 개 있습니다.</h5>
+	<button id="btnWrite" type="button" class="btn btn_left" length="${totalCount}">글쓰기</button>
 	<table class="board_list">
 		<colgroup>
 			<col width="10%"/>
@@ -59,13 +59,9 @@ Search :
 <input type="text" id="searchText" name="searchText" style="margin-right: 10px;" value="${param.searchText}"></input><button id="btnSearch" type="button" class="btn">검색</button>
 </form>
 <c:set var="listIndex" value="${totalCount / page.pageSize}" />
-<c:forEach var="i" begin="1" end="${listIndex eq 0 ? listIndex : listIndex+1}">
+<c:forEach var="i" begin="1" end="${(listIndex mod 2) eq 1 ? listIndex : listIndex+1}">
     <p style="float: left; margin-left: 5px; margin-bottom: 20px;"><a href="#this" id="index_${i}" pageidx="${param.pageIndex}" name="index">${i}</a></p>
 </c:forEach>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/study/studyLs.js'/>" charset="utf-8"></script>
 </html>
-
-
-
-
