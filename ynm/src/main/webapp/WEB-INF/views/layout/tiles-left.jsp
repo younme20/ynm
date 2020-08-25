@@ -8,13 +8,13 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<!-- left page -->
+	<!-- left page 
 	<div>
 		<ul>
 			<li><a href="/ynm">study</a></li>
 			<li><a href="/ynm/notice">notice</a></li>
 		</ul>
-	</div>
+	</div> -->
 </body>
 </html>
 <!-- left page -->

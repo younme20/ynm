@@ -3,6 +3,8 @@
  */
 $(document).ready(function(){ 
 	
+	calendarEvent();
+	
 	$("#searchCondition").trigger("change");
 	
 	$("a[name='index']").each(function(){

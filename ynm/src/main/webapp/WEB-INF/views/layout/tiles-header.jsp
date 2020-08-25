@@ -12,6 +12,11 @@
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>	 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<!-- full canlander -->
+	<link href='/ynm/resources/static/fullcalendar/lib/main.css' rel='stylesheet' />
+    <script src='/ynm/resources/static/fullcalendar/lib/main.js'></script>
+	
 	<title></title>
 </head>
 <body>
