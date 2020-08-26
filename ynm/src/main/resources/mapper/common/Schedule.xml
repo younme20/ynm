@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="schedule">
+
+	<!-- 리스트 조회 -->
+	<select id="selectScheduleList" parameterType="hashmap" resultType="hashmap"> 
+			SELECT TASK AS title
+				 , date_format(START_DATE, '%Y-%m-%d') AS start
+				 , date_format(END_DATE, '%Y-%m-%d') AS end
+			  FROM schedule 
+	</select>
+	
+	<select id="selectScheduleOne" parameterType="hashmap" resultType="hashmap"> 
+		<![CDATA[ 
+			SELECT TASK AS title
+				 , date_format(START_DATE, '%Y-%m-%d') AS start
+				 , date_format(END_DATE, '%Y-%m-%d') AS end
+			  FROM schedule 
+			 WHERE IDX = #{IDX}  
+		]]> 
+	</select>
+	
+    <insert id="insertSchedule" parameterType="hashmap">
+        <selectKey keyProperty="IDX" resultType="int" order="BEFORE">
+        	SELECT IFNULL(MAX(IDX),0)+1 FROM schedule
+        </selectKey>
+        INSERT INTO schedule
+             ( IDX, START_DATE, END_DATE, TASK, CATEGORY, COLOR, MEMO, DONE_FLAG   
+             )
+        VALUES
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TASK}, #{CATEGORY}, #{COLOR}, #{MEMO}, 'N'             
+             ) 
+    </insert>
+    
+<!--     <update id="updateBoard" parameterType="hashmap">
+        UPDATE board
+           SET TITLE = #{TITLE}
+             , CONTENTS = #{CONTENTS}
+             , UPDATE_ID = 'testid2'
+             , UPDATE_DATETIME = SYSDATE()
+         WHERE IDX = #{IDX}
+    </update>
+    
+    <update id="updateBoardHit" parameterType="hashmap">
+        UPDATE board
+           SET HITCNT = IFNULL(HITCNT,0) + 1
+         WHERE IDX = #{IDX}
+    </update>    
+    
+    <delete id="deleteBoard" parameterType="hashmap">
+        DELETE FROM board
+         WHERE IDX = #{IDX}
+    </delete> -->
+
+
+</mapper>

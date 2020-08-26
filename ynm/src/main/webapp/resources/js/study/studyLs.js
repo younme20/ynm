@@ -1,10 +1,7 @@
 /**
  * 
  */
-$(document).ready(function(){ 
-	
-	calendarEvent();
-	
+$(document).ready(function(){ 		
 	$("#searchCondition").trigger("change");
 	
 	$("a[name='index']").each(function(){
@@ -31,14 +28,14 @@ $(document).ready(function(){
 	
 	$("#btnSearch").on("click", function(e){
 		study.searchBoard(1);
-	});
+	});	
 	
-	study = new studyList();		
-
+	study = new studyList();	
 });
 
 function studyList() {
 	this.init = function(){
+
 		
 	},
 	this.searchBoard = function(index){ 
@@ -51,6 +48,7 @@ function studyList() {
 	}
 	
 }
+
 
 
 
