@@ -30,7 +30,8 @@ public class NoticeController {
 
 		ModelAndView mv = new ModelAndView("/notice/noticeLs.tiles");
 		mv.addObject("list", noticeService.selectBoard(param));	
-					
+		mv.addObject("page", param.get("page"));
+		mv.addObject("totalCount", noticeService.selectCount(param));	
 		return mv;
 	}
 	/*

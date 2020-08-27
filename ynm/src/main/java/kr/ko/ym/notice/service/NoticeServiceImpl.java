@@ -59,6 +59,12 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<Map<String, Object>> serchBoard(Map<String, Object> param) throws Exception {
 		return commonDao.selectList("notice.selectBoard", param);
 	}
+	
+	
+	@Override
+	public Map<String, Object> selectCount(Map<String, Object> param) throws Exception {
+		return commonDao.selectOne("notice.selectCount", param);
+	}
 
 
 }

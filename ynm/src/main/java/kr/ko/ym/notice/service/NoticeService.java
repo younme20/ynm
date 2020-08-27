@@ -19,4 +19,6 @@ public interface NoticeService {
 	Map<String, Object> selectMaxIdx()throws Exception;
 
 	List<Map<String,Object>> serchBoard(Map<String, Object> param)throws Exception;
+
+	Map<String, Object> selectCount(Map<String, Object> param)throws Exception;
 }

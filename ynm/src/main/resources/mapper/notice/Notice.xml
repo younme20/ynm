@@ -37,6 +37,22 @@
 		SELECT MAX(IDX) AS IDX FROM board
 	</select>
 	
+	<!-- select count -->
+	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(IDX) AS TOTAL FROM board
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="searchType == 'title' and keyword != null and keyword != '' ">
+				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+				AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+			</if>
+			<if test="searchType == 'user' and keyword != null and keyword != '' ">
+				AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+			</if>	
+		</trim> 
+	</select>
+	
 	
 	<!-- hit -->
 	<update id="updateCount" parameterType="hashmap">
