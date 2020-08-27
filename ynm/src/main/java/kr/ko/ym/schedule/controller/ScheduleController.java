@@ -30,11 +30,30 @@ public class ScheduleController {
 		return list;	
 	}
 	
+	@RequestMapping(value="/schedule/select", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String,Object>> selectScheduleOne(@RequestParam Map<String,Object>param) throws Exception {		
+		List<Map<String,Object>>list = scheduleService.selectSchedule(param);		
+		return list;	
+	}
+	
 	
 	@RequestMapping(value="/schedule/insert", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> insertSchedule(@RequestParam Map<String,Object>param) throws Exception {		
+	public List<Map<String, Object>> insertSchedule(@RequestParam Map<String,Object>param) throws Exception {		
 		return scheduleService.insertSchedule(param);	
+	}
+	
+	@RequestMapping(value="/schedule/update", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, Object>> updateSchedule(@RequestParam Map<String,Object>param) throws Exception {		
+		return scheduleService.updateSchedule(param);	
+	}
+	
+	@RequestMapping(value="/schedule/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, Object>> deleteSchedule(@RequestParam Map<String,Object>param) throws Exception {		
+		return scheduleService.deleteSchedule(param);	
 	}
 
 }

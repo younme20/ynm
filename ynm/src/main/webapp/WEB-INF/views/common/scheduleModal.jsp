@@ -15,6 +15,8 @@
 					<h4 class="modal-title" id="planModalLabel">일정 추가</h4>
 				</div>
 				<form id="scheduleForm" name="scheduleForm">
+					<input type="hidden" id="IDX" name="IDX" class="form-control" value=""></input>																										
+				
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-xs-12">
@@ -29,7 +31,7 @@
 									일정명 :  
 								</div>
 								<div class="col-xs-10">
-									<input type="text" id="TASK" name="TASK" class="form-control" value=""></input>																					
+									<input type="text" id="TITLE" name="TITLE" class="form-control" value=""></input>																					
 								</div>
 							</div>
 						</div>
@@ -55,7 +57,11 @@
 									구분 : 
 								</div>
 								<div class="col-xs-10">
-									<input type="text" id="CATEGORY" name="CATEGORY" class="form-control" value=""></input>																					
+									<select id="selectCategory" class="form-control">
+										<option value="O">선택</option>
+										<option value="B">PUBLIC</option>
+										<option value="V">PRIVATE</option>
+									</select>																					
 								</div>				
 							</div>
 						</div>	
@@ -87,8 +93,9 @@
 					</div>
 				</form>
 				<div class="modal-footer">
-					<button type="button" id="btnModalConfirm" class="btn btn-primary">확인</button>
-					<button type="button" id="btnModalCancel" class="btn btn-primary" data-dismiss="modal">취소</button>
+					<button type="button" id="btnModalConfirm" class="btn btn-primary" data-dismiss="modal">확인</button>
+					<button type="button" id="btnModalCancel" class="btn btn-secondary" data-dismiss="modal">취소</button>
+					<button type="button" id="btnModalDelete" class="btn btn-danger" data-dismiss="modal">삭제</button>					
 				</div>
 			</div>
 		</div>

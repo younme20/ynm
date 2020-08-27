@@ -5,8 +5,13 @@ import java.util.Map;
 
 public interface ScheduleService {
 
-	Map<String, Object> insertSchedule(Map<String, Object> param) throws Exception;
+	List<Map<String, Object>> insertSchedule(Map<String, Object> param) throws Exception;
 
 	List<Map<String, Object>> selectSchedule(Map<String, Object> param) throws Exception;
+	
+	List<Map<String, Object>> updateSchedule(Map<String, Object> param) throws Exception;
+
+	List<Map<String, Object>> deleteSchedule(Map<String, Object> param) throws Exception;
+
 
 }

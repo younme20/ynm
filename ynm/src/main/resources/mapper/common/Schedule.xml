@@ -4,15 +4,28 @@
 
 	<!-- 리스트 조회 -->
 	<select id="selectScheduleList" parameterType="hashmap" resultType="hashmap"> 
-			SELECT TASK AS title
+			SELECT IDX as idx
+				 , title
+			 	 , COLOR as color
+			 	 , date_format(START_DATE, '%Y-%m-%d-%T') as start_date
+				 , date_format(END_DATE, '%Y-%m-%d-%T') AS end_date
 				 , date_format(START_DATE, '%Y-%m-%d') AS start
 				 , date_format(END_DATE, '%Y-%m-%d') AS end
+				 , category
+				 , memo
+				 , done_flag
 			  FROM schedule 
+			<where>
+				<if test='IDX != "" and IDX != null '>
+					AND IDX = #{IDX}  
+				</if>	  	  
+			</where>
 	</select>
 	
 	<select id="selectScheduleOne" parameterType="hashmap" resultType="hashmap"> 
 		<![CDATA[ 
-			SELECT TASK AS title
+			SELECT title
+			 	 , COLOR as color			     
 				 , date_format(START_DATE, '%Y-%m-%d') AS start
 				 , date_format(END_DATE, '%Y-%m-%d') AS end
 			  FROM schedule 
@@ -25,12 +38,28 @@
         	SELECT IFNULL(MAX(IDX),0)+1 FROM schedule
         </selectKey>
         INSERT INTO schedule
-             ( IDX, START_DATE, END_DATE, TASK, CATEGORY, COLOR, MEMO, DONE_FLAG   
+             ( IDX, START_DATE, END_DATE, TITLE, CATEGORY, COLOR, MEMO, DONE_FLAG   
              )
         VALUES
-             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TASK}, #{CATEGORY}, #{COLOR}, #{MEMO}, 'N'             
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, #{CATEGORY}, #{COLOR}, #{MEMO}, 'N'             
              ) 
     </insert>
+    
+    <update id="updateSchedule" parameterType="hashmap">
+        UPDATE schedule
+           SET TITLE = #{TITLE}
+             , MEMO = #{MEMO}
+             , CATEGORY = #{CATEGORY}
+             , START_DATE = #{START_DATE}
+             , END_DATE = #{END_DATE}
+             , COLOR = #{COLOR}
+         WHERE IDX = #{IDX}
+    </update>    
+    
+    <delete id="deleteSchedule" parameterType="hashmap">
+        DELETE FROM schedule
+         WHERE IDX = #{IDX}
+    </delete>    
     
 <!--     <update id="updateBoard" parameterType="hashmap">
         UPDATE board
