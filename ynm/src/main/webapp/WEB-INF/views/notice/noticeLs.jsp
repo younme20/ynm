@@ -1,20 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
+	<div class="con">
 	<h1>스터디 게시판</h1>
+	
 	<form name="form" id="form" action="/ynm/notice/serch" method="post">
-	 	<div class="input-group">
+	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
 				<option value="title">제목</option>
 				<option value="content">본문</option>
 				<option value="user">작성자</option>
 			</select>
 		    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
-		    <button type="submit" id="btnSerch" class="btn btn-default">검색</button>
+		    <button type="submit" id="btnSerch" class="btn">검색</button>
 		 </div>
-  	
+  			
 		<div class="table-responsive">
 			<table  class="table">
 			    <colgroup>
@@ -55,6 +58,7 @@
 			          
 			    </tbody>
 			</table>
+			<button type="button" id="write" class="btn btn-default">글쓰기</button>  
 		</div>
 	</form>
-	<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
+	</div>
