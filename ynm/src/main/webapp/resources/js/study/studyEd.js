@@ -20,7 +20,7 @@ $(document).ready(function(){
     
     //목록
 	$("#btnList").on("click", function(e){ 
-		movePage("/ynm");
+		movePage("/ynm/study");
 	});
 	
 	//저장
@@ -89,7 +89,7 @@ function studyEdit() {
 				movePage("/ynm/study/view/"+idx);
 			},
 			error   : function(result, textStatus, jqXHR){
-				movePage("/ynm");
+				movePage("/ynm/study");
 			}
 		});		
 	},
@@ -104,18 +104,12 @@ function studyEdit() {
 			data : data,                 
 			success : function(result, textStatus, jqXHR){
 				alert('삭제되었습니다.');
-				movePage("/ynm");
+				movePage("/ynm/study");
 			},
 			error   : function(result, textStatus, jqXHR){
-				movePage("/ynm");
+				movePage("/ynm/study");
 			}
 		});		
 	}
 	
 }
-
-
-
-
-
-

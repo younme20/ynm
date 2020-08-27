@@ -1,14 +1,17 @@
 package kr.ko.ym.study.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,13 +29,24 @@ public class StudyController {
 	@Autowired
 	private StudyService studyService;
 	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="/")
+	
+	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
+
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
-		mv.addObject("list", studyService.selectList(param));				
-		return mv;		
+ 		List<Map<String,Object>>list = studyService.selectList(param);
+		Map<String,Object>map = studyService.selectTotalCount(param);
+		
+		mv.addObject("list", list);		
+		mv.addObject("param", param);		
+		
+		mv.addObject("page", param.get("page"));
+		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
+
+ 		return mv;		
 	}
 	
 	@RequestMapping(value="/study/view/{idx}")
@@ -92,6 +106,5 @@ public class StudyController {
 		
 	}
 
-	
 
 }

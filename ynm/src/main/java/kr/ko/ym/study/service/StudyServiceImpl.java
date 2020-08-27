@@ -8,16 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ko.ym.common.dao.CommonDao;
+import kr.ko.ym.common.util.PagingUtil;
 
 @Service("studyService")
 public class StudyServiceImpl implements StudyService {
 	
 	@Autowired
-	private CommonDao commonDao;	
+	private CommonDao commonDao;	  
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
+		PagingUtil paging = new PagingUtil();
+		
+		int index = 1;
+		if(param.containsKey("pageIndex")) {
+			index = Integer.parseInt(param.get("pageIndex").toString());
+		}		
+		
+		paging.countPaging(index, 10);
+		
+		param.put("page", paging);		
+		
 		return commonDao.selectList("study.selectList", param);
 	}
 
@@ -47,5 +59,12 @@ public class StudyServiceImpl implements StudyService {
 	public void deleteBoard(Map<String, Object> param) throws Exception {
 		commonDao.delete("study.deleteBoard", param);			
 	}
+	
+	@Override
+	public Map<String, Object> selectTotalCount(Map<String, Object> param) throws Exception {
+		return commonDao.selectOne("study.selectTotalCount", param);
+	}
+
+
 
 }

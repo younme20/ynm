@@ -1,26 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
-<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
-<script src="<c:url value='/resources/js/notice/noticeEd.js'/>"charset="utf-8"></script>
-</head>
-<body>
-	공지사항 게시판 목록
+
+	<h1>스터디 게시판</h1>
 	<form id="form" method="post">
-	<table style="border:1px solid #ccc">
+	 <div class="input-group">
+		 <select name="searchType" id="searchType" >
+			<option value="title">제목</option>
+			<option value="content">본문</option>
+			<option value="user">작성자</option>
+		</select>
+	    <input type="text" id="keyword" placeholder="Search">
+	    <div class="input-group-btn">
+	      <button class="btn" type="button" id="btnSerch">
+	        <i class="glyphicon glyphicon-search"></i>
+	      </button>
+	    </div>
+	  </div>
+  
+	<div class="table-responsive">
+	<table  class="table">
 	    <colgroup>
-	        <col width="10%"/>
-	        <col width="*"/>
-	        <col width="15%"/>
-	        <col width="20%"/>
-	        <col width="15%"/>
+	        <col width="10%"/><col width="*"/><col width="15%"/><col width="20%"/><col width="15%"/>
 	    </colgroup>
 	    <thead>
 	        <tr>
@@ -34,11 +35,11 @@
 	    <tbody>
 	        <c:choose>
 	            <c:when test="${fn:length(list) > 0}">
-	                <c:forEach items="${list }" var="row">
+	                <c:forEach items="${list}" var="row">
 	                    <tr>
 	                        <td>${row.IDX }</td>
 	                        <td>
-	                        	<a href='<c:url value='/noticeDetail?IDX=${row.IDX }'/>'>
+	                        	<a href="<c:url value='/notice/detail/${row.IDX}'/>">
 									${row.TITLE }
 	                        	</a>
 	                        </td>
@@ -57,9 +58,6 @@
 	          
 	    </tbody>
 	</table>
-	
-	<a href='<c:url value='writeForm'/>'>글쓰기</a>
-
-	</form>  
-</body>
-</html>
+	</div>
+	</form>
+	<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
