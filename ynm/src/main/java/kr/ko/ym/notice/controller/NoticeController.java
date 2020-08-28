@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.ko.ym.common.util.PagingUtil;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
 public class NoticeController {
@@ -25,13 +26,21 @@ public class NoticeController {
 	/*
 	 * list serch
 	 * */
-	@RequestMapping(value="/notice")
+	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView selectBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
-
-		ModelAndView mv = new ModelAndView("/notice/noticeLs.tiles");
+		
+		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
+		Map<String,Object>map = noticeService.selectCount(param);
+		param.put("totalCount", map.get("TOTAL_COUNT"));
+		param.put("totalCount", map.get("TOTAL_COUNT"));
+		
 		mv.addObject("list", noticeService.selectBoard(param));	
+		mv.addObject("param", param);		
+		
 		mv.addObject("page", param.get("page"));
-		mv.addObject("totalCount", noticeService.selectCount(param));	
+		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
+		
+		
 		return mv;
 	}
 	/*

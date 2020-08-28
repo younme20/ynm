@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ko.ym.common.dao.CommonDao;
+import kr.ko.ym.common.util.PagingUtil;
 @Service("NoticeService")
 public class NoticeServiceImpl implements NoticeService{
 	
@@ -17,6 +18,13 @@ public class NoticeServiceImpl implements NoticeService{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectBoard(Map<String, Object> param) throws Exception {
+		PagingUtil paging = new PagingUtil();
+		int index = 1;
+		if(param.containsKey("pageIndex")) {
+			index = Integer.parseInt(param.get("pageIndex").toString());
+		}
+		paging.countPaging(index, 5);
+		param.put("page",paging);
 		
 		return commonDao.selectList("notice.selectBoard", param);
 	}

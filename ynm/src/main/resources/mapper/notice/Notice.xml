@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="notice">
+	<!-- 페이징 공통 -->
+	<sql id="COMMON_PAGING_HEADER">
+		select R1.* FROM(	
+	</sql>
 
-	<!-- list 
+	<sql id="COMMON_PAGING_TAIL">
+		) R1
+	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
+	</sql>
+	<!-- 페이징 공통 -->
+	
+	<!-- select list -->
 	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
-		SELECT IDX, TITLE, HITCNT, CREATE_DATETIME, CREATE_ID
-		FROM board;
-	</select>-->
-
-	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
-		SELECT IDX, TITLE, HITCNT, CREATE_DATETIME, CREATE_ID
-		FROM board
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="searchType == 'title' and keyword != null and keyword != '' ">
-				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'contents' and keyword != null and keyword != '' ">
-				AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'user' and keyword != null and keyword != '' ">
-				AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
-			</if>	
-		</trim> 
-		ORDER BY IDX DESC
+		<include refid="COMMON_PAGING_HEADER"/>	
+			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
+			FROM board
+				<if test='searchType != ""'>
+					<trim prefix="WHERE" prefixOverrides="AND|OR">
+						<if test="searchType == 'title' and keyword != null and keyword != '' ">
+							AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+						</if>
+						<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+							AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+						</if>
+						<if test="searchType == 'user' and keyword != null and keyword != '' ">
+							AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+						</if>	
+					</trim> 
+				</if>
+			ORDER BY IDX DESC
+			<include refid="COMMON_PAGING_TAIL"/>
 	</select>
+	<!-- select list -->
 	
 	<!-- select one -->
 	<select id="detailBoard" parameterType="hashmap" resultType="hashmap">
@@ -37,22 +47,24 @@
 		SELECT MAX(IDX) AS IDX FROM board
 	</select>
 	
-	<!-- select count -->
+	<!-- select TOTAL COUNT -->
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
-		SELECT COUNT(IDX) AS TOTAL FROM board
-		<trim prefix="WHERE" prefixOverrides="AND|OR">
-			<if test="searchType == 'title' and keyword != null and keyword != '' ">
-				AND TITLE LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'contents' and keyword != null and keyword != '' ">
-				AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
-			</if>
-			<if test="searchType == 'user' and keyword != null and keyword != '' ">
-				AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
-			</if>	
-		</trim> 
+		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board
+		<if test='searchType != ""'>
+			<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="searchType == 'title' and keyword != null and keyword != '' ">
+					AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+					AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType == 'user' and keyword != null and keyword != '' ">
+					AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+				</if>	
+			</trim> 
+		</if>
 	</select>
-	
+	<!-- select TOTAL COUNT -->
 	
 	<!-- hit -->
 	<update id="updateCount" parameterType="hashmap">

@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
-div{background-color: pink}
-.con{position: relative;width: 100%;     float: left;}
+.con{position: relative;width: 100%;     float: left; background-color: pink}
 .serch-group{position: relative; width: 400px;margin: 0 auto;padding: 20px 0 5px;}
 .serch-group select {float: left;width: 84px;margin-left: 10px;}
 .serch-group input[type=text] {float: left;width: 200px;margin: 0 5px;}
 .table-responsive{ position: relative; width: 800px; margin: 0 auto;}
+.table-responsive .table tr th, .table-responsive .table tr td {text-align: center;}
 #write{display: block;float: right;}

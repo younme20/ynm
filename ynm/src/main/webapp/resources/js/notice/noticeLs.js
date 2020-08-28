@@ -1,6 +1,7 @@
 /**
  * Notice List Script Page 
  */
+	
 $(document).ready(function(){
 	//글쓰기
 	$("#write").on("click", function(e){ 
@@ -21,4 +22,9 @@ $(document).ready(function(){
 		  }
 		  return true;
 	}*/
+
 });
+var pageMove  = function(obj){
+	var pageIndex = $(obj).attr("pageidx");
+	movePage("/ynm/notice/"+pageIndex);
+};

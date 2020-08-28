@@ -8,6 +8,7 @@
 	<h1>스터디 게시판</h1>
 	
 	<form name="form" id="form" action="/ynm/notice/serch" method="post">
+	<input type="hidden" name="page">
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
 				<option value="title">제목</option>
@@ -25,7 +26,7 @@
 			    </colgroup>
 			    <thead>
 			        <tr>
-			            <th scope="col">글번호</th>
+			            <th scope="col">no</th>
 			            <th scope="col">제목</th>
 			            <th scope="col">작성자</th>
 			            <th scope="col">작성일</th>
@@ -60,5 +61,20 @@
 			</table>
 			<button type="button" id="write" class="btn btn-default">글쓰기</button>  
 		</div>
+		
+		
+	<div id="paging">
+		
+		<%-- <c:if test="${paging.startRow != 1 }">
+			<a href="/boardList?nowPage=${paging.startRow - 1 }&cntPerPage=${paging.pageIndex}">&lt;</a>
+		</c:if> --%>
+		<c:set var="listIndex" value="${totalCount / page.pageSize}" />
+		<c:forEach var="i" begin="1" end="${(listIndex mod 2) eq 1 ? listIndex : listIndex+1}">
+			<p><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></p>
+		</c:forEach>
+		<%-- <c:if test="${paging.endRow != listIndex+1}">
+			<a href="/boardList?nowPage=${listIndex+1 }&cntPerPage=${paging.pageIndex}">&gt;</a>
+		</c:if> --%>
+	</div>
 	</form>
 	</div>
