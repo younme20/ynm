@@ -24,15 +24,14 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	/*
-	 * list serch
+	 * list select
 	 * */
 	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView selectBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
 		Map<String,Object>map = noticeService.selectCount(param);
-		param.put("totalCount", map.get("TOTAL_COUNT"));
-		param.put("totalCount", map.get("TOTAL_COUNT"));
+		//param.put("totalCount", map.get("TOTAL_COUNT"));
 		
 		mv.addObject("list", noticeService.selectBoard(param));	
 		mv.addObject("param", param);		

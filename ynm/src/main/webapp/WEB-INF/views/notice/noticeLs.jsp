@@ -1,23 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
 	<div class="con">
 	<h1>스터디 게시판</h1>
 	
-	<form name="form" id="form" action="/ynm/notice/serch" method="post">
-	<input type="hidden" name="page">
-	 	<div class="serch-group">
-			 <select name="searchType" id="searchType" class="form-control">
-				<option value="title">제목</option>
-				<option value="content">본문</option>
-				<option value="user">작성자</option>
-			</select>
-		    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
-		    <button type="submit" id="btnSerch" class="btn">검색</button>
-		 </div>
+	
   			
 		<div class="table-responsive">
 			<table  class="table">
@@ -62,19 +54,40 @@
 			<button type="button" id="write" class="btn btn-default">글쓰기</button>  
 		</div>
 		
-		
-	<div id="paging">
-		
-		<%-- <c:if test="${paging.startRow != 1 }">
-			<a href="/boardList?nowPage=${paging.startRow - 1 }&cntPerPage=${paging.pageIndex}">&lt;</a>
-		</c:if> --%>
-		<c:set var="listIndex" value="${totalCount / page.pageSize}" />
-		<c:forEach var="i" begin="1" end="${(listIndex mod 2) eq 1 ? listIndex : listIndex+1}">
-			<p><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></p>
-		</c:forEach>
-		<%-- <c:if test="${paging.endRow != listIndex+1}">
-			<a href="/boardList?nowPage=${listIndex+1 }&cntPerPage=${paging.pageIndex}">&gt;</a>
-		</c:if> --%>
-	</div>
-	</form>
+		<form name="form" id="form" action="/ynm/notice/serch" method="post">
+		 	<div class="serch-group">
+				 <select name="searchType" id="searchType" class="form-control">
+					<option value="title">제목</option>
+					<option value="content">본문</option>
+					<option value="user">작성자</option>
+				</select>
+			    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
+			    <button type="submit" id="btnSerch" class="btn">검색</button>
+			 </div>
+			 
+			<div id="paging" >
+				<c:set var="listIndex" value="${totalCount / page.pageSize}" />
+				<c:set var="lastIndex" value="${(totalCount mod page.pageSize) == 0 ? listIndex : listIndex+1}" />
+				<c:set var="lastIndex" value="${lastIndex-(lastIndex%1)}" />
+				
+				<ul  class="pagination">
+					<c:if test="${page.pageIndex > 1 }">
+						<li><a href="javascript:;" onClick="pageMove(this);"  pageidx="${page.pageIndex-1}">&lt;</a></li>
+					</c:if>
+					<c:forEach var="i" begin="1" end="${lastIndex}">
+						<c:choose>
+							<c:when test="${i == page.pageIndex }">
+								<li class="active"><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></li>
+							</c:when>
+							<c:when test="${i != page.pageIndex }">
+								<li><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></li>
+							</c:when>
+						</c:choose>
+					</c:forEach>
+					<c:if test="${page.pageIndex != lastIndex}">
+						<li><a href="javascript:;" onClick="pageMove(this);" pageidx="${page.pageIndex+1}">&gt;</a></li>
+					</c:if>
+				</ul>
+			</div>
+		</form>
 	</div>

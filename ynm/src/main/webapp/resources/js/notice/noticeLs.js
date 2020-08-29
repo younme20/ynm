@@ -25,6 +25,8 @@ $(document).ready(function(){
 
 });
 var pageMove  = function(obj){
-	var pageIndex = $(obj).attr("pageidx");
-	movePage("/ynm/notice/"+pageIndex);
+	var index = $(obj).attr("pageidx");
+	
+	
+	movePage("/ynm/notice?pageIndex="+index);
 };

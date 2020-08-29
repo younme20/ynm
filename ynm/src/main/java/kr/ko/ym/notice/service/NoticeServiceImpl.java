@@ -21,7 +21,9 @@ public class NoticeServiceImpl implements NoticeService{
 		PagingUtil paging = new PagingUtil();
 		int index = 1;
 		if(param.containsKey("pageIndex")) {
-			index = Integer.parseInt(param.get("pageIndex").toString());
+ 			index = Integer.parseInt(param.get("pageIndex").toString());
+ 			paging.setPageIndex(index);
+			
 		}
 		paging.countPaging(index, 5);
 		param.put("page",paging);

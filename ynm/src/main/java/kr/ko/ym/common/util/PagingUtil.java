@@ -40,6 +40,10 @@ public class PagingUtil {
 	    return totalCount;
 	}
 	
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
 	public void countPaging(int pageIndex, int pageSize) {
 		this.pageIndex = this.pageIndex < 1 ? 1 : this.pageIndex;
 		this.pageSize = pageSize;
