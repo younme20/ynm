@@ -17,6 +17,7 @@
 		<include refid="COMMON_PAGING_HEADER"/>	
 			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
 			FROM board
+			WHERE MENU_CODE='B'
 				<if test='searchType != ""'>
 					<trim prefix="WHERE" prefixOverrides="AND|OR">
 						<if test="searchType == 'title' and keyword != null and keyword != '' ">
@@ -44,12 +45,14 @@
 	
 	<!-- select one -->
 	<select id="selectMaxIdx" parameterType="hashmap" resultType="hashmap">
-		SELECT MAX(IDX) AS IDX FROM board
+		SELECT MAX(IDX) AS IDX FROM board WHERE MENU_CODE='B'
 	</select>
 	
 	<!-- select TOTAL COUNT -->
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
-		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board
+		SELECT COUNT(IDX) AS TOTAL_COUNT 
+		FROM board
+		WHERE MENU_CODE='B'
 		<if test='searchType != ""'>
 			<trim prefix="WHERE" prefixOverrides="AND|OR">
 				<if test="searchType == 'title' and keyword != null and keyword != '' ">
@@ -78,10 +81,10 @@
         	SELECT MAX(IDX) + 1 FROM board
         </selectKey>
         INSERT INTO board
-             ( IDX, TITLE, CONTENTS, CREATE_ID, CREATE_DATETIME   
+             ( IDX, TITLE, CONTENTS, CREATE_ID, MENU_CODE, CREATE_DATETIME   
              )
         VALUES
-             ( #{IDX}, #{TITLE}, #{CONTENTS}, #{CREATE_ID}, NOW()
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, #{CREATE_ID}, #{MENU_CODE}, NOW()
              ) 
     </insert>
    	

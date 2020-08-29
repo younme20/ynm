@@ -3,6 +3,7 @@
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
 	    <form name="form" id="form" method="post">
+	    	<input type="hidden" name="MENU_CODE" value="B">
 	    	<input type="hidden" name="IDX" value="${data.IDX}">
 	        <div class="form-group">
 	            <label for="exampleFormControlInput1">제목</label>

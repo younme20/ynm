@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
 	<div class="table-responsive">
 		<table class="table">
 			<tr>

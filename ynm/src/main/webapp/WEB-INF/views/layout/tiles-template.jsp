@@ -12,8 +12,6 @@
 	<title></title>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
-	<script src="<c:url value='/resources/js/notice/noticeEd.js'/>"charset="utf-8"></script>
-	<script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>
 	<script src="<c:url value='/resources/js/common/jquery.serializeObject.min.js'/>"charset="utf-8"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

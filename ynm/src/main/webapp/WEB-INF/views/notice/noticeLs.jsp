@@ -10,7 +10,16 @@
 	<h1>스터디 게시판</h1>
 	
 	
-  			
+	<form name="form" id="form" action="/ynm/notice/serch" method="post">
+	 	<div class="serch-group">
+			 <select name="searchType" id="searchType" class="form-control">
+				<option value="title">제목</option>
+				<option value="content">본문</option>
+				<option value="user">작성자</option>
+			</select>
+		    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
+		    <button type="submit" id="btnSerch" class="btn">검색</button>
+		 </div>
 		<div class="table-responsive">
 			<table  class="table">
 			    <colgroup>
@@ -28,9 +37,11 @@
 			    <tbody>
 			        <c:choose>
 			            <c:when test="${fn:length(list) > 0}">
+			             <c:set var="num" value="${totalCount - ((page.pageIndex-1) * page.pageSize) }"/>
 			                <c:forEach items="${list}" var="row">
+			               
 			                    <tr>
-			                        <td>${row.IDX }</td>
+			                        <td>${num}</td>
 			                        <td>
 			                        	<a href="<c:url value='/notice/detail/${row.IDX}'/>">
 											${row.TITLE }
@@ -40,6 +51,7 @@
 			                        <td>${row.CREATE_DATETIME }</td>
 			                        <td>${row.HITCNT }</td>
 			                    </tr>
+			                     <c:set var="num" value="${num-1 }" />
 			                </c:forEach>
 			            </c:when>
 			            <c:otherwise>
@@ -54,27 +66,17 @@
 			<button type="button" id="write" class="btn btn-default">글쓰기</button>  
 		</div>
 		
-		<form name="form" id="form" action="/ynm/notice/serch" method="post">
-		 	<div class="serch-group">
-				 <select name="searchType" id="searchType" class="form-control">
-					<option value="title">제목</option>
-					<option value="content">본문</option>
-					<option value="user">작성자</option>
-				</select>
-			    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
-			    <button type="submit" id="btnSerch" class="btn">검색</button>
-			 </div>
+		
 			 
 			<div id="paging" >
 				<c:set var="listIndex" value="${totalCount / page.pageSize}" />
 				<c:set var="lastIndex" value="${(totalCount mod page.pageSize) == 0 ? listIndex : listIndex+1}" />
-				<c:set var="lastIndex" value="${lastIndex-(lastIndex%1)}" />
-				
+				<c:set var="endIndex" value="${lastIndex-(lastIndex%1)}" />
 				<ul  class="pagination">
 					<c:if test="${page.pageIndex > 1 }">
 						<li><a href="javascript:;" onClick="pageMove(this);"  pageidx="${page.pageIndex-1}">&lt;</a></li>
 					</c:if>
-					<c:forEach var="i" begin="1" end="${lastIndex}">
+					<c:forEach var="i" begin="1" end="${endIndex}">
 						<c:choose>
 							<c:when test="${i == page.pageIndex }">
 								<li class="active"><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></li>
@@ -84,7 +86,7 @@
 							</c:when>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${page.pageIndex != lastIndex}">
+					<c:if test="${page.pageIndex != endIndex}">
 						<li><a href="javascript:;" onClick="pageMove(this);" pageidx="${page.pageIndex+1}">&gt;</a></li>
 					</c:if>
 				</ul>
