@@ -10,7 +10,11 @@
 	<h1>스터디 게시판</h1>
 	
 	
-	<form name="form" id="form" action="/ynm/notice/serch" method="post">
+	<form name="form" id="form" action="/ynm/notice" method="post">
+		<input type="hidden" name="MENU_CODE" value="B">
+		<input type="hidden" name="pageIndex" value="${page.pageIndex}">
+		
+		
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
 				<option value="title">제목</option>

@@ -30,31 +30,16 @@ public class NoticeController {
 	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
+		param.put("MENU_CODE", "B");
 		Map<String,Object>map = noticeService.selectCount(param);
-		//param.put("totalCount", map.get("TOTAL_COUNT"));
-		
 		mv.addObject("list", noticeService.selectBoard(param));	
-		mv.addObject("param", param);		
-		
+		mv.addObject("param", param);	
 		mv.addObject("page", param.get("page"));
 		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
 		
 		
 		return mv;
 	}
-	/*
-	 * list serch
-	 * */
-	@RequestMapping(value="/notice/serch" , method = RequestMethod.POST)
-	public ModelAndView serchBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
-		
-		
-		ModelAndView mv = new ModelAndView("/notice/noticeLs.tiles");
-		mv.addObject("list", noticeService.serchBoard(param));	
-					
-		return mv;
-	}
-	
 	
 	/*
 	 * view

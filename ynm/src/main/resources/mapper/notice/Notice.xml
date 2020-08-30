@@ -8,6 +8,7 @@
 
 	<sql id="COMMON_PAGING_TAIL">
 		) R1
+		ORDER BY IDX DESC
 	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
 	</sql>
 	<!-- 페이징 공통 -->
@@ -17,9 +18,9 @@
 		<include refid="COMMON_PAGING_HEADER"/>	
 			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
 			FROM board
-			WHERE MENU_CODE='B'
+			WHERE MENU_CODE=#{MENU_CODE}
 				<if test='searchType != ""'>
-					<trim prefix="WHERE" prefixOverrides="AND|OR">
+					<trim prefix="AND" prefixOverrides="AND|OR">
 						<if test="searchType == 'title' and keyword != null and keyword != '' ">
 							AND TITLE LIKE CONCAT('%', #{keyword}, '%')
 						</if>
@@ -31,7 +32,6 @@
 						</if>	
 					</trim> 
 				</if>
-			ORDER BY IDX DESC
 			<include refid="COMMON_PAGING_TAIL"/>
 	</select>
 	<!-- select list -->
@@ -54,7 +54,7 @@
 		FROM board
 		WHERE MENU_CODE='B'
 		<if test='searchType != ""'>
-			<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<trim prefix="AND" prefixOverrides="AND|OR">
 				<if test="searchType == 'title' and keyword != null and keyword != '' ">
 					AND TITLE LIKE CONCAT('%', #{keyword}, '%')
 				</if>
