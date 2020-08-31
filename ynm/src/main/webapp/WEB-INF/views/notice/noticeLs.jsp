@@ -12,16 +12,13 @@
 	
 	<form name="form" id="form" action="/ynm/notice" method="post">
 		<input type="hidden" name="MENU_CODE" value="B">
-		<input type="hidden" name="pageIndex" value="${page.pageIndex}">
-		
-		
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
-				<option value="title">제목</option>
-				<option value="content">본문</option>
-				<option value="user">작성자</option>
+				<option value="title" <c:if test="${param.searchType eq 'title'}">selected</c:if>>제목</option>
+				<option value="content" <c:if test="${param.searchType eq 'content'}">selected</c:if>>본문</option>
+				<option value="user" <c:if test="${param.searchType eq 'user'}">selected</c:if>>작성자</option>
 			</select>
-		    <input type="text" name="keyword" id="keyword" placeholder="Search" class="form-control">
+		    <input type="text" name="keyword" id="keyword" value="${param.keyword}" placeholder="Search" class="form-control">
 		    <button type="submit" id="btnSerch" class="btn">검색</button>
 		 </div>
 		<div class="table-responsive">

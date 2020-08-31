@@ -31,8 +31,9 @@ public class NoticeController {
 		
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
 		param.put("MENU_CODE", "B");
-		Map<String,Object>map = noticeService.selectCount(param);
 		mv.addObject("list", noticeService.selectBoard(param));	
+		
+		Map<String,Object>map = noticeService.selectCount(param);
 		mv.addObject("param", param);	
 		mv.addObject("page", param.get("page"));
 		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
@@ -44,12 +45,15 @@ public class NoticeController {
 	/*
 	 * view
 	 * */
-	@RequestMapping(value="/notice/detail/{idx}" , method = RequestMethod.GET)
-	public ModelAndView selectDetail( HttpServletRequest request, @PathVariable int idx) throws Exception {
+	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
-		Map<String,Object>param = new HashMap<String,Object>();
-		param.put("IDX", idx);			
+		System.out.println("1키워드"+param.get("keyword"));
+		System.out.println("1키워드"+request.getParameter("keyword"));
 		
+		
+		param.put("IDX", idx);			
+		mv.addObject("param", param);
 		mv.addObject("data", noticeService.selectDetail(param));		
 		noticeService.updateCount(param);
 		return mv;		

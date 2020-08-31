@@ -11,7 +11,13 @@ $(document).ready(function(){
 	//글보기
 	$("#detail").on("click", function(){
 		var idx = $(this).attr("id");
-		movePage("/ynm/notice/detail/"+idx);
+		
+		 $("#form")[0].attr("action", "ynm/notice/detail/"+id);
+		 $("#form")[0].submit();
+		
+		
+		//$("#form").attr("action", "ynm/notice/detail/");
+		//movePage("/ynm/notice/detail/"+idx);
 	});
 	
 	//검색
