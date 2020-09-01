@@ -14,17 +14,20 @@
 	
 	<!-- 검색 공통 -->
 	<sql id="COMMON_SEARCH">
+		<where>
 		<if test='searchText != ""'>
 			<if test='searchCondition != "" and searchCondition == "T" '>
-				WHERE INSTR(TITLE, #{searchText}) > 0
+				AND INSTR(TITLE, #{searchText}) > 0
 			</if>
 			<if test='searchCondition != "" and searchCondition == "C" '>
-				WHERE INSTR(CONTENTS, #{searchText}) > 0
+				AND INSTR(CONTENTS, #{searchText}) > 0
 			</if>		
 			<if test='searchCondition != "" and searchCondition == "A" '>
-			 	WHERE INSTR(TITLE, #{searchText}) > 0 OR INSTR(CONTENTS, #{searchText}) > 0
-			</if>		
+			 	AND INSTR(TITLE, #{searchText}) > 0 OR INSTR(CONTENTS, #{searchText}) > 0
+			</if>
+			AND MENU_CODE = 'G'		
 		</if>
+		</where>
 	</sql>
 	
 	<select id="selectTotalCount" parameterType="hashmap" resultType="hashmap"> 
@@ -62,10 +65,10 @@
         	SELECT MAX(IDX)+1 FROM board
         </selectKey>
         INSERT INTO board
-             ( IDX, TITLE, CONTENTS, CREATE_ID, CREATE_DATETIME   
+             ( IDX, TITLE, CONTENTS, CREATE_ID, CREATE_DATETIME, MENU_CODE
              )
         VALUES
-             ( #{IDX}, #{TITLE}, #{CONTENTS}, 'testid', SYSDATE()
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, 'testid', SYSDATE(), 'G'
              
              ) 
     </insert>

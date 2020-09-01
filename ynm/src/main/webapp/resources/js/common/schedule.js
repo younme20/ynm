@@ -73,6 +73,9 @@ function saveSchedule() {
 		url = "update";
 	}
 	
+	//구분 필드
+	schedule["category"] = $('input[name="category"]:checked').val();	
+	
 	$.ajax({
 		type : "POST",                               
 		url : "/ynm/schedule/"+url,                   
@@ -126,10 +129,11 @@ function calendarEvent(eventData){
     	  center: 'title',
     	  end : 'dayGridMonth'
       },
-      height: 900,
+      height: 1200,
       //날짜 클릭 이벤트	
-      dateClick: function (info) {
-          //alert('Clicked on: ' + info.dateStr);
+      dateClick: function (info) {    	  
+    	  $("#START_DATE").val(info.dateStr);    	  
+    	  
     	  $("#planModal").modal('show');
       },
       eventClick: function(info) {

@@ -18,9 +18,11 @@
 </body>
 </html>
 <!-- left page -->
-	<div>
-		<ul class="nav nav-tabs">
-			<li><a href="/ynm/menu/study">study</a></li>
-			<li><a href="/ynm/menu/notice">notice</a></li>
-		</ul>
+	<div class="container">
+		<div id="wrapper">
+			<ul class="nav nav-tabs">
+				<li><a href="/ynm/menu/study">G</a></li>
+				<li><a href="/ynm/menu/notice">B</a></li>
+			</ul>
+		</div>
 	</div>
