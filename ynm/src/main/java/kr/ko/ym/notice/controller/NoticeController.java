@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.ko.ym.common.util.PagingUtil;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
 public class NoticeController {
@@ -23,42 +24,36 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	/*
-	 * list serch
+	 * list select
 	 * */
-	@RequestMapping(value="/notice")
-	public ModelAndView selectBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
-
-		ModelAndView mv = new ModelAndView("/notice/noticeLs");
+	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
+		
+		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
+		param.put("MENU_CODE", "B");
 		mv.addObject("list", noticeService.selectBoard(param));	
-					
+		
+		Map<String,Object>map = noticeService.selectCount(param);
+		mv.addObject("param", param);	
+		mv.addObject("page", param.get("page"));
+		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
+		
+		
 		return mv;
 	}
-	/*
-	 * list serch
-	 * */
-	@RequestMapping(value="/notice/serch/{searchType}/{keyword}" , method = RequestMethod.GET)
-	public ModelAndView serchBoard(HttpServletRequest request, @RequestParam String searchType, @RequestParam String keyword) throws Exception {
-		
-		Map<String,Object>param = new HashMap<String,Object>();
-		param.put("searchType", searchType);	
-		param.put("keyword", keyword);	
-		
-		ModelAndView mv = new ModelAndView("/notice/noticeLs");
-		mv.addObject("list", noticeService.serchBoard(param));	
-					
-		return mv;
-	}
-	
 	
 	/*
 	 * view
 	 * */
-	@RequestMapping(value="/notice/detail/{idx}" , method = RequestMethod.GET)
-	public ModelAndView selectDetail( HttpServletRequest request, @PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeVw");
-		Map<String,Object>param = new HashMap<String,Object>();
-		param.put("IDX", idx);			
+	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
+		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
+		System.out.println("1�궎�썙�뱶"+param.get("keyword"));
+		System.out.println("1�궎�썙�뱶"+request.getParameter("keyword"));
 		
+		
+		param.put("IDX", idx);			
+		mv.addObject("param", param);
 		mv.addObject("data", noticeService.selectDetail(param));		
 		noticeService.updateCount(param);
 		return mv;		
@@ -69,7 +64,7 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice/write")
 	public ModelAndView  writeForm() throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeEd");
+		ModelAndView mv = new ModelAndView("notice/noticeEd.tiles");
 		mv.addObject("mode", "new");	
 		return mv;
 	}
@@ -91,7 +86,7 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeEd");
+		ModelAndView mv = new ModelAndView("notice/noticeEd.tiles");
 		Map<String,Object>param = new HashMap<String,Object>();
 		param.put("IDX", idx);	
 		mv.addObject("data", noticeService.selectDetail(param));	
@@ -118,9 +113,7 @@ public class NoticeController {
 		param.put("IDX", idx);	
 		noticeService.deleteBoard(param);
 		return "redirect:/notice";	
-	}
-	
-	
+	}	
 
 
 }
