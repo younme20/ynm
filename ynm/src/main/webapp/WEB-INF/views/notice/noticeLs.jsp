@@ -7,11 +7,10 @@
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
 	<div class="con">
-	<h1>스터디 게시판</h1>
+	<h1>스터디 관리</h1>
 	
 	
 	<form name="form" id="form" action="/ynm/notice" method="post">
-		<input type="hidden" name="MENU_CODE" value="B">
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
 				<option value="title" <c:if test="${param.searchType eq 'title'}">selected</c:if>>제목</option>
@@ -44,9 +43,7 @@
 			                    <tr>
 			                        <td>${num}</td>
 			                        <td>
-			                        	<a href="<c:url value='/notice/detail/${row.IDX}'/>">
-											${row.TITLE }
-			                        	</a>
+			                        	<a href="javascript:;" onclick="detaile(${row.IDX});" >${row.TITLE }</a>
 			                        </td>
 			                        <td>${row.CREATE_ID }</td>
 			                        <td>${row.CREATE_DATETIME }</td>

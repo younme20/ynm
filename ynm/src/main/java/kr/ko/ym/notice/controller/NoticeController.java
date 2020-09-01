@@ -27,6 +27,7 @@ public class NoticeController {
 	 * list select
 	 * */
 	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
 	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
@@ -46,11 +47,10 @@ public class NoticeController {
 	 * view
 	 * */
 	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
-		System.out.println("1�궎�썙�뱶"+param.get("keyword"));
-		System.out.println("1�궎�썙�뱶"+request.getParameter("keyword"));
-		
+	
 		
 		param.put("IDX", idx);			
 		mv.addObject("param", param);

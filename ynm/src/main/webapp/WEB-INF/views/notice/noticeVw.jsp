@@ -4,11 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
-	<form name="form2" id="form2" action="/ynm/notice" method="post">
-		<input type="hidden" name="MENU_CODE" value="${param.MENU_CODE }">
+	<form name="form" id="form" action="/ynm/notice" method="post">
 		<input type="hidden" name="searchType" value="${param.searchType}">
 		<input type="hidden" name="keyword"  value="${param.keyword}">
-		<input type="hidden" name="pageIndex"  value="${param.pageIndex}">
+	<%-- 	<input type="hidden" name="pageIndex"  value="${param.pageIndex}"> --%>
 	
 		<div class="table-responsive">
 			<table class="table">
