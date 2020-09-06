@@ -77,8 +77,8 @@
    	
 	<!-- insert  -->
  	 <insert id="insertBoard" parameterType="hashmap">
-        <selectKey keyProperty="IDX" resultType="int"  order="BEFORE">
-        	SELECT MAX(IDX) + 1 FROM board
+         <selectKey keyProperty="IDX" resultType="int" order="BEFORE">
+        	SELECT IFNULL(MAX(IDX),0)+1 FROM board
         </selectKey>
         INSERT INTO board
              ( IDX, TITLE, CONTENTS, CREATE_ID, MENU_CODE, CREATE_DATETIME   

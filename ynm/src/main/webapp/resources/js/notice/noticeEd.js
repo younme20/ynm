@@ -26,26 +26,34 @@ $(document).ready(function(){
 		var idx = $(this).attr("data");
 		movePage("/ynm/notice/delete/"+idx);
 	});
+	 
+	//파일업로드2
+	$("#uploadFile").on('change', function() {
+		 notice.multiUploadFile();
+	});
+	
 	notice = new noticeEdit();	
+	
+	
 });
-
 function noticeEdit() {
 	this.init = function(){
 		
 	},
 	this.insertBoard = function(){ 
-		var data = $("#form").serializeObject();
+		var formData = $("#form").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/notice/insert",                         
-			data : data,
+			url : "/ynm/notice/insert",
+			data: formData, 
+			cache: false, 
 			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('등록되었습니다.'+result);
 				movePage(result);
 			},
 			error   : function(result, textStatus, jqXHR){
-				//alert('전송실패!');
+				alert('실패!');
 				movePage("/ynm/notice");
 			}
 		});
@@ -66,5 +74,26 @@ function noticeEdit() {
 				movePage("/ynm/notice");
 			}
 		});
-	}
+	},
+		this.multiUploadFile = function(){ 
+			var formData = new FormData($('#form')[0]);
+
+			$.ajax({
+				type : "POST",         
+				enctype: 'multipart/form-data',
+				url : "/ynm/attach/multipartUpload",
+				data: formData, 
+				processData: false,  
+				contentType: false,  
+				cache: false, 
+				success : function(result, textStatus, jqXHR){
+					alert('업로드 성공'+result);
+				},
+				error   : function(result, textStatus, jqXHR){
+					alert('업로드 실패!');
+					console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
+
+				}
+			});
+		}
 }

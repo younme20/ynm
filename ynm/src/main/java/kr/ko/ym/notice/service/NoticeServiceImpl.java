@@ -14,7 +14,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	private CommonDao commonDao;	
 	
-	//怨듭��궗�빆 紐⑸줉 議고쉶
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectBoard(Map<String, Object> param) throws Exception {

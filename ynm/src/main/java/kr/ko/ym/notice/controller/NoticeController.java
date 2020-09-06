@@ -1,6 +1,7 @@
 package kr.ko.ym.notice.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.ko.ym.common.service.FileUploadService;
 import kr.ko.ym.common.util.PagingUtil;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
@@ -22,7 +26,7 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-	
+    
 	/*
 	 * list select
 	 * */
@@ -75,9 +79,10 @@ public class NoticeController {
 	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+	public String insertBoard(MultipartHttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.insertBoard(param);	
 		Map<String,Object> map =  noticeService.selectMaxIdx();
+		param.put("BOARD_IDX", map.get("IDX"));
 		return "detail/"+ map.get("IDX");	
 	}
 

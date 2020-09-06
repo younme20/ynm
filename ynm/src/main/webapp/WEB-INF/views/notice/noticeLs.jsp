@@ -61,7 +61,7 @@
 			          
 			    </tbody>
 			</table>
-			<button type="button" id="write" class="btn btn-default">글쓰기</button>  
+			<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
 		</div>
 		
 		
