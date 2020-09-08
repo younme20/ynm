@@ -28,11 +28,11 @@
 		</div>
 	 	<div id="btnGrp">
 			<c:if test="${mode eq 'new' }">
-			<button type="button" id="save" class="btn btn-success">등록</button>
+				<button type="button" id="save" class="btn btn-success">등록</button>
 			</c:if>
 			<c:if test="${mode eq 'modify' }">
-			<button type="button" id="update" class="btn btn-warning">수정</button>
+				<button type="button" id="update" class="btn btn-warning">수정</button>
 			</c:if>
-			<button type="button" id="list" class="btn btn-primary">목록</button>
+				<button type="button" id="list" class="btn btn-primary">목록</button>
 		</div>
 	</form>

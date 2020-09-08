@@ -1,23 +1,10 @@
 package kr.ko.ym.common.util;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import javax.servlet.ServletRequest;
-
-import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
-@Component("fileUtils")
+
 public class FileUtils{
 	
 	private static final String filePath = "C:\\ymnProject\\upload"; // 파일이 저장될 위치

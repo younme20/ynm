@@ -81,10 +81,10 @@
         	SELECT IFNULL(MAX(IDX),0)+1 FROM board
         </selectKey>
         INSERT INTO board
-             ( IDX, TITLE, CONTENTS, CREATE_ID, MENU_CODE, CREATE_DATETIME   
+             ( IDX, TITLE, CONTENTS, CREATE_ID, FILE_GROUP, MENU_CODE, CREATE_DATETIME   
              )
         VALUES
-             ( #{IDX}, #{TITLE}, #{CONTENTS}, #{CREATE_ID}, #{MENU_CODE}, NOW()
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, #{CREATE_ID}, #{FILE_GROUP}, #{MENU_CODE}, NOW()
              ) 
     </insert>
    	

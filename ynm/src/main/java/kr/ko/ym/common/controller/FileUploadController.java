@@ -21,9 +21,10 @@ public class FileUploadController {
     
     @RequestMapping(value = "/attach/multipartUpload", method = RequestMethod.POST)
     public Map<String, Object> multipartUpload(MultipartHttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception { 
-    	List<MultipartFile> fileList = request.getFiles("uploadFile");
     	
+    	List<MultipartFile> fileList = request.getFiles("uploadFile");
     	Map<String,Object>map = fileuploadService.insertAttachFile(fileList, param);
+    	
     	return map;
     }
 }

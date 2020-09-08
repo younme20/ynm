@@ -79,7 +79,7 @@ public class NoticeController {
 	
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String insertBoard(MultipartHttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
 		noticeService.insertBoard(param);	
 		Map<String,Object> map =  noticeService.selectMaxIdx();
 		param.put("BOARD_IDX", map.get("IDX"));

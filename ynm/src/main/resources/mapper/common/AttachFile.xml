@@ -24,7 +24,7 @@
 	<!-- insert attach file group -->
 	<insert id="insertAttachFileGroup" parameterType="hashmap">
 	<selectKey keyProperty="FILE_GROUP" resultType="int" order="BEFORE">
-        	SELECT IFNULL(MAX(FILE_GROUP),0)+1 AS FILE_GROUP FROM attachfile_group
+        	SELECT MAX(IFNULL(FILE_GROUP),0)+1 AS FILE_GROUP FROM attachfile_group
         </selectKey>
         INSERT INTO attachfile_group
              ( FILE_GROUP, CREATE_ID, CREATE_DATETIME
@@ -34,4 +34,13 @@
              ) 
     </insert>
     <!-- insert attach file group -->
+    
+    
+    <!-- select file list-->
+	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
+		SELECT a.FILE_NO ,a.FILE_GROUP ,a.FILE_SIZE ,a.ORG_FILE_NAME ,a.STORED_FILE_NAME 
+		FROM board b LEFT JOIN attachfile a 
+		WHERE b.FILE_GROUP  == a.FILE_GROUP AND b.IDX  = #{IDX}
+	</select>
+	<!-- select file list-->
 </mapper>
