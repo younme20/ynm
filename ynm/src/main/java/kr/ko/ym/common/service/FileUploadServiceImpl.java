@@ -29,11 +29,12 @@ public class FileUploadServiceImpl implements FileUploadService{
 
 		if("".equals(param.get("FILE_GROUP"))){
 			commonDao.insert("attach.insertAttachFileGroup",param);
+			@SuppressWarnings("unchecked")
+			Map<String,Object>map = commonDao.selectOne("attach.selectMaxGrp");
+			param.put("FILE_GROUP", map.get("FILE_GROUP"));
 		}
 		
-		@SuppressWarnings("unchecked")
-		Map<String,Object>map = commonDao.selectOne("attach.selectMaxGrp");
-		param.put("FILE_GROUP", map.get("FILE_GROUP"));
+		
 		
 		FileUtils file = new FileUtils();
 		

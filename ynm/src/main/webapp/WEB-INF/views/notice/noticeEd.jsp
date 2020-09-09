@@ -7,7 +7,7 @@
 	<form name="form" id="form" method="post" enctype="multipart/form-data">
 		<div id="writeForm">
 			<input type="hidden" name="MENU_CODE" value="B"> 
-			<input type="hidden" name="FILE_GROUP" value="${FILE_GROUP}"> 
+			<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP"> 
 			
 			<input type="hidden" name="IDX" value="${data.IDX}">
 	

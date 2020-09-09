@@ -26,7 +26,8 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-    
+	@Autowired
+	private FileUploadService fileuploadService;
 	/*
 	 * list select
 	 * */
@@ -58,7 +59,9 @@ public class NoticeController {
 		
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
-		mv.addObject("data", noticeService.selectDetail(param));		
+		mv.addObject("data", noticeService.selectDetail(param));
+		mv.addObject("files", noticeService.selectDetail(param));
+		
 		noticeService.updateCount(param);
 		return mv;		
 	}

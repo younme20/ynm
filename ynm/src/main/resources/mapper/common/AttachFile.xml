@@ -17,14 +17,14 @@
  
  	<!-- select MaxGrp -->
 	<select id="selectMaxGrp" resultType="hashmap">
-		SELECT MAX(FILE_GROUP) AS FILE_GROUP FROM attachfile_group
+		SELECT IFNULL(MAX(FILE_GROUP),0) AS FILE_GROUP FROM attachfile_group
 	</select>
 	<!-- select MaxGrp -->
 	
 	<!-- insert attach file group -->
 	<insert id="insertAttachFileGroup" parameterType="hashmap">
 	<selectKey keyProperty="FILE_GROUP" resultType="int" order="BEFORE">
-        	SELECT MAX(IFNULL(FILE_GROUP),0)+1 AS FILE_GROUP FROM attachfile_group
+        	SELECT IFNULL(MAX(FILE_GROUP),0)+1 AS FILE_GROUP FROM attachfile_group
         </selectKey>
         INSERT INTO attachfile_group
              ( FILE_GROUP, CREATE_ID, CREATE_DATETIME

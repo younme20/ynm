@@ -88,6 +88,7 @@ function noticeEdit() {
 				cache: false, 
 				success : function(result, textStatus, jqXHR){
 					alert('업로드 성공'+result);
+					$("#FILE_GROUP").val(result);
 				},
 				error   : function(result, textStatus, jqXHR){
 					alert('업로드 실패!');
