@@ -56,12 +56,10 @@ public class NoticeController {
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
 	
-		
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
 		mv.addObject("data", noticeService.selectDetail(param));
-		mv.addObject("files", noticeService.selectDetail(param));
-		
+		mv.addObject("files", fileuploadService.selecAttachFileList(param));
 		noticeService.updateCount(param);
 		return mv;		
 	}

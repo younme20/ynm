@@ -20,6 +20,17 @@
 				<tr>
 					<td>작성일:</td><td> ${data.CREATE_DATETIME}</td>
 				</tr>
+				<tr>
+                	<th>첨부파일</th>
+                	<td>
+                    <c:forEach items="${files}" var="row" >
+                        <p>
+                            <input type="hidden" value="${row.FILE_NO }" id="IDX">
+                            <a href="#this" name="file">${row.ORG_FILE_NAME }</a>
+                            (${row.FILE_SIZE }Byte)
+                        </p>
+                    </c:forEach>                          
+            		</tr>
 				<tr >
 					<td >
 						<div>${data.CONTENTS }</div>

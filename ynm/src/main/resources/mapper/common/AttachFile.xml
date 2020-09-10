@@ -36,11 +36,14 @@
     <!-- insert attach file group -->
     
     
-    <!-- select file list-->
-	<select id="selectFileList" parameterType="hashmap" resultType="hashmap">
-		SELECT a.FILE_NO ,a.FILE_GROUP ,a.FILE_SIZE ,a.ORG_FILE_NAME ,a.STORED_FILE_NAME 
-		FROM board b LEFT JOIN attachfile a 
-		WHERE b.FILE_GROUP  == a.FILE_GROUP AND b.IDX  = #{IDX}
+    <!-- select attach file list-->
+	<select id="selectAttachFileList" parameterType="hashmap" resultType="hashmap">
+		SELECT a.FILE_NO, a.FILE_GROUP, a.FILE_SIZE, a.ORG_FILE_NAME, a.STORED_FILE_NAME 
+		FROM board b LEFT JOIN attachfile a ON b.FILE_GROUP = a.FILE_GROUP
+		LEFT JOIN attachfile_group g ON g.FILE_GROUP = a.FILE_GROUP
+		WHERE b.IDX  = #{IDX}
+		ORDER BY a.file_no ASC 
 	</select>
-	<!-- select file list-->
+	<!-- select attach file list-->
+	
 </mapper>

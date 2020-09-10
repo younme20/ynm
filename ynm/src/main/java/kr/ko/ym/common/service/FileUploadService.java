@@ -11,6 +11,7 @@ public interface FileUploadService {
 	Map<String, Object> selectMaxGroup()throws Exception;
 
 	Map<String, Object> insertAttachFile(List<MultipartFile> fileList, Map<String, Object> param) throws Exception;
-
+	
+	List<Map<String,Object>>selecAttachFileList(Map<String, Object> param) throws Exception;
 	
 }

@@ -45,6 +45,13 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> selecAttachFileList(Map<String, Object> param) throws Exception {
+		
+		return commonDao.selectList("attach.selectAttachFileList",param);
+	}
+
 	
 	
 
