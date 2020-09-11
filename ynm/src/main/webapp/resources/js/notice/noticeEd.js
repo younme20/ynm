@@ -27,15 +27,10 @@ $(document).ready(function(){
 		movePage("/ynm/notice/delete/"+idx);
 	});
 	 
-	//파일업로드2
-	$("#uploadFile").on('change', function() {
-		 notice.multiUploadFile();
-	});
-	
 	notice = new noticeEdit();	
-	
-	
 });
+
+
 function noticeEdit() {
 	this.init = function(){
 		
@@ -62,7 +57,7 @@ function noticeEdit() {
 		var data = $("#form").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/notice/update/",                         
+			url : "/ynm/notice/update",                         
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){
@@ -74,27 +69,5 @@ function noticeEdit() {
 				movePage("/ynm/notice");
 			}
 		});
-	},
-		this.multiUploadFile = function(){ 
-			var formData = new FormData($('#form')[0]);
-
-			$.ajax({
-				type : "POST",         
-				enctype: 'multipart/form-data',
-				url : "/ynm/attach/multipartUpload",
-				data: formData, 
-				processData: false,  
-				contentType: false,  
-				cache: false, 
-				success : function(result, textStatus, jqXHR){
-					alert('업로드 성공'+result);
-					$("#FILE_GROUP").val(result);
-				},
-				error   : function(result, textStatus, jqXHR){
-					alert('업로드 실패!');
-					console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
-
-				}
-			});
-		}
+	}
 }

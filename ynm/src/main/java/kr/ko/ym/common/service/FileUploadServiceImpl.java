@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.ko.ym.common.dao.CommonDao;
+import kr.ko.ym.common.util.FileDownloadUtil;
 import kr.ko.ym.common.util.FileUtils;
 
 @Service("FileUploadService")
@@ -26,7 +27,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 	@Override
 	public Map<String, Object> insertAttachFile(List<MultipartFile> fileList, Map<String, Object> param)
 			throws Exception {	
-
+		//업로드 파일 그룹 생성
 		if("".equals(param.get("FILE_GROUP"))){
 			commonDao.insert("attach.insertAttachFileGroup",param);
 			@SuppressWarnings("unchecked")
@@ -37,22 +38,47 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 		
 		FileUtils file = new FileUtils();
-		
+		//파일 업로드
 		Map<String, Object> data = file.uploadFile(fileList,param);
 		commonDao.insert("attach.insertAttachFile", data);
 		
-		return param;
+		//업로드된 파일 목록
+		@SuppressWarnings("unchecked")
+		Map<String, Object> files = commonDao.selectOne("attach.selectAttachFileListByGroup");
+		return files;
 		
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, Object>> selecAttachFileList(Map<String, Object> param) throws Exception {
+	public List<Map<String, Object>> selectAttachFileListByIDX(Map<String, Object> param) throws Exception {
 		
-		return commonDao.selectList("attach.selectAttachFileList",param);
+		return commonDao.selectList("attach.selectAttachFileListByIDX",param);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> selectAttachFileListByGroup(Map<String, Object> param) throws Exception {
+		return commonDao.selectList("attach.selectAttachFileListByGroup",param);
+	}
+	
+	@Override
+	public void deleteAttachFile(Map<String, Object> param) throws Exception {
+		commonDao.delete("attach.deleteAttachFile",param);
+	}
+
+	@Override
+	public void selectAttachFileDownload(Map<String, Object> param) throws Exception {
+		
+	
+		Map<String, Object> file = commonDao.selectOne("attach.selectAttachFileDownload",param);
+		FileDownloadUtil down = new FileDownloadUtil();
+		down.downloadFile(param, null, null);
+	
 	}
 
 	
+
 	
 
 }

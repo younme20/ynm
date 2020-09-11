@@ -59,7 +59,7 @@ public class NoticeController {
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
 		mv.addObject("data", noticeService.selectDetail(param));
-		mv.addObject("files", fileuploadService.selecAttachFileList(param));
+		mv.addObject("files", fileuploadService.selectAttachFileListByIDX(param));
 		noticeService.updateCount(param);
 		return mv;		
 	}

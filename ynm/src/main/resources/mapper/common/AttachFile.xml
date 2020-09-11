@@ -36,14 +36,40 @@
     <!-- insert attach file group -->
     
     
-    <!-- select attach file list-->
-	<select id="selectAttachFileList" parameterType="hashmap" resultType="hashmap">
+    <!-- select attach file list by IDX-->
+	<select id="selectAttachFileListByIDX" parameterType="hashmap" resultType="hashmap">
 		SELECT a.FILE_NO, a.FILE_GROUP, a.FILE_SIZE, a.ORG_FILE_NAME, a.STORED_FILE_NAME 
 		FROM board b LEFT JOIN attachfile a ON b.FILE_GROUP = a.FILE_GROUP
 		LEFT JOIN attachfile_group g ON g.FILE_GROUP = a.FILE_GROUP
 		WHERE b.IDX  = #{IDX}
 		ORDER BY a.file_no ASC 
 	</select>
-	<!-- select attach file list-->
+	<!-- select attach file list by IDX-->
 	
+	
+	<!-- select attach file list -->
+	<select id="selectAttachFileListByGroup" parameterType="hashmap" resultType="hashmap">
+		SELECT a.FILE_NO, a.FILE_GROUP, a.FILE_SIZE, a.ORG_FILE_NAME, a.STORED_FILE_NAME 
+		FROM attachfile a LEFT 
+		JOIN attachfile_group g ON a.FILE_GROUP = g.FILE_GROUP
+		WHERE a.FILE_GROUP  = #{FILE_GROUP}
+		ORDER BY a.file_no ASC 
+	</select>
+	<!-- select attach file list by FILE_GROUP-->
+	
+	 <!-- delete -->
+     <delete id="deleteAttachFile" parameterType="hashmap">
+        DELETE FROM attachfile
+        WHERE
+            FILE_NO = #{FILE_NO}
+     </delete>
+     
+     <!-- select one -->
+	<select id="selectAttachFileDownload" parameterType="hashmap" resultType="hashmap">
+		SELECT FILE_NO, FILE_GROUP, FILE_SIZE, ORG_FILE_NAME, STORED_FILE_NAME 
+		FROM attachfile
+		WHERE FILE_NO = #{FILE_NO}
+	</select>
+	
+     
 </mapper>
