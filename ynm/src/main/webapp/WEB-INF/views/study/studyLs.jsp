@@ -63,15 +63,24 @@
 					<p style="float: left; margin-left: 5px; margin-bottom: 20px;"><a href="#this" id="index_${i}" pageidx="${param.pageIndex}" name="index">${i}</a></p>
 				</c:forEach>
 			</div>
-			<form id="searchForm" style="margin-left: 10%; margin-top: 30px;">
+		</div>
+		<div class="navbar-footer">
+			<form id="searchForm" style="margin-left: 10%; margin-top: 30px; margin-bottom: 30px;">
 				<div class="row">
 					<div class="col-sm-12">
-						<select id="searchCondition" class="form-control" style="width: 30%;">
-							<option value="T" ${param.searchCondition eq 'T' or param.searchCondition eq '' ? 'selected' : ''}>제목</option>
-							<option value="C" ${param.searchCondition eq 'C' ? 'selected'  : ''}>내용</option>
-							<option value="A" ${param.searchCondition eq 'A' ? 'selected'  : ''}>전체</option>
-						</select>
-						<input type="text" id="searchText" name="searchText" style="margin-right: 10px;" value="${param.searchText}"></input><button id="btnSearch" type="button" class="btn">검색</button>
+						<div class="col-sm-2">					
+							<select id="searchCondition" class="form-control">
+								<option value="T" ${param.searchCondition eq 'T' or param.searchCondition eq '' ? 'selected' : ''}>제목</option>
+								<option value="C" ${param.searchCondition eq 'C' ? 'selected'  : ''}>내용</option>
+								<option value="A" ${param.searchCondition eq 'A' ? 'selected'  : ''}>전체</option>
+							</select>
+						</div>
+						<div class="col-sm-5">	
+							<input type="text" id="searchText" name="searchText" class="form-control" style="width: 90%; margin-left: -20px;" value="${param.searchText}"></input>
+						</div>
+						<div class="col-sm-5">
+							<button id="btnSearch" type="button" style="margin-left: -70px;" class="btn">검색</button>						
+						</div>
 					</div>
 				</div>	
 			</form>
