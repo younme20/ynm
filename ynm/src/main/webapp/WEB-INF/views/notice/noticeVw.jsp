@@ -4,9 +4,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
+<script src="<c:url value='/resources/js/common/FileUpload.js'/>" charset="utf-8"></script>	
 	<form name="form" id="form" action="/ynm/notice" method="post">
 		<input type="hidden" name="searchType" value="${param.searchType}">
 		<input type="hidden" name="keyword"  value="${param.keyword}">
+		<input type="hidden" name="file_no" id="file_no">
 	<%-- 	<input type="hidden" name="pageIndex"  value="${param.pageIndex}"> --%>
 	
 		<div class="table-responsive">
@@ -20,6 +22,17 @@
 				<tr>
 					<td>작성일:</td><td> ${data.CREATE_DATETIME}</td>
 				</tr>
+				<tr>
+                	<th>첨부파일</th>
+                	<td>
+                	 
+                    <c:forEach items="${files}" var="row" >
+                        <div>
+                           <span id="down" data="${row.FILE_NO}">${row.ORG_FILE_NAME }</span>
+                            (${row.FILE_SIZE }Byte)
+                        </div>
+                    </c:forEach>                          
+            		</tr>
 				<tr >
 					<td >
 						<div>${data.CONTENTS }</div>

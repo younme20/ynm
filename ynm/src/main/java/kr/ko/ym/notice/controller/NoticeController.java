@@ -26,7 +26,8 @@ public class NoticeController {
 
 	@Autowired
 	private NoticeService noticeService;
-    
+	@Autowired
+	private FileUploadService fileuploadService;
 	/*
 	 * list select
 	 * */
@@ -55,10 +56,10 @@ public class NoticeController {
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
 	
-		
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
-		mv.addObject("data", noticeService.selectDetail(param));		
+		mv.addObject("data", noticeService.selectDetail(param));
+		mv.addObject("files", fileuploadService.selectAttachFileListByIDX(param));
 		noticeService.updateCount(param);
 		return mv;		
 	}
