@@ -2,6 +2,10 @@ package kr.ko.ym.common.service;
 
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -68,13 +72,12 @@ public class FileUploadServiceImpl implements FileUploadService{
 	}
 
 	@Override
-	public void selectAttachFileDownload(Map<String, Object> param) throws Exception {
+	public void selectAttachFileDownload(Map<String, Object> param, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		
-	
 		Map<String, Object> file = commonDao.selectOne("attach.selectAttachFileDownload",param);
-		FileDownloadUtil down = new FileDownloadUtil();
-		down.downloadFile(param, null, null);
-	
+		FileDownloadUtil download = new FileDownloadUtil();
+		download.downloadFile(file, request, response);
 	}
 
 	

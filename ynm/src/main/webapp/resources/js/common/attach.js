@@ -1,6 +1,19 @@
 /**
  * 
  */
+var selectFileList = function(data, resul){
+	var file_group = 0;
+	$('#fileList div').remove();
+	 $.each(data, function(i, item) {
+		 
+		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span>  <button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
+		file_group = item.FILE_GROUP;
+	});
+	 if($("#FILE_GROUP").val() == 0){
+		 $("#FILE_GROUP").val(file_group);
+	 }
+	
+}
 $(document).ready(function(){
 	//파일업로드
 	$("#uploadFile").on('change', function() {
@@ -8,18 +21,20 @@ $(document).ready(function(){
 	});
 	
 	//파일삭제
-	$("#deleteFile").on('click', function(e) {
-		console.log("파일 삭제하기");
+	$(document).on("click", "#deleteFile", function(e){
 		var file_no = $(this).attr("data");
-		attach.deleteFile(file_no);
+		if (confirm("정말 삭제하시겠습니까??") == true){  
+			attach.deleteFile(file_no);
+		}else{   
+		    return;
+		}
+
 	});
 	
 	//다운로드
-	$("#down").on("click", function(e){
+	$("#download").on("click", function(e){
 		var file_no = $(this).attr("data");
-		alert("no: "+file_no);
-		$("#FILE_NO").attr("value", file_no);
-		attach.downloadFile();
+		attach.downloadFile(file_no);
 	});
 	
 	attach = new attach();
@@ -65,8 +80,10 @@ function attach() {
 			}
 		});		
 	},
-	this.downloadFile = function(){ 
-		var formData = $("#form").serializeObject();
+	this.downloadFile = function(file_no){ 
+		var formData = {
+				"FILE_NO": file_no
+			};
 		$.ajax({
 			type : "POST",                               
 			url : "/ynm/attach/download",
@@ -83,15 +100,3 @@ function attach() {
 	}
 }
 
-var selectFileList = function(data, resul){
-	var file_group = 0;
-	$('#fileList div').remove();
-	 $.each(data, function(i, item) {
-		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' data="+item.FILE_NO+">삭제</button></div>");
-		file_group = item.FILE_GROUP;
-	});
-	 if($("#FILE_GROUP").val() == 0){
-		 $("#FILE_GROUP").val(file_group);
-	 }
-	
-}

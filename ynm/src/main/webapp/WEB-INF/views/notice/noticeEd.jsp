@@ -7,7 +7,7 @@
 	<form name="form" id="form" method="post" enctype="multipart/form-data">
 		<div id="writeForm">
 			<input type="hidden" name="MENU_CODE" value="B"> 
-			<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP"> 
+			<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP" value="${FILE_GROUP}"> 
 			
 			<input type="hidden" name="IDX" value="${data.IDX}">
 	
@@ -23,18 +23,16 @@
 			
 			
 		  	<label for="exampleFormControlTextarea1">첨부파일</label>
-		  	<div id="fileList"></div>
-		  	<c:forEach items="${files}" var="row" >
-                <p>
-                  <input type="hidden" value="${row.FILE_NO}" id="IDX">
-                  ${row.ORG_FILE_NAME }  
-                  <span> (${row.FILE_SIZE }Byte)</span>
-                  <a href="#this" name="file">delete</a>
-                   
-                </p>
-            </c:forEach>   
+		  	<div id="fileList">
+			<c:forEach items="${files}" var="row" >
+                <div>
+			         ${row.ORG_FILE_NAME }  
+			         <span> (${row.FILE_SIZE }byte)</span>
+			         <button type="button" id="deleteFile" class="btn" data="${row.FILE_NO}">삭제</button>
+		         </div>
+	        </c:forEach>
 		  	<input type="file" name="uploadFile" id="uploadFile"  multiple="multiple" class="form-control">
-		  	
+		  	</div>
 		</div>
 	 	<div id="btnGrp">
 			<c:if test="${mode eq 'new' }">

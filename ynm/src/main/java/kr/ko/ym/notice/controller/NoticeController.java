@@ -44,7 +44,6 @@ public class NoticeController {
 		mv.addObject("page", param.get("page"));
 		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
 		
-		
 		return mv;
 	}
 	
@@ -93,9 +92,16 @@ public class NoticeController {
 	@RequestMapping(value="/notice/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeEd.tiles");
+		
 		Map<String,Object>param = new HashMap<String,Object>();
 		param.put("IDX", idx);	
-		mv.addObject("data", noticeService.selectDetail(param));	
+		
+		List<Map<String, Object>> files = fileuploadService.selectAttachFileListByIDX(param);
+		if(files.size() > 0){
+			mv.addObject("FILE_GROUP", files.get(0).get("FILE_GROUP"));
+			mv.addObject("files", files);
+		}
+		mv.addObject("data", noticeService.selectDetail(param));
 		mv.addObject("mode", "modify");		
 		return mv;		
 	}

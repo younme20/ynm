@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	//목록
 	$("#list").on("click", function(){
-		//movePage("/ynm/notice");
-		 $("#form").submit();
+		movePage("/ynm/notice");
+		// $("#form").submit();
 	
 	});
 	
