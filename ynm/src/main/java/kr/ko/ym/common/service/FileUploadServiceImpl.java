@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.ko.ym.common.dao.CommonDao;
 import kr.ko.ym.common.util.FileDownloadUtil;
-import kr.ko.ym.common.util.FileUtils;
+import kr.ko.ym.common.util.FileUploadUtil;
 
 @Service("FileUploadService")
 public class FileUploadServiceImpl implements FileUploadService{
@@ -41,7 +41,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 		
 		
-		FileUtils file = new FileUtils();
+		FileUploadUtil file = new FileUploadUtil();
 		//파일 업로드
 		Map<String, Object> data = file.uploadFile(fileList,param);
 		commonDao.insert("attach.insertAttachFile", data);

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.web.multipart.MultipartFile;
 
-public class FileUtils{
+public class FileUploadUtil{
 	
 	private static final String filePath = "C:\\ymnProject\\upload"; // 파일이 저장될 위치
 
