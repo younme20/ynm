@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import kr.ko.ym.common.dao.CommonDao;
-import kr.ko.ym.common.util.FileDownloadUtil;
+//import kr.ko.ym.common.util.FileDownloadUtil;
 import kr.ko.ym.common.util.FileUtils;
 
 @Service("FileUploadService")
@@ -27,7 +27,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 	@Override
 	public Map<String, Object> insertAttachFile(List<MultipartFile> fileList, Map<String, Object> param)
 			throws Exception {	
-		//업로드 파일 그룹 생성
+		//�뾽濡쒕뱶 �뙆�씪 洹몃９ �깮�꽦
 		if("".equals(param.get("FILE_GROUP"))){
 			commonDao.insert("attach.insertAttachFileGroup",param);
 			@SuppressWarnings("unchecked")
@@ -38,11 +38,11 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 		
 		FileUtils file = new FileUtils();
-		//파일 업로드
+		//�뙆�씪 �뾽濡쒕뱶
 		Map<String, Object> data = file.uploadFile(fileList,param);
 		commonDao.insert("attach.insertAttachFile", data);
 		
-		//업로드된 파일 목록
+		//�뾽濡쒕뱶�맂 �뙆�씪 紐⑸줉
 		@SuppressWarnings("unchecked")
 		Map<String, Object> files = commonDao.selectOne("attach.selectAttachFileListByGroup");
 		return files;
@@ -72,8 +72,8 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 	
 		Map<String, Object> file = commonDao.selectOne("attach.selectAttachFileDownload",param);
-		FileDownloadUtil down = new FileDownloadUtil();
-		down.downloadFile(param, null, null);
+		//FileDownloadUtil down = new FileDownloadUtil();
+		//down.downloadFile(param, null, null);
 	
 	}
 

@@ -84,6 +84,7 @@ function attach() {
 }
 
 var selectFileList = function(data, resul){
+	console.log(data, resul);
 	var file_group = 0;
 	$('#fileList div').remove();
 	 $.each(data, function(i, item) {
