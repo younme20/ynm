@@ -6,7 +6,7 @@ var selectFileList = function(data, resul){
 	$('#fileList div').remove();
 	 $.each(data, function(i, item) {
 		 
-		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span>  <button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
+		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
 		file_group = item.FILE_GROUP;
 	});
 	 if($("#FILE_GROUP").val() == 0){
@@ -34,7 +34,7 @@ $(document).ready(function(){
 	//다운로드
 	$("#download").on("click", function(e){
 		var file_no = $(this).attr("data");
-		attach.downloadFile(file_no);
+		 window.location ="/ynm/attach/download?file_no="+file_no;
 	});
 	
 	attach = new attach();
@@ -79,24 +79,6 @@ function attach() {
 				alert('삭제 실패');
 			}
 		});		
-	},
-	this.downloadFile = function(file_no){ 
-		var formData = {
-				"FILE_NO": file_no
-			};
-		$.ajax({
-			type : "POST",                               
-			url : "/ynm/attach/download",
-			data: formData, 
-			cache: false, 
-			json:true,
-			success : function(result, textStatus, jqXHR){
-				alert("다운로드 성공");
-			},
-			error   : function(result, textStatus, jqXHR){
-				alert("다운로드 실패");
-			}
-		});
 	}
 }
 

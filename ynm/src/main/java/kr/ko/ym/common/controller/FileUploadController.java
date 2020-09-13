@@ -51,13 +51,20 @@ public class FileUploadController {
     	return list;
 	}	
 	
-	 /*
+	 /*@PathVariable int idx
 	 * upload file download
 	 * */
-	@RequestMapping(value="/attach/download")
+	@RequestMapping(value="/attach/download" , method = RequestMethod.GET)
+	public void download(HttpServletRequest request, HttpServletResponse response,  @RequestParam("file_no") int file_no) throws Exception{
+		Map<String,Object>param = new HashMap<String,Object>();
+		param.put("FILE_NO", (Integer)file_no);	
+		fileuploadService.selectAttachFileDownload(response,response, param);
+		
+	}
+/*	@RequestMapping(value="/attach/download" , method = RequestMethod.GET)
 	public void download(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object>param) throws Exception{
 		
 		fileuploadService.selectAttachFileDownload(param,request,response);
 		
-	}
+	}*/
 }
