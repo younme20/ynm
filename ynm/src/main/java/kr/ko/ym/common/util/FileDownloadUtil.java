@@ -33,7 +33,7 @@ public class FileDownloadUtil {
 			String mimetype = "text/html";
  
 			response.setBufferSize(fSize);
-			response.setContentType(mimetype);
+			response.setContentType("application/octer-stream");
 			response.setHeader("Content-Disposition", "attachment; filename=\""
 					+ originalFileName + "\"");
 			response.setContentLength(fSize);
