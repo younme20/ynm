@@ -8,19 +8,17 @@
 	<title>Insert title here</title>
 </head>
 <body>
-	<!-- left page 
-	<div>
-		<ul>
-			<li><a href="/ynm">study</a></li>
-			<li><a href="/ynm/notice">notice</a></li>
-		</ul>
-	</div> -->
+<!-- left page -->
+	<div class="container">
+		<div id="wrapper">
+			<ul class="nav nav-tabs">
+				<li><a href="/ynm/menu/study">G</a></li>
+				<li><a href="/ynm/menu/notice">B</a></li>
+			</ul>
+		</div>
+	</div>
+<!-- left page -->
 </body>
 </html>
-<!-- left page -->
-	<div>
-		<ul class="nav nav-tabs">
-			<li><a href="/ynm/menu/study">study</a></li>
-			<li><a href="/ynm/menu/notice">notice</a></li>
-		</ul>
-	</div>
+
+

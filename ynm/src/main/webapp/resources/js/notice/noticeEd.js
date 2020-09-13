@@ -1,7 +1,9 @@
 $(document).ready(function(){
 	//목록
 	$("#list").on("click", function(){
-		movePage("/ynm/notice");
+		//movePage("/ynm/notice");
+		 $("#form").submit();
+	
 	});
 	
 	//글저장
@@ -24,26 +26,29 @@ $(document).ready(function(){
 		var idx = $(this).attr("data");
 		movePage("/ynm/notice/delete/"+idx);
 	});
+	 
 	notice = new noticeEdit();	
 });
+
 
 function noticeEdit() {
 	this.init = function(){
 		
 	},
 	this.insertBoard = function(){ 
-		var data = $("#form").serializeObject();
+		var formData = $("#form").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/notice/insert",                         
-			data : data,
+			url : "/ynm/notice/insert",
+			data: formData, 
+			cache: false, 
 			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('등록되었습니다.'+result);
 				movePage(result);
 			},
 			error   : function(result, textStatus, jqXHR){
-				//alert('전송실패!');
+				alert('실패!');
 				movePage("/ynm/notice");
 			}
 		});
@@ -52,7 +57,7 @@ function noticeEdit() {
 		var data = $("#form").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/notice/update/",                         
+			url : "/ynm/notice/update",                         
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){

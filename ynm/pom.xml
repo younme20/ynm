@@ -192,8 +192,23 @@
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-api</artifactId>
 		    <version>${org.apache.tiles-version}</version>
-    </dependency>
+    	</dependency>	
     
+    	<!-- file upload -->
+	    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.7</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+    	<!-- file upload -->
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

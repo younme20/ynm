@@ -20,13 +20,6 @@
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="col-xs-6">
-									<input type="checkbox" id="allDay" style="margin-bottom: 20px"> 하루종일</input>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-12">
 								<div class="col-xs-2">
 									일정명 :  
 								</div>
@@ -56,12 +49,9 @@
 								<div class="col-xs-2">
 									구분 : 
 								</div>
-								<div class="col-xs-10">
-									<select id="selectCategory" class="form-control">
-										<option value="O">선택</option>
-										<option value="B">PUBLIC</option>
-										<option value="V">PRIVATE</option>
-									</select>																					
+								<div class="col-xs-10">	
+									<input type="radio" id="category_1" name="category" value="B" checked="checked"> PUBLIC</input>
+									<input type="radio" id="category_2" name="category" VALUE="V"> PRIVATE</input>																				
 								</div>				
 							</div>
 						</div>	
@@ -70,12 +60,7 @@
 								<div class="col-xs-2">
 									색상 : 
 								</div>
-								<div class="col-xs-10">
-	<!-- 								<select id="selectColor" class="form-control">
-										<option value="red">빨간색</option>
-										<option value="yellow">노란색</option>
-										<option value="blue">파란색</option>
-									</select> -->	
+								<div class="col-xs-10">	
 									<input type="color" id="COLOR" name="COLOR" value=""></input>																					
 								</div>				
 							</div>

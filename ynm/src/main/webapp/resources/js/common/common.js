@@ -14,6 +14,3 @@ ymDataObj.prototype.addParam = function(dataObj) {
 	this.ymDataObj.requestParam = $.extend(this.ymDataObj.requsetParam, dataObj);
 }
 
-
-
-
