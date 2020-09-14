@@ -12,7 +12,16 @@ var selectFileList = function(data, resul){
 	 if($("#FILE_GROUP").val() == 0){
 		 $("#FILE_GROUP").val(file_group);
 	 }
-	
+	 
+	 var agent = navigator.userAgent.toLowerCase();
+	 if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ){
+	     // ie 일때 input[type=file] init.
+	     $("#uploadFile").replaceWith( $("#uploadFile").clone(true) );
+	 } else {
+	     //other browser 일때 input[type=file] init.
+	     $("#uploadFile").val("");
+	 }
+
 }
 $(document).ready(function(){
 	//파일업로드

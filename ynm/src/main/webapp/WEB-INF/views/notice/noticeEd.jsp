@@ -24,15 +24,16 @@
 			
 		  	<label for="exampleFormControlTextarea1">첨부파일</label>
 		  	<div id="fileList">
-			<c:forEach items="${files}" var="row" >
-                <div>
-			         ${row.ORG_FILE_NAME }  
-			         <span> (${row.FILE_SIZE }byte)</span>
-			         <button type="button" id="deleteFile" class="btn" data="${row.FILE_NO}">삭제</button>
-		         </div>
-	        </c:forEach>
+				<c:forEach items="${files}" var="row" >
+	                <div>
+				         ${row.ORG_FILE_NAME }  
+				         <span> (${row.FILE_SIZE }byte)</span>
+				         <button type="button" id="deleteFile" class="btn" data="${row.FILE_NO}">삭제</button>
+			         </div>
+		        </c:forEach>
+	        </div>
 		  	<input type="file" name="uploadFile" id="uploadFile"  multiple="multiple" class="form-control">
-		  	</div>
+		  	
 		</div>
 	 	<div id="btnGrp">
 			<c:if test="${mode eq 'new' }">

@@ -6,7 +6,7 @@
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
-	<div class="con">
+<div class="container">
 	<h1>스터디 관리</h1>
 	
 	
