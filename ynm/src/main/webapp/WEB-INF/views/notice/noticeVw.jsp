@@ -11,33 +11,43 @@
 		<input type="hidden" name="file_no" id="file_no">
 	<%-- 	<input type="hidden" name="pageIndex"  value="${param.pageIndex}"> --%>
 	
-		<div class="table-responsive">
+		<div class="container">
 			<table class="table">
 				<tr>
-					<td>제목:</td><td> ${data.TITLE }</td>
+					<td colspan="2"><strong>${data.TITLE }</strong></td>
 				</tr>
 				<tr>
-					<td>작성자:</td><td> ${data.CREATE_ID }</td>
+					<td> ${data.CREATE_ID }</td><td> ${data.CREATE_DATETIME}</td>
 				</tr>
 				<tr>
-					<td>작성일:</td><td> ${data.CREATE_DATETIME}</td>
-				</tr>
-				<tr>
-                	<th>첨부파일</th>
-                	<td>
+                	<td colspan="2">
 	                    <c:forEach items="${files}" var="row" >
-	                        <div id="download" data="${row.FILE_NO}">${row.ORG_FILE_NAME }</div>
+		                    <c:choose>
+								<c:when test="${status.end > 0}">
+			                        <div id="download" data="${row.FILE_NO}" >
+			                       		<span class="glyphicon glyphicon-download"></span> 	
+			                        	${row.ORG_FILE_NAME }
+			                        </div>
+		                        </c:when>
+								<c:otherwise>
+									첨부파일 없음
+								</c:otherwise>
+							</c:choose>
 	                    </c:forEach>                          
             		</tr>
 				<tr >
-					<td >
+					<td colspan="2">
 						<div>${data.CONTENTS }</div>
 					</td>
 				</tr>
 			</table>
+			
+			<div class="form-group button">    
+				<button type="button" id="modify" data="${data.IDX}" class="btn btn-warning">수정</button>
+				<button type="button" id="delete" data="${data.IDX}" class="btn btn-danger">삭제</button>
+				<button type="button" id="list" class="btn btn-default">목록</button>
+			</div>
 		</div>
 		
-		<button type="button" id="modify" data="${data.IDX}" class="btn btn-warning">수정</button>
-		<button type="button" id="delete" data="${data.IDX}" class="btn btn-danger">삭제</button>
-		<button type="button" id="list" class="btn btn-default">목록</button>
+		
 	</form>

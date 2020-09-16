@@ -9,14 +9,12 @@
 </head>
 <body>
 <!-- left page -->
-	<div class="container">
 		<div id="wrapper">
 			<ul class="nav nav-tabs">
 				<li><a href="/ynm/menu/study">G</a></li>
 				<li><a href="/ynm/menu/notice">B</a></li>
 			</ul>
 		</div>
-	</div>
 <!-- left page -->
 </body>
 </html>
