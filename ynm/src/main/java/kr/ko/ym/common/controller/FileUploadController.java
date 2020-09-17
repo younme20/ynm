@@ -24,24 +24,11 @@ public class FileUploadController {
 	
 	@Autowired
 	private FileUploadService fileuploadService;
-	 
-	/*
-   	 * upload file list
-   	 * */
-   	@RequestMapping(value="/attach/list/{group}" , method = RequestMethod.GET)
-   	@ResponseBody
-   	public List<Map<String, Object>> list(HttpServletRequest request, @PathVariable String group) throws Exception {
-   		Map<String,Object>param = new HashMap<String,Object>();
-		param.put("FILE_GROUP", group);	
-   		List<Map<String,Object>> list = fileuploadService.selectAttachFileListByGroup(param);
-   		
-   		return list;
-   	}	
-   	
+	
 	 /*
 	 * upload file
 	 * */
-    @RequestMapping(value = "/attach/upload", method = RequestMethod.POST)    
+    @RequestMapping(value = "/attach/upload", method = RequestMethod.POST)
     @ResponseBody
     public List<Map<String, Object>> upload(MultipartHttpServletRequest request, @RequestParam Map<String,Object> param) throws Exception { 
     	
@@ -58,20 +45,20 @@ public class FileUploadController {
 	 * */
 	@RequestMapping(value="/attach/delete" , method = RequestMethod.POST)
 	@ResponseBody
-	public String delete(HttpServletRequest request,  @RequestParam Map<String,Object> param) throws Exception {
+	public List<Map<String, Object>> delete(HttpServletRequest request,  @RequestParam Map<String,Object> param) throws Exception {
 		
 		fileuploadService.deleteAttachFile(param);
-		String group = String.valueOf( param.get("FILE_GROUP"));
-		return "redirect:/attach/list/"+group;
+		List<Map<String,Object>> list  = fileuploadService.selectAttachFileListByGroup(param);
+    	return list;
 	}	
 	
 	 /*
 	 * upload file download
 	 * */
 	@RequestMapping(value="/attach/download")
-	public void download(HttpServletResponse response, @RequestParam Map<String,Object>param) throws Exception{
+	public void download(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String,Object>param) throws Exception{
 		
-		fileuploadService.selectAttachFileDownload(param);
+		fileuploadService.selectAttachFileDownload(param,request,response);
 		
 	}
 }

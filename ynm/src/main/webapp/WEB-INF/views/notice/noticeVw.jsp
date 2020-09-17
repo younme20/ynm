@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>	
-<script src="<c:url value='/resources/js/common/FileUpload.js'/>" charset="utf-8"></script>	
+<script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>	
 	<form name="form" id="form" action="/ynm/notice" method="post">
 		<input type="hidden" name="searchType" value="${param.searchType}">
 		<input type="hidden" name="keyword"  value="${param.keyword}">
@@ -25,13 +25,9 @@
 				<tr>
                 	<th>첨부파일</th>
                 	<td>
-                	 
-                    <c:forEach items="${files}" var="row" >
-                        <div>
-                           <span id="down" data="${row.FILE_NO}">${row.ORG_FILE_NAME }</span>
-                            (${row.FILE_SIZE }Byte)
-                        </div>
-                    </c:forEach>                          
+	                    <c:forEach items="${files}" var="row" >
+	                        <div id="download" data="${row.FILE_NO}">${row.ORG_FILE_NAME }</div>
+	                    </c:forEach>                          
             		</tr>
 				<tr >
 					<td >
