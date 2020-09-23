@@ -6,13 +6,22 @@ var selectFileList = function(data, resul){
 	$('#fileList div').remove();
 	 $.each(data, function(i, item) {
 		 
-		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span>  <button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
+		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
 		file_group = item.FILE_GROUP;
 	});
 	 if($("#FILE_GROUP").val() == 0){
 		 $("#FILE_GROUP").val(file_group);
 	 }
-	
+	 
+	 var agent = navigator.userAgent.toLowerCase();
+	 if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ){
+	     // ie 일때 input[type=file] init.
+	     $("#uploadFile").replaceWith( $("#uploadFile").clone(true) );
+	 } else {
+	     //other browser 일때 input[type=file] init.
+	     $("#uploadFile").val("");
+	 }
+
 }
 $(document).ready(function(){
 	//파일업로드
@@ -34,7 +43,7 @@ $(document).ready(function(){
 	//다운로드
 	$("#download").on("click", function(e){
 		var file_no = $(this).attr("data");
-		attach.downloadFile(file_no);
+		 window.location ="/ynm/attach/download?file_no="+file_no;
 	});
 	
 	attach = new attach();

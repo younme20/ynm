@@ -6,11 +6,13 @@
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
-	<div class="con">
+<div class="container">
 	<h1>스터디 관리</h1>
 	
 	
 	<form name="form" id="form" action="/ynm/notice" method="post">
+	
+		<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
 				<option value="title" <c:if test="${param.searchType eq 'title'}">selected</c:if>>제목</option>
@@ -18,10 +20,10 @@
 				<option value="user" <c:if test="${param.searchType eq 'user'}">selected</c:if>>작성자</option>
 			</select>
 		    <input type="text" name="keyword" id="keyword" value="${param.keyword}" placeholder="Search" class="form-control">
-		    <button type="submit" id="btnSerch" class="btn">검색</button>
+		    <button type="submit" id="btnSerch" class="btn glyphicon glyphicon-search">검색</button>
 		 </div>
 		<div class="table-responsive">
-			<table  class="table">
+			<table  class="table  table-striped">
 			    <colgroup>
 			        <col width="10%"/><col width="*"/><col width="15%"/><col width="20%"/><col width="15%"/>
 			    </colgroup>
@@ -61,7 +63,6 @@
 			          
 			    </tbody>
 			</table>
-			<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
 		</div>
 		
 		

@@ -73,14 +73,15 @@ public class FileUploadServiceImpl implements FileUploadService{
 	}
 
 	@Override
-	public void selectAttachFileDownload(Map<String, Object> param, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		
+	public void selectAttachFileDownload(HttpServletResponse request, HttpServletResponse response,
+			Map<String, Object> param) throws Exception {	
 		Map<String, Object> file = commonDao.selectOne("attach.selectAttachFileDownload",param);
 		//FileDownloadUtil down = new FileDownloadUtil();
 		//down.downloadFile(param, null, null);
 		FileDownloadUtil download = new FileDownloadUtil();
-		download.downloadFile(file, request, response);
-	}	
+		download.downloadFile(request, response, file);
+	}
+
+
 
 }

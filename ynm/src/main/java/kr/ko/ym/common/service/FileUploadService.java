@@ -21,5 +21,5 @@ public interface FileUploadService {
 	
 	void deleteAttachFile(Map<String, Object> param) throws Exception;
 	
-	void selectAttachFileDownload(Map<String, Object> param, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	void selectAttachFileDownload(HttpServletResponse request, HttpServletResponse response, Map<String, Object> param)throws Exception;
 }
