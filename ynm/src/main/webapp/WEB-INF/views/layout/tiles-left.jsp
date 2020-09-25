@@ -11,6 +11,7 @@
 <!-- left page -->
 		<div id="wrapper">
 			<ul class="nav nav-tabs">
+				<li><a href="/ynm">M</a></li>
 				<li><a href="/ynm/menu/study">G</a></li>
 				<li><a href="/ynm/menu/notice">B</a></li>
 			</ul>
