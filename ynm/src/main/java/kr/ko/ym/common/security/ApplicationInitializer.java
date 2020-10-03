@@ -1,6 +1,5 @@
 package kr.ko.ym.common.security;
 
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
