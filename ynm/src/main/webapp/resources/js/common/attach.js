@@ -43,8 +43,18 @@ function attach() {
 	this.init = function(){
 		
 	},
-	this.uploadFile = function(e){
+	this.uploadFile = function(file){
 		var formData = new FormData($('#form')[0]);
+		formData.append('uploadFile', file);
+		for (let key of formData.keys()) {
+			  console.log(key);
+			}
+
+			// FormData의 value 확인
+			for (let value of formData.values()) {
+			  console.log(value);
+			}
+			
 		var file_group = 0;
 		$.ajax({
 			type : "POST",         
@@ -143,11 +153,14 @@ function attach() {
 	  e.dataTransfer = e.originalEvent.dataTransfer;
 	  var files = e.target.files || e.dataTransfer.files;
 	  
+      
 	  if (files.length > 1) {
 	      alert('한 개씩 업로드 해주세요');
 	      return false;
 	  }else{
-		  attach.uploadFile();
+		  
+		  var file = e.originalEvent.dataTransfer.files;
+	      attach.uploadFile(file[0]);
 	  }
 	  
 	}

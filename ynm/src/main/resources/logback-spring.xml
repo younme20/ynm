@@ -16,7 +16,7 @@
 	</appender>	
 	
 	<!-- 로거 -->
-	<logger name="study" level="DEBUG" appender-ref="console" />
+	<logger name="study" level="INFO" appender-ref="console" />
 	
 	<logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
 	<logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infologsss" />
