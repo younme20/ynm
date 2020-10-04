@@ -1,35 +1,24 @@
 /**
- * 
+ * 파일업로드.js
  */
-var selectFileList = function(data, resul){
-	var file_group = 0;
-	$('#fileList div').remove();
-	 $.each(data, function(i, item) {
-		 
-		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>("+item.FILE_SIZE+" byte)</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
-		file_group = item.FILE_GROUP;
-	});
-	 if($("#FILE_GROUP").val() == 0){
-		 $("#FILE_GROUP").val(file_group);
-	 }
-	 
-	 var agent = navigator.userAgent.toLowerCase();
-	 if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ){
-	     // ie 일때 input[type=file] init.
-	     $("#uploadFile").replaceWith( $("#uploadFile").clone(true) );
-	 } else {
-	     //other browser 일때 input[type=file] init.
-	     $("#uploadFile").val("");
-	 }
-
-}
 $(document).ready(function(){
-	//파일업로드
+	
+	// 파일업로드
 	$("#uploadFile").on('change', function() {
 		attach.uploadFile();
 	});
 	
-	//파일삭제
+	$("#uploadScope")
+	.on("dragover", dragOver)
+	.on("dragleave", dragOver)
+	.on("drop", uploadFilesCheck);
+
+	//drag 영역 클릭시 파일 선택창
+	$("#uploadScope").on('click',function (e){
+        $('input[type=file]').trigger('click');
+    });
+    
+	// 파일삭제
 	$(document).on("click", "#deleteFile", function(e){
 		var file_no = $(this).attr("data");
 		if (confirm("정말 삭제하시겠습니까??") == true){  
@@ -40,7 +29,7 @@ $(document).ready(function(){
 
 	});
 	
-	//다운로드
+	// 다운로드
 	$("#download").on("click", function(e){
 		var file_no = $(this).attr("data");
 		 window.location ="/ynm/attach/download?file_no="+file_no;
@@ -54,7 +43,7 @@ function attach() {
 	this.init = function(){
 		
 	},
-	this.uploadFile = function(){ 
+	this.uploadFile = function(e){
 		var formData = new FormData($('#form')[0]);
 		var file_group = 0;
 		$.ajax({
@@ -68,7 +57,7 @@ function attach() {
 			success : selectFileList,
 			error   : function(result, textStatus, jqXHR){
 				alert('업로드 실패!');
-				console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
+				//console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
 	
 			}
 		});
@@ -114,15 +103,51 @@ function attach() {
 	}
 }
 
-var selectFileList = function(data, resul){
-	var file_group = 0;
-	$('#fileList div').remove();
-	 $.each(data, function(i, item) {
-		$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' data="+item.FILE_NO+">삭제</button></div>");
-		file_group = item.FILE_GROUP;
-	});
-	 if($("#FILE_GROUP").val() == 0){
-		 $("#FILE_GROUP").val(file_group);
-	 }
+	var selectFileList = function(data, resul){
+		var file_group = 0;
+		$('#fileList div').remove();
+		$.each(data, function(i, item) {
+			$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' data="+item.FILE_NO+">삭제</button></div>");
+			file_group = item.FILE_GROUP;
+			
+		});
+		
+		if($("#FILE_GROUP").val() == 0){
+			 $("#FILE_GROUP").val(file_group);
+		 }
+	}
+
+	var dragOver = function(e){
 	
-}
+	  e.stopPropagation();
+	  e.preventDefault();
+	  
+	  if (e.type == "dragover") {
+		  $(e.target).css({
+	          "background-color": "black",
+	          "outline-offset": "-20px"
+	      });
+	  } else {
+	      $(e.target).css({
+	          "background-color": "gray",
+	          "outline-offset": "-10px"
+	      });
+	  }
+	}
+		 
+	var uploadFilesCheck = function(e){
+	  e.stopPropagation();
+	  e.preventDefault();
+	  dragOver(e);
+	  
+	  e.dataTransfer = e.originalEvent.dataTransfer;
+	  var files = e.target.files || e.dataTransfer.files;
+	  
+	  if (files.length > 1) {
+	      alert('한 개씩 업로드 해주세요');
+	      return false;
+	  }else{
+		  attach.uploadFile();
+	  }
+	  
+	}

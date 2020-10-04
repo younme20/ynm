@@ -9,7 +9,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title></title>	
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 	<script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script> 
 	<script src="<c:url value='/resources/js/common/jquery.serializeObject.min.js'/>"charset="utf-8"></script>
 	
