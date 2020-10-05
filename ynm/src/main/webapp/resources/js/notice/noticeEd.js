@@ -1,10 +1,45 @@
 $(document).ready(function(){
 	$('#summernote').summernote({
-           height: 300,                 // set editor height
-           minHeight: null,             // set minimum height of editor
-           maxHeight: null,             // set maximum height of editor
-           focus: true                  // set focus to editable area after initializing summernote
+           height: 300,                 
+           minHeight: null,           
+           maxHeight: null,             
+           focus: true,                 
+           lang: "ko-KR",					
+			placeholder: '최대 2048자까지 쓸 수 있습니다',	
+			callbacks: {
+				onImageUpload : function(files) {
+					 attach.uploadFile(files[0]);
+				},
+				onPaste: function (e) {
+					var clipboardData = e.originalEvent.clipboardData;
+					if (clipboardData && clipboardData.items && clipboardData.items.length) {
+						var item = clipboardData.items[0];
+						if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
+							e.preventDefault();
+						}
+					}
+				}
+			}
    });
+	
+	/**
+	* 이미지 파일 업로드
+	*/
+	function uploadSummernoteImageFile(file, editor) {
+		data = new FormData();
+		data.append("file", file);
+		$.ajax({
+			data : data,
+			type : "POST",
+			url : "/uploadSummernoteImageFile",
+			contentType : false,
+			processData : false,
+			success : function(data) {
+            	//항상 업로드된 파일의 url이 있어야 한다.
+				$(editor).summernote('insertImage', data.url);
+			}
+		});
+	}
 	   
 	//목록
 	$("#list").on("click", function(){
