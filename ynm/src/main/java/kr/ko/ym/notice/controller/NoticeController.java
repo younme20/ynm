@@ -1,5 +1,6 @@
 package kr.ko.ym.notice.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,13 @@ public class NoticeController {
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
 		mv.addObject("data", noticeService.selectDetail(param));
-		mv.addObject("files", fileuploadService.selectAttachFileListByIDX(param));
+		
+
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		list = fileuploadService.selectAttachFileListByIDX(param);
+		if(!list.isEmpty() || list != null ) {
+			mv.addObject("files", list);
+		}
 		noticeService.updateCount(param);
 		return mv;		
 	}
