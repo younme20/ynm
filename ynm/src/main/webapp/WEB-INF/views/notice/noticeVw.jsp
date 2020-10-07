@@ -21,9 +21,7 @@
 				<td>${data.CREATE_ID }</td>
 				<td>${data.CREATE_DATETIME}</td>
 			</tr>
-			<c:out value="${fn: length(files)}"/><%-- 
-			<c:if test="${!empty files}"> --%>
-			<c:if test="${fn:length(files) > 0}">
+			<c:if test="${files[0].FILE_NO ne null}">
 			<tr>
 				<td colspan="2">
 				<c:forEach items="${files}" var="row" varStatus="status">

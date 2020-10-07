@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,6 +97,7 @@ public class NoticeController {
 	/*
 	 * modify form
 	 * */
+	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping(value="/notice/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeEd.tiles");
@@ -103,11 +105,16 @@ public class NoticeController {
 		Map<String,Object>param = new HashMap<String,Object>();
 		param.put("IDX", idx);	
 		
-		List<Map<String, Object>> files = fileuploadService.selectAttachFileListByIDX(param);
-		if(files.size() > 0){
-			mv.addObject("FILE_GROUP", files.get(0).get("FILE_GROUP"));
-			mv.addObject("files", files);
+		List<Map<String, Object>> files = null;
+		files = fileuploadService.selectAttachFileListByIDX(param);
+		// "false".equals(files.isEmpty()) || (Integer)files.get(0).get("FILE_GROUP") > 0 
+		if(!files.isEmpty()) {
+			//if ("".equals(files.get(0).get("FILE_GROUP").toString().trim())) {
+				mv.addObject("FILE_GROUP", files.get(0).get("FILE_GROUP"));
+				mv.addObject("files", files);
+			//}
 		}
+	
 		mv.addObject("data", noticeService.selectDetail(param));
 		mv.addObject("mode", "modify");		
 		return mv;		
