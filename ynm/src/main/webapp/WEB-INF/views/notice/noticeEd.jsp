@@ -3,6 +3,7 @@
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
+
 <div class="container">
 	<form name="form" id="form" method="post" enctype="multipart/form-data">
 		
@@ -29,7 +30,7 @@
 		<div class="form-group">
 		 	<label class="control-label col-sm-2" for="email">내용 :</label>
 		 	<div class="col-sm-10">
-				<textarea rows="5" name="CONTENTS" class="form-control">${data.CONTENTS}</textarea>
+				<textarea id="summernote" name="CONTENTS" class="form-control">${data.CONTENTS}</textarea>
 			</div>
 		</div>
 		
@@ -45,9 +46,10 @@
 				         </div>
 			        </c:forEach>
 		        </div>
-		  		<input type="file" name="uploadFile" id="uploadFile"  multiple="multiple" class="form-control">
+		  		<div id="uploadScope" class="uploadScope">Drag & Drop File Here</div>
+	       		<input type="file" name="uploadFile" id="uploadFile" multiple style="display:none;">
 		  	 </div>
-	  	 </div>
+		 </div>
 		  	 
 	 	<div class="form-group button">        
 	      	<div class="col-sm-offset-2 col-sm-10">

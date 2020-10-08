@@ -21,18 +21,12 @@
 				</tr>
 				<tr>
                 	<td colspan="2">
-	                    <c:forEach items="${files}" var="row" >
-		                    <c:choose>
-								<c:when test="${status.end > 0}">
-			                        <div id="download" data="${row.FILE_NO}" >
-			                       		<span class="glyphicon glyphicon-download"></span> 	
-			                        	${row.ORG_FILE_NAME }
-			                        </div>
-		                        </c:when>
-								<c:otherwise>
-									첨부파일 없음
-								</c:otherwise>
-							</c:choose>
+                	
+	                    <c:forEach items="${files}" var="row" varStatus="status">
+	                        <div id="download" data="${row.FILE_NO}" >
+	                       		<span class="glyphicon glyphicon-download"></span> 	
+	                        	${row.ORG_FILE_NAME }
+	                        </div>
 	                    </c:forEach>                          
             		</tr>
 				<tr >

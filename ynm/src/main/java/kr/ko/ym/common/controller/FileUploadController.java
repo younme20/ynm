@@ -35,9 +35,8 @@ public class FileUploadController {
     	List<MultipartFile> fileList = request.getFiles("uploadFile");    	
     	fileuploadService.insertAttachFile(fileList, param);
     	List<Map<String,Object>> list  = fileuploadService.selectAttachFileListByGroup(param);
+    	
     	return list;
-    	//String group = String.valueOf(param.get("FILE_GROUP"));
-    	//return "redirect:/attach/list/"+group; 
     }
    	
     /*
