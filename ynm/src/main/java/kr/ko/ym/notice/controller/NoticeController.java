@@ -109,10 +109,12 @@ public class NoticeController {
 		files = fileuploadService.selectAttachFileListByIDX(param);
 		// "false".equals(files.isEmpty()) || (Integer)files.get(0).get("FILE_GROUP") > 0 
 		if(!files.isEmpty()) {
-			//if ("".equals(files.get(0).get("FILE_GROUP").toString().trim())) {
-				mv.addObject("FILE_GROUP", files.get(0).get("FILE_GROUP"));
+			
+			int FILE_GROUP = (Integer) files.get(0).get("FILE_GROUP");
+			if (FILE_GROUP > 0) {
+				mv.addObject("FILE_GROUP",FILE_GROUP);
 				mv.addObject("files", files);
-			//}
+			}
 		}
 	
 		mv.addObject("data", noticeService.selectDetail(param));

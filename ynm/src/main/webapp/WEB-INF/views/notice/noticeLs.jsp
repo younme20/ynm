@@ -9,7 +9,9 @@
 <div class="container">
 	<h1>스터디 관리</h1>
 	
-	
+	<div id="wrapper">
+		<div id='calendar'></div>
+	</div>
 	<form name="form" id="form" action="/ynm/notice" method="post">
 	
 		<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
