@@ -32,7 +32,7 @@ public class FileUploadController {
     @ResponseBody
     public List<Map<String, Object>> upload(MultipartHttpServletRequest request, @RequestParam Map<String,Object> param) throws Exception { 
     	
-    	List<MultipartFile> fileList = request.getFiles("uploadFile");
+    	List<MultipartFile> fileList = request.getFiles("uploadFile");    	
     	fileuploadService.insertAttachFile(fileList, param);
     	List<Map<String,Object>> list  = fileuploadService.selectAttachFileListByGroup(param);
     	

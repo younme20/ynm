@@ -4,9 +4,13 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-  <title>스터디 과정 등록 게시판</title>
+  <title></title>
 </head>
 <body>
-	게시판 목록
+	<div class="container">
+		<div id="wrapper" style="margin-top: 20px;">
+			<div id='calendar'></div>
+		</div>
+	</div>
 <body>
 </html>
