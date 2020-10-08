@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,7 @@ public class StudyController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	
+
 	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 
@@ -87,7 +88,7 @@ public class StudyController {
 	
 	@RequestMapping(value="/study/insert", method=RequestMethod.POST)
 	@ResponseBody
-	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {		
+	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.insertBoard(param);
 		
 	}
