@@ -122,7 +122,7 @@ function attach() {
 			
 		});
 		
-		if($("#FILE_GROUP").val() == 0){
+		if($("#FILE_GROUP").val() == null){
 			 $("#FILE_GROUP").val(file_group);
 		 }
 	}
