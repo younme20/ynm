@@ -41,7 +41,7 @@
              ( IDX, START_DATE, END_DATE, TITLE, CATEGORY, COLOR, MEMO, DONE_FLAG   
              )
         VALUES
-             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'             
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'
              ) 
     </insert>
     
