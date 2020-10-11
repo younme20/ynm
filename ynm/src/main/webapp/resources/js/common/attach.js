@@ -3,29 +3,21 @@
  */
 $(document).ready(function(){
 	
-	// 파일업로드
-	/*$("#uploadFile").on('change', function() {
-		attach.uploadFile();
-	});*/
 	$("#uploadFile").on({
 		change: function () {
 			attach.uploadFile();
-		},
-		click : function(){
-			 $('input[type=file]').trigger('click');
 		}
-
 	});
 	$("#uploadScope")
 	.on("dragover", dragOver)
 	.on("dragleave", dragOver)
 	.on("drop", uploadFilesCheck);
 
-/*	//drag 영역 클릭시 파일 선택창
+	//drag 영역 클릭시 파일 선택창
 	$("#uploadScope").on('click',function (e){
-        $('input[type=file]').trigger('click');
+		$("#uploadFile").trigger('click');
     });
-    */
+    
 	// 파일삭제
 	$(document).on("click", "#deleteFile", function(e){
 		var file_no = $(this).attr("data");
@@ -117,7 +109,7 @@ function attach() {
 		var num = "";
 		$('#fileList div').remove();
 		$.each(data, function(i, item) {
-			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn btn-danger' data="+item.FILE_NO+">삭제</button></div>");
+			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
 			num = item.FILE_GROUP;
 			
 		});
