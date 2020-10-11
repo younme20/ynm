@@ -117,7 +117,7 @@ function attach() {
 		var num = "";
 		$('#fileList div').remove();
 		$.each(data, function(i, item) {
-			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' data="+item.FILE_NO+">삭제</button></div>");
+			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn btn-danger' data="+item.FILE_NO+">삭제</button></div>");
 			num = item.FILE_GROUP;
 			
 		});
