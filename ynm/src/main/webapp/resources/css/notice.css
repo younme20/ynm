@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 /*notice list*/
 .con {position: relative;width: 100%;float: left;background-color: pink}
-.service_area{position: relative;width: 100%;margin: 30px auto 15px; float: left;}
+#service_area{position: relative;width: 100%;margin: 30px auto 15px; float: left;}
 .serch-group {position: relative;display: block;float: left;}
 .serch-group select {float: left;width: 84px;margin-left: 10px;}
 .serch-group input[type=text] {float: left;width: 200px;margin: 0 5px;}
