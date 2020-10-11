@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <form name="form" id="form" action="/ynm/notice" method="post">
@@ -21,8 +22,8 @@
 			<tr>
 				<td colspan="2">
 				<c:forEach items="${files}" var="row" varStatus="status">
-					<div id="download" data="${row.FILE_NO}">
-						<span class="glyphicon glyphicon-download">${row.ORG_FILE_NAME }</span>
+					<div class="download"  data="${row.FILE_NO}">
+						<p><span class="glyphicon glyphicon-download"></span>${row.ORG_FILE_NAME}</p>
 					</div>
 				</c:forEach>
 				</td>

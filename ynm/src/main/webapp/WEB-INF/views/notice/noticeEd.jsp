@@ -3,12 +3,12 @@
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
-
+a ${FILE_GROUP}
 <div class="container">
 	<form name="form" id="form" method="post" enctype="multipart/form-data">
 		
 			<input type="hidden" name="MENU_CODE" value="B"> 
-			<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP" value="${FILE_GROUP eq ''? FILE_GROUP : ''}"> 
+			<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP" value="${FILE_GROUP}"> 
 			
 			<input type="hidden" name="IDX" value="${data.IDX}">
 		
