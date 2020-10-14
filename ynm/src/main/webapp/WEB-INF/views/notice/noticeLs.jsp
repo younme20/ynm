@@ -90,7 +90,7 @@
 							</c:when>
 						</c:choose>
 					</c:forEach>
-					<c:if test="${page.pageIndex != endIndex}">
+					<c:if test="${page.pageIndex < endIndex}">
 						<li><a href="javascript:;" onClick="pageMove(this);" pageidx="${page.pageIndex+1}">&gt;</a></li>
 					</c:if>
 				</ul>
