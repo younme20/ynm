@@ -1,0 +1,121 @@
+.intro{
+	position: relative;
+    top: 50px;
+    float: left;
+    width: 230px;
+    height: 300px;
+}
+.title{
+	 float: left;
+	display: inline-block;
+    font-size: 50px;
+    text-align: center;
+    position: relative;
+    animation: appear 2s;
+    top: 0;
+    left: 0;
+    color: #fff;
+    }
+     
+@keyframes appear { 
+ 0% {
+    top:-50px;
+  }
+  100% {
+    top:0;
+  }
+}
+.subTitle{
+	 float: left;
+	display: inline-block;
+    font-size: 15px;
+    text-align: center;
+    position: relative;
+    animation: appear2 2s;
+    top: 14px;
+    left: 0;
+    color: #fff;
+    
+}
+@keyframes appear2 { 
+ 0% {
+    top:-50px;
+  }
+  100% {
+    top:14px;
+  }
+}
+:root {
+  --bg: #1a1e2d;
+  --green: #a5ea9b;
+  --pink: #ff61d8;
+  --blue: #569cfa;
+  --orange: #ffcc81;
+  --cyan: #7ed1e2;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: var(--bg);
+  display: -webkit-box;
+  display: flex;
+  place-content: center;
+  -webkit-box-align: end;
+          align-items: flex-end;
+}
+
+.icon {
+ 	position:relative;
+    width: 500px;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 241px;
+}
+.icon svg {
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+}
+
+#bongo-cat {
+  fill: var(--bg);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+#bongo-cat .laptop-cover,
+#bongo-cat .headphone .band {
+  fill: none;
+}
+#bongo-cat .paw, #bongo-cat .head {
+  stroke: var(--orange);
+}
+#bongo-cat .laptop-keyboard {
+  stroke-width: 2;
+}
+#bongo-cat .terminal-code {
+  stroke-width: 5;
+}
+#bongo-cat .music .note,
+#bongo-cat .laptop-base,
+#bongo-cat .laptop-cover,
+#bongo-cat .paw .pads {
+  stroke: var(--pink);
+}
+#bongo-cat .table line,
+#bongo-cat .headphone .band,
+#bongo-cat .headphone .speaker path:nth-child(3) {
+  stroke: var(--green);
+}
+#bongo-cat .terminal-frame,
+#bongo-cat .laptop-keyboard,
+#bongo-cat .headphone .speaker path:nth-child(2) {
+  stroke: var(--blue);
+}
+#bongo-cat .terminal-code,
+#bongo-cat .headphone .speaker path:first-child {
+  stroke: var(--cyan);
+}
+
+
