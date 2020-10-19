@@ -5,7 +5,6 @@ $(document).ready(function(){
            maxHeight: null,             
            focus: true,                 
            lang: "ko-KR",					
-			placeholder: '최대 2048자까지 쓸 수 있습니다',	
 			callbacks: {
 				onImageUpload : function(files) {
 					 attach.uploadFile(files[0]);
@@ -90,7 +89,39 @@ function noticeEdit() {
 				movePage(result);
 			},
 			error   : function(result, textStatus, jqXHR){
-				alert('실패!');
+				 if (jqXHR.status === 0) {
+			            alert('Not connect.\n Verify Network.');
+			        } 
+			        else if (jqXHR.status == 400) {
+			            alert('Server understood the request, but request content was invalid. [400]');
+			        } 
+			        else if (jqXHR.status == 401) {
+			            alert('Unauthorized access. [401]');
+			        } 
+			        else if (jqXHR.status == 403) {
+			            alert('Forbidden resource can not be accessed. [403]');
+			        } 
+			        else if (jqXHR.status == 404) {
+			            alert('Requested page not found. [404]');
+			        } 
+			        else if (jqXHR.status == 500) {
+			            alert('Internal server error. [500]');
+			        } 
+			        else if (jqXHR.status == 503) {
+			            alert('Service unavailable. [503]');
+			        } 
+			        else if (exception === 'parsererror') {
+			            alert('Requested JSON parse failed. [Failed]');
+			        } 
+			        else if (exception === 'timeout') {
+			            alert('Time out error. [Timeout]');
+			        } 
+			        else if (exception === 'abort') {
+			            alert('Ajax request aborted. [Aborted]');
+			        } 
+			        else {
+			            alert('Uncaught Error.n' + jqXHR.responseText);
+			        }
 				movePage("/ynm/notice");
 			}
 		});

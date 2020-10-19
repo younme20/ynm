@@ -3,11 +3,11 @@
  */
 $(document).ready(function(){
 	
-	// 파일업로드
-	$("#uploadFile").on('change', function() {
-		attach.uploadFile();
+	$("#uploadFile").on({
+		change: function () {
+			attach.uploadFile();
+		}
 	});
-	
 	$("#uploadScope")
 	.on("dragover", dragOver)
 	.on("dragleave", dragOver)
@@ -15,7 +15,7 @@ $(document).ready(function(){
 
 	//drag 영역 클릭시 파일 선택창
 	$("#uploadScope").on('click',function (e){
-        $('input[type=file]').trigger('click');
+		$("#uploadFile").trigger('click');
     });
     
 	// 파일삭제
@@ -30,7 +30,7 @@ $(document).ready(function(){
 	});
 	
 	// 다운로드
-	$("#download").on("click", function(e){
+	$(".download").on("click", function(e){
 		var file_no = $(this).attr("data");
 		 window.location ="/ynm/attach/download?file_no="+file_no;
 	});
@@ -46,16 +46,7 @@ function attach() {
 	this.uploadFile = function(file){
 		var formData = new FormData($('#form')[0]);
 		formData.append('uploadFile', file);
-		for (let key of formData.keys()) {
-			  console.log(key);
-			}
-
-			// FormData의 value 확인
-			for (let value of formData.values()) {
-			  console.log(value);
-			}
-			
-		var file_group = 0;
+	
 		$.ajax({
 			type : "POST",         
 			enctype: 'multipart/form-data',
@@ -114,16 +105,16 @@ function attach() {
 }
 
 	var selectFileList = function(data, resul){
-		var file_group = 0;
+		var fg = $("#FILE_GROUP").val();
+		var num = "";
 		$('#fileList div').remove();
 		$.each(data, function(i, item) {
-			$('#fileList').append("<div>" + item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' data="+item.FILE_NO+">삭제</button></div>");
-			file_group = item.FILE_GROUP;
+			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
+			num = item.FILE_GROUP;
 			
 		});
-		
-		if($("#FILE_GROUP").val() == 0){
-			 $("#FILE_GROUP").val(file_group);
+		if(fg == "" || fg == null){
+			$("#FILE_GROUP").val(num);
 		 }
 	}
 

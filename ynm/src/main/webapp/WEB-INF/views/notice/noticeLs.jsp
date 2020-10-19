@@ -9,9 +9,12 @@
 <div class="container">
 	<h1>스터디 관리</h1>
 	
-	
+	<div id="wrapper">
+		<div id='calendar'></div>
+	</div>
 	<form name="form" id="form" action="/ynm/notice" method="post">
 	
+	<div id="service_area">
 		<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
 	 	<div class="serch-group">
 			 <select name="searchType" id="searchType" class="form-control">
@@ -22,6 +25,8 @@
 		    <input type="text" name="keyword" id="keyword" value="${param.keyword}" placeholder="Search" class="form-control">
 		    <button type="submit" id="btnSerch" class="btn glyphicon glyphicon-search">검색</button>
 		 </div>
+	</div>
+	
 		<div class="table-responsive">
 			<table  class="table  table-striped">
 			    <colgroup>

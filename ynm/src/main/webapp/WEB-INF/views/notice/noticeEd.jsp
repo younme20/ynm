@@ -3,7 +3,6 @@
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
-
 <div class="container">
 	<form name="form" id="form" method="post" enctype="multipart/form-data">
 		
