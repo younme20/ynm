@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileUploadUtil{
 	
-	private static final String filePath = "C:\\ymnProject\\upload"; // 파일이 저장될 위치
+	private static final String filePath = "//Users//aprilgoo"; // 파일이 저장될 위치
 
 	public Map<String, Object> uploadFile(List<MultipartFile> fileList, Map<String, Object> param) {
 	

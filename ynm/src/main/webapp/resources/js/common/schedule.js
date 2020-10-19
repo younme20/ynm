@@ -49,11 +49,17 @@ $(document).ready(function(){
 });
 
 function selectSchedule() {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+
 	$.ajax({
 		type : "POST",                               
 		url : "/ynm/schedule/list",                   
 		json : true,
-		data : {},      
+		data : JSON.stringify({"_csrf":token}),
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader(header,token);
+		},
 		success : function(result, textStatus, jqXHR){
 			calendarEvent(result);
 		},

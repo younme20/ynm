@@ -34,6 +34,7 @@ public class StudyController {
 	
 
 	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");

@@ -7,8 +7,18 @@
 		SELECT USERNAME
 		     , PASSWORD
 		  FROM user
-		 WHERE USERNAME = #{username}
+		 WHERE USERNAME = 'test'
 	</select>
+
+	<!-- 유저 롤 조회 -->
+	<select id="selectUserRolesByUserName" parameterType="hashmap" resultType="string">
+		SELECT 'ROLE_USER'
+			 , 'user:write'
+			 , 'user:read'
+		  FROM user
+		 WHERE USERNAME = 'test'
+	</select>
+
 	
 
 
