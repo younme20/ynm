@@ -23,7 +23,7 @@ public class AppUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return getApplicationUsers().get(0);
+        return getApplicationUsers().get(2);
     }
 
     private List<AppUser> getApplicationUsers() {
@@ -47,8 +47,8 @@ public class AppUserService implements UserDetailsService {
                         true
                 ),
                 new AppUser(
-                        "test2",
-                        passwordEncoder.encode("password"),
+                        "test3",
+                        passwordEncoder.encode("password2"),
                         MANAGER.getGrantedAuthorities(),
                         true,
                         true,

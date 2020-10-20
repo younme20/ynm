@@ -41,10 +41,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                //csrf().disable()
-                .csrf()
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .and()
+                .csrf().disable()
+                //.csrf()
+                //    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                //    .and()
                 //.httpBasic().disable()
                 //.formLogin().disable()
                 .sessionManagement()
@@ -53,9 +53,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey))
                 .addFilterAfter(new JwtTokenVerifier(secretKey), JwtAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/", "/login", "/auth", "/menu/**", "/resources/**").permitAll()
+                .antMatchers("/", "/login", "/resources/**/**").permitAll()
                 .anyRequest()
                 .authenticated();
+                //.permitAll();
 
     }
 

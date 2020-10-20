@@ -59,7 +59,7 @@ function studyEdit() {
 			type : "POST",                               
 			url : "/ynm/study/insert",                   
 			json : true,                           
-			data : data,      
+			data : data,
 			async: false,
 			success : function(result, textStatus, jqXHR){
 				alert('성공적으로 저장되었습니다.');

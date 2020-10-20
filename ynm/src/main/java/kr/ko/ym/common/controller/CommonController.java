@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommonController {
 
 	@RequestMapping(value="/menu/{sub}")
-	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@PreAuthorize("hasAnyRole('ROLE_USER') or hasAnyRole('ROLE_MANAGER')")
 	public String selectViewPage(@PathVariable String sub) throws Exception {
 		
 		return "redirect:/"+sub;	

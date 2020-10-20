@@ -22,21 +22,19 @@ function userLogin() {
 
 		$.ajax({
 			type : "POST",
-			url : "/login",
+			url : "/ynm/login",
 			json : true,
 			contentType : "application/json",
 			data : JSON.stringify(data),
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader(header,token);
-			},
-			async: false,
-			success : function(result, textStatus, jqXHR){
+			async: true,
+			cache :false, // 캐시 여부
+			success : function(result, response){
 				alert("success");
+				console.log("success...?"+result, response);
 				movePage("/ynm");
 			},
 			error   : function(result, textStatus, jqXHR){
-				//alert("error");
-				movePage("/ynm");
+				alert("error");
 				console.log(result, textStatus, jqXHR);
 			}
 		});

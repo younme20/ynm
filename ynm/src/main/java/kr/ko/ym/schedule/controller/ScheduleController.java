@@ -24,7 +24,7 @@ public class ScheduleController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="/schedule/list", method=RequestMethod.POST)
+	@RequestMapping(value="/schedule/list", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	public List<Map<String,Object>> selectSchedule(@RequestParam Map<String,Object>param) throws Exception {		
@@ -32,7 +32,7 @@ public class ScheduleController {
 		return list;	
 	}
 	
-	@RequestMapping(value="/schedule/select", method=RequestMethod.POST)
+	@RequestMapping(value="/schedule/select", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	public List<Map<String,Object>> selectScheduleOne(@RequestParam Map<String,Object>param) throws Exception {		

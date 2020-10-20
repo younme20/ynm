@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +13,7 @@
 				<li><a href="/ynm">M</a></li>
 				<li><a href="/ynm/menu/study">G</a></li>
 				<li><a href="/ynm/menu/notice">B</a></li>
+				<li><a href="/ynm/menu/logoutt">LOGOUT</a></li>
 			</ul>
 		</div>
 <!-- left page -->

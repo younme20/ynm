@@ -8,20 +8,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.common.service.FileUploadService;
-import kr.ko.ym.common.util.PagingUtil;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
 public class NoticeController {
@@ -35,10 +31,14 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
-		param.put("MENU_CODE", "B");
+		
+		if(param.get("MENU_CODE") == null) {
+			param.put("MENU_CODE", "B");
+		}
 		mv.addObject("list", noticeService.selectBoard(param));	
 		
 		Map<String,Object>map = noticeService.selectCount(param);
@@ -97,7 +97,6 @@ public class NoticeController {
 	/*
 	 * modify form
 	 * */
-	@SuppressWarnings("unlikely-arg-type")
 	@RequestMapping(value="/notice/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeEd.tiles");

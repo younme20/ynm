@@ -56,9 +56,9 @@ function selectSchedule() {
 		type : "POST",                               
 		url : "/ynm/schedule/list",                   
 		json : true,
-		data : JSON.stringify({"_csrf":token}),
+		data : {},//JSON.stringify({"_csrf":token}),
 		beforeSend: function(xhr) {
-			xhr.setRequestHeader(header,token);
+			//xhr.setRequestHeader(header,token);
 		},
 		success : function(result, textStatus, jqXHR){
 			calendarEvent(result);

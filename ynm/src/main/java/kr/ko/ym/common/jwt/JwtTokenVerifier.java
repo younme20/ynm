@@ -15,9 +15,11 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.crypto.SecretKey;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,15 +38,26 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        String requestHeader = "";
 
-        String requestHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        Cookie[] requestCookies = request.getCookies();
 
-        if(Strings.isNullOrEmpty(requestHeader) || !requestHeader.startsWith("Bearer ")){
+        if(requestCookies.length > 0){
+
+            for(Cookie requestCookie : requestCookies){
+                if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
+                    requestHeader = requestCookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if(Strings.isNullOrEmpty(requestHeader) || !requestHeader.startsWith(URLEncoder.encode("Bearer ", "UTF-8"))){
             filterChain.doFilter(request, response);
             return;
         }
 
-        String token = requestHeader.replace("Bearer ", " ");
+        String token = requestHeader.replace(URLEncoder.encode("Bearer ", "UTF-8"), " ");
 
         try {
 

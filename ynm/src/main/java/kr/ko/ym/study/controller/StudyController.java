@@ -31,12 +31,10 @@ public class StudyController {
 	private StudyService studyService;
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
-	
 
 	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
 	@PreAuthorize("hasRole('ROLE_USER')")
-	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
-
+	public ModelAndView selectList(@RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
  		List<Map<String,Object>>list = studyService.selectList(param);
@@ -88,6 +86,7 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/study/insert", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@ResponseBody
 	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.insertBoard(param);
