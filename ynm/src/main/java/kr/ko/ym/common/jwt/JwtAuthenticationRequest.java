@@ -1,11 +1,17 @@
 package kr.ko.ym.common.jwt;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class JwtAuthenticationRequest {
 
     private String username;
     private String password;
 
-    public JwtAuthenticationRequest() {
+    @JsonCreator
+    public JwtAuthenticationRequest(@JsonProperty("username")String username, @JsonProperty("password") String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public String getUsername() {

@@ -13,11 +13,11 @@
 	<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
   </head>
 <body>
-    <div class="intro">
+ <!--   <div class="intro">
     	<div class="title">당신의 <br>소중한 <br>기록.</div>
 		<p class="subTitle lax" data-lax-opacity="0 1, (0.5*vh) 0" style="backface-visibility: hidden; opacity: 1;">
 	       <span class="point" style="color: rgb(164, 81, 247);">더 가치있는 것</span>들로 <br>채워볼까요?
-	   	</p>!!!!!!test!!!!!!!
+	   	</p>
     </div>      
 	<div class="icon">
 		<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 785.5 465.8">
@@ -218,7 +218,6 @@
   <div class="container">
     <form class="form-signin" method="post" id="myForm">
 		<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
-
 		<p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Usernameeeee" required="" autofocus="">
@@ -229,15 +228,15 @@
         </p>
         <p>remember-me? <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
         </p>
-        <button class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
-    </form>
+		<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
+	</form>
   </div>
  
-    <!-- partial -->
+    <!-- partial
   	<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/gsap-latest-beta.min.js'></script>
 	<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js'></script>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.min.js'></script>
-	<script   src="<c:url value='/resources/js/login/login.js'/>"></script>
+	<script   src="<c:url value='/resources/js/login/login.js'/>"></script> -->
 
 </body>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>

@@ -23,7 +23,7 @@ public class AppUserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return getApplicationUsers().get(2);
+        return getApplicationUsers().get(0);
     }
 
     private List<AppUser> getApplicationUsers() {

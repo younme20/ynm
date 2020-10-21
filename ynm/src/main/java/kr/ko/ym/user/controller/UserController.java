@@ -20,8 +20,9 @@ public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value = "/login", method = {RequestMethod.GET,RequestMethod.POST})
+	@GetMapping(value = "/login")
 	public ModelAndView loginViewPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		ModelAndView mv = new ModelAndView("");
 		boolean isAuth = false;
 		String url = "";

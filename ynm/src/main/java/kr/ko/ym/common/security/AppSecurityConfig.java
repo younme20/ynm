@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.crypto.SecretKey;
 
@@ -45,12 +45,15 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.csrf()
                 //    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 //    .and()
-                //.httpBasic().disable()
-                //.formLogin().disable()
+                .httpBasic().disable()
+                .formLogin().disable()
+                .exceptionHandling()
+                .accessDeniedHandler(new AccessDeniedHandler())
+                .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey))
+                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), secretKey), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JwtTokenVerifier(secretKey), JwtAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/resources/**/**").permitAll()
@@ -72,5 +75,27 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(appUserService);
         return provider;
     }
+
+/*    @Bean
+    public FilterChainProxy springSecurityFilterChain()
+            throws ServletException, Exception {
+        List<SecurityFilterChain> securityFilterChains = new ArrayList<SecurityFilterChain>();
+        securityFilterChains.add(new DefaultSecurityFilterChain(
+                new AntPathRequestMatcher("/login2"),
+                usernamePasswordAuthenticationFilter()));
+        securityFilterChains.add(new DefaultSecurityFilterChain(
+                new AntPathRequestMatcher("/resources/**")));
+//        securityFilterChains.add(new DefaultSecurityFilterChain(
+//                new AntPathRequestMatcher("/api/**"),
+//                securityContextPersistenceFilterASCFalse(),
+//                basicAuthenticationFilter(), exceptionTranslationFilter(),
+//                filterSecurityInterceptor()));
+//        securityFilterChains.add(new DefaultSecurityFilterChain(
+//                new AntPathRequestMatcher("/**"),
+//                securityContextPersistenceFilterASCTrue(), logoutFilter(),
+//                usernamePasswordAuthenticationFilter(),
+//                exceptionTranslationFilter(), filterSecurityInterceptor()));
+        return new FilterChainProxy(securityFilterChains);
+    }*/
 
 }

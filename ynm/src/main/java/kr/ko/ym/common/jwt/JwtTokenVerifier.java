@@ -42,7 +42,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
         Cookie[] requestCookies = request.getCookies();
 
-        if(requestCookies.length > 0){
+        if(requestCookies != null){
 
             for(Cookie requestCookie : requestCookies){
                 if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
@@ -50,6 +50,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     break;
                 }
             }
+        }else{
+            return;
         }
 
         if(Strings.isNullOrEmpty(requestHeader) || !requestHeader.startsWith(URLEncoder.encode("Bearer ", "UTF-8"))){
