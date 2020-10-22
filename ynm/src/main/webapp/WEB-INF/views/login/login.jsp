@@ -8,10 +8,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Please login in</title>
-<!--  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
- -->
-<link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css"rel="stylesheet" crossorigin="anonymous">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css" rel="stylesheet">
 <link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
 </head>
 <body>
@@ -34,7 +30,7 @@
 				
 				<div class="field">
 					<input type="checkbox" id="remember-me" name="remember-me" class="form-control">
-					<label for="human">remember-me?</label>
+					<label for="remember-me">remember-me?</label>
 				</div>
 			</div>
 			<ul class="actions special">
