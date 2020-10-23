@@ -1,10 +1,13 @@
 package kr.ko.ym.main;
 
+import java.util.Arrays;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.common.net.HttpHeaders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,13 @@ public class MainController {
 	public ModelAndView selectList(HttpServletRequest request, HttpServletResponse response,  @RequestParam Map<String, Object>param) throws Exception {
 
 		ModelAndView mv = new ModelAndView("/index.tiles");
+
+		boolean isAuth = Arrays.stream(
+				request.getCookies())
+				.anyMatch(auth -> HttpHeaders.AUTHORIZATION.equals(auth.getName()));
+
+		mv.addObject("auth", isAuth);
+
  		return mv;		
 	}
 

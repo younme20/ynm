@@ -13,7 +13,7 @@
 				<li><a href="/ynm">M</a></li>
 				<li><a href="/ynm/menu/study">G</a></li>
 				<li><a href="/ynm/menu/notice">B</a></li>
-				<li><a href="/ynm/menu/logoutt">LOGOUT</a></li>
+				<li><a href="${auth ? "/ynm/logout" : "/ynm/login"}">${auth ? "LOGOUT" : "LOGIN"}</a></li>
 			</ul>
 		</div>
 <!-- left page -->

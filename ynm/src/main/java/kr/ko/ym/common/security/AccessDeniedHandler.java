@@ -21,7 +21,7 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
         httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
 
         if(e instanceof AccessDeniedException){
-
+            ;
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
             if(authentication != null){
@@ -32,14 +32,7 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
                 }
 
                 httpServletRequest.getRequestDispatcher("/login").forward(httpServletRequest, httpServletResponse);
-
-
             }
-
-
         }
-
-
-
     }
 }

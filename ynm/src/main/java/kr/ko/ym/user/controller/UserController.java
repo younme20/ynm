@@ -49,7 +49,7 @@ public class UserController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/logoutt", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/logout", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("/");
 
