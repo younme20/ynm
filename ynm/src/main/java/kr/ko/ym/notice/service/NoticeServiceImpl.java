@@ -7,16 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ko.ym.common.dao.CommonDao;
+import kr.ko.ym.common.util.PagingUtil;
 @Service("NoticeService")
 public class NoticeServiceImpl implements NoticeService{
 	
 	@Autowired
 	private CommonDao commonDao;	
 	
-	//공지사항 목록 조회
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectBoard(Map<String, Object> param) throws Exception {
+		PagingUtil paging = new PagingUtil();
+		int index = 1;
+		if(param.containsKey("pageIndex")) {
+ 			index = Integer.parseInt(param.get("pageIndex").toString());
+ 			paging.setPageIndex(index);
+			
+		}
+		paging.countPaging(index, 5);
+		param.put("page",paging);
 		
 		return commonDao.selectList("notice.selectBoard", param);
 	}
@@ -58,6 +67,12 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Map<String, Object>> serchBoard(Map<String, Object> param) throws Exception {
 		return commonDao.selectList("notice.selectBoard", param);
+	}
+	
+	
+	@Override
+	public Map<String, Object> selectCount(Map<String, Object> param) throws Exception {
+		return commonDao.selectOne("notice.selectCount", param);
 	}
 
 

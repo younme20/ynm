@@ -41,7 +41,7 @@
              ( IDX, START_DATE, END_DATE, TITLE, CATEGORY, COLOR, MEMO, DONE_FLAG   
              )
         VALUES
-             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, #{CATEGORY}, #{COLOR}, #{MEMO}, 'N'             
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'
              ) 
     </insert>
     
@@ -49,7 +49,7 @@
         UPDATE schedule
            SET TITLE = #{TITLE}
              , MEMO = #{MEMO}
-             , CATEGORY = #{CATEGORY}
+             , CATEGORY = 'G'
              , START_DATE = #{START_DATE}
              , END_DATE = #{END_DATE}
              , COLOR = #{COLOR}

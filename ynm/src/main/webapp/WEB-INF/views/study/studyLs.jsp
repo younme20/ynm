@@ -2,18 +2,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>first</title>
+<title></title>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 </head>
 <body>
 	<div class="container">
-		<h2>스터디 관리 게시판 목록</h2>	
+		<h2>스터디 관리</h2>	
 		<div id="wrapper">
-			<div id='calendar'></div>			
+			<div id='calendar'></div>
+		</div>
+		<div id="wrapper" style="margin-top: 20px;">				
 			<div class="col-sm-12">				
-				<div class="col-sm-7"><h5>* 읽지않은 글이 개 있습니다.</h5></div>
-				<div class="col-sm-1"><button id="btnWrite" type="button" class="btn" length="${totalCount}">글쓰기</button></div>
+				<div class="col-sm-11">
+					<h5>* 읽지않은 글이 개 있습니다.</h5>
+				</div>
+				<div class="col-sm-1">
+					<button id="btnWrite" type="button" class="btn" length="${totalCount}">글쓰기</button>
+				</div>
 				<table class="board_list">				
 					<colgroup>
 						<col width="10%"/>
@@ -52,20 +58,32 @@
 						</c:choose>
 					</tbody>
 				</table>
-				<form id="searchForm" style="margin-left: 10%; margin-top: 30px;">
-					Search : 
-					<select id="searchCondition">
-						<option value="T" ${param.searchCondition eq 'T' or param.searchCondition eq '' ? 'selected' : ''}>제목</option>
-						<option value="C" ${param.searchCondition eq 'C' ? 'selected'  : ''}>내용</option>
-						<option value="A" ${param.searchCondition eq 'A' ? 'selected'  : ''}>전체</option>
-					</select>
-					<input type="text" id="searchText" name="searchText" style="margin-right: 10px;" value="${param.searchText}"></input><button id="btnSearch" type="button" class="btn">검색</button>
-				</form>
 				<c:set var="listIndex" value="${totalCount / page.pageSize}" />
 				<c:forEach var="i" begin="1" end="${(listIndex mod 2) eq 1 ? listIndex : listIndex+1}">
 					<p style="float: left; margin-left: 5px; margin-bottom: 20px;"><a href="#this" id="index_${i}" pageidx="${param.pageIndex}" name="index">${i}</a></p>
 				</c:forEach>
 			</div>
+		</div>
+		<div class="navbar-footer">
+			<form id="searchForm" style="margin-left: 10%; margin-top: 30px; margin-bottom: 30px;">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-2">					
+							<select id="searchCondition" class="form-control">
+								<option value="T" ${param.searchCondition eq 'T' or param.searchCondition eq '' ? 'selected' : ''}>제목</option>
+								<option value="C" ${param.searchCondition eq 'C' ? 'selected'  : ''}>내용</option>
+								<option value="A" ${param.searchCondition eq 'A' ? 'selected'  : ''}>전체</option>
+							</select>
+						</div>
+						<div class="col-sm-5">	
+							<input type="text" id="searchText" name="searchText" class="form-control" style="width: 90%; margin-left: -20px;" value="${param.searchText}"></input>
+						</div>
+						<div class="col-sm-5">
+							<button id="btnSearch" type="button" style="margin-left: -70px;" class="btn">검색</button>						
+						</div>
+					</div>
+				</div>	
+			</form>
 		</div>
 	</div>	
 </body>

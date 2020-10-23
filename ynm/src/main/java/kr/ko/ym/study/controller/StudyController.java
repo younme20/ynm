@@ -4,18 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.ko.ym.common.auth.AppUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.study.service.StudyService;
@@ -30,11 +28,10 @@ public class StudyController {
 	private StudyService studyService;
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
-	
-	
-	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView selectList(@RequestParam Map<String,Object>param) throws Exception {
 
+	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
+	@PreAuthorize("hasRole('ROLE_USER') or hasAnyAuthority('user:read,user:write')")
+	public ModelAndView selectList(@RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/study/studyLs.tiles");
 		
  		List<Map<String,Object>>list = studyService.selectList(param);
@@ -63,9 +60,10 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/study/edit/{idx}")
-	public ModelAndView selectDetailInfo(@PathVariable int idx) throws Exception {
+	@PreAuthorize("hasAnyAuthority('user:read,user:write') or (appUser.username == principal.username)")
+	public ModelAndView selectDetailInfo(@PathVariable int idx, AppUser appUser) throws Exception {
 		ModelAndView mv = new ModelAndView("/study/studyEd.tiles");
-		
+
 		Map<String,Object>param = new HashMap<String,Object>();
 		
 		param.put("IDX", idx);	
@@ -86,8 +84,9 @@ public class StudyController {
 	}
 	
 	@RequestMapping(value="/study/insert", method=RequestMethod.POST)
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@ResponseBody
-	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {		
+	public void insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		studyService.insertBoard(param);
 		
 	}
