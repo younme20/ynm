@@ -50,9 +50,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //.httpBasic().disable()
                 //.formLogin().disable()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                //.sessionManagement()
+                //    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.and()
                 .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), secretKey), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JwtTokenVerifier(secretKey), JwtAuthenticationFilter.class)
                 .authorizeRequests()
@@ -75,27 +75,4 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(appUserService);
         return provider;
     }
-
-/*    @Bean
-    public FilterChainProxy springSecurityFilterChain()
-            throws ServletException, Exception {
-        List<SecurityFilterChain> securityFilterChains = new ArrayList<SecurityFilterChain>();
-        securityFilterChains.add(new DefaultSecurityFilterChain(
-                new AntPathRequestMatcher("/login2"),
-                usernamePasswordAuthenticationFilter()));
-        securityFilterChains.add(new DefaultSecurityFilterChain(
-                new AntPathRequestMatcher("/resources/**")));
-//        securityFilterChains.add(new DefaultSecurityFilterChain(
-//                new AntPathRequestMatcher("/api/**"),
-//                securityContextPersistenceFilterASCFalse(),
-//                basicAuthenticationFilter(), exceptionTranslationFilter(),
-//                filterSecurityInterceptor()));
-//        securityFilterChains.add(new DefaultSecurityFilterChain(
-//                new AntPathRequestMatcher("/**"),
-//                securityContextPersistenceFilterASCTrue(), logoutFilter(),
-//                usernamePasswordAuthenticationFilter(),
-//                exceptionTranslationFilter(), filterSecurityInterceptor()));
-        return new FilterChainProxy(securityFilterChains);
-    }*/
-
 }
