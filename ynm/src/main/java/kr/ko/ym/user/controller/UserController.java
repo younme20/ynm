@@ -2,10 +2,12 @@ package kr.ko.ym.user.controller;
 
 import com.google.common.base.Strings;
 import com.google.common.net.HttpHeaders;
+import kr.ko.ym.common.auth.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.Arrays;
 
 @Controller
@@ -20,25 +23,20 @@ public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@GetMapping(value = "/login")
-	public ModelAndView loginViewPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@Autowired
+	private AppUserService appUserService;
+
+	@GetMapping(value = {"/", "/login"})
+	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView("");
-		boolean isAuth = false;
 		String url = "";
-
-		Cookie[] requestCookies = request.getCookies();
-
-		for(Cookie requestCookie : requestCookies){
-			if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
-				isAuth = true;
-				break;
-			}
-		}
+		boolean isAuth = this.isAuth(request, response);
 
 		//이미 인증 정보가 있을 경우
 		if(isAuth){
-			url = Strings.isNullOrEmpty(request.getHeader("Referer")) ? "/" : request.getHeader("Referer");
+			url = Strings.isNullOrEmpty(request.getHeader("Referer")) ? "/main/main.tiles" : request.getHeader("Referer");
+			mv.addObject("username", authentication.getPrincipal());
 		}else{
 			url = "/login/login.tiles";
 		}
@@ -49,6 +47,7 @@ public class UserController {
 		return mv;
 	}
 
+	//TODO: 서버측 로그아웃 처리하기
 	@RequestMapping(value = "/logout", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("/");
@@ -67,6 +66,19 @@ public class UserController {
 		return mv;
 	}
 
+	public Boolean isAuth(HttpServletRequest request, HttpServletResponse response){
+		boolean isAuth = false;
+
+		Cookie[] requestCookies = request.getCookies();
+
+		for(Cookie requestCookie : requestCookies){
+			if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
+				isAuth = true;
+				break;
+			}
+		}
+		return isAuth;
+	}
 
 
 }

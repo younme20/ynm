@@ -26,12 +26,13 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
 
             if(authentication != null){
 
+                //TODO: alert 창 뜨게 하기
                 if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER"))){
                     httpServletRequest.setAttribute("msg", "접근 권한 없는 사용자 입니다.");
                     httpServletRequest.setAttribute("nextPage", "/");
                 }
 
-                httpServletRequest.getRequestDispatcher("/login").forward(httpServletRequest, httpServletResponse);
+                httpServletRequest.getRequestDispatcher("/").forward(httpServletRequest, httpServletResponse);
             }
         }
     }

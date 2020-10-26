@@ -7,10 +7,5 @@
   <title></title>
 </head>
 <body>
-	<div class="container">
-		<div id="wrapper" style="margin-top: 20px;">
-			<div id='calendar'></div>
-		</div>
-	</div>
 <body>
 </html>

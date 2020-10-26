@@ -2,7 +2,9 @@ package kr.ko.ym.common.dao;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import kr.ko.ym.common.auth.AppUser;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,11 +38,16 @@ public class CommonDao {
 		return sqlSession.selectOne(queryId); 
 	} 
 	
-	public Map<String,Object> selectOne(String queryId, Object params){ 
+	public Map<String,Object> selectOne(String queryId, Object params){
 		//printQueryId(queryId); 
 		return sqlSession.selectOne(queryId, params); 
-	} 
-	
+	}
+
+	public Object selectOptional(String queryId, Object params){
+		//printQueryId(queryId);
+		return sqlSession.selectOne(queryId, params);
+	}
+
 	@SuppressWarnings("rawtypes") 
 	public List selectList(String queryId){ 
 		//printQueryId(queryId); 

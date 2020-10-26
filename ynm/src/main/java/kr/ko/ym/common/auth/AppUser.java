@@ -9,28 +9,37 @@ import java.util.Set;
 
 public class AppUser implements UserDetails {
 
-    private final Set<SimpleGrantedAuthority> grantedAuthorityList;
-    private final String username;
-    private final String password;
-    private final boolean isAccountNonExpired;
-    private final boolean isAccountNonLocked;
-    private final boolean isCredentialNonExpired;
-    private final boolean isEnabled;
+    private Set<SimpleGrantedAuthority> grantedAuthorityList;
+    private String username;
+    private String password;
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialNonExpired;
+    private boolean isEnabled;
 
-    public AppUser(String username,
+    private AppUser(){
+    }; //디폴트 생성자
+
+    public AppUser createInstance(
+                   String username,
                    String password,
                    Set<SimpleGrantedAuthority> grantedAuthorityList,
                    boolean isAccountNonExpired,
                    boolean isAccountNonLocked,
                    boolean isCredentialNonExpired,
                    boolean isEnabled) {
-        this.grantedAuthorityList = grantedAuthorityList;
-        this.username = username;
-        this.password = password;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialNonExpired = isCredentialNonExpired;
-        this.isEnabled = isEnabled;
+
+        AppUser appUser = new AppUser();
+
+        appUser.grantedAuthorityList = grantedAuthorityList;
+        appUser.username = username;
+        appUser.password = password;
+        appUser.isAccountNonExpired = isAccountNonExpired;
+        appUser.isAccountNonLocked = isAccountNonLocked;
+        appUser.isCredentialNonExpired = isCredentialNonExpired;
+        appUser.isEnabled = isEnabled;
+
+        return appUser;
     }
 
     @Override
@@ -67,4 +76,9 @@ public class AppUser implements UserDetails {
     public boolean isEnabled() {
         return isEnabled;
     }
+
+    public void setGrantedAuthorityList(Set<SimpleGrantedAuthority> grantedAuthorityList) {
+        this.grantedAuthorityList = grantedAuthorityList;
+    }
+
 }

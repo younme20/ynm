@@ -7,16 +7,16 @@
 	<title>Insert title here</title>
 </head>
 <body>
-<!-- left page -->
+<!-- left page
 		<div id="wrapper">
 			<ul class="nav nav-tabs">
 				<li><a href="/ynm">M</a></li>
 				<li><a href="/ynm/menu/study">G</a></li>
 				<li><a href="/ynm/menu/notice">B</a></li>
-				<li><a href="${auth ? "/ynm/logout" : "/ynm/login"}">${auth ? "LOGOUT" : "LOGIN"}</a></li>
+				<li><a href=""></a></li>
 			</ul>
 		</div>
-<!-- left page -->
+ left page -->
 </body>
 </html>
 

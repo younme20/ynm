@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.net.HttpHeaders;
 import com.mysql.cj.util.StringUtils;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 
+import kr.ko.ym.common.auth.AppUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -99,6 +102,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 URLEncoder.encode("Bearer ", "UTF-8")+accessToken);
 
         response.addCookie(cookie);
+
     }
 
 
