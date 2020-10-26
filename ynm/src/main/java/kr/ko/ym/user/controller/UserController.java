@@ -26,7 +26,8 @@ public class UserController {
 	@Autowired
 	private AppUserService appUserService;
 
-	@GetMapping(value = {"/", "/login"})
+	//@GetMapping(value = {"/", "/login"})
+	@RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView("");
@@ -35,7 +36,7 @@ public class UserController {
 
 		//이미 인증 정보가 있을 경우
 		if(isAuth){
-			url = Strings.isNullOrEmpty(request.getHeader("Referer")) ? "/main/main.tiles" : request.getHeader("Referer");
+			url = "/main/main.tiles";
 			mv.addObject("username", authentication.getPrincipal());
 		}else{
 			url = "/login/login.tiles";
