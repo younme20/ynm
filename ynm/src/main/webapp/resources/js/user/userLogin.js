@@ -25,8 +25,7 @@ function userLogin() {
 			async: true,
 			cache :false, // 캐시 여부
 			success : function(result, response){
-				alert("success!");
-				movePage("/")
+				movePage("/ynm");
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert("error");
