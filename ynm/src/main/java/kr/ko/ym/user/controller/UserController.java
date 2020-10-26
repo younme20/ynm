@@ -26,8 +26,7 @@ public class UserController {
 	@Autowired
 	private AppUserService appUserService;
 
-	//@GetMapping(value = {"/", "/login"})
-	@RequestMapping(value = {"/", "/login"}, method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping(value = {"/", "/login"})
 	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView("");
@@ -72,14 +71,15 @@ public class UserController {
 
 		Cookie[] requestCookies = request.getCookies();
 
-		for(Cookie requestCookie : requestCookies){
-			if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
-				isAuth = true;
-				break;
+		if(requestCookies != null){
+			for(Cookie requestCookie : requestCookies) {
+				if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
+					isAuth = true;
+					break;
+				}
 			}
 		}
 		return isAuth;
 	}
-
 
 }
