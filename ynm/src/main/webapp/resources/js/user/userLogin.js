@@ -25,7 +25,8 @@ function userLogin() {
 			async: true,
 			cache :false, // 캐시 여부
 			success : function(result, response){
-				history.back();
+				alert("success!");
+				movePage("/")
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert("error");

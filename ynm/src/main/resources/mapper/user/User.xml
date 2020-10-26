@@ -3,20 +3,22 @@
 <mapper namespace="user">
 
 	<!-- 유저 조회 -->
-	<select id="selectUserByUserName" parameterType="hashmap" resultType="hashmap">
+	<select id="selectUserByUserName" parameterType="string" resultType="kr.ko.ym.common.auth.AppUser">
 		SELECT USERNAME
-		     , PASSWORD
+		     ,PASSWORD
+		     , true as isAccountNonExpired
+		     , true as isAccountNonLocked
+		     , true as isCredentialNonExpired
+		     , true as isEnabled
 		  FROM user
-		 WHERE USERNAME = 'test'
+		 WHERE USERNAME = #{username}
 	</select>
 
 	<!-- 유저 롤 조회 -->
-	<select id="selectUserRolesByUserName" parameterType="hashmap" resultType="string">
-		SELECT 'ROLE_USER'
-			 , 'user:write'
-			 , 'user:read'
+	<select id="selectUserRolesByUserName" parameterType="string" resultType="string">
+		SELECT ROLE
 		  FROM user
-		 WHERE USERNAME = 'test'
+		 WHERE USERNAME = #{username}
 	</select>
 
 	

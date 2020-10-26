@@ -70,6 +70,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
             Claims body = claimsJws.getBody();
 
             String username = body.getSubject();
+
             List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
 
             Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
@@ -87,6 +88,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
         } catch(JwtException e) {
             throw new IllegalStateException(String.format("Token %s cannot be trust", token));
         }
+
 
         //filter1에서 filter2로 넘겨줘야함
         filterChain.doFilter(request, response);
