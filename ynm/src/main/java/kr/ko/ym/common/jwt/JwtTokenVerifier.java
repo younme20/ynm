@@ -51,6 +51,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 }
             }
         }else{
+            filterChain.doFilter(request, response);
             return;
         }
 
