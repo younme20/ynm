@@ -16,13 +16,13 @@
 	</appender>	
 	
 	<!-- 로거 -->
-	<logger name="study" level="INFO" appender-ref="console" />
+	<logger name="study" level="ERROR" appender-ref="console" />
 	
-	<logger name="jdbc.sqlonly" level="INFO" appender-ref="console-infolog" />
-	<logger name="jdbc.resultsettable" level="INFO" appender-ref="console-infologsss" />
+	<logger name="jdbc.sqlonly" level="ERROR" appender-ref="console-infolog" />
+	<logger name="jdbc.resultsettable" level="ERROR" appender-ref="console-infolog" />
 
 	<root level="off">
-		<appender-ref ref="console" />
+		<appender-ref ref="INFO" />
 	</root>
 
 </configuration>

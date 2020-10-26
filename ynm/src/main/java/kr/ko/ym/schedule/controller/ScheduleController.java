@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,17 +30,17 @@ public class ScheduleController {
 	@RequestMapping(value="/schedule", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public ModelAndView getScheduleView(@RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView getScheduleView(@RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleLs.tiles");
-
 		return mv;
 	}
 	
 	@RequestMapping(value="/schedule/list", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public List<Map<String,Object>> selectSchedule(@RequestParam Map<String,Object>param) throws Exception {
-		List<Map<String,Object>>list = scheduleService.selectSchedule(param);		
+	public List<Map<String,Object>> selectSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
+		param.put("username", authentication.getPrincipal());
+		List<Map<String,Object>>list = scheduleService.selectSchedule(param);
 		return list;	
 	}
 	
