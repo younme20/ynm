@@ -5,16 +5,12 @@
 	<!-- insert  -->
  	 <insert id="insertHashTag" parameterType="hashmap">
         INSERT INTO hashtag ( MENU_CODE, BOARD_IDX, CONTENTS)
-		ALUES( #{MENU_CODE}, #{IDX}, #{HASHTAG}) 
+		VALUES( #{MENU_CODE}, #{IDX}, #{HASHTAG}) 
     </insert>
    	
    	<!-- update -->
    	<update id="updateHashTag" parameterType="hashmap">
-        UPDATE board SET
-            TITLE = #{TITLE}
-            , CONTENTS = #{CONTENTS}
-            , UPDATE_ID = #{CREATE_ID}
-            , UPDATE_DATETIME = NOW()
+        UPDATE hashtag SET CONTENTS = #{CONTENTS}
         WHERE
             IDX = #{IDX}
     </update>

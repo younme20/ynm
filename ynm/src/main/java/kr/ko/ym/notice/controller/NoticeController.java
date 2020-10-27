@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.common.service.FileUploadService;
+import kr.ko.ym.hashtag.service.HashtagService;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
 public class NoticeController {
@@ -25,6 +26,8 @@ public class NoticeController {
 	private NoticeService noticeService;
 	@Autowired
 	private FileUploadService fileuploadService;
+	@Autowired
+	private HashtagService hashtagService;
 	/*
 	 * list select
 	 * */
@@ -86,11 +89,20 @@ public class NoticeController {
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
-		noticeService.insertBoard(param);	
+		noticeService.insertBoard(param);
+		
+		
 		Map<String,Object> map =  noticeService.selectMaxIdx();
+		
+		param.put("IDX", map.get("IDX"));	
+		if(param.get("HASHTAG") != null) {
+			hashtagService.insertHashTag(param);
+		}
+		
 		param.put("BOARD_IDX", map.get("IDX"));
 		return "detail/"+ map.get("IDX");	
 	}
+
 
 	/*
 	 * modify form
