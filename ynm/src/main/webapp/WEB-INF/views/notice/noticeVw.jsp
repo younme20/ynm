@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <form name="form" id="form" action="/ynm/notice" method="post">
@@ -11,6 +12,17 @@
 	<input type="hidden" name="keyword" value="${param.keyword}">
 	<div class="container">
 		<table class="table">
+			<tr>
+				<td colspan="2">
+					<div id="tlist">
+						<ul>
+							<c:forEach var="item" items="${hash}" varStatus="idx">
+								<li class="titem"><p>${item}</p></li>
+							</c:forEach>
+						</ul>
+					</div>
+				</td>
+			</tr>
 			<tr>
 				<td colspan="2"><strong>${data.TITLE }</strong></td>
 			</tr>

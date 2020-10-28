@@ -19,4 +19,15 @@ public class HshtagServiceImpl implements HashtagService {
 		 commonDao.insert("hashtag.insertHashTag", param);
 	}
 
+	@Override
+	public Map<String, Object> selectOneHashTag(Map<String, Object> param) throws Exception {
+		return  commonDao.selectOne("hashtag.selectOneHashTag", param);
+	}
+
+	@Override
+	public void updateHashTag(Map<String, Object> param) throws Exception {
+		 commonDao.update("hashtag.updateHashTag", param);
+		
+	}
+
 }

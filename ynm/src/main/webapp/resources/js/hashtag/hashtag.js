@@ -2,45 +2,58 @@
  * hash tag js
  */
 var arr_ori = [];
-
+var arr_final = [];
 
 $(document).ready(function () {
-	$(document).on("click", "#delTag", function(){
-
-		var word = $(this).parents("li");
-		word.remove();
-    	alert("선택 된 태그 삭제"+word.text());
-    	console.log(arr_ori);
-    });
-	
-    $("#tag").on("keypress", function (e) {
-    	var tag = $(this);
-        if (e.keyCode == 13) {
-        	var word = tag.val().replace(/(\s*)/g,"");
-        	getTag(word);
+	var hash = $("#HASHTAG").val();
+	 if(typeof hash != "undefined" || hash != null || hash != ""){
+		arr_ori = hash.split(",");;
+		
+	}
+	 
+    //태그 삭제
+   $(document).on("click", "#delTag", function(){
+    var word = $(this).parents("li");
+    //console.log("삭제할 단어 : "+word);
+    var idx = arr_ori.indexOf(word.text());
+        if(idx  > -1){
+            arr_ori.splice(idx, 1);
+            arr_final = arr_ori;
+            tagList();
         }
-       /* for (var i = 0; i < arr.length; i++) {
-            console.log(arr[i]);
-        }  */
+        alert("선택 된 태그 삭제"+word.text());
+        //console.log("idx : "+idx);
+        //console.log("arr_orui: "+arr_ori);
     });
-    
+   
+
+   //태그 등록
+    $("#tag").on("keypress", function(e){
+        if (e.keyCode == 13) {
+           var word = $(this).val().replace(/(\s*)/g,"").replace( /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\$%&\\\=\(\'\"]/gi,"");
+           arr_final = [];
+            if(word){
+                    arr_ori.push(word);
+                    $.each(arr_ori,function(i,value){
+                        if(arr_final.indexOf(value) == -1 ){
+                            arr_final.push(value);
+                        }
+                    });
+                    tagList();
+            }
+        }
+    });
   
 });
-var getTag  = function(word){
-	if(word){
-		var arr_final = [];
-		arr_ori.push(word);
-	}
-	
-	$.each(arr_ori,function(i,value){
-	    if(arr_final.indexOf(value) == -1 ){
-	    	alert("체크:"+arr_final.indexOf(value));
-	    	arr_final.push(value);
-	    	$("#tlist").append("<li class='titem'>"+value+"<span id='delTag' class='glyphicon glyphicon-remove'></span></li>");
-			
-			$("#tag").val("");
-	    }
-	    
-	    $("#HASHTAG").val(arr_final.join());
-	});
+
+var tagList = function(){
+    $("#tlist li").remove();
+    for (var i = 0; i < arr_final.length; i++) {
+            //console.log(arr_final[i]);
+            $("#tlist ul").append("<li class='titem'><p>"+arr_final[i]+"</p><span id='delTag' class='glyphicon glyphicon-remove'></span></li>");
+        } 
+        $("#tag").val("");
+        $("#HASHTAG").val(arr_final.join());
+        arr_ori = arr_final
+        //console.log("ori  end : "+arr_ori.join());
 }

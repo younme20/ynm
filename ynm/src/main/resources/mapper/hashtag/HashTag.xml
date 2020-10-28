@@ -10,10 +10,14 @@
    	
    	<!-- update -->
    	<update id="updateHashTag" parameterType="hashmap">
-        UPDATE hashtag SET CONTENTS = #{CONTENTS}
+        UPDATE hashtag SET CONTENTS = #{HASHTAG}
         WHERE
-            IDX = #{IDX}
+            BOARD_IDX = #{IDX}
     </update>
     
-   
+   <select id="selectOneHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE BOARD_IDX = #{IDX}
+   </select>
 </mapper>

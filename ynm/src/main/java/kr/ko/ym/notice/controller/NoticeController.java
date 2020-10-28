@@ -58,17 +58,23 @@ public class NoticeController {
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
 	
-		param.put("IDX", idx);			
-		mv.addObject("param", param);
+		param.put("IDX", idx);		
 		mv.addObject("data", noticeService.selectDetail(param));
 		
-
+		//파일 obj
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		list = fileuploadService.selectAttachFileListByIDX(param);
 		if(!list.isEmpty() || list != null ) {
 			mv.addObject("files", list);
 		}
+		
+		//해시태그 obj
+		Map<String,Object> tag = hashtagService.selectOneHashTag(param);
+		String[] tagArray = ((String) tag.get("CONTENTS")).split(",");
+		mv.addObject("hash", tagArray);
+		
 		noticeService.updateCount(param);
+		mv.addObject("param", param);
 		return mv;		
 	}
 	
@@ -125,7 +131,13 @@ public class NoticeController {
 				mv.addObject("files", files);
 			}
 		}
-	
+		
+		
+		//해시태그 obj
+		Map<String,Object> tag = hashtagService.selectOneHashTag(param);
+		String[] tagArray = ((String) tag.get("CONTENTS")).split(",");
+		mv.addObject("hash", tagArray);
+		mv.addObject("HASHTAG", (String)tag.get("CONTENTS"));
 		mv.addObject("data", noticeService.selectDetail(param));
 		mv.addObject("mode", "modify");		
 		return mv;		
@@ -138,6 +150,7 @@ public class NoticeController {
 	@ResponseBody
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.updateBoard(param);
+		hashtagService.updateHashTag(param);
 		String idx = (String) param.get("IDX");
 		return idx;
 	}
