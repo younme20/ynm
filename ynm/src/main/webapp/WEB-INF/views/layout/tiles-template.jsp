@@ -22,11 +22,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
 	<script src="<c:url value='/resources/js/common/bootstrap-datepicker.min.js'/>"charset="utf-8"></script>
-
-	<!-- full canlander -->
-	<link href='/ynm/resources/static/fullcalendar/lib/main.css' rel='stylesheet' />
-	<script src='/ynm/resources/static/fullcalendar/lib/main.js'></script>
-
+	
 	<!-- 공통js -->
 	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
 
@@ -34,7 +30,6 @@
 
 </head>
 <body>
-	<tiles:importAttribute name="script" />
 	<tiles:insertAttribute name="header" />
     <tiles:insertAttribute name="nav" />
     <div id="container">

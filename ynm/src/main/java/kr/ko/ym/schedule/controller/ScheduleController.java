@@ -30,8 +30,9 @@ public class ScheduleController {
 	@RequestMapping(value="/schedule", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public ModelAndView getScheduleView(@RequestParam Map<String, Object>param) throws Exception {
+	public ModelAndView getScheduleView(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleLs.tiles");
+		mv.addObject("username", authentication.getPrincipal());
 		return mv;
 	}
 	

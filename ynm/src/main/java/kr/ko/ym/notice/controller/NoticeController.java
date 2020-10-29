@@ -55,7 +55,7 @@ public class NoticeController {
 	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
+		ModelAndView mv = new ModelAndView("board/boardVw.tiles");
 	
 		param.put("IDX", idx);			
 		mv.addObject("param", param);
