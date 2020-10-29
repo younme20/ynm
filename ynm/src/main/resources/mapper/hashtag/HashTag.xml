@@ -20,4 +20,17 @@
 		FROM hashtag
 		WHERE BOARD_IDX = #{IDX}
    </select>
+   
+   <select id="selectHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE MENU_CODE =  #{MENU_CODE}
+   </select>
+   
+    <!-- delete -->
+     <delete id="deleteHashTag" parameterType="hashmap">
+        DELETE FROM board
+        WHERE
+            BOARD_IDX = #{IDX}
+     </delete>
 </mapper>

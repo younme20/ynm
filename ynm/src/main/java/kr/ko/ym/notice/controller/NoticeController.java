@@ -2,6 +2,7 @@ package kr.ko.ym.notice.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -33,13 +34,19 @@ public class NoticeController {
 	 * */
 	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(required = false) String word) throws Exception {
 		
+		if(word != null) {
+			param.put("hashSerch", "true");
+			param.put("hashword", word);		
+		}
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
 		
 		if(param.get("MENU_CODE") == null) {
 			param.put("MENU_CODE", "B");
 		}
+		
+		mv.addObject("hash", hashtagService.selectHashTag(param));
 		mv.addObject("list", noticeService.selectBoard(param));	
 		
 		Map<String,Object>map = noticeService.selectCount(param);
@@ -138,6 +145,7 @@ public class NoticeController {
 		String[] tagArray = ((String) tag.get("CONTENTS")).split(",");
 		mv.addObject("hash", tagArray);
 		mv.addObject("HASHTAG", (String)tag.get("CONTENTS"));
+		
 		mv.addObject("data", noticeService.selectDetail(param));
 		mv.addObject("mode", "modify");		
 		return mv;		

@@ -6,11 +6,19 @@ var arr_final = [];
 
 $(document).ready(function () {
 	var hash = $("#HASHTAG").val();
-	 if(typeof hash != "undefined" || hash != null || hash != ""){
-		arr_ori = hash.split(",");;
+	 if(!hash == ""){
+		arr_ori = hash.split(",");
 		
 	}
 	 
+   //태그 검색
+   $(document).on("click", ".titem", function(){
+    var word = $(this).text();
+   	 $("#form").attr("action", "notice/"+word);
+	 $("#form").submit();
+   
+    });
+   
     //태그 삭제
    $(document).on("click", "#delTag", function(){
     var word = $(this).parents("li");
@@ -54,6 +62,7 @@ var tagList = function(){
         } 
         $("#tag").val("");
         $("#HASHTAG").val(arr_final.join());
+        console.log("arr_final "+ arr_final.join());
         arr_ori = arr_final
-        //console.log("ori  end : "+arr_ori.join());
+        console.log("arr_ori : "+arr_ori.join());
 }
