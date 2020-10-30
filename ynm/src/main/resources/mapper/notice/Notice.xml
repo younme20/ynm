@@ -66,13 +66,10 @@
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
 		SELECT COUNT(IDX) AS TOTAL_COUNT 
 		FROM board
-		<if test='hashword != ""'>
-			INNER JOIN
-				(SELECT board_idx 
-				 FROM hashtag 
-				 WHERE CONCAT(',',contents,',') LIKE '%', #{hashword}, '%'
-				 ) AS hash
-			ON    board.idx  = hash.board_idx
+		<if test='hashSerch == "true"'>
+			<trim prefix="AND" prefixOverrides="AND|OR">
+				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)	
+			</trim> 
 		</if>
 		WHERE MENU_CODE='B'
 		<if test='searchType != ""'>
