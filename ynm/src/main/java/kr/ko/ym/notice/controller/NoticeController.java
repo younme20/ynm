@@ -32,13 +32,13 @@ public class NoticeController {
 	/*
 	 * list select
 	 * */
-	@RequestMapping(value={"/notice", "/notice/{word]"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value={"/notice", "/notice/{word}"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(value = "word", required = false) String word) throws Exception {
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(required = false) String word) throws Exception {
 		
 		if(word != null) {
 			param.put("hashSerch", "true");
-			param.put("hashword", word);		
+			param.put("hashWord", word);		
 		}
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
 		
