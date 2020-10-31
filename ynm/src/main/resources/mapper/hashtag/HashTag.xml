@@ -5,19 +5,32 @@
 	<!-- insert  -->
  	 <insert id="insertHashTag" parameterType="hashmap">
         INSERT INTO hashtag ( MENU_CODE, BOARD_IDX, CONTENTS)
-		ALUES( #{MENU_CODE}, #{IDX}, #{HASHTAG}) 
+		VALUES( #{MENU_CODE}, #{IDX}, #{HASHTAG}) 
     </insert>
    	
    	<!-- update -->
    	<update id="updateHashTag" parameterType="hashmap">
-        UPDATE board SET
-            TITLE = #{TITLE}
-            , CONTENTS = #{CONTENTS}
-            , UPDATE_ID = #{CREATE_ID}
-            , UPDATE_DATETIME = NOW()
+        UPDATE hashtag SET CONTENTS = #{HASHTAG}
         WHERE
-            IDX = #{IDX}
+            BOARD_IDX = #{IDX}
     </update>
     
+   <select id="selectOneHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE BOARD_IDX = #{IDX}
+   </select>
    
+   <select id="selectHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE MENU_CODE =  #{MENU_CODE}
+   </select>
+   
+    <!-- delete -->
+     <delete id="deleteHashTag" parameterType="hashmap">
+        DELETE FROM board
+        WHERE
+            BOARD_IDX = #{IDX}
+     </delete>
 </mapper>
