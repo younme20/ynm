@@ -1,60 +1,85 @@
 package kr.ko.ym.user.controller;
 
-//import kr.ko.ym.common.auth.AppUserService;
-//import kr.ko.ym.common.jwt.JwtAuthenticationRequest;
-import kr.ko.ym.user.service.UserService;
+import com.google.common.base.Strings;
+import com.google.common.net.HttpHeaders;
+import kr.ko.ym.common.auth.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
+import java.util.Arrays;
 
 @Controller
 public class UserController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
-	//@Autowired
-	//private AppUserService appUserService;
-
 	@Autowired
-	private UserService userService;
+	private AppUserService appUserService;
 
-	@RequestMapping(value = "login")
-	public String loginViewPage() throws Exception {
-		return "/login/login.tiles";
+	@GetMapping(value = {"/", "/login"})
+	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		ModelAndView mv = new ModelAndView("");
+		String url = "";
+		boolean isAuth = this.isAuth(request, response);
+
+		//이미 인증 정보가 있을 경우
+		if(isAuth){
+			url = "/main/main.tiles";
+			mv.addObject("username", authentication.getPrincipal());
+		}else{
+			url = "/login/login.tiles";
+		}
+
+		mv.setViewName(url);
+		mv.addObject("isAuth", isAuth);
+
+		return mv;
 	}
 
-	@RequestMapping(value = "auth", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String,Object> selectUserByName(@RequestParam Map<String,Object>param) throws Exception {
-		List<Map<String,Object>>list = userService.selectUserByName(param);
-		return list
-				.stream()
-				.filter(username -> username.equals(param.get("username")))
-				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("this is not exist"));
+	//TODO: 서버측 로그아웃 처리하기
+	@RequestMapping(value = "/logout", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mv = new ModelAndView("/");
+
+		//클라이언트 측 쿠키 삭제
+		Cookie[] requestCookies = request.getCookies();
+
+		for(Cookie requestCookie : requestCookies){
+			if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
+				requestCookie.setMaxAge(0);
+				response.addCookie(requestCookie);
+				break;
+			}
+		}
+
+		return mv;
 	}
 
-	//login 확인 과정 필요
-	/* @RequestMapping(value = "authenticate", method = RequestMethod.POST)
-	public RequestEntity<?> selectUserInfo (@RequestBody JwtAuthenticationRequest jwtRequest) throws Exception {
+	public Boolean isAuth(HttpServletRequest request, HttpServletResponse response){
+		boolean isAuth = false;
 
-		jwtRequest.setUsername("test");
-		jwtRequest.setPassword("password");
+		Cookie[] requestCookies = request.getCookies();
 
-		final UserDetails userDetails = appUserService
-				.loadUserByUsername(jwtRequest.getUsername());
-
-
-		return null;
-	} */
-
-
-
-
+		if(requestCookies != null){
+			for(Cookie requestCookie : requestCookies) {
+				if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
+					isAuth = true;
+					break;
+				}
+			}
+		}
+		return isAuth;
+	}
 
 }

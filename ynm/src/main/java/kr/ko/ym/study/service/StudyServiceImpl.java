@@ -1,9 +1,11 @@
 package kr.ko.ym.study.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.ko.ym.common.auth.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,6 @@ public class StudyServiceImpl implements StudyService {
 	@Autowired
 	private CommonDao commonDao;	  
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectList(Map<String, Object> param) throws Exception {
 		PagingUtil paging = new PagingUtil();
@@ -35,13 +36,9 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public Map<String, Object> selectDetail(Map<String, Object> param) throws Exception {
-		Map<String,Object>map = new HashMap<String,Object>();
-		if(commonDao.selectOne("study.selectDetail", param) != null) {
-			commonDao.insert("study.updateBoardHit", param);
+		commonDao.insert("study.updateBoardHit", param);
 
-			map = commonDao.selectOne("study.selectDetail", param);
-		}
-		return map;
+		return commonDao.selectOne("study.selectDetail", param);
 	}
 
 	@Override

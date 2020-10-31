@@ -15,8 +15,9 @@
 					<h4 class="modal-title" id="planModalLabel">일정 추가</h4>
 				</div>
 				<form id="scheduleForm" name="scheduleForm">
-					<input type="hidden" id="IDX" name="IDX" class="form-control" value=""></input>																										
-				
+					<input type="hidden" id="IDX" name="IDX" class="form-control" value=""></input>
+					<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-xs-12">

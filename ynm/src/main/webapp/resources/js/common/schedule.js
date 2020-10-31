@@ -7,11 +7,11 @@ $(document).ready(function(){
 	
 	//datetimepicker
 	$("#START_DATE").datetimepicker({
-	    format: 'YYYY-MM-DD HH:mm'
+	    format: 'YYYY-MM-DD'
 	});
 	
 	$("#END_DATE").datetimepicker({
-	    format: 'YYYY-MM-DD HH:mm',
+	    format: 'YYYY-MM-DD',
 	    useCurrent: false
 	});
 	
@@ -49,11 +49,17 @@ $(document).ready(function(){
 });
 
 function selectSchedule() {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+
 	$.ajax({
 		type : "POST",                               
 		url : "/ynm/schedule/list",                   
 		json : true,
-		data : {},      
+		data : {},//JSON.stringify({"_csrf":token}),
+		beforeSend: function(xhr) {
+			//xhr.setRequestHeader(header,token);
+		},
 		success : function(result, textStatus, jqXHR){
 			calendarEvent(result);
 		},
@@ -74,8 +80,8 @@ function saveSchedule() {
 	}
 	
 	//구분 필드
-	schedule["category"] = $('input[name="category"]:checked').val();	
-	
+	schedule["category"] = $('input[name="category"]:checked').val();
+
 	$.ajax({
 		type : "POST",                               
 		url : "/ynm/schedule/"+url,                   
@@ -94,7 +100,7 @@ function saveSchedule() {
 function deleteSchedule() {
 	var schedule = $("#scheduleForm").serializeObject();
 	$.ajax({
-		type : "POST",                               
+		type : "POST",
 		url : "/ynm/schedule/delete",                   
 		json : true,                           
 		data : schedule,      
@@ -122,8 +128,8 @@ function calendarEvent(eventData){
       timezone: "local",
       allDaySlot: true,
       timeFormat: 'HH:mm',
-      minTime: '00:00:00',
-      maxTime: '24:00:00',
+      minTime: '00:00',
+      maxTime: '24:00',
       headerToolbar: {
     	  start: 'prev,next',
     	  center: 'title',
@@ -131,10 +137,14 @@ function calendarEvent(eventData){
       },
       height: 1200,
       //날짜 클릭 이벤트	
-      dateClick: function (info) {    	  
-    	  $("#START_DATE").val(info.dateStr);    	  
-    	  
-    	  $("#planModal").modal('show');
+      dateClick: function (info) {
+    	  $("#scheduleForm")
+			  .find(':radio, :checkbox').removeAttr('checked').end()
+			  .find('textarea, :text, select').val('');
+
+		  $("#START_DATE").val(info.dateStr);
+
+		  $("#planModal").modal('show');
       },
       eventClick: function(info) {
     	  let eventFullDate = info.event.start;

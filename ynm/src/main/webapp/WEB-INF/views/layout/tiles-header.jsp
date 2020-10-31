@@ -1,18 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
 <head>
-	 <!-- tiles template에 선언되어 있어서 중복 선언되므로 주석 처리함  20200825 구한별  -->
-	 <!-- jQuery 
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 	  
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>	 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	
+
+	<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
+	<section id="main">
+		<header>
+			<span class="avatar"><img src="<c:url value='/resources/images/avatar.jpg' />" alt=""></span>
+			<h3>${username} 님 환영합니다!!</h3>
+
+			<h9><a href="/ynm/schedule">plan</a>  *  <a href="/ynm/board">categories</a> *  <a>search</a></h9>
+		</header>
+	</section>
+
 	<!-- 일정관리 모달 -->
 	<jsp:include page="../common/scheduleModal.jsp"></jsp:include>
     	

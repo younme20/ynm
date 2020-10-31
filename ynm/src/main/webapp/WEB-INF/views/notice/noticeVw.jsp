@@ -53,6 +53,4 @@
 			<button type="button" id="list" class="btn btn-default">목록</button>
 		</div>
 	</div>
-
-
 </form>

@@ -18,7 +18,10 @@
 			<where>
 				<if test='IDX != "" and IDX != null '>
 					AND IDX = #{IDX}  
-				</if>	  	  
+				</if>
+				<if test='username != "" and username != null'>
+                    AND USERNAME != #{username}
+                </if>
 			</where>
 	</select>
 	
@@ -41,7 +44,7 @@
              ( IDX, START_DATE, END_DATE, TITLE, CATEGORY, COLOR, MEMO, DONE_FLAG   
              )
         VALUES
-             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'             
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'
              ) 
     </insert>
     
