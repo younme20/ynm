@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +33,11 @@ public class NoticeController {
 	/*
 	 * list select
 	 * */
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	@RequestMapping(value={"/notice", "/notice/{word}"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(required = false) String word) throws Exception {
-		
+	
 		if(word != null) {
 			param.put("hashSerch", "true");
 			param.put("hashWord", word);		
@@ -63,7 +65,7 @@ public class NoticeController {
 	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
+		ModelAndView mv = new ModelAndView("board/boardVw.tiles");
 	
 		param.put("IDX", idx);		
 		mv.addObject("data", noticeService.selectDetail(param));
