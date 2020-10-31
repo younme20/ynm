@@ -33,15 +33,12 @@ public class NoticeController {
 	/*
 	 * list select
 	 * */
-	@RequestMapping(value={"/notice", "/notice/{word]"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value={"/notice", "/notice/{word}"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-<<<<<<< HEAD
 	@PreAuthorize("hasRole('ROLE_MANAGER')")
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
-=======
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(value = "word", required = false) String word) throws Exception {
->>>>>>> origin/notice_B
-		
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param,
+									@PathVariable(value = "word", required = false) String word) throws Exception {
+
 		if(word != null) {
 			param.put("hashSerch", "true");
 			param.put("hashword", word);		

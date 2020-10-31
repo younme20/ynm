@@ -133,7 +133,7 @@ function calendarEvent(eventData){
       headerToolbar: {
     	  start: 'prev,next',
     	  center: 'title',
-    	  end : 'dayGridMonth'
+    	  end : 'dayGridMonth, listWeek'
       },
       height: 1200,
       //날짜 클릭 이벤트	
@@ -177,11 +177,11 @@ function calendarEvent(eventData){
       },
       contentHeight: "auto",
       bootstrapFontAwesome: {
-    	  close: 'fa-times',
-    	  prev: 'fa-chevron-left',
-    	  next: 'fa-chevron-right',
-    	  prevYear: 'fa-angle-double-left',
-    	  nextYear: 'fa-angle-double-right'
+    	  close: 'fa fa-times',
+    	  prev: 'fa fa-chevron-left',
+    	  next: 'fa fa-chevron-right',
+    	  prevYear: 'fa fa-angle-double-left',
+    	  nextYear: 'fa fa-angle-double-right'
       },
       initialView: 'dayGridMonth',
       schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source', //라이센스

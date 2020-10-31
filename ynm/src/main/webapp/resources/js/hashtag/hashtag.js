@@ -13,8 +13,8 @@ $(document).ready(function () {
 	 
    //태그 검색
    $(document).on("click", ".titem", function(){
-    var word = $(this).text();
-   	 $("#form").attr("action", "notice/"+word);
+     var word = $(this).text().toString();
+   	 $("#form").attr("action", "/ynm/notice/"+word);
 	 $("#form").submit();
    
     });
