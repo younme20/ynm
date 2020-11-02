@@ -210,5 +210,3 @@ function calendarEvent(eventData){
     });
     calendar.render();	
 }
-
-

@@ -13,7 +13,11 @@ $(document).ready(function () {
 	 
    //태그 검색
    $(document).on("click", ".titem", function(){
+<<<<<<< HEAD
      var word = $(this).text().toString();
+=======
+    var word = $(this).text();
+>>>>>>> origin/notice_B
    	 $("#form").attr("action", "/ynm/notice/"+word);
 	 $("#form").submit();
    

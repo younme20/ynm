@@ -17,7 +17,7 @@
 	<sql id="COMMON__SERCH_HASHTAG">
 		SELECT board_idx 
 		FROM hashtag 
-		WHERE CONCAT(',',contents,',') LIKE '%', #{hashword}, '%'
+		WHERE CONCAT(',',contents,',') LIKE CONCAT('%',',',#{hashWord},',','%')
 	</sql>
 	
 	
@@ -66,12 +66,12 @@
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
 		SELECT COUNT(IDX) AS TOTAL_COUNT 
 		FROM board
+		WHERE MENU_CODE=#{MENU_CODE}
 		<if test='hashSerch == "true"'>
 			<trim prefix="AND" prefixOverrides="AND|OR">
 				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
 			</trim>
 		</if>
-		WHERE MENU_CODE='B'
 		<if test='searchType != ""'>
 			<trim prefix="AND" prefixOverrides="AND|OR">
 				<if test="searchType == 'title' and keyword != null and keyword != '' ">
