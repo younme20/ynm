@@ -5,7 +5,7 @@
 $(document).ready(function(){
 	//글쓰기
 	$("#write").on("click", function(e){ 
-		movePage("/ynm/notice//write");
+		movePage("/ynm/notice/write");
 	});
 
 });

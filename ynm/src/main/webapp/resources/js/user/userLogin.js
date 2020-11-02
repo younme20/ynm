@@ -25,6 +25,7 @@ function userLogin() {
 			async: true,
 			cache :false, // 캐시 여부
 			success : function(result, response){
+				alert("정상적으로 로그인되었습니다.");
 				movePage("/ynm");
 			},
 			error   : function(result, textStatus, jqXHR){
@@ -32,5 +33,4 @@ function userLogin() {
 			}
 		});
 	}
-	
 }

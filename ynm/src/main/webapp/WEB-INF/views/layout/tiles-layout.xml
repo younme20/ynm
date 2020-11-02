@@ -6,7 +6,6 @@
 <tiles-definitions>
     <!-- default layout-->
     <definition name="default" template="/WEB-INF/views/layout/tiles-template.jsp">
-        <put-attribute name="script" value="/WEB-INF/views/layout/tiles-script.jsp" />
         <put-attribute name="header" value="/WEB-INF/views/layout/tiles-header.jsp" />
         <put-attribute name="nav"   value="/WEB-INF/views/layout/tiles-nav.jsp" />
         <put-attribute name="left"   value="/WEB-INF/views/layout/tiles-left.jsp" />
@@ -25,6 +24,18 @@
     
     <definition name="*/*/*.tiles" extends="default">
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+    </definition>
+
+    <!-- default layout-->
+    <definition name="login" template="/WEB-INF/views/layout/tiles-login.jsp">
+        <put-attribute name="nav"   value="/WEB-INF/views/layout/tiles-nav.jsp" />
+        <put-attribute name="left"   value="/WEB-INF/views/layout/tiles-left.jsp" />
+        <put-attribute name="content"   value="" />
+        <put-attribute name="footer" value="/WEB-INF/views/layout/tiles-footer.jsp" />
+    </definition>
+
+    <definition name="userlogin" extends="login">
+        <put-attribute name="content" value="/WEB-INF/views/login/login.jsp" />
     </definition>
 
 

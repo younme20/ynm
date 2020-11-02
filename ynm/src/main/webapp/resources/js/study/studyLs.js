@@ -14,7 +14,7 @@ $(document).ready(function(){
 	
 	$("a[name='title']").on("click", function(e){ 
 		var idx = $(this).attr("idx");
-		movePage("/ynm/study/view/"+idx);
+		movePage("/ynm/board/detail/"+idx);
 	});
 	
 	$("a[name='index']").on("click", function(e){ 

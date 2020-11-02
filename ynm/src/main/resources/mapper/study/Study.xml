@@ -25,7 +25,9 @@
 			<if test='searchCondition != "" and searchCondition == "A" '>
 			 	AND INSTR(TITLE, #{searchText}) > 0 OR INSTR(CONTENTS, #{searchText}) > 0
 			</if>
-			AND MENU_CODE = 'G'		
+			<if test='username != "" and username != null'>
+				AND create_id = #{username}
+			</if>
 		</if>
 		</where>
 	</sql>
@@ -36,15 +38,15 @@
 	
 	<!-- 리스트 조회 -->
 	<select id="selectList" parameterType="hashmap" resultType="hashmap"> 
-		<include refid="COMMON_PAGING_HEADER"/>	
+<!--	<include refid="COMMON_PAGING_HEADER"/>	-->
 			SELECT IDX
 				 , TITLE
 				 , HITCNT
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 		
 			  FROM board 
 			  <include refid="COMMON_SEARCH"/>
-			 ORDER BY IDX DESC 
-		<include refid="COMMON_PAGING_TAIL"/>	 
+			 ORDER BY IDX DESC
+<!--		<include refid="COMMON_PAGING_TAIL"/>	 -->
 	</select>
 	
 	<select id="selectDetail" parameterType="hashmap" resultType="hashmap"> 
@@ -57,8 +59,7 @@
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 
 			  FROM board 
 			 WHERE IDX = #{IDX}
-			   AND CREATE_ID = #{username}
-		]]> 
+		]]>
 	</select>
 	
     <insert id="insertBoard" parameterType="hashmap">

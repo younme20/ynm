@@ -4,8 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <link href="<c:url value="/resources/css/notice.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/notice/noticeLs.js'/>" charset="utf-8"></script>	
+<script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>	
+
 <div class="container">
 	<h1>스터디 관리</h1>
 	
@@ -13,7 +16,13 @@
 		<div id='calendar'></div>
 	</div>
 	<form name="form" id="form" action="/ynm/notice" method="post">
-	
+	<div id="tlist">
+		<ul>
+			<c:forEach var="item" items="${hash}" varStatus="idx">
+				<li id="hash"class="titem"><p>${item}</p></li>
+			</c:forEach>
+		</ul>
+	</div>
 	<div id="service_area">
 		<button type="button" id="write" class="btn btn-primary">글쓰기</button>  
 	 	<div class="serch-group">

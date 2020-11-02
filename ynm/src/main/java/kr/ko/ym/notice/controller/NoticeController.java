@@ -2,6 +2,7 @@ package kr.ko.ym.notice.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.common.service.FileUploadService;
+import kr.ko.ym.hashtag.service.HashtagService;
 import kr.ko.ym.notice.service.NoticeService;
 @Controller
 public class NoticeController {
@@ -26,19 +28,27 @@ public class NoticeController {
 	private NoticeService noticeService;
 	@Autowired
 	private FileUploadService fileuploadService;
+	@Autowired
+	private HashtagService hashtagService;
 	/*
 	 * list select
 	 * */
-	@RequestMapping(value="/notice", method = {RequestMethod.POST,RequestMethod.GET})
-	@ResponseBody
+
 	@PreAuthorize("hasRole('ROLE_MANAGER')")
-	public ModelAndView selectBoard(@RequestParam Map<String,Object>param) throws Exception {
-		
+	@RequestMapping(value={"/notice", "/notice/{word}"},produces="text/plain;charset=UTF-8", method = {RequestMethod.POST,RequestMethod.GET})
+	@ResponseBody
+	public ModelAndView selectBoard(@RequestParam Map<String,Object>param , @PathVariable(required = false) String word) throws Exception {
+		if(word != null) {
+			param.put("hashSerch", "true");
+			param.put("hashWord", word);		
+		}
 		ModelAndView mv = new ModelAndView("notice/noticeLs.tiles");
 		
 		if(param.get("MENU_CODE") == null) {
 			param.put("MENU_CODE", "B");
 		}
+		
+		mv.addObject("hash", hashtagService.selectHashTag(param));
 		mv.addObject("list", noticeService.selectBoard(param));	
 		
 		Map<String,Object>map = noticeService.selectCount(param);
@@ -55,19 +65,25 @@ public class NoticeController {
 	@RequestMapping(value="/notice/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectDetail(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
-		ModelAndView mv = new ModelAndView("notice/noticeVw.tiles");
+		ModelAndView mv = new ModelAndView("board/boardVw.tiles");
 	
-		param.put("IDX", idx);			
-		mv.addObject("param", param);
+		param.put("IDX", idx);		
 		mv.addObject("data", noticeService.selectDetail(param));
 		
-
+		//파일 obj
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		list = fileuploadService.selectAttachFileListByIDX(param);
 		if(!list.isEmpty() || list != null ) {
 			mv.addObject("files", list);
 		}
+		
+		//해시태그 obj
+		Map<String,Object> tag = hashtagService.selectOneHashTag(param);
+		String[] tagArray = ((String) tag.get("CONTENTS")).split(",");
+		mv.addObject("hash", tagArray);
+		
 		noticeService.updateCount(param);
+		mv.addObject("param", param);
 		return mv;		
 	}
 	
@@ -88,11 +104,20 @@ public class NoticeController {
 	@RequestMapping(value="/notice/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
-		noticeService.insertBoard(param);	
+		noticeService.insertBoard(param);
+		
+		
 		Map<String,Object> map =  noticeService.selectMaxIdx();
+		
+		param.put("IDX", map.get("IDX"));	
+		if(param.get("HASHTAG") != null) {
+			hashtagService.insertHashTag(param);
+		}
+		
 		param.put("BOARD_IDX", map.get("IDX"));
 		return "detail/"+ map.get("IDX");	
 	}
+
 
 	/*
 	 * modify form
@@ -115,7 +140,14 @@ public class NoticeController {
 				mv.addObject("files", files);
 			}
 		}
-	
+		
+		
+		//해시태그 obj
+		Map<String,Object> tag = hashtagService.selectOneHashTag(param);
+		String[] tagArray = ((String) tag.get("CONTENTS")).split(",");
+		mv.addObject("hash", tagArray);
+		mv.addObject("HASHTAG", (String)tag.get("CONTENTS"));
+		
 		mv.addObject("data", noticeService.selectDetail(param));
 		mv.addObject("mode", "modify");		
 		return mv;		
@@ -128,6 +160,7 @@ public class NoticeController {
 	@ResponseBody
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		noticeService.updateBoard(param);
+		hashtagService.updateHashTag(param);
 		String idx = (String) param.get("IDX");
 		return idx;
 	}

@@ -13,12 +13,26 @@
 	</sql>
 	<!-- 페이징 공통 -->
 	
+	
+	<sql id="COMMON__SERCH_HASHTAG">
+		SELECT board_idx 
+		FROM hashtag 
+		WHERE CONCAT(',',contents,',') LIKE CONCAT('%',',',#{hashWord},',','%')
+	</sql>
+	
+	
 	<!-- select list -->
 	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
 		<include refid="COMMON_PAGING_HEADER"/>	
 			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
 			FROM board
 			WHERE MENU_CODE=#{MENU_CODE}
+				<if test='hashSerch == "true"'>
+					<trim prefix="AND" prefixOverrides="AND|OR">
+						AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
+					</trim> 
+				</if>
+				
 				<if test='searchType != ""'>
 					<trim prefix="AND" prefixOverrides="AND|OR">
 						<if test="searchType == 'title' and keyword != null and keyword != '' ">
@@ -52,7 +66,12 @@
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
 		SELECT COUNT(IDX) AS TOTAL_COUNT 
 		FROM board
-		WHERE MENU_CODE='B'
+		WHERE MENU_CODE=#{MENU_CODE}
+		<if test='hashSerch == "true"'>
+			<trim prefix="AND" prefixOverrides="AND|OR">
+				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
+			</trim>
+		</if>
 		<if test='searchType != ""'>
 			<trim prefix="AND" prefixOverrides="AND|OR">
 				<if test="searchType == 'title' and keyword != null and keyword != '' ">
