@@ -7,20 +7,23 @@
 			SELECT IDX as idx
 				 , title
 			 	 , COLOR as color
-			 	 , date_format(START_DATE, '%Y-%m-%d-%T') as start_date
-				 , date_format(END_DATE, '%Y-%m-%d-%T') AS end_date
-				 , date_format(START_DATE, '%Y-%m-%d') AS start
-				 , date_format(END_DATE, '%Y-%m-%d') AS end
-				 , category
+			 	 , USERNAME
+                 , date_format(START_DATE, '%y/%m/%d %H:%i') as start_date
+                 , date_format(END_DATE, '%y/%m/%d %H:%i') as end_date
+                 , date_format(START_DATE, '%Y-%m-%dT%T') as start
+                 , date_format(END_DATE, '%Y-%m-%dT%T') as end
 				 , memo
 				 , done_flag
-			  FROM schedule 
+				 , all_day as allDay
+        FROM schedule
 			<where>
 				<if test='IDX != "" and IDX != null '>
 					AND IDX = #{IDX}  
 				</if>
-				<if test='username != "" and username != null'>
-                    AND USERNAME != #{username}
+				<if test='all == "false"'>
+                    <if test='username != "" and username != null'>
+                        AND USERNAME = #{username}
+                    </if>
                 </if>
 			</where>
 	</select>
@@ -29,10 +32,13 @@
 		<![CDATA[ 
 			SELECT title
 			 	 , COLOR as color			     
-				 , date_format(START_DATE, '%Y-%m-%d') AS start
-				 , date_format(END_DATE, '%Y-%m-%d') AS end
+				 , date_format(START_DATE, '%Y-%m-%d %h:%i') AS start
+				 , date_format(END_DATE, '%Y-%m-%d %h:%i') AS end
 			  FROM schedule 
-			 WHERE IDX = #{IDX}  
+			 WHERE IDX = #{IDX}
+			<if test='username != "" and username != null'>
+                AND USERNAME != #{username}
+            </if>
 		]]> 
 	</select>
 	
@@ -41,10 +47,10 @@
         	SELECT IFNULL(MAX(IDX),0)+1 FROM schedule
         </selectKey>
         INSERT INTO schedule
-             ( IDX, START_DATE, END_DATE, TITLE, CATEGORY, COLOR, MEMO, DONE_FLAG   
+             ( IDX, START_DATE, END_DATE, TITLE, COLOR, MEMO, DONE_FLAG, USERNAME
              )
         VALUES
-             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, 'G', #{COLOR}, #{MEMO}, 'N'
+             ( #{IDX}, #{START_DATE}, #{END_DATE}, #{TITLE}, #{COLOR}, #{MEMO}, 'N', #{username}
              ) 
     </insert>
     
@@ -52,37 +58,17 @@
         UPDATE schedule
            SET TITLE = #{TITLE}
              , MEMO = #{MEMO}
-             , CATEGORY = 'G'
              , START_DATE = #{START_DATE}
              , END_DATE = #{END_DATE}
              , COLOR = #{COLOR}
          WHERE IDX = #{IDX}
+           AND USERNAME = #{username}
     </update>    
     
     <delete id="deleteSchedule" parameterType="hashmap">
         DELETE FROM schedule
          WHERE IDX = #{IDX}
-    </delete>    
-    
-<!--     <update id="updateBoard" parameterType="hashmap">
-        UPDATE board
-           SET TITLE = #{TITLE}
-             , CONTENTS = #{CONTENTS}
-             , UPDATE_ID = 'testid2'
-             , UPDATE_DATETIME = SYSDATE()
-         WHERE IDX = #{IDX}
-    </update>
-    
-    <update id="updateBoardHit" parameterType="hashmap">
-        UPDATE board
-           SET HITCNT = IFNULL(HITCNT,0) + 1
-         WHERE IDX = #{IDX}
-    </update>    
-    
-    <delete id="deleteBoard" parameterType="hashmap">
-        DELETE FROM board
-         WHERE IDX = #{IDX}
-    </delete> -->
-
+           AND USERNAME = #{username}
+    </delete>
 
 </mapper>

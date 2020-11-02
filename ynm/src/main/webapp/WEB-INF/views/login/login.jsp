@@ -3,12 +3,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="">
-<meta name="author" content="">
-<title>Please login in</title>
-<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>Please login in</title>
+	<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
 </head>
 <body class="bg">
 	<section id="main">
@@ -29,8 +29,7 @@
 				<label for="password" class="sr-only">Password</label>
 				<input type="password" id="password" name="password" class="form-control" placeholder="Passworddddd" required="">
 			</p>
-			<p>remember-me? <input type="checkbox" id="remember-me" name="remember-me" class="form-control">
-			</p>
+			<p><a href="javascript:alert('api 로그인 추가하기!');"><h6 style="font-size: 10px;">간단하게 가입하실래요?</h6></a></p>
 			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
 		</form>
 	</section>

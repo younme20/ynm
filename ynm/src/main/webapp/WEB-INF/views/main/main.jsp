@@ -15,9 +15,7 @@
         <h1 style="
         font-family: 'Arial Black', sans-serif;
         font-size: 36px;
-        font-weight: bold;
-        color: #ffffff;
-        text-shadow: 2px 6px 2px gray;">Beam Us UP</h1>
+        font-weight: bold;">Beam Us UP</h1>
         <p>Project management</p>
     </header>
     <hr>
