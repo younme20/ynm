@@ -1,5 +1,6 @@
 package kr.ko.ym.config;
 
+import kr.ko.ym.common.security.CustomAccessDeniedHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -52,6 +53,5 @@ public class ServletConfig implements WebMvcConfigurer {
         resolver.setDefaultEncoding("utf-8");
         return resolver;
     }
-
 
 }

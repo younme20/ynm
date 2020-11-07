@@ -6,6 +6,23 @@
 <!-- 일정관리 모달 -->
 <body>
     <div class="container">
+        <details>
+            <summary>오늘의 할 일 보기</summary>
+            <br>
+            <div class="wrapper">
+                <div class="col-sm-12">
+                <div class="row">
+                    <c:forEach var="i" begin="0" end="2">
+                            <div id="selection_${i}" style="border: 0.05em solid #808080; margin-right: 25px; margin-bottom: 25px; width: 20em; height: 15em;">
+                                test
+                            </div>
+                    </c:forEach>
+                </div>
+                </div>
+            </div>
+        </details>
+    </div>
+    <div class="container">
         <div id="wrapper">
             <div id="loading"></div>
             <div id="calendar"></div>

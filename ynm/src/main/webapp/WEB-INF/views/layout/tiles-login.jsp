@@ -21,10 +21,10 @@
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
 
-	<script src="<c:url value='/resources/js/common/bootstrap-datepicker.min.js'/>"charset="utf-8"></script>
+	<script src="<c:url value='/resources/js/common/bootstrap-datepicker.min.js'/>" charset="utf-8"></script>
 
 	<!-- 공통js -->
-	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
+	<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 
 	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/ui.css'/>" />
 

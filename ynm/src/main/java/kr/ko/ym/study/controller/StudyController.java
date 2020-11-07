@@ -32,7 +32,7 @@ public class StudyController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value="/study", method= {RequestMethod.GET, RequestMethod.POST})
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	@PreAuthorize("hasRole('USER')")
 	public ModelAndView selectList(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/board/boardLs.tiles");
 		
