@@ -30,7 +30,7 @@ public class FileUploadServiceImpl implements FileUploadService{
 	@Override
 	public Map<String, Object> insertAttachFile(List<MultipartFile> fileList, Map<String, Object> param)
 			throws Exception {	
-		//占쎈씜嚥≪뮆諭� 占쎈솁占쎌뵬 域밸챶竊� 占쎄문占쎄쉐
+		
 		if("".equals(param.get("FILE_GROUP"))){
 			commonDao.insert("attach.insertAttachFileGroup",param);
 			@SuppressWarnings("unchecked")
@@ -40,14 +40,11 @@ public class FileUploadServiceImpl implements FileUploadService{
 		
 		
 		
-		FileUtils file = new FileUtils();
-		//占쎈솁占쎌뵬 占쎈씜嚥≪뮆諭�
+		//FileUtils file = new FileUtils();
 		FileUploadUtil file1 = new FileUploadUtil();
-		//�뙆�씪 �뾽濡쒕뱶
 		Map<String, Object> data = file1.uploadFile(fileList,param);
 		commonDao.insert("attach.insertAttachFile", data);
 		
-		//占쎈씜嚥≪뮆諭띰옙留� 占쎈솁占쎌뵬 筌뤴뫖以�
 		@SuppressWarnings("unchecked")
 		Map<String, Object> files = commonDao.selectOne("attach.selectAttachFileListByGroup");
 		return files;

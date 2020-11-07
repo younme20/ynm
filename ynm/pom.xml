@@ -312,6 +312,15 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.evernote/evernote-api -->
+		<dependency>
+		    <groupId>com.evernote</groupId>
+		    <artifactId>evernote-api</artifactId>
+		    <version>1.25.1</version>
+		</dependency>
+		
+		
 	</dependencies>
     <build>
     <!-- ROOT.war 가 생성된다. -->
