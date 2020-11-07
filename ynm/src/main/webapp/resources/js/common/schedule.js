@@ -1,42 +1,48 @@
 /**
  * 일정관리 공통
  */
+const all = false;
 
-$(document).ready(function(){ 	
-	selectSchedule();
-	
+$(document).ready(function(){
+	$("select[name='COLOR']").trigger("change");
+
+	selectSchedule(all);
+
 	//datetimepicker
-	$("#START_DATE").datetimepicker({
-	    format: 'YYYY-MM-DD'
+	$("#startDate").datetimepicker({
+		format:'YY/MM/DD hh:mm',
+		sideBySide: true,
 	});
 	
-	$("#END_DATE").datetimepicker({
-	    format: 'YYYY-MM-DD',
-	    useCurrent: false
+	$("#endDate").datetimepicker({
+		format:'YY/MM/DD hh:mm',
+		sideBySide: true,
+		useCurrent: false
 	});
-	
-    $("#START_DATE").on("dp.change", function (e) {
+
+    $("#startDate").on("dp.change", function (e) {
         $('#END_DATE').data("DateTimePicker").minDate(e.date);
     });
-    $("#END_DATE").on("dp.change", function (e) {
+    $("#endDate").on("dp.change", function (e) {
         $('#START_DATE').data("DateTimePicker").maxDate(e.date);
     });
-    
-	$("#START_DATE").focus(function(){
-		$(this).datetimepicker("show");		
+
+	$("#startDate").focus(function(){
+		$(this).datetimepicker("show");
 	});
-	
-	$("#START_DATE").blur(function(){
-		$(this).datetimepicker("hide");		
+
+	$("#startDate").blur(function(){
+		$(this).datetimepicker("hide");
 	});
-	
-	$("#END_DATE").focus(function(){
-		$(this).datetimepicker("show");		
+
+	$("#endDate").focus(function(){
+		$(this).datetimepicker("show");
 	});
-	
-	$("#END_DATE").blur(function(){
-		$(this).datetimepicker("hide");		
+
+	$("#endDate").blur(function(){
+		$(this).datetimepicker("hide");
 	});
+
 	
 	$("#btnModalConfirm").on("click", function(e){
 		saveSchedule();
@@ -44,11 +50,11 @@ $(document).ready(function(){
 	
 	$("#btnModalDelete").on("click", function(e){
 		deleteSchedule();
-	});	
+	});
 
 });
 
-function selectSchedule() {
+function selectSchedule(all) {
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 
@@ -56,7 +62,7 @@ function selectSchedule() {
 		type : "POST",                               
 		url : "/ynm/schedule/list",                   
 		json : true,
-		data : {},//JSON.stringify({"_csrf":token}),
+		data : {"all" : all},//JSON.stringify({"_csrf":token}),
 		beforeSend: function(xhr) {
 			//xhr.setRequestHeader(header,token);
 		},
@@ -78,9 +84,6 @@ function saveSchedule() {
 	}else{
 		url = "update";
 	}
-	
-	//구분 필드
-	schedule["category"] = $('input[name="category"]:checked').val();
 
 	$.ajax({
 		type : "POST",                               
@@ -88,8 +91,8 @@ function saveSchedule() {
 		json : true,                           
 		data : schedule,      
 		success : function(result, textStatus, jqXHR){
-			//alert('성공적으로 저장되었습니다.');
-			calendarEvent(result);	
+			alert('성공적으로 저장되었습니다.');
+			calendarEvent(result);
 		},
 		error   : function(result, textStatus, jqXHR){
 			console.log(result, textStatus, jqXHR);
@@ -105,7 +108,7 @@ function deleteSchedule() {
 		json : true,                           
 		data : schedule,      
 		success : function(result, textStatus, jqXHR){
-			//alert('성공적으로 저장되었습니다.');
+			alert('성공적으로 삭제되었습니다.');
 			calendarEvent(result);	
 		},
 		error   : function(result, textStatus, jqXHR){
@@ -124,26 +127,41 @@ function calendarEvent(eventData){
 	var y = date.getFullYear();	
 	
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      locale: 'ko', //한글
+    	themeSystem: 'bootstrap',
+		locale: 'ko', //한글
       timezone: "local",
       allDaySlot: true,
       timeFormat: 'HH:mm',
       minTime: '00:00',
       maxTime: '24:00',
       headerToolbar: {
-    	  start: 'prev,next',
+    	  start: 'allViewButton,prev,next',
     	  center: 'title',
-    	  end : 'dayGridMonth'
-      },
-      height: 1200,
-      //날짜 클릭 이벤트	
+		  end: 'dayGridMonth,timeGridWeek,timeGridDay'
+	  },
+		customButtons: {
+			allViewButton: {
+				text: '모두 보기',
+				click: function() {
+					selectSchedule(true);
+				}
+			}
+		},
+		buttonText: {
+    		prev : '이전',
+			next : '다음',
+			dayGridMonth : '월',
+			timeGridWeek: '주',
+			timeGridDay: '일'
+		},
+      //height: 1200,
+      //날짜 클릭 이벤트
       dateClick: function (info) {
     	  $("#scheduleForm")
 			  .find(':radio, :checkbox').removeAttr('checked').end()
 			  .find('textarea, :text, select').val('');
 
-		  $("#START_DATE").val(info.dateStr);
-
+		  $("#START_DATE").val(moment(info.date).format('YY/MM/DD hh:mm'));
 		  $("#planModal").modal('show');
       },
       eventClick: function(info) {
@@ -176,13 +194,6 @@ function calendarEvent(eventData){
     	  });
       },
       contentHeight: "auto",
-      bootstrapFontAwesome: {
-    	  close: 'fa-times',
-    	  prev: 'fa-chevron-left',
-    	  next: 'fa-chevron-right',
-    	  prevYear: 'fa-angle-double-left',
-    	  nextYear: 'fa-angle-double-right'
-      },
       initialView: 'dayGridMonth',
       schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source', //라이센스
 	  editable: true,
@@ -199,5 +210,3 @@ function calendarEvent(eventData){
     });
     calendar.render();	
 }
-
-

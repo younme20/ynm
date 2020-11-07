@@ -100,8 +100,11 @@ public class BoardController {
 	 * write form
 	 * */
 	@RequestMapping(value="/board/edit")
-	public ModelAndView  writeForm() throws Exception {
+	public ModelAndView  writeForm(Authentication authentication) throws Exception {
+		String username = authentication.getPrincipal().toString();
+		
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
+		mv.addObject("username", username);
 		mv.addObject("mode", "new");	
 		return mv;
 	}

@@ -32,7 +32,7 @@
                     </tr>
                 </c:otherwise>
             </c:choose>
-            <div id="paging" >
+         <%--    <div id="paging" >
 				<c:set var="listIndex" value="${totalCount / page.pageSize}" />
 				<c:set var="lastIndex" value="${(totalCount mod page.pageSize) == 0 ? listIndex : listIndex+1}" />
 				<c:set var="endIndex" value="${lastIndex-(lastIndex%1)}" />
@@ -54,7 +54,7 @@
 						<li><a href="javascript:;" onClick="pageMove(this);" pageidx="${page.pageIndex+1}">&gt;</a></li>
 					</c:if>
 				</ul>
-			</div>
+			</div> --%>
             <!-- TODO: lazy loading 적용 -->
         </div>
     </div>

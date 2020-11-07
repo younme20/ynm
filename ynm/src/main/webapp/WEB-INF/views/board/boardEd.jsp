@@ -5,8 +5,6 @@
 <head>
 <link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 </head>
 <body>
 	<div id="wrapper">
@@ -26,8 +24,8 @@
 				<div class="form-group">
 					<label class="control-label col-sm-2" for="email">작성자 :</label>
 					<div class="col-sm-10">
-						<input type="text" name="CREATE_ID" value="${data.CREATE_ID}"
-							class="form-control">
+						<input type="text" name="CREATE_ID" value="${username}" 
+							class="form-control" readonly="readonly">
 					</div>
 				</div>
 			
@@ -83,8 +81,6 @@
 			</form>
 	</div>
 </body>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-<script src="<c:url value='/resources/js/common/jquery.serializeObject.min.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>

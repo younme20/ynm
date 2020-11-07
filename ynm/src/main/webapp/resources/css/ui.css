@@ -20,6 +20,6 @@ a:link, a:visited {text-decoration: none; color: #656565;}
 
 .wdp_90 {width:90%; border-style: none;}
 .btn {border-radius:3px;padding:5px 11px;color:#fff !important; display:inline-block; background-color:#6b9ab8; border:1px solid #56819d;vertical-align:middle}
-.btn_left{position: absolute; top:3%; right: 3%; width: 70px; transform: translateY(-3%);}
 
+.btn_left{position: absolute; top:3%; right: 3%; width: 70px; transform: translateY(-3%);}
 .modal-body .row {margin-bottom:10px;text-align:left;color:#3b3a3a}

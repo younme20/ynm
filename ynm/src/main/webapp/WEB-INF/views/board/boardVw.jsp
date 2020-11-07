@@ -7,7 +7,9 @@
     <div class="col-sm-12" style="text-align: center;">
         <!-- 태그 -->
         <p style="margin-bottom: 5%">
-            <c:forEach items="${categories}" var="tag" varStatus="status">${tag.key} (${tag.value})		</c:forEach>
+            <c:forEach items="${categories}" var="tag" varStatus="status">
+            	${tag.key} (${tag.value})		
+            </c:forEach>
         </p>
         <h1 style="margin-bottom: 5%"><strong>${data.TITLE }</strong></h1>
 
@@ -45,5 +47,5 @@
 <link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
 <link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/board/boardVw.js'/>" charset="utf-8"></script>
 </html>

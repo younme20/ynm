@@ -29,7 +29,7 @@
 			WHERE 1=1
 				<if test='hashSerch == "true"'>
 					<trim prefix="AND" prefixOverrides="AND|OR">
-						AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)	
+						AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
 					</trim> 
 				</if>
 				
@@ -69,8 +69,8 @@
 		WHERE 1=1
 		<if test='hashSerch == "true"'>
 			<trim prefix="AND" prefixOverrides="AND|OR">
-				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)	
-			</trim> 
+				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
+			</trim>
 		</if>
 		<if test='searchType != ""'>
 			<trim prefix="AND" prefixOverrides="AND|OR">

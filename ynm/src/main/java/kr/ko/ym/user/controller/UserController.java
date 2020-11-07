@@ -38,7 +38,7 @@ public class UserController {
 			url = "/main/main.tiles";
 			mv.addObject("username", authentication.getPrincipal());
 		}else{
-			url = "/login/login.tiles";
+			url = "userlogin";
 		}
 
 		mv.setViewName(url);
@@ -47,10 +47,18 @@ public class UserController {
 		return mv;
 	}
 
+	@GetMapping(value = {"/register"})
+	public void registerNewMember(HttpServletRequest request,
+								  HttpServletResponse response) throws Exception {
+
+
+
+	}
+
 	//TODO: 서버측 로그아웃 처리하기
-	@RequestMapping(value = "/logout", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/logoutt", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mv = new ModelAndView("/");
+		ModelAndView mv = new ModelAndView("userlogin");
 
 		//클라이언트 측 쿠키 삭제
 		Cookie[] requestCookies = request.getCookies();
