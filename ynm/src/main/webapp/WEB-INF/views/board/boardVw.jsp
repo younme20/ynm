@@ -14,21 +14,36 @@
         <c:if test="${files[0].FILE_NO ne null}">
         <tr>
             <td colspan="2">
-                <c:forEach items="${files}" var="row" varStatus="status">
-                    <div class="download"  data="${row.FILE_NO}">
-                        <p><span class="glyphicon glyphicon-download"></span>${row.ORG_FILE_NAME}</p>
-                    </div>
-                </c:forEach>
+            	<div id="fileList">
+	                <c:forEach items="${files}" var="row" varStatus="status">
+	                    <div class="download"  data="${row.FILE_NO}">
+	                        <span class="glyphicon glyphicon-download">${row.ORG_FILE_NAME}</span>
+	                    </div>
+	                </c:forEach>
+                </div>
             </td>
         <tr>
         </c:if>
-        <tr>
+        <div>
             ${data.CONTENTS }
-        </tr>
-
+        </div>
+		<div id="tlist">
+			<ul>
+				<c:forEach var="item" items="${hash}" varStatus="idx">
+					<li class="titem"><p>${item}</p></li>
+				</c:forEach>
+			</ul>
+		</div>
+		<div class="form-group button">
+			<button type="button" id="modify" data="${data.IDX}" class="btn btn-warning">수정</button>
+			<button type="button" id="delete" data="${data.IDX}" class="btn btn-danger">삭제</button>
+			<button type="button" id="list" class="btn">목록</button>
+		</div>
 
 </div>
 </div></body>
+<link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
+<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/notice/noticeEd.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
 </html>

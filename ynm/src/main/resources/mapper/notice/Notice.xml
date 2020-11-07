@@ -26,7 +26,7 @@
 		<include refid="COMMON_PAGING_HEADER"/>	
 			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
 			FROM board
-			WHERE MENU_CODE=#{MENU_CODE}
+			WHERE 1=1
 				<if test='hashSerch == "true"'>
 					<trim prefix="AND" prefixOverrides="AND|OR">
 						AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)	
@@ -59,14 +59,14 @@
 	
 	<!-- select one -->
 	<select id="selectMaxIdx" parameterType="hashmap" resultType="hashmap">
-		SELECT MAX(IDX) AS IDX FROM board WHERE MENU_CODE='B'
+		SELECT MAX(IDX) AS IDX FROM board
 	</select>
 	
 	<!-- select TOTAL COUNT -->
 	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
 		SELECT COUNT(IDX) AS TOTAL_COUNT 
 		FROM board
-		WHERE MENU_CODE=#{MENU_CODE}
+		WHERE 1=1
 		<if test='hashSerch == "true"'>
 			<trim prefix="AND" prefixOverrides="AND|OR">
 				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)	

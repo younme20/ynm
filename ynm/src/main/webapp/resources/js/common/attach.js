@@ -44,7 +44,7 @@ function attach() {
 		
 	},
 	this.uploadFile = function(file){
-		var formData = new FormData($('#form')[0]);
+		var formData = new FormData($('#form1')[0]);
 		formData.append('uploadFile', file);
 	
 		$.ajax({
@@ -58,7 +58,7 @@ function attach() {
 			success : selectFileList,
 			error   : function(result, textStatus, jqXHR){
 				alert('업로드 실패!');
-				//console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
+				console.log("code:"+result.status+"\n"+"message:"+result.responseText+"\n"+"error:"+textStatus);
 	
 			}
 		});
@@ -109,7 +109,7 @@ function attach() {
 		var num = "";
 		$('#fileList div').remove();
 		$.each(data, function(i, item) {
-			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn' data="+item.FILE_NO+">삭제</button></div>");
+			$('#fileList').append("<div>"+ item.ORG_FILE_NAME + "<span>"+item.FILE_SIZE+" byte</span><button type='button' id='deleteFile' class='btn btn btn-warning' data="+item.FILE_NO+">삭제</button></div>");
 			num = item.FILE_GROUP;
 			
 		});
