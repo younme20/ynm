@@ -3,8 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html lang="en">
 <head>
-<link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
-<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 </head>
 <body>
 	<div id="wrapper">
@@ -82,6 +80,6 @@
 	</div>
 </body>
 <script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
 </html>

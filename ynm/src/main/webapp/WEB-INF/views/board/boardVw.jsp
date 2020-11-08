@@ -44,8 +44,6 @@
 
 </div>
 </div></body>
-<link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
-<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardVw.js'/>" charset="utf-8"></script>
 </html>

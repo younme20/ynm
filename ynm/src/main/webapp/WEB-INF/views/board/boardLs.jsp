@@ -32,30 +32,6 @@
                     </tr>
                 </c:otherwise>
             </c:choose>
-         <%--    <div id="paging" >
-				<c:set var="listIndex" value="${totalCount / page.pageSize}" />
-				<c:set var="lastIndex" value="${(totalCount mod page.pageSize) == 0 ? listIndex : listIndex+1}" />
-				<c:set var="endIndex" value="${lastIndex-(lastIndex%1)}" />
-				<ul  class="pagination">
-					<c:if test="${page.pageIndex > 1 }">
-						<li><a href="javascript:;" onClick="pageMove(this);"  pageidx="${page.pageIndex-1}">&lt;</a></li>
-					</c:if>
-					<c:forEach var="i" begin="1" end="${endIndex}">
-						<c:choose>
-							<c:when test="${i == page.pageIndex }">
-								<li class="active"><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></li>
-							</c:when>
-							<c:when test="${i != page.pageIndex }">
-								<li><a href="javascript:;" onClick="pageMove(this);" id="index_${i}" pageidx="${i}" name="index">${i}</a></li>
-							</c:when>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${page.pageIndex < endIndex}">
-						<li><a href="javascript:;" onClick="pageMove(this);" pageidx="${page.pageIndex+1}">&gt;</a></li>
-					</c:if>
-				</ul>
-			</div> --%>
-            <!-- TODO: lazy loading 적용 -->
         </div>
     </div>
 </body>
