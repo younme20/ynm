@@ -10,7 +10,9 @@
 	<!-- <link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@4.7.0/css/all.css' rel='stylesheet'/> -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-PMjWzHVtwxdq7m7GIxBot5vdxUY+5aKP9wpKtvnNBZrVv1srI8tU6xvFMzG8crLNcMj/8Xl/WWmo/oAP/40p1g==" crossorigin="anonymous" />
 	<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet"/>
-	
+	<link href="<c:url value='/resources/css/board.css'/>" rel="stylesheet">
+	<link href="<c:url value="/resources/css/hashtag.css" />" rel="stylesheet">
+
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
 	
 	
