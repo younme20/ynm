@@ -10,12 +10,12 @@ $(document).ready(function(){
 
 	//datetimepicker
 	$("#startDate").datetimepicker({
-		format:'YY/MM/DD hh:mm',
+		format:'YY/MM/DD HH:mm',
 		sideBySide: true,
 	});
 	
 	$("#endDate").datetimepicker({
-		format:'YY/MM/DD hh:mm',
+		format:'YY/MM/DD HH:mm',
 		sideBySide: true,
 		useCurrent: false
 	});
@@ -85,6 +85,8 @@ function saveSchedule() {
 		url = "update";
 	}
 
+	schedule['all'] = all;
+
 	$.ajax({
 		type : "POST",                               
 		url : "/ynm/schedule/"+url,                   
@@ -129,8 +131,9 @@ function calendarEvent(eventData){
     var calendar = new FullCalendar.Calendar(calendarEl, {
     	themeSystem: 'bootstrap',
 		locale: 'ko', //한글
-      timezone: "local",
-      allDaySlot: true,
+      	timezone: "local",
+		nextDayThreshold: "09:00",
+		allDaySlot: true,
       timeFormat: 'HH:mm',
       minTime: '00:00',
       maxTime: '24:00',
