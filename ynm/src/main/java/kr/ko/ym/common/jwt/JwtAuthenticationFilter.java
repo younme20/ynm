@@ -5,6 +5,7 @@ import com.google.common.net.HttpHeaders;
 import com.mysql.cj.util.StringUtils;
 import io.jsonwebtoken.Jwts;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter  {
 
@@ -86,7 +89,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new java.util.Date())
-                .setExpiration(Date.valueOf(LocalDate.now().plusDays(1)))
+                .setExpiration(Date.valueOf(LocalDate.now().plusDays(14)))
+                // .setExpiration(new Date(System.currentTimeMillis() + 60000))
                 .signWith(secretKey)
                 .compact();
 

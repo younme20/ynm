@@ -42,11 +42,11 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable()
-                .sessionManagement()
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                //.sessionManagement()
+                //    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 //.csrf()
                 //    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .and()
+                //    .and()
                 .exceptionHandling()
                 .accessDeniedHandler(customAccessDeniedHandler())
                 .and()

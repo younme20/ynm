@@ -159,7 +159,7 @@ function calendarEvent(eventData){
       dateClick: function (info) {
     	  $("#scheduleForm")
 			  .find(':radio, :checkbox').removeAttr('checked').end()
-			  .find('textarea, :text, select').val('');
+			  .find('textarea,:hidden,:text, select').val('');
 
 		  $("#START_DATE").val(moment(info.date).format('YY/MM/DD hh:mm'));
 		  $("#planModal").modal('show');
