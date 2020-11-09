@@ -31,6 +31,10 @@
 			</p>
 			<p><a href="javascript:alert('api 로그인 추가하기!');"><h6 style="font-size: 10px;">간단하게 가입하실래요?</h6></a></p>
 			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
+			<div id="loginGrp">
+				<img src="<c:url value='/resources/images/icon_Green.PNG'/>"/>
+			</div>
+			
 		</form>
 	</section>
 </body>
