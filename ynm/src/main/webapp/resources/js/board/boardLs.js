@@ -2,8 +2,12 @@
  *
  */
 $(document).ready(function(){
-
-    $("a[name='index']").each(function(){
+	
+	$("#writeFrom").on("click", function(e){ 
+		movePage("/ynm/board/edit");
+	});
+    
+	$("a[name='index']").each(function(){
         var idx = $(this);
 
         if(idx.attr("pageidx") === idx.text()) {
@@ -17,7 +21,7 @@ $(document).ready(function(){
     });
 
     $("a[name='index']").on("click", function(e){
-        study.searchBoard($(this).text());
+    	board.searchBoard($(this).text());
     });
 
     $("#btnWrite").on("click", function(e){
@@ -32,5 +36,15 @@ function boardList() {
     this.init = function(){
 
 
-    }
+    },
+	this.searchBoard = function(index){ 
+
+    	
+		var data = {
+				"searchText" : $("#searchText").val(),
+				"searchCondition" : $("#searchCondition option:selected").val(),
+				"index" : index
+		};
+		movePage("/ynm/board?pageIndex="+data.index+"&searchCondition="+data.searchCondition+"&searchText="+data.searchText);	
+	}
 }

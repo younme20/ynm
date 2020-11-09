@@ -6,11 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 @Configuration
-@ComponentScan(basePackages="kr.ko.ym.**")
 public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{ RootConfig.class, AppSecurityConfig.class };
+        return new Class[]{ RootConfig.class, AppSecurityConfig.class, DatabaseConfig.class };
     }
 
     @Override
