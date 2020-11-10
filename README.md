@@ -9,15 +9,16 @@
     * 기본 CRUD 구현 (summer note 에디터 적용)
     * 첨부 파일 구현
     * hash tag 기능 구현
-    * spring security 활용한 로그인/권한
+    * spring security 활용한 로그인/권한 관리(jwt token 이용)
     * full calandar을 활용한 스케쥴 관리
     
     
 ## TODO List
     * git연동/공유 가능한 에디터로 변경
     * React.js 적용한 검색 기능 구현
-    * api 로그인 구현
-    ...
+    * api 회원가입 구현
+    * 게스트 로그인/권한 구현
+    * 서버 WAS 8.5로 업그레이드
 
     
         
