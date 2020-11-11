@@ -55,8 +55,8 @@ public class UserController {
 
 	}
 
-	//TODO: 서버측 로그아웃 처리하기
-	@RequestMapping(value = "/logoutt", method = {RequestMethod.GET,RequestMethod.POST})
+	//TODO: 서버측 로그아웃 처리하기, refresh토큰 추가
+	@RequestMapping(value = "/out", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("userlogin");
 

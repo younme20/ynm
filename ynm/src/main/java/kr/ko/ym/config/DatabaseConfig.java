@@ -22,7 +22,7 @@ public class DatabaseConfig {
         // 자바 설정으로 쓸 때에는 url에 &을 &amp; 로 치환하면 에러남
         source.setUrl("jdbc:log4jdbc:mysql://3.20.212.220/ynm?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC");
         source.setUsername("ynm");
-        source.setPassword("Lca5534@!");
+        source.setPassword("Test1234@");
 
         return source;
     }

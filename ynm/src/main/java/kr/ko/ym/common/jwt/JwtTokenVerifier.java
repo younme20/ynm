@@ -2,10 +2,7 @@ package kr.ko.ym.common.jwt;
 
 import com.google.common.base.Strings;
 import com.google.common.net.HttpHeaders;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -86,14 +83,17 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        } catch(JwtException e) {
+        }catch(ExpiredJwtException expiredJwtException){
+            //토큰 만료되었을 시
+
+
+
+        }catch(JwtException e) {
             throw new IllegalStateException(String.format("Token %s cannot be trust", token));
         }
 
 
         //filter1에서 filter2로 넘겨줘야함
         filterChain.doFilter(request, response);
-
-
     }
 }

@@ -34,7 +34,7 @@
 	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<div style="margin-left: 95%;"><a href="/ynm/logoutt">로그아웃</a></div>
+	<div style="margin-left: 95%;"><a href="/ynm/out">로그아웃</a></div>
 	<section id="main">
 		<header>
 			<span class="avatar"><img src="<c:url value='/resources/images/avatar.jpg' />" alt=""></span>

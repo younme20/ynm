@@ -1,24 +1,27 @@
 package kr.ko.ym.common.security;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class AccessDeniedHandler implements org.springframework.security.web.access.AccessDeniedHandler {
+@Configuration
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest httpServletRequest,
-                       HttpServletResponse httpServletResponse,
+    public void handle(HttpServletRequest request,
+                       HttpServletResponse response,
                        AccessDeniedException e) throws IOException, ServletException {
 
-        httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());
+        response.setStatus(HttpStatus.FORBIDDEN.value());
 
         if(e instanceof AccessDeniedException){
             ;
@@ -26,13 +29,10 @@ public class AccessDeniedHandler implements org.springframework.security.web.acc
 
             if(authentication != null){
 
-                //TODO: alert 창 뜨게 하기
-                if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_MANAGER"))){
-                    httpServletRequest.setAttribute("msg", "접근 권한 없는 사용자 입니다.");
-                    httpServletRequest.setAttribute("nextPage", "/");
-                }
+                int error = HttpStatus.FORBIDDEN.value();
 
-                httpServletRequest.getRequestDispatcher("/").forward(httpServletRequest, httpServletResponse);
+                response.sendRedirect(request.getContextPath() + "/error"+error);
+
             }
         }
     }

@@ -38,5 +38,9 @@
         <put-attribute name="content" value="/WEB-INF/views/login/login.jsp" />
     </definition>
 
+    <definition name="userError" extends="login">
+        <put-attribute name="content" value="/WEB-INF/views/error/403.jsp" />
+    </definition>
+
 
 </tiles-definitions>

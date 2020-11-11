@@ -41,6 +41,7 @@
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.9.5" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.5" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjtools:1.9.5" level="project" />
+    <orderEntry type="library" name="Maven: com.evernote:evernote-api:1.25.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.2.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.2.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.2.7.RELEASE" level="project" />
