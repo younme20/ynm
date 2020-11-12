@@ -2,10 +2,12 @@ package kr.ko.ym.user.controller;
 
 import com.google.common.base.Strings;
 import com.google.common.net.HttpHeaders;
+import io.jsonwebtoken.Jwts;
 import kr.ko.ym.common.auth.AppUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 @Controller
@@ -57,7 +61,8 @@ public class UserController {
 
 	//TODO: 서버측 로그아웃 처리하기, refresh토큰 추가
 	@RequestMapping(value = "/out", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView loginOutPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView loginOutPage(HttpServletRequest request,
+									 HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("userlogin");
 
 		//클라이언트 측 쿠키 삭제
@@ -70,6 +75,10 @@ public class UserController {
 				break;
 			}
 		}
+
+		//서버 측 jwt token 기한 만료시키기
+
+
 
 		return mv;
 	}
@@ -87,6 +96,8 @@ public class UserController {
 				}
 			}
 		}
+
+
 		return isAuth;
 	}
 
