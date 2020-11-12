@@ -24,7 +24,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpStatus.FORBIDDEN.value());
 
         if(e instanceof AccessDeniedException){
-            ;
+
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
             if(authentication != null){

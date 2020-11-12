@@ -15,6 +15,13 @@
 		<!-- tiles관련 추가 --> 
 		<org.apache.tiles-version>3.0.7</org.apache.tiles-version>
 	</properties>
+	<repositories>
+		<repository>
+			<id>spring-milestone</id>
+			<name>Spring Maven MILESTONE Repository</name>
+			<url>https://repo.spring.io/libs-milestone</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -61,11 +68,13 @@
 			<version>${org.aspectj-version}</version> 
 		</dependency>
 
-		<dependency>
+<!--		<dependency>
 			<groupId>com.evernote</groupId>
 			<artifactId>evernote-api</artifactId>
 			<version>1.25.1</version>
-		</dependency>
+		</dependency>-->
+
+
 
 		
 		<!-- Logging
@@ -166,6 +175,23 @@
             <scope>runtime</scope>
         </dependency>
         -->
+
+		<!--redis-->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.lettuce</groupId>
+			<artifactId>lettuce-core</artifactId>
+			<version>6.0.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.3.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
