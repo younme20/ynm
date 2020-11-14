@@ -28,7 +28,7 @@ public class ScheduleController {
 
 	@RequestMapping(value="/schedule", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("isAuthenticated() and hasAuthority('user:read')")
+	@PreAuthorize("hasRole('MANAGER')")
 	public ModelAndView getScheduleView(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleLs.tiles");
 		mv.addObject("username", authentication.getPrincipal());
@@ -38,7 +38,7 @@ public class ScheduleController {
 	//TODO: preauthorize에 대해 자세히 알아보기!!!
 	@RequestMapping(value="/schedule/list", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("isAuthenticated() and hasAnyAuthority('user:read')")
+	@PreAuthorize("isAuthenticated() and hasRole('USER')")
 	public List<Map<String,Object>> selectSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		List<Map<String,Object>>list = scheduleService.selectSchedule(param);
@@ -47,7 +47,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/select", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String,Object>> selectScheduleOne(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		List<Map<String,Object>>list = scheduleService.selectSchedule(param);

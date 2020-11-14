@@ -5,7 +5,8 @@ import com.google.common.net.HttpHeaders;
 import com.mysql.cj.util.StringUtils;
 import io.jsonwebtoken.Jwts;
 
-import org.springframework.cglib.core.Local;
+import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,19 +25,20 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter  {
 
     private final AuthenticationManager authenticationManager;
     private final SecretKey secretKey;
+    private final StringRedisTemplate stringRedisTemplate;
 
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   SecretKey secretKey) {
+                                   SecretKey secretKey,
+                                   StringRedisTemplate stringRedisTemplate) {
         this.authenticationManager = authenticationManager;
         this.secretKey = secretKey;
+        this.stringRedisTemplate = stringRedisTemplate;
     }
 
     @Override
@@ -81,7 +83,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new java.util.Date())
-                .setExpiration(Date.valueOf(LocalDate.now().plusDays(14)))
+                .setExpiration(Date.valueOf(LocalDate.now().plusDays(7)))
+                //.setExpiration(new Date(System.currentTimeMillis() + 60000))
                 .signWith(secretKey)
                 .compact();
 
@@ -89,15 +92,20 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(new java.util.Date())
-                .setExpiration(Date.valueOf(LocalDate.now().plusDays(14)))
-                // .setExpiration(new Date(System.currentTimeMillis() + 60000))
+                .setExpiration(new Date(System.currentTimeMillis() + 600000))
                 .signWith(secretKey)
                 .compact();
 
         Cookie cookie = new Cookie(HttpHeaders.AUTHORIZATION,
                 URLEncoder.encode("Bearer ", "UTF-8")+accessToken);
 
+        //쿠키에 액세스토큰 저장
         response.addCookie(cookie);
+        //redis에 리프레시 토큰 저장
+        HashOperations<String, Object, Object> hash = stringRedisTemplate.opsForHash();
+        hash.put("token", accessToken, refreshToken);
+        //stringRedisTemplate
+        //        .opsForValue().set(accessToken, refreshToken);
 
     }
 

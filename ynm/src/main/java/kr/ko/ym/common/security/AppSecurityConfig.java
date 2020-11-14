@@ -7,12 +7,14 @@ import kr.ko.ym.common.jwt.JwtTokenVerifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -23,14 +25,17 @@ import javax.crypto.SecretKey;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final StringRedisTemplate stringRedisTemplate;
     private final PasswordEncoder passwordEncoder;
     private final AppUserService appUserService;
     private final SecretKey secretKey;
 
     @Autowired
-    public AppSecurityConfig(PasswordEncoder passwordEncoder,
+    public AppSecurityConfig(StringRedisTemplate stringRedisTemplate,
+                             PasswordEncoder passwordEncoder,
                              AppUserService appUserService,
                              SecretKey secretKey) {
+        this.stringRedisTemplate = stringRedisTemplate;
         this.passwordEncoder = passwordEncoder;
         this.appUserService = appUserService;
         this.secretKey = secretKey;
@@ -41,21 +46,19 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .csrf().disable()
-                //.sessionManagement()
-                //    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 //.csrf()
                 //    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 //    .and()
+                //.httpBasic().disable()
+                //.formLogin().disable()
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey, stringRedisTemplate))
+                .addFilterAfter(new JwtTokenVerifier(secretKey, stringRedisTemplate), JwtAuthenticationFilter.class)
                 .exceptionHandling()
                 .accessDeniedHandler(customAccessDeniedHandler())
                 .and()
-                //.httpBasic().disable()
-                //.formLogin().disable()
-                //.sessionManagement()
-                //    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                //.and()
-                .addFilterBefore(new JwtAuthenticationFilter(authenticationManager(), secretKey), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new JwtTokenVerifier(secretKey), JwtAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/resources/**/**").permitAll()
                 .anyRequest()
