@@ -953,3 +953,15 @@
 		body.is-ie #form {
 			height: 100%;
 		}
+		
+		
+		#loginGrp{
+			position: relative;
+    		width: 100%;
+		}
+		
+		#loginGrp img{
+			width: 45px;
+			display: block;
+			margin-top: 5px;
+		}
