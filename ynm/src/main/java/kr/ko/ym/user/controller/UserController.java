@@ -62,6 +62,7 @@ public class UserController {
 	public ModelAndView loginOutPage(Authentication authentication,
 			 						 HttpServletRequest request,
 									 HttpServletResponse response) throws Exception {
+
 		ModelAndView mv = new ModelAndView("userlogin");
 
 		//redis에 access cookie를 blacklist 저장
@@ -70,6 +71,7 @@ public class UserController {
 		for(Cookie requestCookie : requestCookies){
 			if(HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())){
 				requestCookie.setMaxAge(0);
+				requestCookie.setHttpOnly(true);
 				response.addCookie(requestCookie);
 
 				//redis에 blacklist 저장(access token)

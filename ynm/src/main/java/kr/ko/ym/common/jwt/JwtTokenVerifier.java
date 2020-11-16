@@ -146,8 +146,11 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
     public void deleteAllToken(HttpServletRequest request, HttpServletResponse response, String accessToken) throws IOException {
         //리프레시토큰, 액세스토큰, 쿠키 토큰 전부 삭제
-        stringRedisTemplate.opsForHash().delete("token", accessToken);
-        stringRedisTemplate.delete(accessToken.trim());
+        if(accessToken != null){
+            stringRedisTemplate.opsForHash().delete("token", accessToken);
+            stringRedisTemplate.delete(accessToken.trim());
+        }
+
         for (Cookie requestCookie : request.getCookies()) {
             if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
                 requestCookie.setMaxAge(0);
