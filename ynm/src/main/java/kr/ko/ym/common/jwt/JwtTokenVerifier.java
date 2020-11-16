@@ -30,7 +30,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
     private final SecretKey secretKey;
     private final StringRedisTemplate stringRedisTemplate;
 
-
     public JwtTokenVerifier(SecretKey secretKey,
                             StringRedisTemplate stringRedisTemplate) {
         this.secretKey = secretKey;
@@ -49,6 +48,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
         if (requestCookies != null) {
 
+            //쿠키에서 암호화된 헤더를 찾음
             for (Cookie requestCookie : requestCookies) {
                 if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
                     requestHeader = requestCookie.getValue();
@@ -61,32 +61,27 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 return;
             }
 
-            String token = requestHeader.replace(URLEncoder.encode("Bearer ", "UTF-8"), " ");
+            //액세스토큰
+            String accessToken = requestHeader.replace(URLEncoder.encode("Bearer ", "UTF-8"), " ");
 
             //블랙리스트에 엑세스 토큰이 이미 있을 시(로그아웃한 유저)
-            if (stringRedisTemplate.opsForValue().get(token.trim()) != null) {
-                logger.warn(String.format("this token %s are already logout", token));
-                //리프레시토큰, 액세스토큰, 쿠키 토큰 전부 삭제
-                stringRedisTemplate.opsForHash().delete("token", token);
-                stringRedisTemplate.delete(token.trim());
-                deleteTokenInCookie(request, response);
-                response.sendRedirect(request.getContextPath() + "/");
+            if (stringRedisTemplate.opsForValue().get(accessToken.trim()) != null) {
+                deleteAllToken(request, response, accessToken);
                 return;
 
             }else{
 
                 try {
-                    setAuthentication(token);
+                    makeAuthentication(accessToken);
 
                 }catch(ExpiredJwtException expiredJwtException){
                     //토큰 만료되었을 시 리프레시 토큰 확인
                     String refreshToken = (String)stringRedisTemplate
-                            .opsForHash().get("token", token.trim());
+                            .opsForHash().get("token", accessToken.trim());
 
                     if(refreshToken != null){
 
                         try{
-
                             Jws<Claims>refreshJws = Jwts.parser()
                                     .setSigningKey(secretKey)
                                     .parseClaimsJws(refreshToken);
@@ -100,18 +95,11 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     .signWith(secretKey)
                                     .compact();
 
-                            setAuthentication(newToken);
+                            makeAuthentication(newToken);
 
                         //리프레시 토큰이 만료되었을 경우
                         }catch(ExpiredJwtException expiredRefreshJwtException){
-                            //리프레시토큰, 액세스토큰, 쿠키 토큰 전부 삭제
-                            stringRedisTemplate.opsForHash().delete("token", token);
-                            stringRedisTemplate.delete(token.trim());
-                            deleteTokenInCookie(request, response);
-
-                            //새로 로그인 하기
-                            logger.warn("you have to login again..!!!");
-                            response.sendRedirect(request.getContextPath() + "/");
+                            deleteAllToken(request, response, accessToken);
                             return;
 
                         }
@@ -120,7 +108,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
 
                 }catch(JwtException e) {
-                    throw new IllegalStateException(String.format("Token %s cannot be trust", token));
+                    throw new IllegalStateException(String.format("Token %s cannot be trust", accessToken));
                 }
             }
 
@@ -130,7 +118,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
     }
 
-    public void setAuthentication(String token){
+    public void makeAuthentication(String token){
 
         Jws<Claims> claimsJws = Jwts.parser()
                 .setSigningKey(secretKey)
@@ -156,7 +144,10 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
     }
 
-    public void deleteTokenInCookie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void deleteAllToken(HttpServletRequest request, HttpServletResponse response, String accessToken) throws IOException {
+        //리프레시토큰, 액세스토큰, 쿠키 토큰 전부 삭제
+        stringRedisTemplate.opsForHash().delete("token", accessToken);
+        stringRedisTemplate.delete(accessToken.trim());
         for (Cookie requestCookie : request.getCookies()) {
             if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
                 requestCookie.setMaxAge(0);
@@ -164,6 +155,8 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 break;
             }
         }
+        response.sendRedirect(request.getContextPath() + "/");
+
     }
 
 }

@@ -5,7 +5,6 @@ import com.google.common.net.HttpHeaders;
 import com.mysql.cj.util.StringUtils;
 import io.jsonwebtoken.Jwts;
 
-import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -96,17 +95,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .signWith(secretKey)
                 .compact();
 
-        Cookie cookie = new Cookie(HttpHeaders.AUTHORIZATION,
+        Cookie cookie = new Cookie(
+                HttpHeaders.AUTHORIZATION,
                 URLEncoder.encode("Bearer ", "UTF-8")+accessToken);
 
         //쿠키에 액세스토큰 저장
         response.addCookie(cookie);
         //redis에 리프레시 토큰 저장
-        HashOperations<String, Object, Object> hash = stringRedisTemplate.opsForHash();
-        hash.put("token", accessToken, refreshToken);
-        //stringRedisTemplate
-        //        .opsForValue().set(accessToken, refreshToken);
-
+        stringRedisTemplate.opsForHash().put("token", accessToken, refreshToken);
     }
 
 
