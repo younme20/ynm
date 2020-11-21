@@ -18,7 +18,11 @@
     * React.js 적용한 검색 기능 구현
     * api 회원가입 구현
     * 게스트 로그인/권한 구현
-    * 서버 WAS 8.5로 업그레이드
+    * hash tag -> memory database로 구현하기
+    
+## 완료
+    * WAS 8.5로 업그레이드
+
 
     
         
