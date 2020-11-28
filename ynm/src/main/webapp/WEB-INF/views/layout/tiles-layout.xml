@@ -26,6 +26,8 @@
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>
 
+
+    
     <!-- default layout-->
     <definition name="login" template="/WEB-INF/views/layout/tiles-login.jsp">
         <put-attribute name="nav"   value="/WEB-INF/views/layout/tiles-nav.jsp" />
@@ -37,10 +39,14 @@
     <definition name="userlogin" extends="login">
         <put-attribute name="content" value="/WEB-INF/views/login/login.jsp" />
     </definition>
-
+	
     <definition name="userError" extends="login">
         <put-attribute name="content" value="/WEB-INF/views/error/403.jsp" />
     </definition>
-
+    
+    <definition name="userjoin" extends="login">
+        <put-attribute name="content" value="/WEB-INF/views/login/join.jsp" />
+    </definition>
+ 	
 
 </tiles-definitions>
