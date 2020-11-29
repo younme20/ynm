@@ -3,25 +3,42 @@
  */
 $(document).ready(function(){
 	$("#btnJoin").on("click", function(e){
-		join.insertUser(e);
+		if(joinCheck() == true)join.insertUser();
 	});
 	
 	join = new userFunction();
 });
+function joinCheck(){
+	var isRight = true;
+	
+	var username = $("#username");
+	var password = $("#password");
+	
+	if(username.val().trim() == ""){
+		 alert(username.attr("data-name")+" 입력하세요.");
+		 isRight = false;
+		 username.focus();
+	}else if(password.val().trim() == ""){
+		 alert(password.attr("data-name")+" 입력하세요.");
+		 isRight = false;
+		 password.focus();
+	}
+	 return isRight
+}
 
 function userFunction() {
 	this.init = function(){
 
 		
 	},
-	this.insertUser = function(e){
+	this.insertUser = function(){
 		var data = $("#myForm").serializeObject();
-		alert(data);
+		alert( JSON.stringify(data));
 		$.ajax({
 			type : "POST",
 			url : "/ynm/join",
 			contentType : "application/json",
-			data : data,
+			data : JSON.stringify(data),
 			async: true,
 			cache :false, // 캐시 여부
 			success : function(result, response){
@@ -29,7 +46,7 @@ function userFunction() {
 				movePage("/ynm/login");
 			},
 			error   : function(result, textStatus, jqXHR){
-				alert("error"+textStatus);
+				alert("error"+jqXHR);
 			}
 		});
 	}
