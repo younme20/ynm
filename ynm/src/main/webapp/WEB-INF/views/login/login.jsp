@@ -39,11 +39,8 @@
 			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
 		</form>
 		        
-	       <a id="custom-login-btn" href="javascript:loginWithKakao()">
-			  <img
-			    src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg"
-			    width="222"
-			  />
+	       <a id="kakaoLogin" href="#">
+			  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/>
 			</a>
 	</section>
 </body>

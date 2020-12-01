@@ -326,7 +326,20 @@
 		    <version>1.25.1</version>
 		</dependency>
 		
-		
+		<!-- kakao login  -->
+		 <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.6</version>
+        </dependency>
+ 
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
 	</dependencies>
     <build>
     <!-- ROOT.war 가 생성된다. -->
