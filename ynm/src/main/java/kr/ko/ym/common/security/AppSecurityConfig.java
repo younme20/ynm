@@ -60,7 +60,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(customAccessDeniedHandler())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/login", "/resources/**/**").permitAll()
+                .antMatchers("/", "/login", "/userjoin","/join", "/kakaologin", "/resources/**/**").permitAll()
                 .anyRequest()
                 .authenticated();
                 //.permitAll();
