@@ -7,6 +7,7 @@ import kr.ko.ym.kakao.service.KakaoAccessToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ public class UserController {
 	StringRedisTemplate stringRedisTemplate;
 	@Autowired
 	private KakaoAccessToken kakao;
-	 
+
 	@GetMapping(value = {"/", "/login"})
 	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -49,7 +50,6 @@ public class UserController {
 		return mv;
 	}
 
-	//TODO: 서버측 로그아웃 처리하기, refresh토큰 추가
 	@RequestMapping(value = "/out", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView loginOutPage(Authentication authentication,
 			 						 HttpServletRequest request,

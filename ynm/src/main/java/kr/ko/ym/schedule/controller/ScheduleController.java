@@ -26,7 +26,7 @@ public class ScheduleController {
 	
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
-	@RequestMapping(value="/schedule", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/schedule", method=RequestMethod.GET)
 	@ResponseBody
 	@PreAuthorize("hasRole('MANAGER')")
 	public ModelAndView getScheduleView(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
@@ -35,17 +35,16 @@ public class ScheduleController {
 		return mv;
 	}
 
-	//TODO: preauthorize에 대해 자세히 알아보기!!!
-	@RequestMapping(value="/schedule/list", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/schedule/list", method=RequestMethod.GET)
 	@ResponseBody
-	@PreAuthorize("isAuthenticated() and hasRole('USER')")
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String,Object>> selectSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		List<Map<String,Object>>list = scheduleService.selectSchedule(param);
 		return list;	
 	}
 	
-	@RequestMapping(value="/schedule/select", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/schedule/select", method=RequestMethod.GET)
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
 	public List<Map<String,Object>> selectScheduleOne(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {

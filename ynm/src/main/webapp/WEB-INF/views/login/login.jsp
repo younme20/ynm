@@ -32,9 +32,9 @@
 				<input type="password" id="password" name="password" class="form-control" placeholder="Passworddddd" required="">
 			</p>
 			<p>
-			<div id="join">
-				<h6>간단하게 가입하실래요?</h6>
-			</div>
+                <div id="join">
+                    <h6>간단하게 가입하실래요?</h6>
+                </div>
 			</p>
 			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
 		</form>

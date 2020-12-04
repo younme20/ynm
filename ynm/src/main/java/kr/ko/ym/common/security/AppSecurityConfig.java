@@ -3,6 +3,7 @@ package kr.ko.ym.common.security;
 
 import kr.ko.ym.common.auth.AppUserService;
 import kr.ko.ym.common.jwt.JwtAuthenticationFilter;
+import kr.ko.ym.common.jwt.JwtConfig;
 import kr.ko.ym.common.jwt.JwtTokenVerifier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.crypto.SecretKey;
 
@@ -29,16 +29,19 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
     private final AppUserService appUserService;
     private final SecretKey secretKey;
+    private final JwtConfig jwtConfig;
 
     @Autowired
     public AppSecurityConfig(StringRedisTemplate stringRedisTemplate,
                              PasswordEncoder passwordEncoder,
                              AppUserService appUserService,
-                             SecretKey secretKey) {
+                             SecretKey secretKey,
+                             JwtConfig jwtConfig) {
         this.stringRedisTemplate = stringRedisTemplate;
         this.passwordEncoder = passwordEncoder;
         this.appUserService = appUserService;
         this.secretKey = secretKey;
+        this.jwtConfig = jwtConfig;
     }
 
     @Override
@@ -54,8 +57,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey, stringRedisTemplate))
-                .addFilterAfter(new JwtTokenVerifier(secretKey, stringRedisTemplate), JwtAuthenticationFilter.class)
+                .addFilter(new JwtAuthenticationFilter(authenticationManager(), secretKey, stringRedisTemplate, jwtConfig))
+                .addFilterAfter(new JwtTokenVerifier(jwtConfig, secretKey, stringRedisTemplate), JwtAuthenticationFilter.class)
                 .exceptionHandling()
                 .accessDeniedHandler(customAccessDeniedHandler())
                 .and()
