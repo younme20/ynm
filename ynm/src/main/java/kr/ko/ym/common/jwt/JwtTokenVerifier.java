@@ -4,14 +4,10 @@ import com.google.common.base.Strings;
 import com.google.common.net.HttpHeaders;
 import io.jsonwebtoken.*;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
-import org.springframework.security.web.server.authentication.logout.LogoutWebFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
@@ -27,11 +23,13 @@ import java.util.stream.Collectors;
 
 public class JwtTokenVerifier extends OncePerRequestFilter {
 
+    private final JwtConfig jwtConfig;
     private final SecretKey secretKey;
     private final StringRedisTemplate stringRedisTemplate;
 
-    public JwtTokenVerifier(SecretKey secretKey,
+    public JwtTokenVerifier(JwtConfig jwtConfig, SecretKey secretKey,
                             StringRedisTemplate stringRedisTemplate) {
+        this.jwtConfig = jwtConfig;
         this.secretKey = secretKey;
         this.stringRedisTemplate = stringRedisTemplate;
     }
@@ -50,19 +48,19 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
 
             //쿠키에서 암호화된 헤더를 찾음
             for (Cookie requestCookie : requestCookies) {
-                if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
+                if (jwtConfig.getAuthorizaionHeader().equals(requestCookie.getName())) {
                     requestHeader = requestCookie.getValue();
                     break;
                 }
             }
 
-            if (Strings.isNullOrEmpty(requestHeader) || !requestHeader.startsWith(URLEncoder.encode("Bearer ", "UTF-8"))) {
+            if (Strings.isNullOrEmpty(requestHeader) || !requestHeader.startsWith(URLEncoder.encode(jwtConfig.getTokenPrefix(), "UTF-8"))) {
                 filterChain.doFilter(request, response);
                 return;
             }
 
             //액세스토큰
-            String accessToken = requestHeader.replace(URLEncoder.encode("Bearer ", "UTF-8"), " ");
+            String accessToken = requestHeader.replace(URLEncoder.encode(jwtConfig.getTokenPrefix(), "UTF-8"), " ");
 
             //블랙리스트에 엑세스 토큰이 이미 있을 시(로그아웃한 유저)
             if (stringRedisTemplate.opsForValue().get(accessToken.trim()) != null) {
@@ -111,11 +109,9 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                     throw new IllegalStateException(String.format("Token %s cannot be trust", accessToken));
                 }
             }
-
-            //filter1에서 filter2로 넘겨줘야함
-            filterChain.doFilter(request, response);
         }
-
+        //filter1에서 filter2로 넘겨줘야함
+        filterChain.doFilter(request, response);
     }
 
     public void makeAuthentication(String token){

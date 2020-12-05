@@ -9,8 +9,10 @@
 	<meta name="author" content="">
 	<title>Please login in</title>
 	<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
+	<script src="https://developers.kakao.com/sdk/js/kakao.min.js" ></script>
 </head>
 <body class="bg">
+
 	<section id="main">
 		<header>
 			<span class="avatar"><img src="<c:url value='/resources/images/avatar.jpg' />" alt=""></span>
@@ -20,7 +22,7 @@
 		<hr>
 		<h2>Right now!</h2>
 		<form class="form-signin" method="post" id="myForm">
-			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}"/>
+			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}">
 			<p>
 				<label for="username" class="sr-only">Username</label>
 				<input type="text" id="username" name="username" class="form-control" placeholder="Usernameeeee" required="" autofocus="">
@@ -29,15 +31,22 @@
 				<label for="password" class="sr-only">Password</label>
 				<input type="password" id="password" name="password" class="form-control" placeholder="Passworddddd" required="">
 			</p>
-			<p><a href="javascript:alert('api 로그인 추가하기!');"><h6 style="font-size: 10px;">간단하게 가입하실래요?</h6></a></p>
-
+			<p>
+                <div id="join">
+                    <h6>간단하게 가입하실래요?</h6>
+                </div>
+			</p>
 			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
-			<div id="loginGrp">
-				<img src="<c:url value='/resources/images/icon_Green.PNG'/>"/>
-			</div>
 		</form>
+		        
+	       <a id="kakaoLogin" href="#">
+			  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/>
+			</a>
 	</section>
 </body>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/login/kakaoLogin.js'/>" charset="utf-8"></script>
+
+
 </html>

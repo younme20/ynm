@@ -30,14 +30,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
     private final SecretKey secretKey;
     private final StringRedisTemplate stringRedisTemplate;
+    private final JwtConfig jwtConfig;
 
 
     public JwtAuthenticationFilter(AuthenticationManager authenticationManager,
                                    SecretKey secretKey,
-                                   StringRedisTemplate stringRedisTemplate) {
+                                   StringRedisTemplate stringRedisTemplate,
+                                   JwtConfig jwtConfig) {
         this.authenticationManager = authenticationManager;
         this.secretKey = secretKey;
         this.stringRedisTemplate = stringRedisTemplate;
+        this.jwtConfig = jwtConfig;
     }
 
     @Override
@@ -96,8 +99,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .compact();
 
         Cookie cookie = new Cookie(
-                HttpHeaders.AUTHORIZATION,
-                URLEncoder.encode("Bearer ", "UTF-8")+accessToken);
+                jwtConfig.getAuthorizaionHeader(),
+                URLEncoder.encode(jwtConfig.getTokenPrefix(), "UTF-8")+accessToken);
 
         //쿠키에 액세스토큰 저장
         response.addCookie(cookie);

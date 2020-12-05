@@ -10,13 +10,16 @@ import javax.crypto.SecretKey;
 @Configuration
 public class JwtSecretKey {
 
+    private final JwtConfig jwtConfig;
+
     @Autowired
-    public JwtSecretKey() {
+    public JwtSecretKey(JwtConfig jwtConfig) {
+        this.jwtConfig = jwtConfig;
     }
 
     @Bean
     public SecretKey secretKey(){
-        return Keys.hmacShaKeyFor("securesecuresecuresecuresecuresecuresecuresecuresecuresecuresecure".getBytes());
+        return Keys.hmacShaKeyFor(jwtConfig.getSecretKey().getBytes());
     }
 
 }

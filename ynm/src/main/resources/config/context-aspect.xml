@@ -12,7 +12,7 @@
   		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">   					   
 	
 	<aop:aspectj-autoproxy/> 
-	<beans:bean id="loggerAspect" class="kr.ko.ym.common.aop.LoggerAspect">
+		<beans:bean id="loggerAspect" class="kr.ko.ym.common.aop.LoggerAspect">
 	</beans:bean>
 
 	

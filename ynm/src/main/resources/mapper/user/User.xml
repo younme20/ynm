@@ -21,7 +21,16 @@
 		 WHERE USERNAME = #{username}
 	</select>
 
-	
+	<!-- 회원가입  -->
+ 	 <insert id="insertUser" parameterType="hashmap">
+        
+        INSERT INTO user
+             ( USERNAME, PASSWORD, CREATE_DATETIME, ROLE   
+             )
+        VALUES
+             ( #{username}, #{password}, NOW() , #{role}
+             ) 
+    </insert>
 
 
 
