@@ -4,6 +4,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +16,27 @@ public class DatabaseConfig {
     @Autowired
     private ApplicationContext applicationContext;
 
+    @Value("${database.mysql.classname}")
+    private String classname;
+
+    @Value("${database.mysql.url}")
+    private String url;
+
+    @Value("${database.mysql.username}")
+    private String username;
+
+    @Value("${database.mysql.password}")
+    private String password;
+
+
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource source = new DriverManagerDataSource();
-        source.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+        source.setDriverClassName(classname);
         // 자바 설정으로 쓸 때에는 url에 &을 &amp; 로 치환하면 에러남
-        source.setUrl("jdbc:log4jdbc:mysql://3.20.212.220/ynm?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=UTC");
-        source.setUsername("ynm");
-        source.setPassword("Test1234@");
+        source.setUrl(url);
+        source.setUsername(username);
+        source.setPassword(password);
 
         return source;
     }
