@@ -8,41 +8,39 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>Please login in</title>
-	<link href="<c:url value='/resources/css/main.css' />" rel="stylesheet">
 	<script src="https://developers.kakao.com/sdk/js/kakao.min.js" ></script>
 </head>
-<body class="bg">
-
-	<section id="main">
-		<header>
-			<span class="avatar"><img src="<c:url value='/resources/images/avatar.jpg' />" alt=""></span>
-			<h1>Beam Us UP</h1>
-			<p>Project management Board</p>
-		</header>
+<body>
+<div class="main-wrapper">
+	<article class="post px-3 py-5 p-md-5">
 		<hr>
 		<h2>Right now!</h2>
 		<form class="form-signin" method="post" id="myForm">
 			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}">
-			<p>
-				<label for="username" class="sr-only">Username</label>
-				<input type="text" id="username" name="username" class="form-control" placeholder="Usernameeeee" required="" autofocus="">
-			</p>
-			<p>
-				<label for="password" class="sr-only">Password</label>
-				<input type="password" id="password" name="password" class="form-control" placeholder="Passworddddd" required="">
-			</p>
-			<p>
-                <div id="join">
-                    <h6>간단하게 가입하실래요?</h6>
-                </div>
-			</p>
-			<button type="button" class="btn btn-lg btn-primary btn-block" id="btnLogin">login</button>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="username">Username</label>
+				<div class="col-sm-3">
+					<input type="text" id="username" name="username" class="form-control" placeholder="Usernameeeee" required="" autofocus="">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="password">Password</label>
+				<div class="col-sm-3">
+					<input type="password" id="password" name="password" class="form-control" placeholder="Passworddddd" required="">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-3">
+					<div class="btn-icon">
+						<button type="button" id="join" data="${data.IDX}" class="btn-li new-btn"><i class="fa fa-sign-language"></i>회원가입</button>
+						<button type="button" id="btnLogin" data="${data.IDX}" class="btn-li new-btn"><i class="fa fa-sign-in-alt"></i>로그인</button>
+						<button type="button" id="kakaoLogin" class="btn-li mt-3"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/></button>
+					</div>
+				</div>
+			</div>
 		</form>
-		        
-	       <a id="kakaoLogin" href="#">
-			  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/>
-			</a>
-	</section>
+	</article>
+</div>
 </body>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>

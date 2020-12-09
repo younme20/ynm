@@ -42,10 +42,11 @@
 			SELECT IDX
 				 , TITLE
 				 , HITCNT
+			     , PARENT_IDX
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 		
 			  FROM board 
 			  <include refid="COMMON_SEARCH"/>
-			 ORDER BY IDX DESC
+			 ORDER BY IDX
 <!--		<include refid="COMMON_PAGING_TAIL"/>	 -->
 	</select>
 	

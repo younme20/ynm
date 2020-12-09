@@ -46,7 +46,7 @@ $(document).ready(function(){
 	   
 	//목록
 	$("#list").on("click", function(){
-		movePage("/ynm/board");
+		movePage("/ynm");
 	
 	});
 	
