@@ -2,6 +2,7 @@ package kr.ko.ym.user.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.net.HttpHeaders;
+import kr.ko.ym.board.service.BoardService;
 import kr.ko.ym.common.auth.AppUserService;
 import kr.ko.ym.kakao.service.KakaoAccessToken;
 import org.slf4j.Logger;
@@ -17,6 +18,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -30,6 +33,8 @@ public class UserController {
 	StringRedisTemplate stringRedisTemplate;
 	@Autowired
 	private KakaoAccessToken kakao;
+	@Autowired
+	private BoardService boardService;
 
 	@GetMapping(value = {"/", "/login"})
 	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -37,9 +42,12 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("");
 		String url = "";
 		boolean isAuth = this.isAuth(request, response);
+		Map<String,Object> paramMap = new HashMap<String,Object>();
+
 		//이미 인증 정보가 있을 경우
 		if(isAuth){
 			url = "/main/main.tiles";
+			mv.addObject("list", boardService.selectBoard(paramMap));
 			mv.addObject("username", authentication.getPrincipal());
 		}else{
 			url = "userlogin";

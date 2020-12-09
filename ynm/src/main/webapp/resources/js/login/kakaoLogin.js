@@ -2,7 +2,7 @@
  * 
  */
 $(document).ready(function(){ 		
-$("a[id='kakaoLogin']").on("click", function(e){ 
+$("#kakaoLogin").on("click", function(e){
 		movePage("https://kauth.kakao.com/oauth/authorize?client_id=9ca8233e7498809ecb8e4dedc89f00fe&redirect_uri=http://localhost:8090/ynm/kakaologin&response_type=code");
 	});
 });

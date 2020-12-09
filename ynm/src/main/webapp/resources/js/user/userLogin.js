@@ -6,6 +6,10 @@ $(document).ready(function(){
 	$("#btnLogin").on("click", function(e){
 		user.authLogin();
 	});
+
+	$("#btnLogout").on("click", function(e){
+		movePage("/ynm/out");
+	});
 	
 	$("#join").on("click", function(e){ 
 		movePage("/ynm/userjoin");

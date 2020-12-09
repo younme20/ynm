@@ -30,7 +30,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
             if(authentication != null){
 
                 int error = HttpStatus.FORBIDDEN.value();
-                String errorPath = request.getContextPath() + "/error"+error;
+                String errorPath = "/error"+error;
 
                 response.sendRedirect(request.getContextPath() + errorPath);
 

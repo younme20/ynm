@@ -30,14 +30,14 @@ public class BoardController {
 	/*
 	 * list select
 	 * */
-	@RequestMapping(value="/board", method = {RequestMethod.POST,RequestMethod.GET})
+/*	@RequestMapping(value="/board", method = {RequestMethod.POST,RequestMethod.GET})
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
 	public ModelAndView selectBoard(Authentication authentication,
 									@RequestParam Map<String,Object>param) throws Exception {
 
 		String username = authentication.getPrincipal().toString();
 		param.put("username", username);
-		
+
 		ModelAndView mv = new ModelAndView("board/boardLs.tiles");
 		Map<String,Object>map = boardService.selectCount(param);
 
@@ -55,12 +55,12 @@ public class BoardController {
 		mv.addObject("username", username);
 
 		return mv;
-	}
+	}*/
 
 	/*
 	 * view
 	 * */
-	@RequestMapping(value="/board/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/board/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectDetail(Authentication authentication,
 									 HttpServletRequest request,
@@ -72,8 +72,13 @@ public class BoardController {
 
 		param.put("IDX", idx);
 		mv.addObject("param", param);
+		mv.addObject("list", boardService.selectBoard(param));
 		mv.addObject("data", boardService.selectDetail(param));
-		mv.addObject("username", authentication.getPrincipal());
+		if(authentication != null){
+			mv.addObject("username", authentication.getPrincipal());
+		}else{
+			mv.addObject("isAnonyMous", false);
+		}
 
 		List<Map<String, Object>> list = fileuploadService.selectAttachFileListByIDX(param);
 
@@ -100,10 +105,11 @@ public class BoardController {
 	 * write form
 	 * */
 	@RequestMapping(value="/board/edit")
-	public ModelAndView  writeForm(Authentication authentication) throws Exception {
+	public ModelAndView  writeForm(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		String username = authentication.getPrincipal().toString();
-		
+
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
+
 		mv.addObject("username", username);
 		mv.addObject("mode", "new");	
 		return mv;
@@ -137,8 +143,10 @@ public class BoardController {
 	@RequestMapping(value="/board/modify/{idx}", method = RequestMethod.GET)
 	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
-		
 		Map<String,Object>param = new HashMap<String,Object>();
+
+		mv.addObject("list", boardService.selectBoard(param));
+
 		param.put("IDX", idx);	
 		
 		List<Map<String, Object>> files = null;

@@ -30,7 +30,6 @@
 
 </head>
 <body>
-    <tiles:insertAttribute name="nav" />
     <div id="container">
        <tiles:insertAttribute name="content" />
     </div>
