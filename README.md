@@ -5,23 +5,21 @@
 <br>
 데모페이지) http://3.20.212.220/ynm/ (aws로 서버 구성)
 
-## 기능 :+1: 
-    * 기본 CRUD 구현 (summer note 에디터 적용)
-    * 첨부 파일 구현
-    * hash tag 기능 구현
-    * spring security 활용한 로그인/권한 관리(jwt token 이용)
-    * full calandar을 활용한 스케쥴 관리
-    
-    
-## TODO List
-    * git연동/공유 가능한 에디터로 변경
-    * React.js 적용한 검색 기능 구현
-    * api 회원가입 구현
-    * 게스트 로그인/권한 구현
-    * hash tag -> memory database로 구현하기
-    
-## 완료
-    * WAS 8.5로 업그레이드
+## 기능 :+1:
+    * Rest API 기반 블로그
+    * 기본 게시판 구현 (summer note 에디터 적용)
+      - 첨부파일 기능(Drag and Drop)
+      - hashtag 등록
+      - 댓글 기능(utterence 를 사용하여 깃 이슈에 자동으로 등록됨)
+
+    * Spring security 프레임워크를 활용한 토큰 기반 인증 시스템 구현
+      - OAUTH 2.0 프레임워크, JWT Token 사용
+      
+    * full calandar 라이브러리를 활용한 일정 관리
+      - 일정 조회, 등록, 수정, 삭제 기능
+      - 내 일정만 보기
+      - 디렉토리 별로 등록하기
+
 
 
     
