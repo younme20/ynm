@@ -7,6 +7,7 @@
 
 ## 기능 :+1:
     * Rest API 기반 블로그
+    
     * 기본 게시판 구현 (summer note 에디터 적용)
       - 첨부파일 기능(Drag and Drop)
       - hashtag 등록
