@@ -1,4 +1,11 @@
-/target/
+# Directories #
+/build/
+/bin/
+target/
+.idea
+classes/
+META-INF/
+
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###

@@ -34,7 +34,7 @@
 					<div class="btn-icon">
 						<button type="button" id="join" data="${data.IDX}" class="btn-li new-btn"><i class="fa fa-sign-language"></i>회원가입</button>
 						<button type="button" id="btnLogin" data="${data.IDX}" class="btn-li new-btn"><i class="fa fa-sign-in-alt"></i>로그인</button>
-						<button type="button" id="kakaoLogin" class="btn-li mt-3"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/></button>
+<%--						<button type="button" id="kakaoLogin" class="btn-li mt-3"><img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" width="222"/></button>--%>
 					</div>
 				</div>
 			</div>
