@@ -28,7 +28,6 @@ public class ScheduleController {
 
 	@RequestMapping(value="/schedule", method=RequestMethod.GET)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
 	public ModelAndView getScheduleView(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleLs.tiles");
 		mv.addObject("username", authentication.getPrincipal());
@@ -37,7 +36,6 @@ public class ScheduleController {
 
 	@RequestMapping(value="/schedule/list", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
 	public List<Map<String,Object>> selectSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		if(authentication != null) {
 			param.put("username", authentication.getPrincipal());
@@ -48,7 +46,6 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/select", method=RequestMethod.GET)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
 	public List<Map<String,Object>> selectScheduleOne(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		List<Map<String,Object>>list = scheduleService.selectSchedule(param);

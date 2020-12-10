@@ -6,7 +6,7 @@ const all = false;
 $(document).ready(function(){
 	$("select[name='COLOR']").trigger("change");
 
-	selectSchedule(all);
+	//selectSchedule(all);
 
 	//datetimepicker
 	$("#startDate").datetimepicker({
@@ -52,6 +52,11 @@ $(document).ready(function(){
 		deleteSchedule();
 	});
 
+	$("#btnShowPlan").on("click", function(e){
+		$("#navPlanModal").modal('show');
+		showNavPlanModal();
+	});
+
 });
 
 function selectSchedule(all) {
@@ -60,7 +65,7 @@ function selectSchedule(all) {
 
 	$.ajax({
 		type : "POST",                               
-		url : "/ynm/schedule/list",                   
+		url : "/ynm/schedule/list",
 		json : true,
 		data : {"all" : all},//JSON.stringify({"_csrf":token}),
 		beforeSend: function(xhr) {
@@ -129,19 +134,21 @@ function calendarEvent(eventData){
 	var y = date.getFullYear();	
 	
     var calendar = new FullCalendar.Calendar(calendarEl, {
+    	//plugins: [ listPlugin ],
+		initialView: 'listWeek',
     	themeSystem: 'bootstrap',
 		locale: 'ko', //한글
       	timezone: "local",
 		nextDayThreshold: "09:00",
 		allDaySlot: true,
-      timeFormat: 'HH:mm',
-      minTime: '00:00',
-      maxTime: '24:00',
-      headerToolbar: {
-    	  start: 'allViewButton,prev,next',
+      	timeFormat: 'HH:mm',
+      	minTime: '00:00',
+      	maxTime: '24:00',
+      	headerToolbar: {
+    	  start: 'allViewButton',
     	  center: 'title',
-		  end: 'dayGridMonth,timeGridWeek,timeGridDay'
-	  },
+		  end: 'prev,next'
+	  	},
 		customButtons: {
 			allViewButton: {
 				text: '모두 보기',
@@ -150,13 +157,18 @@ function calendarEvent(eventData){
 				}
 			}
 		},
-		buttonText: {
-    		prev : '이전',
-			next : '다음',
-			dayGridMonth : '월',
-			timeGridWeek: '주',
-			timeGridDay: '일'
+		buttonIcons: {
+			prev: 'left-single-arrow',
+			next: 'right-single-arrow',
+			dayGridMonth: 'left-double-arrow',
+			listWeek: 'right-double-arrow'
 		},
+		// buttonText: {
+    	// 	prev : '이전',
+		// 	next : '다음',
+		// 	dayGridMonth : '월',
+		// 	listWeek: '주',
+		// },
       //height: 1200,
       //날짜 클릭 이벤트
       dateClick: function (info) {
@@ -197,7 +209,6 @@ function calendarEvent(eventData){
     	  });
       },
       contentHeight: "auto",
-      initialView: 'dayGridMonth',
       schedulerLicenseKey: 'GPL-My-Project-Is-Open-Source', //라이센스
 	  editable: true,
 	  navLinks: false, //달력상의 날짜를 클릭할 수 있는지 여부 
@@ -212,4 +223,9 @@ function calendarEvent(eventData){
       }
     });
     calendar.render();	
+}
+
+
+function showNavPlanModal(){
+	selectSchedule(true);
 }

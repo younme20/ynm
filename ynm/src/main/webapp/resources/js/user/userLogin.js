@@ -10,6 +10,10 @@ $(document).ready(function(){
 	$("#btnLogout").on("click", function(e){
 		movePage("/ynm/out");
 	});
+
+	$("#btnMoveLoginPage").on("click", function(e){
+		movePage("/ynm/login");
+	});
 	
 	$("#join").on("click", function(e){ 
 		movePage("/ynm/userjoin");

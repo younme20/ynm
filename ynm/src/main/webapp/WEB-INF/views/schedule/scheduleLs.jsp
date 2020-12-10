@@ -20,7 +20,7 @@
 <%--                    </div>--%>
 <%--                </div>--%>
 <%--            </details>--%>
-            <div id="calendar"></div>
+            <div id="calendar"  style="width:50%"></div>
         </div>
     </div>
 </body>
