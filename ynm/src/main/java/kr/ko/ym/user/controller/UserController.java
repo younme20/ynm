@@ -46,20 +46,14 @@ public class UserController {
 		String url = "";
 		boolean isAuth = this.isAuth(request, response);
 		Map<String,Object> paramMap = new HashMap<String,Object>();
-		HashSet<String> hash = hashtagService.selectAllHashTag();
-		
+		HashSet<String> set = hashtagService.selectAllHashTag();
 		//이미 인증 정보가 있을 경우
 		if(isAuth){
 			url = "/main/main.tiles";
 			
-			if(!hash.isEmpty()) {
-				if(hash.size() > 0) {
-					System.out.println(" 1: "+ hash.toString());
-					System.out.println(" 2: "+ hash);
-					
-					//String[] arr = ((String) hash).split(",");
-					mv.addObject("hash", hash);
-				}
+			if(!set.isEmpty()) {
+				mv.addObject("hash", set);
+				
 			}
 			
 			

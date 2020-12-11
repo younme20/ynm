@@ -87,6 +87,44 @@
     z-index: -1;
 }
 
+#content{
+	position: relative;
+    width: 100%;
+    float: left;
+}
+#tag{
+	position: relative;
+	margin-top: 10px;
+}
+#tag>ul>li{
+	margin-bottom: 0.875rem;
+    background: rgb(241, 243, 245);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    height: 2rem;
+    border-radius: 1rem;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 0.875rem;
+    color: rgb(12, 166, 120);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+}
+#tag>ul>li>p{
+	margin: 0;
+}
+
+#tag>ul>li:hover {
+    cursor: pointer;
+    background-color:rgb(12, 166, 120);
+    color: #fff;
+}
+
+#comment{
+	position: relative;
+}
 #footer{
 	position: relative;
     width: 100%;

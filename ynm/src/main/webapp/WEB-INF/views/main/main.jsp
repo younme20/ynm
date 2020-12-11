@@ -7,9 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Main Page</title>
 </head>
 <body>
-여기!!!test
+	<div id="container">
+		<div id="content">
+			<div id="tag">
+				<ul>
+					<c:forEach var="item" items="${hash}" varStatus="idx">
+						<li class="titem"><p>${item}</p></li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div id="comment"></div>
+		</div>
+	</div>
 </body>
 </html>
