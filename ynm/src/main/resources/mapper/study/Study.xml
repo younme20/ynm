@@ -57,6 +57,7 @@
 				 , CONTENTS
 				 , HITCNT
 				 , CREATE_ID
+			     , PARENT_IDX
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 
 			  FROM board 
 			 WHERE IDX = #{IDX}

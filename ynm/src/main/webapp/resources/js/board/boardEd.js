@@ -106,7 +106,7 @@ function boardEdit() {
 			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('수정되었습니다.');
-				movePage("/ynm/board/detail/"+result);
+				movePage("/ynm/board/"+result);
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
