@@ -35,6 +35,5 @@
         </div>
     </div>
 </body>
-<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardLs.js'/>" charset="utf-8"></script>
 </html>

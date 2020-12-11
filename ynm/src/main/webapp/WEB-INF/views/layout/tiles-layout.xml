@@ -26,9 +26,7 @@
         <put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
     </definition>
 
-
-    
-    <!-- default layout-->
+    <!-- login layout-->
     <definition name="login" template="/WEB-INF/views/layout/tiles-login.jsp">
         <put-attribute name="left"   value="/WEB-INF/views/layout/tiles-left.jsp" />
         <put-attribute name="content"   value="" />

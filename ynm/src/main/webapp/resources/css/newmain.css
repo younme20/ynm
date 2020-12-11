@@ -375,3 +375,13 @@ button {
 	width:100%;
 	transition:800ms ease all;
 }
+
+.comment-section  {
+	-webkit-box-shadow: 0px -1px 0px 0px rgba(175,158,232,0.4);
+}
+
+.comment-section .heading {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-left: 20%;
+}

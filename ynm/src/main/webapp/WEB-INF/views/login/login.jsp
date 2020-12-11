@@ -41,7 +41,6 @@
 	</article>
 </div>
 </body>
-<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/login/kakaoLogin.js'/>" charset="utf-8"></script>
 

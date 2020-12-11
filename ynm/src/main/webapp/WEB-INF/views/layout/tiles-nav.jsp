@@ -4,6 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
+<!-- 일정관리 모달(단순 조회용) -->
+<jsp:include page="../schedule/scheduleNavModal.jsp"></jsp:include>
+
 <header class="header">
     <div class="main">
         STUDY_LOG
@@ -17,7 +21,7 @@
                     <button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그아웃 </button>
                 </c:when>
                 <c:otherwise>
-                    <button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그인 </button>
+                    <button type="button" id="btnMoveLoginPage" class="new-btn"><i class="fa fa-sing-in-alt"></i> 로그인 </button>
                 </c:otherwise>
             </c:choose>
 
@@ -28,7 +32,7 @@
         <c:choose>
             <c:when test="${item.PARENT_IDX != null}">
                 <ul>
-                    <li id="item_${item.PARENT_IDX}" class="item">
+                    <li group="${item.PARENT_IDX}" class="item">
                         <a href="/ynm/board/${item.IDX}">${item.TITLE}</a>
                     </li>
                 </ul>
@@ -36,7 +40,7 @@
             <c:otherwise>
                 <ul>
                     <li>
-                        <a href="#">${item.TITLE}
+                        <a href="#" class="">${item.TITLE}
                             <button id="btn_${item.IDX}" aria-label="collapse" class="collapser" onclick="sideBarClick(${item.IDX})">
                                 <i class="fa fa-plus"></i>
                             </button>
@@ -48,7 +52,4 @@
     </c:forEach>
 </header>
 <aside class="aside">
-nav 페이지
 </aside>
-
-<script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>
