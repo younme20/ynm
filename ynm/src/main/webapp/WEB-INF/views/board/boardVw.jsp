@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta property="og:title" content="${data.TITLE}"/>
+
 <html lang="en">
+<head>
+<title>${data.TITLE}</title>
+</head>
 <body>
 	<div class="main-wrapper">
 		<section class="section py-5">
@@ -42,6 +46,8 @@
 			</ul>
 		</div>
 		<input type="hidden" id="PARENT_IDX" VALUE="${data.PARENT_IDX}"/>
+		<input type="hidden" id="issue[body]" name="issue[body]" VALUE="${data.TITLE}"/>
+
 		<div class="new-btn-group btn-right mt-5 md-5">
 			<button type="button" id="modify" data="${data.IDX}" class="btn-li new-btn">수정</button>
 			<button type="button" id="delete" data="${data.IDX}" class="btn-li new-btn">삭제</button>
