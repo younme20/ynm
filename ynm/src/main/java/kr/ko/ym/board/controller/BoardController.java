@@ -144,11 +144,12 @@ public class BoardController {
 	 * */
 	@RequestMapping(value="/board/modify/{idx}", method = RequestMethod.GET)
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
+	public ModelAndView modifyForm(Authentication authentication, HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
 		Map<String,Object>param = new HashMap<String,Object>();
 
 		mv.addObject("list", boardService.selectBoard(param));
+		mv.addObject("username", authentication.getPrincipal().toString());
 
 		param.put("IDX", idx);	
 		
