@@ -27,7 +27,6 @@
 			</td>
 		<tr>
 		</c:if>
-
 		<article class="post px-3 py-5 p-md-5">
 			<div class="container body">
 				${data.CONTENTS }
@@ -41,6 +40,7 @@
 				</c:forEach>
 			</ul>
 		</div>
+		<input type="hidden" id="PARENT_IDX" VALUE="${data.PARENT_IDX}"/>
 		<div class="new-btn-group my-5 btn-right px-3 py-5 p-md-5">
 			<button type="button" id="modify" data="${data.IDX}" class="btn-li new-btn">수정</button>
 			<button type="button" id="delete" data="${data.IDX}" class="btn-li new-btn">삭제</button>
@@ -48,6 +48,5 @@
 		</div>
 	</div>
 </body>
-<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 <script src="<c:url value='/resources/js/board/boardVw.js'/>" charset="utf-8"></script>
 </html>

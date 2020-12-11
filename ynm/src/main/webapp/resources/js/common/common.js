@@ -2,7 +2,11 @@
  * 
  */
 $(document).ready(function(){
+	const PARENT_IDX = $("#PARENT_IDX").val();
 
+	if(PARENT_IDX != null){
+		sideBarClick(PARENT_IDX);
+	}
 });
 
 function movePage(url) {
@@ -10,7 +14,8 @@ function movePage(url) {
 }
 
 function sideBarClick(idx){
-	let item = $("li[id=item_"+idx+"]");
+
+	let item = $("li[group="+idx+"]");
 
 	if(item.css("display") == "block"){
 		item.css("display", "none");
@@ -20,6 +25,9 @@ function sideBarClick(idx){
 		$("#btn_"+idx+" > i").attr("class", "fa fa-minus");
 	}
 }
+
+
+
 
 
 

@@ -32,7 +32,7 @@
         <c:choose>
             <c:when test="${item.PARENT_IDX != null}">
                 <ul>
-                    <li id="item_${item.PARENT_IDX}" class="item">
+                    <li group="${item.PARENT_IDX}" class="item">
                         <a href="/ynm/board/${item.IDX}">${item.TITLE}</a>
                     </li>
                 </ul>
