@@ -12,5 +12,4 @@
 <body>
 
 </body>
-<script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 </html>
