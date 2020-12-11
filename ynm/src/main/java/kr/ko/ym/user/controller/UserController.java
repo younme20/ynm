@@ -56,7 +56,7 @@ public class UserController {
 				
 			}
 			
-			
+			mv.addObject("comment", boardService.selectLastComment());
 			mv.addObject("list", boardService.selectBoard(paramMap));
 			mv.addObject("username", authentication.getPrincipal());
 		}else{

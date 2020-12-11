@@ -126,4 +126,12 @@
             IDX = #{IDX}
      </delete>
    
+   
+   
+   <!-- COMMENT List Select -->
+	<select id="selectLastComment" resultType="hashmap">
+		SELECT board_idx, cmment, writer, reg_datetime FROM comment
+		ORDER BY reg_datetime DESC 
+		LIMIT 5
+	</select>
 </mapper>

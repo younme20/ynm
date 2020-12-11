@@ -21,4 +21,7 @@ public interface BoardService {
 	List<Map<String,Object>> serchBoard(Map<String, Object> param)throws Exception;
 
 	Map<String, Object> selectCount(Map<String, Object> param)throws Exception;
+	
+	List<Map<String,Object>>selectLastComment() throws Exception;
+	
 }
