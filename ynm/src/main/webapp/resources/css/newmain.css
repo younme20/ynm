@@ -77,14 +77,28 @@
 	-webkit-box-shadow: -1px 0px 4px 1px rgba(175,158,232,0.4);
 }
 
+
+#container{
+	position: relative;
+    width: 100%;
+    float: left;
+    padding-left: 280px;
+    height: 600px;
+    z-index: -1;
+}
+
+#footer{
+	position: relative;
+    width: 100%;
+    float: left;	
+}
 .aside {
-	position: fixed;
-	right: 0;
-	top: 0;
-	height: 100vh;
-	width: 250px;
-	background: #ffffff;
-	color: #fff;
+	float: left;
+    width: 100%;
+    position: relative;
+    background: #ffffff;
+    color: #fff;
+    z-index: -1;
 }
 
 /*.navbar {*/
@@ -98,9 +112,11 @@
 
 
 .main-wrapper {
-	margin-left: 350px;
+/* 	margin-left: 350px;
+	margin-right: 250px; */
+	margin-top: 30px;
 	background: #fff;
-	margin-right: 250px;
+	
 }
 
 

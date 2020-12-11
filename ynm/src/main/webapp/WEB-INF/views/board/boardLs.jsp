@@ -6,7 +6,7 @@
 <body>
     <div id="wrapper" style="margin-top: 20px;">
         <div class="col-sm-12" style="text-align: center;">
-            <!-- 태그 -->
+            <!-- 태그 -->ㅇㅇㅇ
             <p style="margin-bottom: 3%">
                 <c:forEach items="${categories}" var="tag" varStatus="status">${tag.key} (${tag.value})		</c:forEach>
             </p>

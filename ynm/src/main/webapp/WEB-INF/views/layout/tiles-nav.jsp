@@ -48,7 +48,7 @@
     </c:forEach>
 </header>
 <aside class="aside">
-
+nav 페이지
 </aside>
 
 <script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>

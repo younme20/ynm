@@ -10,7 +10,7 @@
     <title>Main Page</title>
 </head>
 <body>
-
+여기!!!test
 </body>
 <script src="<c:url value='/resources/js/common/common.js'/>" charset="utf-8"></script>
 </html>
