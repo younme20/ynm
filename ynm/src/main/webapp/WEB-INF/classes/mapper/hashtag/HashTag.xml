@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="hashtag">
+	
+	<!-- insert  -->
+ 	 <insert id="insertHashTag" parameterType="hashmap">
+        INSERT INTO hashtag ( MENU_CODE, BOARD_IDX, CONTENTS)
+		VALUES( #{MENU_CODE}, #{IDX}, #{HASHTAG}) 
+    </insert>
+   	
+   	<!-- update -->
+   	<update id="updateHashTag" parameterType="hashmap">
+        UPDATE hashtag SET CONTENTS = #{HASHTAG}
+        WHERE
+            BOARD_IDX = #{IDX}
+    </update>
+    
+   <select id="selectOneHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE BOARD_IDX = #{IDX}
+   </select>
+   
+   <select id="selectHashTag" parameterType="hashmap" resultType="hashmap">  
+   		SELECT IDX, CONTENTS
+		FROM hashtag
+		WHERE MENU_CODE =  #{MENU_CODE}
+   </select>
+   
+    <!-- delete -->
+     <delete id="deleteHashTag" parameterType="hashmap">
+        DELETE FROM board
+        WHERE
+            BOARD_IDX = #{IDX}
+     </delete>
+</mapper>

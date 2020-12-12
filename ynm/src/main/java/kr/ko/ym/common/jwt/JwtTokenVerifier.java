@@ -119,9 +119,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 .parseClaimsJws(token);
 
         Claims body = claimsJws.getBody();
-
         String username = body.getSubject();
-
         List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
 
         Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()

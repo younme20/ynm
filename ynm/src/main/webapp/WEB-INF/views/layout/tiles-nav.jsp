@@ -7,6 +7,8 @@
 
 <!-- 일정관리 모달(단순 조회용) -->
 <jsp:include page="../schedule/scheduleNavModal.jsp"></jsp:include>
+<!-- 로그아웃 용 -->
+<script src="<c:url value='/resources/js/user/userLogin.js'/>"charset="utf-8"></script>
 
 <header class="header">
     <div class="main">
@@ -33,7 +35,7 @@
             <c:when test="${item.PARENT_IDX != null}">
                 <ul>
                     <li id="item_${item.PARENT_IDX}" class="item">
-                        <a href="/ynm/board/${item.IDX}">${item.TITLE}</a>
+                        <a href="/ynm/board/detail/${item.IDX}">${item.TITLE}</a>
                     </li>
                 </ul>
             </c:when>

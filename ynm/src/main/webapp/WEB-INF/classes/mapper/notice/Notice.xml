@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="notice">
+	<!-- 페이징 공통 -->
+	<sql id="COMMON_PAGING_HEADER">
+		select R1.* FROM(	
+	</sql>
+
+	<sql id="COMMON_PAGING_TAIL">
+		) R1
+		ORDER BY IDX DESC
+	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
+	</sql>
+	<!-- 페이징 공통 -->
+	
+	
+	<sql id="COMMON__SERCH_HASHTAG">
+		SELECT board_idx 
+		FROM hashtag 
+		WHERE CONCAT(',',contents,',') LIKE CONCAT('%',',',#{hashWord},',','%')
+	</sql>
+	
+	
+	<!-- select list -->
+	<select id="selectBoard" parameterType="hashmap" resultType="hashmap">
+		<include refid="COMMON_PAGING_HEADER"/>	
+			SELECT IDX, TITLE, HITCNT, DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME , CREATE_ID
+			FROM board
+			WHERE 1=1
+				<if test='hashSerch == "true"'>
+					<trim prefix="AND" prefixOverrides="AND|OR">
+						AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
+					</trim> 
+				</if>
+				
+				<if test='searchType != ""'>
+					<trim prefix="AND" prefixOverrides="AND|OR">
+						<if test="searchType == 'title' and keyword != null and keyword != '' ">
+							AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+						</if>
+						<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+							AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+						</if>
+						<if test="searchType == 'user' and keyword != null and keyword != '' ">
+							AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+						</if>	
+					</trim> 
+				</if>
+			<include refid="COMMON_PAGING_TAIL"/>
+	</select>
+	<!-- select list -->
+	
+	<!-- select one -->
+	<select id="detailBoard" parameterType="hashmap" resultType="hashmap">
+		SELECT IDX, TITLE, CONTENTS, HITCNT, CREATE_DATETIME, CREATE_ID, UPDATE_DATETIME, UPDATE_ID
+		FROM board
+		WHERE IDX = #{IDX};
+	</select>
+	
+	<!-- select one -->
+	<select id="selectMaxIdx" parameterType="hashmap" resultType="hashmap">
+		SELECT MAX(IDX) AS IDX FROM board
+	</select>
+	
+	<!-- select TOTAL COUNT -->
+	<select id="selectCount" parameterType="hashmap" resultType="hashmap">
+		SELECT COUNT(IDX) AS TOTAL_COUNT 
+		FROM board
+		WHERE 1=1
+		<if test='hashSerch == "true"'>
+			<trim prefix="AND" prefixOverrides="AND|OR">
+				AND IDX IN(<include refid="COMMON__SERCH_HASHTAG"/>)
+			</trim>
+		</if>
+		<if test='searchType != ""'>
+			<trim prefix="AND" prefixOverrides="AND|OR">
+				<if test="searchType == 'title' and keyword != null and keyword != '' ">
+					AND TITLE LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType == 'contents' and keyword != null and keyword != '' ">
+					AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType == 'user' and keyword != null and keyword != '' ">
+					AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
+				</if>	
+			</trim> 
+		</if>
+	</select>
+	<!-- select TOTAL COUNT -->
+	
+	<!-- hit -->
+	<update id="updateCount" parameterType="hashmap">
+	  UPDATE board SET HITCNT = HITCNT + 1 WHERE IDX = #{IDX};
+	</update>
+	
+   	
+	<!-- insert  -->
+ 	 <insert id="insertBoard" parameterType="hashmap">
+         <selectKey keyProperty="IDX" resultType="int" order="BEFORE">
+        	SELECT IFNULL(MAX(IDX),0)+1 FROM board
+        </selectKey>
+        INSERT INTO board
+             ( IDX, TITLE, CONTENTS, CREATE_ID, FILE_GROUP, MENU_CODE, CREATE_DATETIME   
+             )
+        VALUES
+             ( #{IDX}, #{TITLE}, #{CONTENTS}, #{CREATE_ID}, #{FILE_GROUP}, #{MENU_CODE}, NOW()
+             ) 
+    </insert>
+   	
+   	<!-- update -->
+   	<update id="updateBoard" parameterType="hashmap">
+        UPDATE board SET
+            TITLE = #{TITLE}
+            , CONTENTS = #{CONTENTS}
+            , UPDATE_ID = #{CREATE_ID}
+            , UPDATE_DATETIME = NOW()
+        WHERE
+            IDX = #{IDX}
+    </update>
+    
+
+    <!-- delete -->
+     <delete id="deleteBoard" parameterType="hashmap">
+        DELETE FROM board
+        WHERE
+            IDX = #{IDX}
+     </delete>
+   
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="user">
+
+	<!-- 유저 조회 -->
+	<select id="selectUserByUserName" parameterType="string" resultType="kr.ko.ym.common.auth.AppUser">
+		SELECT USERNAME
+		     ,PASSWORD
+		     , true as isAccountNonExpired
+		     , true as isAccountNonLocked
+		     , true as isCredentialNonExpired
+		     , true as isEnabled
+		  FROM user
+		 WHERE USERNAME = #{username}
+	</select>
+
+	<!-- 유저 롤 조회 -->
+	<select id="selectUserRolesByUserName" parameterType="string" resultType="string">
+		SELECT ROLE
+		  FROM user
+		 WHERE USERNAME = #{username}
+	</select>
+
+	<!-- 회원가입  -->
+ 	 <insert id="insertUser" parameterType="hashmap">
+        
+        INSERT INTO user
+             ( USERNAME, PASSWORD, CREATE_DATETIME, ROLE   
+             )
+        VALUES
+             ( #{username}, #{password}, NOW() , #{role}
+             ) 
+    </insert>
+
+
+
+</mapper>

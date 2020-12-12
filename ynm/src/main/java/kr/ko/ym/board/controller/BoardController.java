@@ -26,41 +26,11 @@ public class BoardController {
 	private FileUploadService fileuploadService;
 	@Autowired
 	private HashtagService hashtagService;
-	
-	/*
-	 * list select
-	 * */
-/*	@RequestMapping(value="/board", method = {RequestMethod.POST,RequestMethod.GET})
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public ModelAndView selectBoard(Authentication authentication,
-									@RequestParam Map<String,Object>param) throws Exception {
-
-		String username = authentication.getPrincipal().toString();
-		param.put("username", username);
-
-		ModelAndView mv = new ModelAndView("board/boardLs.tiles");
-		Map<String,Object>map = boardService.selectCount(param);
-
-		//TODO: 해시 태그 test중, 추후에 추가 예정
-		Map<String,Integer>hs = new HashMap<String, Integer>();
-		hs.put("java", 5);
-		hs.put("spring", 3);
-		hs.put("test", 7);
-		mv.addObject("categories", hs);
-
-		mv.addObject("list", boardService.selectBoard(param));
-		mv.addObject("param", param);
-		mv.addObject("page", param.get("page"));
-		mv.addObject("totalCount", map.get("TOTAL_COUNT"));
-		mv.addObject("username", username);
-
-		return mv;
-	}*/
 
 	/*
 	 * view
 	 * */
-	@RequestMapping(value="/board/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/board/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
 	public ModelAndView selectDetail(Authentication authentication,
 									 HttpServletRequest request,

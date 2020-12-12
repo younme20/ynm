@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,12 +39,15 @@ public class UserController {
 	private BoardService boardService;
 
 	@GetMapping(value = {"/", "/login"})
-	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView loginViewPage(Authentication authentication,
+									  HttpServletRequest request, HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView("");
 		String url = "";
 		boolean isAuth = this.isAuth(request, response);
 		Map<String,Object> paramMap = new HashMap<String,Object>();
+
+		log.debug("test");
 
 		//이미 인증 정보가 있을 경우
 		if(isAuth){
