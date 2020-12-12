@@ -58,6 +58,7 @@ public class HshtagServiceImpl implements HashtagService {
 	@Override
 	public HashSet<String> selectAllHashTag() throws Exception {
 		
+		@SuppressWarnings("unchecked")
 		List<Map<String, Object>> list =  commonDao.selectList("hashtag.selectAllHashTag");
 		HashSet<String> set = new HashSet<String>();
 		String[] arr = null;
@@ -72,6 +73,12 @@ public class HshtagServiceImpl implements HashtagService {
 		
 		
 	   return set;
+	}
+
+	@Override
+	public void deleteHashTag(Map<String, Object> param) throws Exception {
+		commonDao.selectList("hashtag.deleteHashTag", param);
+		
 	}
 
 }

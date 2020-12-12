@@ -93,7 +93,7 @@ function boardEdit() {
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert('Uncaught Error.n' + jqXHR.responseText);
-			    movePage("/ynm/board");
+			    movePage("/ynm");
 			}
 		});
 	},
@@ -110,7 +110,7 @@ function boardEdit() {
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
-				movePage("/ynm/board");
+				movePage("/ynm");
 			}
 		});
 	}
