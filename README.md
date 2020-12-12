@@ -1,27 +1,26 @@
-# [토이 프로젝트] 스터디 관리 프로젝트
+# [토이 프로젝트] STUDY_LOG
 
 ## 설명
-스케쥴 관리와 스터디내용/개인공부/팁 공유를 할 수 있는 간단한 스터디 관리 웹 어플리케이션 
-<br>
-데모페이지) http://3.20.212.220/ynm/ (aws로 서버 구성)
+스케쥴 관리 및 스터디 내용 공유가 가능한 간단한 스터디 관리 웹 어플리케이션입니다.
 
-## 기능 :+1: 
-    * 기본 CRUD 구현 (summer note 에디터 적용)
-    * 첨부 파일 구현
-    * hash tag 기능 구현
-    * spring security 활용한 로그인/권한 관리(jwt token 이용)
-    * full calandar을 활용한 스케쥴 관리
+데모페이지) http://34.64.101.68/ynm/
+
+## 기능 :+1:
+    * Rest API 기반 블로그
     
-    
-## TODO List
-    * git연동/공유 가능한 에디터로 변경
-    * React.js 적용한 검색 기능 구현
-    * api 회원가입 구현
-    * 게스트 로그인/권한 구현
-    * hash tag -> memory database로 구현하기
-    
-## 완료
-    * WAS 8.5로 업그레이드
+    * 기본 게시판 구현 (summer note 에디터 적용)
+      - 첨부파일 기능(Drag and Drop)
+      - hashtag 등록
+      - 댓글 기능(utterence 를 사용하여 깃 이슈에 자동으로 등록됨)
+
+    * Spring security 프레임워크를 활용한 토큰 기반 인증 시스템 구현
+      - OAUTH 2.0 프레임워크, JWT Token 사용(redis 사용)
+      
+    * full calandar 라이브러리를 활용한 일정 관리
+      - 일정 조회, 등록, 수정, 삭제 기능
+      - 내 일정만 보기
+      - 디렉토리 별로 등록하기
+
 
 
     

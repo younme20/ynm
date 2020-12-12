@@ -12,6 +12,21 @@
 	  	LIMIT #{page.pageSize} OFFSET #{page.startRow}	
 	</sql>
 	
+	<!-- 해시태그 검색 -->
+	<sql id="COMMON__SERCH_HASHTAG">
+	<where>
+		<if test='hashTag != null'>
+			<trim prefix="AND" prefixOverrides="AND|OR">
+				AND IDX IN(
+					SELECT board_idx 
+					FROM hashtag 
+					WHERE CONCAT(',',contents,',') LIKE CONCAT('%',',',#{hashTag},',','%')
+				)
+			</trim> 
+		</if>
+		</where>
+	</sql>
+	
 	<!-- 검색 공통 -->
 	<sql id="COMMON_SEARCH">
 		<where>
@@ -33,7 +48,9 @@
 	</sql>
 	
 	<select id="selectTotalCount" parameterType="hashmap" resultType="hashmap"> 
-		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board <include refid="COMMON_SEARCH"/>	
+		SELECT COUNT(IDX) AS TOTAL_COUNT FROM board 
+		<include refid="COMMON__SERCH_HASHTAG"/>
+		<include refid="COMMON_SEARCH"/>	
 	</select>
 	
 	<!-- 리스트 조회 -->
@@ -45,6 +62,7 @@
 			     , PARENT_IDX
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 		
 			  FROM board 
+			  <include refid="COMMON__SERCH_HASHTAG"/>
 			  <include refid="COMMON_SEARCH"/>
 			 ORDER BY IDX
 <!--		<include refid="COMMON_PAGING_TAIL"/>	 -->
@@ -57,6 +75,7 @@
 				 , CONTENTS
 				 , HITCNT
 				 , CREATE_ID
+			     , PARENT_IDX
 				 , DATE_FORMAT(CREATE_DATETIME, '%y/%m/%d') AS  CREATE_DATETIME 
 			  FROM board 
 			 WHERE IDX = #{IDX}

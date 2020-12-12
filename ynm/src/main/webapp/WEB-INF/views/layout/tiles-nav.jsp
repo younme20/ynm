@@ -7,8 +7,6 @@
 
 <!-- 일정관리 모달(단순 조회용) -->
 <jsp:include page="../schedule/scheduleNavModal.jsp"></jsp:include>
-<!-- 로그아웃 용 -->
-<script src="<c:url value='/resources/js/user/userLogin.js'/>"charset="utf-8"></script>
 
 <header class="header">
     <div class="main">
@@ -21,10 +19,12 @@
             <c:choose>
                 <c:when test="${username != null}">
                     <button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그아웃 </button>
+               		<button type="button" id="writeFrom" class="new-btn"><i class="fa"></i> 글쓰기 </button>
                 </c:when>
                 <c:otherwise>
                     <button type="button" id="btnMoveLoginPage" class="new-btn"><i class="fa fa-sing-in-alt"></i> 로그인 </button>
                 </c:otherwise>
+               
             </c:choose>
 
         </div>
@@ -34,8 +34,8 @@
         <c:choose>
             <c:when test="${item.PARENT_IDX != null}">
                 <ul>
-                    <li id="item_${item.PARENT_IDX}" class="item">
-                        <a href="/ynm/board/detail/${item.IDX}">${item.TITLE}</a>
+                    <li group="${item.PARENT_IDX}" class="item">
+                        <a href="/ynm/board/${item.IDX}">${item.TITLE}</a>
                     </li>
                 </ul>
             </c:when>
@@ -54,6 +54,4 @@
     </c:forEach>
 </header>
 <aside class="aside">
-
 </aside>
-

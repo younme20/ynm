@@ -126,4 +126,12 @@
             IDX = #{IDX}
      </delete>
    
+   
+   
+   <!-- COMMENT List Select -->
+	<select id="selectLastComment" resultType="hashmap">
+		SELECT BOARD_IDX, COMMENT , WRITER,DATE_FORMAT(REG_DATETIME, '%y/%m/%d') AS  REG_DATETIME   FROM comment
+		ORDER BY REG_DATETIME DESC 
+		LIMIT 5
+	</select>
 </mapper>

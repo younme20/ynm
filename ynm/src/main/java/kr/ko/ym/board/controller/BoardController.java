@@ -75,6 +75,7 @@ public class BoardController {
 	 * write form
 	 * */
 	@RequestMapping(value="/board/edit")
+	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
 	public ModelAndView  writeForm(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		String username = authentication.getPrincipal().toString();
 
@@ -91,6 +92,7 @@ public class BoardController {
 	
 	@RequestMapping(value="/board/insert", method = RequestMethod.POST)
 	@ResponseBody
+	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
 	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		boardService.insertBoard(param);
@@ -104,18 +106,20 @@ public class BoardController {
 		}
 		
 		//param.put("BOARD_IDX", idx);
-		return "/ynm/board/detail/"+ idx;	
+		return "/ynm/board/"+ idx;	
 	}
 	
 	/*
 	 * modify form
 	 * */
 	@RequestMapping(value="/board/modify/{idx}", method = RequestMethod.GET)
-	public ModelAndView modifyForm(HttpServletRequest request, @PathVariable int idx) throws Exception {
+	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	public ModelAndView modifyForm(Authentication authentication, HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
 		Map<String,Object>param = new HashMap<String,Object>();
 
 		mv.addObject("list", boardService.selectBoard(param));
+		mv.addObject("username", authentication.getPrincipal().toString());
 
 		param.put("IDX", idx);	
 		
@@ -157,9 +161,19 @@ public class BoardController {
 	 * */
 	@RequestMapping(value="/board/update", method = RequestMethod.POST)
 	@ResponseBody
+	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+		
+		//int idx = (int) map.get("IDX");
+		//param.put("IDX",idx);	
+		hashtagService.deleteHashTag(param);
+		//if(param.get("HASHTAG") != "") {
+		if(param.get("HASHTAG") != null || param.get("HASHTAG") != "") {
+				hashtagService.insertHashTag(param);
+		}
+		
 		boardService.updateBoard(param);
-		hashtagService.updateHashTag(param);
+		
 		String idx = (String) param.get("IDX");
 		return idx;
 	}
