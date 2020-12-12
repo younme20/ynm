@@ -3,6 +3,7 @@ package kr.ko.ym.hashtag.service;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -51,9 +52,33 @@ public class HshtagServiceImpl implements HashtagService {
 				set.add(arr[j]);
 			}
 		}
-		
-		
 	        return set;
+	}
+
+	@Override
+	public HashSet<String> selectAllHashTag() throws Exception {
+		
+		@SuppressWarnings("unchecked")
+		List<Map<String, Object>> list =  commonDao.selectList("hashtag.selectAllHashTag");
+		HashSet<String> set = new HashSet<String>();
+		String[] arr = null;
+		for(int i=0; i<list.size(); i++) {
+			String str = list.get(i).get("CONTENTS").toString();
+			arr = str.split(",");
+			
+			for(int j=0; j<arr.length; j++) {
+				set.add(arr[j]);
+			}
+		}
+		
+		
+	   return set;
+	}
+
+	@Override
+	public void deleteHashTag(Map<String, Object> param) throws Exception {
+		commonDao.selectList("hashtag.deleteHashTag", param);
+		
 	}
 
 }

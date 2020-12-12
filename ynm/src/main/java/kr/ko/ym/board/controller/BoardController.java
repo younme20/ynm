@@ -136,7 +136,7 @@ public class BoardController {
 		}
 		
 		//param.put("BOARD_IDX", idx);
-		return "/ynm/board/detail/"+ idx;	
+		return "/ynm/board/"+ idx;	
 	}
 	
 	/*
@@ -193,8 +193,17 @@ public class BoardController {
 	@ResponseBody
 	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
+		
+		//int idx = (int) map.get("IDX");
+		//param.put("IDX",idx);	
+		hashtagService.deleteHashTag(param);
+		//if(param.get("HASHTAG") != "") {
+		if(param.get("HASHTAG") != null || param.get("HASHTAG") != "") {
+				hashtagService.insertHashTag(param);
+		}
+		
 		boardService.updateBoard(param);
-		hashtagService.updateHashTag(param);
+		
 		String idx = (String) param.get("IDX");
 		return idx;
 	}
