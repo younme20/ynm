@@ -20,8 +20,8 @@ $(document).ready(function(){
         movePage("/ynm/board/detail/"+idx);
     });
 
-    $("a[name='index']").on("click", function(e){
-    	board.searchBoard($(this).text());
+    $(".tag").on("click", function(e){
+    	board.searchTagBoard($(this).attr("id"));
     });
 
     $("#btnWrite").on("click", function(e){
@@ -37,6 +37,10 @@ function boardList() {
 
 
     },
+	this.searchTagBoard = function(tag){ 
+
+    	movePage("/ynm/"+tag);	
+	},
 	this.searchBoard = function(index){ 
 
     	

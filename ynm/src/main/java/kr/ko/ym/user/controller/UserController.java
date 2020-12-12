@@ -39,8 +39,9 @@ public class UserController {
 	private HashtagService hashtagService;
 	
 	
-	@GetMapping(value = {"/", "/login"})
-	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@GetMapping(value = {"/", "/{word}", "/login"})
+	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response,
+			@PathVariable(required = false) String word) throws Exception {
 
 		ModelAndView mv = new ModelAndView("");
 		String url = "";
@@ -56,6 +57,7 @@ public class UserController {
 				
 			}
 			
+			paramMap.put("hashTag", word);
 			mv.addObject("comment", boardService.selectLastComment());
 			mv.addObject("list", boardService.selectBoard(paramMap));
 			mv.addObject("username", authentication.getPrincipal());

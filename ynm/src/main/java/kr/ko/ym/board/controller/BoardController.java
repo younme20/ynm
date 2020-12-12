@@ -136,7 +136,7 @@ public class BoardController {
 		}
 		
 		//param.put("BOARD_IDX", idx);
-		return "/ynm/board/detail/"+ idx;	
+		return "/ynm/board/"+ idx;	
 	}
 	
 	/*
