@@ -36,14 +36,14 @@ function userFunction() {
 		alert( JSON.stringify(data));
 		$.ajax({
 			type : "POST",
-			url : "/ynm/join",
+			url : contextPath+"/join",
 			contentType : "application/json",
 			data : JSON.stringify(data),
 			async: true,
 			cache :false, // 캐시 여부
 			success : function(result, response){
 				alert("정상적으로 회원가입되었습니다.");
-				movePage("/ynm/login");
+				movePage(contextPath+"/login");
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert("error"+jqXHR);

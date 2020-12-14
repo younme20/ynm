@@ -1,6 +1,8 @@
 /**
  * 
  */
+//const contextPath = getContextPath();
+
 $(document).ready(function(){
 	
 	$("#btnLogin").on("click", function(e){
@@ -8,16 +10,22 @@ $(document).ready(function(){
 	});
 
 	$("#btnLogout").on("click", function(e){
-		movePage("/ynm/out");
+		movePage(contextPath+"/out");
 	});
 
 	$("#btnMoveLoginPage").on("click", function(e){
-		movePage("/ynm/login");
+		movePage(contextPath+"/login");
 	});
 	
 	$("#join").on("click", function(e){ 
-		movePage("/ynm/userjoin");
-	})
+		movePage(contextPath+"/userjoin");
+	});
+
+	$("input").keydown(function (key) {
+		if(key.keyCode == 13){
+			$("#btnLogin").click();
+		}
+	});
 
 	user = new userLogin();
 });
@@ -25,20 +33,20 @@ $(document).ready(function(){
 function userLogin() {
 	this.init = function(){
 
-		
+
 	},
 	this.authLogin = function(){
 		var data = $("#myForm").serializeObject();
 		$.ajax({
 			type : "POST",
-			url : "/ynm/login",
+			url : contextPath+"/login",
 			contentType : "application/json",
 			data : JSON.stringify(data),
 			async: true,
 			cache :true, // 캐시 여부
 			success : function(result, response){
 				alert("정상적으로 로그인되었습니다.");
-				movePage("/ynm");
+				movePage(contextPath);
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert("error");

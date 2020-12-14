@@ -32,7 +32,7 @@ $(document).ready(function(){
 	// 다운로드
 	$(".download").on("click", function(e){
 		var file_no = $(this).attr("data");
-		 window.location ="/ynm/attach/download?file_no="+file_no;
+		 window.location =contextPath+"+/attach/download?file_no="+file_no;
 	});
 	
 	attach = new attach();
@@ -50,7 +50,7 @@ function attach() {
 		$.ajax({
 			type : "POST",         
 			enctype: 'multipart/form-data',
-			url : "/ynm/attach/upload",
+			url : contextPath+"+/attach/upload",
 			data: formData, 
 			processData: false,  
 			contentType: false,  
@@ -70,7 +70,7 @@ function attach() {
 		};
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/attach/delete",                   
+			url : contextPath+"+/attach/delete",                   
 			json : true,                           
 			data : formData,                 
 			success : selectFileList,
@@ -85,7 +85,7 @@ function attach() {
 			};
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/attach/download",
+			url : contextPath+"+/attach/download",
 			data: formData, 
 			download: {
 		        mimetype: "image/jpeg",

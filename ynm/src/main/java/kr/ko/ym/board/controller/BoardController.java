@@ -80,7 +80,7 @@ public class BoardController {
 	@RequestMapping(value="/board/insert", method = RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
-	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
+	public String insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		
 		boardService.insertBoard(param);
 		Map<String,Object> map =  boardService.selectMaxIdx();
@@ -91,7 +91,7 @@ public class BoardController {
 		if(param.get("HASHTAG") != null) {
 			hashtagService.insertHashTag(param);
 		}
-		return "/ynm/board/"+ idx;
+		return request.getContextPath()+"/board/"+ idx;
 	}
 	
 	/*

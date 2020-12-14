@@ -46,7 +46,7 @@ $(document).ready(function(){
 	   
 	//목록
 	$("#list").on("click", function(){
-		movePage("/ynm");
+		movePage(contextPath);
 	
 	});
 	
@@ -58,7 +58,7 @@ $(document).ready(function(){
 	//수정폼
 	$("#modify").on("click", function(e){ 
 		var idx = $(this).attr("data");
-		movePage("/ynm/board/modify/"+idx);
+		movePage(contextPath+"/board/modify/"+idx);
 	});
 	//수정
 	$("#update").on("click", function(e){ 
@@ -68,7 +68,7 @@ $(document).ready(function(){
 	//삭제
 	$("#delete").on("click", function(e){ 
 		var idx = $(this).attr("data");
-		movePage("/ynm/board/delete/"+idx);
+		movePage(contextPath+"/board/delete/"+idx);
 	});
 	 
 	board = new boardEdit();	
@@ -83,7 +83,7 @@ function boardEdit() {
 		var formData = $("#form1").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/board/insert",
+			url : contextPath+"/board/insert",
 			data: formData, 
 			cache: false, 
 			json:true,
@@ -93,7 +93,7 @@ function boardEdit() {
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert('Uncaught Error.n' + jqXHR.responseText);
-			    movePage("/ynm");
+			    movePage(contextPath+"");
 			}
 		});
 	},
@@ -101,16 +101,16 @@ function boardEdit() {
 		var data = $("#form1").serializeObject();
 		$.ajax({
 			type : "POST",                               
-			url : "/ynm/board/update",                         
+			url : contextPath+"/board/update",                         
 			data : data,
 			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('수정되었습니다.');
-				movePage("/ynm/board/"+result);
+				movePage(contextPath+"/board/"+result);
 			},
 			error   : function(result, textStatus, jqXHR){
 				//alert('전송실패!');
-				movePage("/ynm");
+				movePage(contextPath+"");
 			}
 		});
 	}
