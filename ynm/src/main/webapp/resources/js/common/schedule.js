@@ -44,7 +44,7 @@ $(document).ready(function(){
 	});
 
 	$("#btnWritePlan").on("click", function(e){
-		movePage("/ynm/schedule");
+		movePage(contextPath+"/schedule");
 	});
 
 	$("#btnModalConfirm").on("click", function(e){
@@ -68,7 +68,7 @@ function selectSchedule(all) {
 
 	$.ajax({
 		type : "POST",                               
-		url : "/ynm/schedule/list",
+		url : contextPath+"/schedule/list",
 		json : true,
 		data : {"all" : all},//JSON.stringify({"_csrf":token}),
 		beforeSend: function(xhr) {
@@ -97,7 +97,7 @@ function saveSchedule() {
 
 	$.ajax({
 		type : "POST",                               
-		url : "/ynm/schedule/"+url,                   
+		url : contextPath+"/schedule/"+url,                   
 		json : true,                           
 		data : schedule,      
 		success : function(result, textStatus, jqXHR){
@@ -114,7 +114,7 @@ function deleteSchedule() {
 	var schedule = $("#scheduleForm").serializeObject();
 	$.ajax({
 		type : "POST",
-		url : "/ynm/schedule/delete",                   
+		url : contextPath+"/schedule/delete",                   
 		json : true,                           
 		data : schedule,      
 		success : function(result, textStatus, jqXHR){
@@ -192,7 +192,7 @@ function calendarEvent(eventData){
     	  
     	  // 해당 이벤트 정보 가져오기 -> 나중에 위의 함수랑 합치기
     	  $.ajax({
-    	    url: "/ynm/schedule/list",    
+    	    url: contextPath+"/schedule/list",    
     	    type: "POST",
     	    data: {IDX : info.event._def.extendedProps.idx},
     		json : true,                           

@@ -4,7 +4,7 @@
 $(document).ready(function(){
 	
 	$("#btnWriteFrom").on("click", function(e){
-		movePage("/ynm/board/edit");
+		movePage(contextPath+"/board/edit");
 	});
     
 	$("a[name='index']").each(function(){
@@ -17,7 +17,7 @@ $(document).ready(function(){
 
     $("a[name='title']").on("click", function(e){
         var idx = $(this).attr("idx");
-        movePage("/ynm/board/detail/"+idx);
+        movePage(contextPath+"/board/detail/"+idx);
     });
 
     $(".tag").on("click", function(e){
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
     $("#btnWrite").on("click", function(e){
         var length = $(this).attr("length") * 1;
-        movePage("/ynm/board/edit/"+(length+1));
+        movePage(contextPath+"/board/edit/"+(length+1));
     });
 
     board = new boardList();
@@ -39,16 +39,14 @@ function boardList() {
     },
 	this.searchTagBoard = function(tag){ 
 
-    	movePage("/ynm/"+tag);	
+    	movePage(contextPath+"/"+tag);	
 	},
-	this.searchBoard = function(index){ 
-
-    	
+	this.searchBoard = function(index){
 		var data = {
 				"searchText" : $("#searchText").val(),
 				"searchCondition" : $("#searchCondition option:selected").val(),
 				"index" : index
 		};
-		movePage("/ynm/board?pageIndex="+data.index+"&searchCondition="+data.searchCondition+"&searchText="+data.searchText);	
+		movePage(contextPath+"/board?pageIndex="+data.index+"&searchCondition="+data.searchCondition+"&searchText="+data.searchText);	
 	}
 }

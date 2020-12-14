@@ -58,7 +58,7 @@
             <c:when test="${item.PARENT_IDX != null}">
                 <ul>
                     <li group="${item.PARENT_IDX}" class="item">
-                        <a href="/ynm/board/${item.IDX}">${item.TITLE}</a>
+                        <a href="<c:url value='/board/${item.IDX}'/>">${item.TITLE}</a>
                     </li>
                 </ul>
             </c:when>

@@ -16,7 +16,7 @@ $(document).ready(function () {
 
      var word = $(this).text().toString();
 
-   	 $("#form").attr("action", "/ynm/notice/"+word);
+   	 $("#form").attr("action", contextPath+"/notice/"+word);
 	 $("#form").submit();
    
     });
