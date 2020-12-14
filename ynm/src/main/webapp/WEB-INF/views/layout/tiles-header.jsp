@@ -30,12 +30,14 @@
 
 	<!-- 공통js -->
 	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
+	<script src="<c:url value='/resources/js/common/schedule.js'/>"charset="utf-8"></script>
 
 	<div class="top">
 
 	</div>
 </head>
 <body>
+<c:set var="auth" scope="application" value="${isAuth}"></c:set>
 </body>
 </html>
 <!-- header page -->	

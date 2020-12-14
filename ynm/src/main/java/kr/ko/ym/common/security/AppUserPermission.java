@@ -4,8 +4,6 @@ public enum AppUserPermission {
 
     USER_READ("user:read"),
     USER_WRITE("user:write"),
-    //MANAGER_READ("manager:read"),
-    //MANAGER_WRITE("manager:write"),
     GUEST_READ("guest:read");
 
     private final String permission;
