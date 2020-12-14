@@ -70,10 +70,8 @@ public class UserController {
 
 	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value = "/out", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView loginOutPage(HttpServletRequest request,
+	public void loginOutPage(HttpServletRequest request,
 									 HttpServletResponse response) throws Exception {
-
-		ModelAndView mv = new ModelAndView("/main/main.tiles");
 
 		//클라이언트 측 쿠키 삭제
 		Cookie[] requestCookies = request.getCookies();
@@ -93,6 +91,7 @@ public class UserController {
 			}
 		}
 
-		return mv;
+		response.sendRedirect(request.getContextPath());
+
 	}
 }

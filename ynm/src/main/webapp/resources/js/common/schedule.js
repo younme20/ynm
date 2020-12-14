@@ -1,7 +1,8 @@
 /**
  * 일정관리 공통
  */
-var all = false;
+const all = false;
+const contextPath = getContextPath();
 
 $(document).ready(function(){
 	$("select[name='COLOR']").trigger("change");

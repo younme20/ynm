@@ -1,7 +1,7 @@
 /**
  * 
  */
-const contextPath = getContextPath();
+//const contextPath = getContextPath();
 
 $(document).ready(function(){
 	
@@ -19,7 +19,13 @@ $(document).ready(function(){
 	
 	$("#join").on("click", function(e){ 
 		movePage(contextPath+"/userjoin");
-	})
+	});
+
+	$("input").keydown(function (key) {
+		if(key.keyCode == 13){
+			$("#btnLogin").click();
+		}
+	});
 
 	user = new userLogin();
 });

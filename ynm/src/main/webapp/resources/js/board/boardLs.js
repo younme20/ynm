@@ -1,6 +1,8 @@
 /**
  *
  */
+//const contextPath = getContextPath();
+
 $(document).ready(function(){
 	
 	$("#btnWriteFrom").on("click", function(e){

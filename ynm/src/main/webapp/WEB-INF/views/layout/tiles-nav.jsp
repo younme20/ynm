@@ -19,6 +19,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
+<script src="<c:url value='/resources/js/common/schedule.js'/>" charset="utf-8"></script>
+
 <div class="modal fade" id="navPlanModal" role="dialog" aria-labelledby="navPlanModalLabel">
     <div class="modal-dialog modal-sm" role="document" style="max-width: 50%; max-height: 50%; width: auto; height: auto; display: table;" tabindex="-1">
         <div class="modal-content">
