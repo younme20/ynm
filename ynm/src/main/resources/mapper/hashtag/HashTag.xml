@@ -27,6 +27,12 @@
 		WHERE MENU_CODE =  #{MENU_CODE}
    </select>
    
+   
+    <select id="selectAllHashTag" resultType="hashmap">  
+   		SELECT IDX, CONTENTS FROM hashtag
+   </select>
+   
+   
     <!-- delete -->
      <delete id="deleteHashTag" parameterType="hashmap">
         DELETE FROM board

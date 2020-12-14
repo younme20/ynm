@@ -11,5 +11,9 @@ public interface HashtagService {
 	void updateHashTag(Map<String, Object> param) throws Exception;
 	
 	HashSet<String> selectHashTag(Map<String, Object> param) throws Exception;
+
+	HashSet<String> selectAllHashTag() throws Exception;
+
+	void deleteHashTag(Map<String, Object> param)  throws Exception;
 	
 }

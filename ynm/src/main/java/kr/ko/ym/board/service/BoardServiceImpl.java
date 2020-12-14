@@ -76,5 +76,12 @@ public class BoardServiceImpl implements BoardService {
 		return commonDao.selectOne("notice.selectCount", param);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Map<String, Object>> selectLastComment() throws Exception {
+	
+		return commonDao.selectList("notice.selectLastComment");
+	}
+
 
 }

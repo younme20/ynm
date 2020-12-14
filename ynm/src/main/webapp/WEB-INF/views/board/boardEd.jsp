@@ -62,7 +62,7 @@
 						<div id="tlist">
 								<ul>
 									<c:forEach var="item" items="${hash}" varStatus="idx">
-										<li class="titem"><p>${item}</p><span id='delTag' class='glyphicon glyphicon-remove'></span></li>
+										<li class="titem"><p>${item}</p><span id='delTag' class='as fa-times'></span></li>
 									</c:forEach>
 								</ul>
 							</div>
