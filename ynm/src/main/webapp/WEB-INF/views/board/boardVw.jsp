@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta property="og:title" content="${data.TITLE}"/>
-<meta property="og:description" content="${data.IDX}"/>
-<meta property="og:contents" content="${data.CONTENTS}"/>
-
 <html lang="en">
+<head>
+<title>${data.TITLE}</title>
+</head>
 <body>
 	<div class="main-wrapper">
 		<section class="section py-5">
