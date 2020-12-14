@@ -27,21 +27,26 @@
     </definition>
 
     <!-- login layout-->
-    <definition name="login" template="/WEB-INF/views/layout/tiles-login.jsp">
+    <definition name="manage" template="/WEB-INF/views/layout/tiles-login.jsp">
+        <put-attribute name="header" value="/WEB-INF/views/layout/tiles-header.jsp" />
         <put-attribute name="left"   value="/WEB-INF/views/layout/tiles-left.jsp" />
         <put-attribute name="content"   value="" />
         <put-attribute name="footer" value="/WEB-INF/views/layout/tiles-footer.jsp" />
+    </definition>
+
+    <definition name="schedule" extends="manage">
+        <put-attribute name="content" value="/WEB-INF/views/schedule/scheduleLs.jsp" />
     </definition>
 
     <definition name="userlogin" extends="default">
         <put-attribute name="content" value="/WEB-INF/views/login/login.jsp" />
     </definition>
 	
-    <definition name="userError" extends="login">
+    <definition name="userError" extends="manage">
         <put-attribute name="content" value="/WEB-INF/views/error/403.jsp" />
     </definition>
     
-    <definition name="userjoin" extends="login">
+    <definition name="userjoin" extends="manage">
         <put-attribute name="content" value="/WEB-INF/views/login/join.jsp" />
     </definition>
  	

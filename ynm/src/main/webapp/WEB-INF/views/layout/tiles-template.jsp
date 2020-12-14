@@ -8,6 +8,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- 구글 메타태그 -->
+    <meta name="google-site-verification" content="k2vGgxrovF_MtRI-tklF_96159fMmepWgiYQxj8HGV4" />
 	<title></title>
 </head>
 <body>

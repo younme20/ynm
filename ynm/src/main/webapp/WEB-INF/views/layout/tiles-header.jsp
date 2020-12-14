@@ -30,6 +30,7 @@
 
 	<!-- 공통js -->
 	<script src="<c:url value='/resources/js/common/common.js'/>"charset="utf-8"></script>
+	<script src="<c:url value='/resources/js/common/schedule.js'/>"charset="utf-8"></script>
 
 	<div class="top">
 

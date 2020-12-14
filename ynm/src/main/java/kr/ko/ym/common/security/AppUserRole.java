@@ -10,8 +10,7 @@ import static kr.ko.ym.common.security.AppUserPermission.*;
 
 public enum AppUserRole {
 
-    USER(Sets.newHashSet(USER_READ, USER_WRITE)),
-    MANAGER(Sets.newHashSet(USER_READ, USER_WRITE, MANAGER_READ, MANAGER_WRITE)),
+    USER(Sets.newHashSet(GUEST_READ, USER_READ, USER_WRITE)),
     GUEST(Sets.newHashSet(GUEST_READ));
 
     private final Set<AppUserPermission> permission;

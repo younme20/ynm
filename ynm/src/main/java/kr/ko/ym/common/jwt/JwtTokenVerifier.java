@@ -39,7 +39,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-
         String requestHeader = "";
 
         Cookie[] requestCookies = request.getCookies();
@@ -119,9 +118,7 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                 .parseClaimsJws(token);
 
         Claims body = claimsJws.getBody();
-
         String username = body.getSubject();
-
         List<Map<String, String>> authorities = (List<Map<String, String>>) body.get("authorities");
 
         Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
