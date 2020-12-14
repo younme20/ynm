@@ -46,7 +46,7 @@ public class UserController {
 		HashMap<String,Object>paramMap = new HashMap<String,Object>();
 
 		GithubApi githubApi = new GithubApi();
-		List<Map<String,Object>> githubApiIssueComments = githubApi.getIssueRecentComments(jwtConfig.getOauthToken(), "younme20/ynm");
+		List<Map<String,Object>> githubApiIssueComments = githubApi.getIssueRecentComments(jwtConfig.getOauthToken(), jwtConfig.getRepoName());
 
 		//해시태그
 		HashSet<String> set = hashtagService.selectAllHashTag();

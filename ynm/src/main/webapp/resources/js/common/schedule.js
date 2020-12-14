@@ -1,12 +1,12 @@
 /**
  * 일정관리 공통
  */
-const all = false;
+var all = false;
 
 $(document).ready(function(){
 	$("select[name='COLOR']").trigger("change");
 
-	//selectSchedule(all);
+	selectSchedule(all);
 
 	//datetimepicker
 	$("#startDate").datetimepicker({
@@ -43,7 +43,10 @@ $(document).ready(function(){
 		$(this).datetimepicker("hide");
 	});
 
-	
+	$("#btnWritePlan").on("click", function(e){
+		movePage("/ynm/schedule");
+	});
+
 	$("#btnModalConfirm").on("click", function(e){
 		saveSchedule();
 	});	
@@ -54,7 +57,7 @@ $(document).ready(function(){
 
 	$("#btnShowPlan").on("click", function(e){
 		$("#navPlanModal").modal('show');
-		showNavPlanModal();
+		selectSchedule(true);
 	});
 
 });
@@ -124,10 +127,10 @@ function deleteSchedule() {
 	});			
 }
 
+function calendarEvent(eventData){
+	var id = $("div[type=date]").attr("id");
+	var calendarEl = $("div[id="+id+"]")[0];
 
-
-function calendarEvent(eventData){	
-    var calendarEl = $("div[id=calendar]")[0];
 	var date = new Date();
 	var d = date.getDate();
 	var m = date.getMonth();
@@ -223,9 +226,4 @@ function calendarEvent(eventData){
       }
     });
     calendar.render();	
-}
-
-
-function showNavPlanModal(){
-	selectSchedule(true);
 }

@@ -5,10 +5,8 @@
 <jsp:include page="../common/scheduleModal.jsp"></jsp:include>
 <!-- 일정관리 모달 -->
 <body>
-    <div class="container">
-        <div id="wrapper">
-            <div id="calendar"  style="width:50%"></div>
-        </div>
+    <div class="main-wrapper">
+        <div id="calendar" type="date" style="width:50%"></div>
     </div>
 </body>
 </html>

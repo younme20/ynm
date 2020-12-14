@@ -37,7 +37,6 @@
 	</div>
 </head>
 <body>
-<c:set var="auth" scope="application" value="${isAuth}"></c:set>
 </body>
 </html>
 <!-- header page -->	

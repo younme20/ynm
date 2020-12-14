@@ -28,9 +28,8 @@ public class ScheduleController {
 
 	@RequestMapping(value="/schedule", method=RequestMethod.GET)
 	@ResponseBody
-	public ModelAndView getScheduleView(Authentication authentication, @RequestParam Map<String, Object>param) throws Exception {
+	public ModelAndView getScheduleView(@RequestParam Map<String, Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("/schedule/scheduleLs.tiles");
-		mv.addObject("username", authentication.getPrincipal());
 		return mv;
 	}
 
@@ -46,6 +45,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/select", method=RequestMethod.GET)
 	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String,Object>> selectScheduleOne(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		List<Map<String,Object>>list = scheduleService.selectSchedule(param);
@@ -55,7 +55,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/insert", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String, Object>> insertSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		return scheduleService.insertSchedule(param);
@@ -63,7 +63,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/update", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String, Object>> updateSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		return scheduleService.updateSchedule(param);
@@ -71,7 +71,7 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/delete", method=RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('manager:read,manager:write')")
+	@PreAuthorize("hasRole('USER')")
 	public List<Map<String, Object>> deleteSchedule(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		param.put("username", authentication.getPrincipal());
 		return scheduleService.deleteSchedule(param);

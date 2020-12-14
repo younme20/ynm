@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <head>
-	<script src="<c:url value='/resources/js/common/schedule.js'/>" charset="utf-8"></script>
 	<title>first</title>
 </head>
 <body>
