@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta property="og:title" content="${data.TITLE}"/>
-
 <html lang="en">
 <head>
 <title>${data.TITLE}</title>
@@ -46,19 +45,19 @@
 			</ul>
 		</div>
 		<input type="hidden" id="PARENT_IDX" VALUE="${data.PARENT_IDX}"/>
-		<input type="hidden" id="issue[body]" name="issue[body]" VALUE="${data.TITLE}"/>
-
-		<div class="new-btn-group btn-right mt-5 md-5">
-			<button type="button" id="modify" data="${data.IDX}" class="btn-li new-btn">수정</button>
-			<button type="button" id="delete" data="${data.IDX}" class="btn-li new-btn">삭제</button>
-<%--			<button type="button" id="list" class="btn-li">목록</button>--%>
-		</div>
+		<c:if test="${isAuth}">
+			<div class="new-btn-group btn-right mt-5 md-5">
+				<button type="button" id="modify" data="${data.IDX}" class="btn-li new-btn">수정</button>
+				<button type="button" id="delete" data="${data.IDX}" class="btn-li new-btn">삭제</button>
+	<%--			<button type="button" id="list" class="btn-li">목록</button>--%>
+			</div>
+		</c:if>
 		<section class="comment-section py-5">
 			<div class="mt-5 pt-5">
 				<h3 class="heading"><strong>Comments</strong></h3>
 				<script src="https://utteranc.es/client.js"
 						repo="younme20/ynm"
-						issue-term="og:title"
+						issue-term="pathname"
 						label="comments"
 						theme="boxy-light"
 						crossorigin="anonymous"

@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 	
-	$("#writeFrom").on("click", function(e){ 
+	$("#btnWriteFrom").on("click", function(e){
 		movePage("/ynm/board/edit");
 	});
     
