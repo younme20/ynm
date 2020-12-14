@@ -39,7 +39,6 @@ public class JwtTokenVerifier extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-
         String requestHeader = "";
 
         Cookie[] requestCookies = request.getCookies();

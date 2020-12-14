@@ -158,6 +158,13 @@
 			<version>2.9.2</version>
 		</dependency>
 
+		<!-- github api -->
+		<dependency>
+			<groupId>org.kohsuke</groupId>
+			<artifactId>github-api</artifactId>
+			<version>1.117</version>
+		</dependency>
+
 		<!-- JWT -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>

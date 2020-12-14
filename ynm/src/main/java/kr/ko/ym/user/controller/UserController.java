@@ -1,19 +1,16 @@
 package kr.ko.ym.user.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.net.HttpHeaders;
 import kr.ko.ym.board.service.BoardService;
-import kr.ko.ym.common.auth.AppUserService;
+import kr.ko.ym.common.api.GithubApi;
+import kr.ko.ym.common.jwt.JwtConfig;
 import kr.ko.ym.hashtag.service.HashtagService;
-import kr.ko.ym.kakao.service.KakaoAccessToken;
+import org.kohsuke.github.GHIssueComment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.authentication.AuthenticationDetailsSource;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,8 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-
 
 @Controller
 public class UserController {
@@ -32,52 +29,51 @@ public class UserController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private AppUserService appUserService;
-	@Autowired
-	StringRedisTemplate stringRedisTemplate;
-	@Autowired
 	private BoardService boardService;
 	@Autowired
 	private HashtagService hashtagService;
-	
-	
-	@GetMapping(value = {"/", "/{word}", "/login"})
-	public ModelAndView loginViewPage(Authentication authentication, HttpServletRequest request, HttpServletResponse response,
-			@PathVariable(required = false) String word) throws Exception {
+	@Autowired
+	StringRedisTemplate stringRedisTemplate;
+	@Autowired
+	private JwtConfig jwtConfig;
 
-		ModelAndView mv = new ModelAndView("");
-		String url = "";
-		boolean isAuth = this.isAuth(request, response);
-		Map<String,Object> paramMap = new HashMap<String,Object>();
+	@GetMapping(value = {"/", "/{word}"})
+	public ModelAndView mainViewPage(HttpServletRequest request,
+							   		 HttpServletResponse response,
+									 @PathVariable(required = false) String word) throws Exception {
+
+		ModelAndView mv = new ModelAndView("/main/main.tiles");
+		HashMap<String,Object>paramMap = new HashMap<String,Object>();
+
+		GithubApi githubApi = new GithubApi();
+		List<Map<String,Object>> githubApiIssueComments = githubApi.getIssueRecentComments(jwtConfig.getOauthToken(), "younme20/ynm");
+
+		//해시태그
 		HashSet<String> set = hashtagService.selectAllHashTag();
-		//이미 인증 정보가 있을 경우
-		if(isAuth){
-			url = "/main/main.tiles";
-			
-			if(!set.isEmpty()) {
-				mv.addObject("hash", set);
-				
-			}
-			
-			paramMap.put("hashTag", word);
-			mv.addObject("comment", boardService.selectLastComment());
-			mv.addObject("list", boardService.selectBoard(paramMap));
-			mv.addObject("username", authentication.getPrincipal());
-		}else{
-			url = "userlogin";
+		if(!set.isEmpty()) {
+			mv.addObject("hash", set);
 		}
+		paramMap.put("hashTag", word);
+		//댓글
+		mv.addObject("comment", githubApiIssueComments);
+		//목록
+		mv.addObject("list", boardService.selectBoard(paramMap));
 
-		mv.setViewName(url);
-		mv.addObject("isAuth", isAuth);
 		return mv;
 	}
 
+	@GetMapping(value = {"/login"})
+	public String loginViewPage(HttpServletRequest request,
+									  HttpServletResponse response) throws Exception {
+		return "userlogin";
+	}
+
+	@PreAuthorize("hasRole('USER')")
 	@RequestMapping(value = "/out", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView loginOutPage(Authentication authentication,
-			 						 HttpServletRequest request,
+	public ModelAndView loginOutPage(HttpServletRequest request,
 									 HttpServletResponse response) throws Exception {
 
-		ModelAndView mv = new ModelAndView("userlogin");
+		ModelAndView mv = new ModelAndView("/main/main.tiles");
 
 		//클라이언트 측 쿠키 삭제
 		Cookie[] requestCookies = request.getCookies();
@@ -99,21 +95,4 @@ public class UserController {
 
 		return mv;
 	}
-
-	public Boolean isAuth(HttpServletRequest request, HttpServletResponse response){
-		boolean isAuth = false;
-
-		Cookie[] requestCookies = request.getCookies();
-
-		if(requestCookies != null){
-			for(Cookie requestCookie : requestCookies) {
-				if (HttpHeaders.AUTHORIZATION.equals(requestCookie.getName())) {
-					isAuth = true;
-					break;
-				}
-			}
-		}
-		return isAuth;
-	}
-	
 }

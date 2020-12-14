@@ -4,11 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="<c:url value='/resources/js/board/boardLs.js'/>" charset="utf-8"></script>
 </head>
 <body>
 	<div id="container">
@@ -21,19 +20,19 @@
 				</ul>
 			</div>
 			<div id="comment">
+				<h3>최신 댓글 (일단 5개만)</h3>
 			 <c:choose>
 				<c:when test="${fn:length(comment) > 0}">
 					<ul>
 					<c:forEach items="${comment}" var="row" varStatus="status">
-					
 							<li class="titem">
 								 <a href="/ynm/board/${row.BOARD_IDX}">
-									 ${row.COMMENT}
-									 ${row.WRITER}
-									 ${row.REG_DATETIME}
+									 <img src="${row.imgUrl}" style="width:10px;height:10px;" />
+									 ${row.comment}
+									 ${row.userName}
+									 ${row.git}
 								 </a>
 							</li>
-						
 					</c:forEach>
 					</ul>
 				</c:when>

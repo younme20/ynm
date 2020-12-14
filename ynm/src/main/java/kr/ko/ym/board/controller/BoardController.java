@@ -30,10 +30,9 @@ public class BoardController {
 	/*
 	 * view
 	 * */
-	@RequestMapping(value="/board/detail/{idx}" , method = {RequestMethod.POST,RequestMethod.GET})
+	@RequestMapping(value="/board/{idx}" , method = {RequestMethod.GET})
 	@ResponseBody
-	public ModelAndView selectDetail(Authentication authentication,
-									 HttpServletRequest request,
+	public ModelAndView selectDetail(HttpServletRequest request,
 									 HttpServletResponse response,
 									 @RequestParam Map<String,Object>param,
 									 @PathVariable int idx) throws Exception {
@@ -44,11 +43,6 @@ public class BoardController {
 		mv.addObject("param", param);
 		mv.addObject("list", boardService.selectBoard(param));
 		mv.addObject("data", boardService.selectDetail(param));
-		if(authentication != null){
-			mv.addObject("username", authentication.getPrincipal());
-		}else{
-			mv.addObject("isAnonyMous", false);
-		}
 
 		List<Map<String, Object>> list = fileuploadService.selectAttachFileListByIDX(param);
 
@@ -57,7 +51,6 @@ public class BoardController {
 		}
 		
 		//해시태그 obj
-		
 		Map<String,Object> hash = hashtagService.selectOneHashTag(param);
 		if(hash != null) {
 			if(hash.size() > 0) {
@@ -65,8 +58,7 @@ public class BoardController {
 				mv.addObject("hash", arr);
 			}
 		}
-		
-		
+
 		boardService.updateCount(param);
 		return mv;
 	}
@@ -74,14 +66,10 @@ public class BoardController {
 	/*
 	 * write form
 	 * */
-	@RequestMapping(value="/board/edit")
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
-	public ModelAndView  writeForm(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
-		String username = authentication.getPrincipal().toString();
-
+	@RequestMapping(value="/board/edit", method = RequestMethod.GET)
+	@PreAuthorize("hasRole('USER')")
+	public ModelAndView writeForm(@RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
-
-		mv.addObject("username", username);
 		mv.addObject("mode", "new");	
 		return mv;
 	}
@@ -89,10 +77,9 @@ public class BoardController {
 	/*
 	 * insert
 	 * */
-	
 	@RequestMapping(value="/board/insert", method = RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	@PreAuthorize("hasRole('USER')")
 	public String insertBoard(@RequestParam Map<String,Object>param) throws Exception {
 		
 		boardService.insertBoard(param);
@@ -104,16 +91,14 @@ public class BoardController {
 		if(param.get("HASHTAG") != null) {
 			hashtagService.insertHashTag(param);
 		}
-		
-		//param.put("BOARD_IDX", idx);
-		return "/ynm/board/"+ idx;	
+		return "/ynm/board/"+ idx;
 	}
 	
 	/*
 	 * modify form
 	 * */
 	@RequestMapping(value="/board/modify/{idx}", method = RequestMethod.GET)
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	@PreAuthorize("hasRole('USER')")
 	public ModelAndView modifyForm(Authentication authentication, HttpServletRequest request, @PathVariable int idx) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
 		Map<String,Object>param = new HashMap<String,Object>();
@@ -161,11 +146,9 @@ public class BoardController {
 	 * */
 	@RequestMapping(value="/board/update", method = RequestMethod.POST)
 	@ResponseBody
-	@PreAuthorize("hasAnyAuthority('user:read,user:write')")
+	@PreAuthorize("hasRole('USER')")
 	public String updateBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		
-		//int idx = (int) map.get("IDX");
-		//param.put("IDX",idx);	
 		hashtagService.deleteHashTag(param);
 		//if(param.get("HASHTAG") != "") {
 		if(param.get("HASHTAG") != null || param.get("HASHTAG") != "") {
@@ -177,5 +160,15 @@ public class BoardController {
 		String idx = (String) param.get("IDX");
 		return idx;
 	}
+
+	@RequestMapping(value="/board/delete/{idx}", method=RequestMethod.POST)
+	@ResponseBody
+	@PreAuthorize("hasRole('USER')")
+	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
+		boardService.deleteBoard(param);
+
+	}
+
+
 	
 }
