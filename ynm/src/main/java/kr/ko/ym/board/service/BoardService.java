@@ -8,7 +8,7 @@ public interface BoardService {
 
 	Map<String,Object> selectDetail(Map<String, Object> param) throws Exception;
 
-	Object insertBoard(Map<String, Object> param) throws Exception;
+	Integer insertBoard(Map<String, Object> param) throws Exception;
 
 	void updateCount(Map<String, Object> param) throws Exception;
 
@@ -23,5 +23,6 @@ public interface BoardService {
 	Map<String, Object> selectCount(Map<String, Object> param)throws Exception;
 	
 	List<Map<String,Object>>selectLastComment() throws Exception;
-	
+
+	List<Map<String, Object>> selectCategory()throws Exception;
 }

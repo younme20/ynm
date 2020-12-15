@@ -2,6 +2,16 @@
  * board Edit js
  */
 $(document).ready(function(){
+
+	$("#selectCategory").trigger("change");
+
+	$("#CATEGORY").blur(function() {
+		if($(this).val() == ""){
+			$("#selectCategory").attr("disabled", false);
+		}else{
+			$("#selectCategory").attr("disabled", true);
+		}
+	});
 	
 	$('#summernote').summernote({
            height: 300,                 
@@ -79,8 +89,9 @@ function boardEdit() {
 	this.init = function(){
 		
 	},
-	this.insertBoard = function(){ 
-		var formData = $("#form1").serializeObject();
+	this.insertBoard = function(){
+		const formData = board.setFormDate();
+
 		$.ajax({
 			type : "POST",                               
 			url : contextPath+"/board/insert",
@@ -93,16 +104,17 @@ function boardEdit() {
 			},
 			error   : function(result, textStatus, jqXHR){
 				alert('Uncaught Error.n' + jqXHR.responseText);
-			    movePage(contextPath+"");
+			    movePage(contextPath);
 			}
 		});
 	},
-	this.updateBoard = function(){ 
-		var data = $("#form1").serializeObject();
+	this.updateBoard = function(){
+		const formData = board.setFormDate();
+
 		$.ajax({
 			type : "POST",                               
-			url : contextPath+"/board/update",                         
-			data : data,
+			url : contextPath+"/board/update",
+			data : formData,
 			json:true,
 			success : function(result, textStatus, jqXHR){
 				alert('수정되었습니다.');
@@ -113,5 +125,18 @@ function boardEdit() {
 				movePage(contextPath+"");
 			}
 		});
+	}, this.setFormDate = function () {
+		const formData = $("#form1").serializeObject();
+
+		//카테고리 수정
+		if($("#CATEGORY").val() == null || $("#CATEGORY").val() === ""){
+			formData["CATEGORY"] = $("#selectCategory option:selected").val();
+			formData["CATEGORY_TYPE"] = "EDIT";
+			formData["PARENT_IDX"] = $("#selectCategory option:selected").attr("id");
+		//카테고리 신규
+		}else{
+			formData["CATEGORY_TYPE"] = "NEW";
+		}
+		return formData;
 	}
 }

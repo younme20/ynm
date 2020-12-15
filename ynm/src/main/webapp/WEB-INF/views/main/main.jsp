@@ -26,7 +26,7 @@
 					<ul>
 					<c:forEach items="${comment}" var="row" varStatus="status">
 							<li class="titem">
-								 <a href="<c:url value="/board/${row.BOARD_IDX}"/>">
+								 <a href="<c:url value="${row.idx}"/>">
 									 <img src="${row.imgUrl}" style="width:10px;height:10px;" />
 									 ${row.comment}
 									 ${row.userName}

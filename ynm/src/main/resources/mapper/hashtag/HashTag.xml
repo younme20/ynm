@@ -35,7 +35,7 @@
    
     <!-- delete -->
      <delete id="deleteHashTag" parameterType="hashmap">
-        DELETE FROM board
+        DELETE FROM hashtag
         WHERE
             BOARD_IDX = #{IDX}
      </delete>
