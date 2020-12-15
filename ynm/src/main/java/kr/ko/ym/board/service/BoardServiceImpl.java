@@ -2,10 +2,10 @@ package kr.ko.ym.board.service;
 
 import kr.ko.ym.common.dao.CommonDao;
 import kr.ko.ym.common.util.PagingUtil;
-import kr.ko.ym.notice.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,60 +27,64 @@ public class BoardServiceImpl implements BoardService {
 		}
 		paging.countPaging(index, 5);
 		param.put("page",paging);
-		
-		return commonDao.selectList("study.selectList", param);
+
+		return commonDao.selectList("board.selectBoard", param);
 	}
 
 	@Override
 	public Map<String, Object> selectDetail(Map<String, Object> param) throws Exception {
 	
-		return commonDao.selectOne("study.selectDetail",param);
+		return commonDao.selectOne("board.detailBoard",param);
 	}
 
 	@Override
-	public Object insertBoard(Map<String, Object> param) throws Exception {
-		
-		return commonDao.insert("notice.insertBoard",param);
+	public Integer insertBoard(Map<String, Object> param) throws Exception {
+		return (int)commonDao.insert("board.insertBoard",param);
 	}
 
 	@Override
 	public void updateCount(Map<String, Object> param) throws Exception {
-		commonDao.update("notice.updateCount",param);
+		commonDao.update("board.updateCount",param);
 	}
 
 	@Override
 	public void updateBoard(Map<String, Object> param) throws Exception {
-		commonDao.update("notice.updateBoard",param);
+		commonDao.update("board.updateBoard",param);
 	}
 
 	@Override
 	public void deleteBoard(Map<String, Object> param) throws Exception {
-		commonDao.delete("notice.deleteBoard", param);
+		commonDao.delete("board.deleteBoard", param);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public  Map<String, Object> selectMaxIdx() throws Exception {
-		return commonDao.selectOne("notice.selectMaxIdx");
+		return commonDao.selectOne("board.selectMaxIdx");
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> serchBoard(Map<String, Object> param) throws Exception {
-		return commonDao.selectList("notice.selectBoard", param);
+		return commonDao.selectList("board.selectBoard", param);
 	}
 	
 	
 	@Override
 	public Map<String, Object> selectCount(Map<String, Object> param) throws Exception {
-		return commonDao.selectOne("notice.selectCount", param);
+		return commonDao.selectOne("board.selectCount", param);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, Object>> selectLastComment() throws Exception {
 	
-		return commonDao.selectList("notice.selectLastComment");
+		return commonDao.selectList("board.selectLastComment");
+	}
+
+	@Override
+	public List<Map<String, Object>> selectCategory() throws Exception {
+		return commonDao.selectList("board.selectCategory");
 	}
 
 

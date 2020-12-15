@@ -68,9 +68,14 @@ public class BoardController {
 	 * */
 	@RequestMapping(value="/board/edit", method = RequestMethod.GET)
 	@PreAuthorize("hasRole('USER')")
-	public ModelAndView writeForm(@RequestParam Map<String,Object>param) throws Exception {
+	public ModelAndView writeForm(Authentication authentication, @RequestParam Map<String,Object>param) throws Exception {
 		ModelAndView mv = new ModelAndView("board/boardEd.tiles");
-		mv.addObject("mode", "new");	
+
+		mv.addObject("list", boardService.selectBoard(param));
+		mv.addObject("category", boardService.selectCategory());
+		mv.addObject("username", authentication.getPrincipal().toString());
+
+		mv.addObject("mode", "new");
 		return mv;
 	}
 	
@@ -81,14 +86,16 @@ public class BoardController {
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
 	public String insertBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
-		
+
+		//카테고리 넣기
+		param.put("PARENT_IDX", insertCategory(param).get("PARENT_IDX"));
+
 		boardService.insertBoard(param);
 		Map<String,Object> map =  boardService.selectMaxIdx();
-		
 		int idx = (int) map.get("IDX");
-		
-		param.put("IDX",idx);	
-		if(param.get("HASHTAG") != null) {
+		//param.put("IDX",idx);
+
+		if(param.get("HASHTAG") != null && param.get("HASHTAG") != "") {
 			hashtagService.insertHashTag(param);
 		}
 		return request.getContextPath()+"/board/"+ idx;
@@ -104,6 +111,7 @@ public class BoardController {
 		Map<String,Object>param = new HashMap<String,Object>();
 
 		mv.addObject("list", boardService.selectBoard(param));
+		mv.addObject("category", boardService.selectCategory());
 		mv.addObject("username", authentication.getPrincipal().toString());
 
 		param.put("IDX", idx);	
@@ -154,14 +162,18 @@ public class BoardController {
 		if(param.get("HASHTAG") != null || param.get("HASHTAG") != "") {
 				hashtagService.insertHashTag(param);
 		}
-		
+
+		//카테고리 넣기(신규일시)
+		if(param.get("CATEGORY_TYPE").toString().equals("NEW")){
+			param.put("PARENT_IDX", insertCategory(param).get("PARENT_IDX"));
+		}
 		boardService.updateBoard(param);
 		
 		String idx = (String) param.get("IDX");
 		return idx;
 	}
 
-	@RequestMapping(value="/board/delete/{idx}", method=RequestMethod.POST)
+	@RequestMapping(value="/board/delete/{idx}", method={RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
 	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
@@ -169,6 +181,20 @@ public class BoardController {
 
 	}
 
+
+	public Map<String,Object> insertCategory(Map<String,Object>param) throws Exception {
+		Map<String,Object>category = new HashMap<>();
+
+		if(param.get("CATEGORY_TYPE").toString().equals("NEW")){
+			category.put("TITLE", param.get("CATEGORY"));
+			category.put("CREATE_ID", param.get("CREATE_ID"));
+			boardService.insertBoard(category);
+			category.put("PARENT_IDX", category.get("IDX"));
+		}else{
+			category.put("PARENT_IDX", param.get("PARENT_IDX"));
+		}
+		return category;
+	}
 
 	
 }
