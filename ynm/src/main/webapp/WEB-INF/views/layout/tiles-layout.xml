@@ -29,6 +29,7 @@
     <!-- login layout-->
     <definition name="manage" template="/WEB-INF/views/layout/tiles-login.jsp">
         <put-attribute name="header" value="/WEB-INF/views/layout/tiles-header.jsp" />
+        <put-attribute name="nav"   value="/WEB-INF/views/layout/tiles-nav.jsp" />
         <put-attribute name="left"   value="/WEB-INF/views/layout/tiles-left.jsp" />
         <put-attribute name="content"   value="" />
         <put-attribute name="footer" value="/WEB-INF/views/layout/tiles-footer.jsp" />

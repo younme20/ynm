@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<title>Please login in</title>
-	<script src="https://developers.kakao.com/sdk/js/kakao.min.js" ></script>
-</head>
-<body>
-<div class="main-wrapper">
-	<article class="post px-3 py-5 p-md-5">
-		<hr>
+<!-- login page -->
 		<h2>Right now!</h2>
 		<form class="form-signin" method="post" id="myForm">
 			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}">
@@ -38,10 +26,4 @@
 				</div>
 			</div>
 		</form>
-	</article>
-</div>
-</body>
-<script src="<c:url value='/resources/js/login/kakaoLogin.js'/>" charset="utf-8"></script>
-
-
-</html>
+<!-- login page -->

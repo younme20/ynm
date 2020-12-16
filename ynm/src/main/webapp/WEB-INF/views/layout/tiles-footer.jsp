@@ -1,2 +1,3 @@
 <!-- footer page -->
-<div id="footer"></div>
+<div class="footer"></div>
+<!-- footer page -->

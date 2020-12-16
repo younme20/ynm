@@ -7,10 +7,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<tiles:insertAttribute name="header" />
 </head>
 <body>
-	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="content" />
+	
+	<tiles:insertAttribute name="nav" />
+	<tiles:insertAttribute name="left" />
+	 <div class="container">
+	    <div class="main">
+			<div class="main-content">
+	    		<tiles:insertAttribute name="content" />
+	    	</div>
+		</div>
+    </div>
     <tiles:insertAttribute name="footer" />
 </body>
 </html>
