@@ -12,18 +12,21 @@
 			</div>
 			<div id="comment">
 				<h3>최신 댓글 (일단 5개만)</h3>
-				<c:choose>
-					<c:when test="${fn:length(comment) > 0}">
-						<ul>
-							<c:forEach items="${comment}" var="row" varStatus="status">
-								<li class="titem"><a
-									href="<c:url value="/board/${row.BOARD_IDX}"/>"> <img
-										src="${row.imgUrl}" style="width: 10px; height: 10px;" />
-										${row.comment} ${row.userName} ${row.git}
-								</a></li>
-							</c:forEach>
-						</ul>
-					</c:when>
-				</c:choose>
+			 <c:choose>
+				<c:when test="${fn:length(comment) > 0}">
+					<ul>
+					<c:forEach items="${comment}" var="row" varStatus="status">
+							<li class="titem">
+								 <a href="<c:url value="${row.idx}"/>">
+									 <img src="${row.imgUrl}" style="width:10px;height:10px;" />
+									 ${row.comment}
+									 ${row.userName}
+									 ${row.git}
+								 </a>
+							</li>
+					</c:forEach>
+					</ul>
+				</c:when>
+			</c:choose>
 			</div>
 <!-- main page -->

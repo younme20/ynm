@@ -48,6 +48,15 @@ $(document).ready(function(){
 		movePage(contextPath+"/schedule");
 	});
 
+	$("#btnWritePlanModal").on("click", function(e){
+		$("#scheduleForm")
+			.find(':radio, :checkbox').removeAttr('checked').end()
+			.find('textarea,:hidden,:text, select').val('');
+
+		$("#START_DATE").val(moment(new Date()).format('YY/MM/DD hh:mm'));
+		$("#planModal").modal('show');
+	});
+
 	$("#btnModalConfirm").on("click", function(e){
 		saveSchedule();
 	});	

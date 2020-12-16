@@ -11,9 +11,9 @@
 				<!-- <input type="hidden" name="MENU_CODE" value="B">  -->
 				<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP" value="${FILE_GROUP}">
 				<input type="hidden" name="HASHTAG" id="HASHTAG" value="${HASHTAG}"> 
-				<input type="hidden" name="IDX" value="${data.IDX}">
-				
-				 <div class="form-group">
+				<input type="hidden" name="IDX" id="IDX" value="${data.IDX}">
+
+				<div class="form-group">
 					 <label class="control-label col-sm-2" for="TITLE">Title :</label>
 					 <div class="col-sm-10">
 				     	<input type="text" id="TITLE" name="TITLE" value="${data.TITLE }" class="form-control">
@@ -25,6 +25,22 @@
 					<div class="col-sm-10">
 						<input type="text" id="CREATE_ID" name="CREATE_ID" value="${username}"
 							class="form-control" readonly="readonly">
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="CATEGORY">Category :</label>
+					<div class="row ml-0 mr-0">
+						<div class="col-sm-5">
+							<select type="select" id="selectCategory" name="selectCategory" class="form-control">
+								<c:forEach items="${category}"  var="cg">
+									<option id="${cg.IDX}" value="${cg.TITLE}" ${cg.IDX eq data.PARENT_IDX ? 'selected': ''}>${cg.TITLE}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="col-sm-5">
+							<input type="text" id="CATEGORY" name="CATEGORY" value="" class="form-control"/>
+						</div>
 					</div>
 				</div>
 			
