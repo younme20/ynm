@@ -20,9 +20,9 @@
 
 	<!-- 개발환경이랑 운영환경 로그 분리 -->
 	<springProfile name="dev">
-		<logger name="board" level="DEBUG" appender-ref="console-debug" />
-		<logger name="jdbc.sqlonly" level="INFO" appender-ref="console-info" />
-		<logger name="jdbc.resultsettable" level="INFO" appender-ref="console-info" />
+<!--		<logger name="board" level="ERROR" appender-ref="console-debug" />-->
+<!--		<logger name="jdbc.sqlonly" level="ERROR" appender-ref="console-info" />-->
+<!--		<logger name="jdbc.resultsettable" level="ERROR" appender-ref="console-info" />-->
 	</springProfile>
 
 	<springProfile name="production">

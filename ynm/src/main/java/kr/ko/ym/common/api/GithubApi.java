@@ -48,14 +48,12 @@ public class GithubApi implements Comparator<Map<String,Object>> {
             map.put("comment", gc.getBody());
             map.put("userName", gc.getUser().getLogin());
             map.put("imgUrl", gc.getUser().getAvatarUrl());
-            //map.put("git", gc.getHtmlUrl());
 
             recent.add(map);
         }
 
         //날짜 순으로 정렬(역정렬)
         Collections.sort(recent, new GithubApi());
-
         //최대 5개만
         return recent.subList(0, recent.size() == 5 ? 5 : recent.size());
     }
