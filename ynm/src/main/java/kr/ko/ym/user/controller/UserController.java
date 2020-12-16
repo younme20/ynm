@@ -91,7 +91,7 @@ public class UserController {
 			}
 		}
 
-		response.sendRedirect(request.getContextPath());
+		response.sendRedirect("/");
 
 	}
 }
