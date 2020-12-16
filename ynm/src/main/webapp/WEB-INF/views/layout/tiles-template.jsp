@@ -7,15 +7,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- 구글 메타태그 -->
-    <meta name="google-site-verification" content="k2vGgxrovF_MtRI-tklF_96159fMmepWgiYQxj8HGV4" />
-	<title></title>
+	<tiles:insertAttribute name="header" />
 </head>
 <body>
-	<tiles:insertAttribute name="header" />
-    <tiles:insertAttribute name="nav" />
-    <tiles:insertAttribute name="content" />
+	<tiles:insertAttribute name="nav" />
+    <tiles:insertAttribute name="left" />
+    <div class="container">
+	    <div class="main">
+			<div class="main-content">
+	    		<tiles:insertAttribute name="content" />
+	    	</div>
+		</div>
+    </div>
     <tiles:insertAttribute name="footer" />
 </body>
 </html>
