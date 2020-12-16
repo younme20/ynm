@@ -7,7 +7,7 @@
         <where>
             <if test='hashTag != null'>
                 <trim prefix="AND" prefixOverrides="AND|OR">
-                    AND IDX IN(
+                    AND a.IDX IN(
                     SELECT board_idx
                     FROM hashtag
                     WHERE CONCAT(',',contents,',') LIKE CONCAT('%',',',#{hashTag},',','%')
@@ -31,7 +31,7 @@
         <include refid="COMMON_SERCH_HASHTAG"/>
         <if test='hashSerch == "true"'>
             <trim prefix="AND" prefixOverrides="AND|OR">
-                AND IDX IN(<include refid="COMMON_SERCH_HASHTAG"/>)
+                AND a.IDX IN(<include refid="COMMON_SERCH_HASHTAG"/>)
             </trim>
         </if>
 <!--        <if test='searchType != ""'>-->
@@ -70,32 +70,6 @@
     <select id="selectMaxIdx" parameterType="hashmap" resultType="hashmap">
         SELECT MAX(IDX) AS IDX FROM board
     </select>
-
-    <!-- select TOTAL COUNT -->
-    <select id="selectCount" parameterType="hashmap" resultType="hashmap">
-        SELECT COUNT(IDX) AS TOTAL_COUNT
-        FROM board
-        WHERE 1=1
-        <if test='hashSerch == "true"'>
-            <trim prefix="AND" prefixOverrides="AND|OR">
-                AND IDX IN(<include refid="COMMON_SERCH_HASHTAG"/>)
-            </trim>
-        </if>
-        <if test='searchType != ""'>
-            <trim prefix="AND" prefixOverrides="AND|OR">
-                <if test="searchType == 'title' and keyword != null and keyword != '' ">
-                    AND TITLE LIKE CONCAT('%', #{keyword}, '%')
-                </if>
-                <if test="searchType == 'contents' and keyword != null and keyword != '' ">
-                    AND CONTENTS LIKE CONCAT('%', #{keyword}, '%')
-                </if>
-                <if test="searchType == 'user' and keyword != null and keyword != '' ">
-                    AND CREATE_ID LIKE CONCAT('%', #{keyword}, '%')
-                </if>
-            </trim>
-        </if>
-    </select>
-    <!-- select TOTAL COUNT -->
 
     <!-- hit -->
     <update id="updateCount" parameterType="hashmap">

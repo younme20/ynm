@@ -68,12 +68,6 @@ public class BoardServiceImpl implements BoardService {
 	public List<Map<String, Object>> serchBoard(Map<String, Object> param) throws Exception {
 		return commonDao.selectList("board.selectBoard", param);
 	}
-	
-	
-	@Override
-	public Map<String, Object> selectCount(Map<String, Object> param) throws Exception {
-		return commonDao.selectOne("board.selectCount", param);
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
