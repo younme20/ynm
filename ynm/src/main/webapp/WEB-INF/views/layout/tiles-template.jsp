@@ -12,7 +12,7 @@
 <body>
 	<tiles:insertAttribute name="nav" />
     <tiles:insertAttribute name="left" />
-    <div class="container">
+    <div class="container_y">
 	    <div class="main">
 			<div class="main-content">
 	    		<tiles:insertAttribute name="content" />

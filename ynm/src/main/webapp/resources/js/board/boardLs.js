@@ -41,7 +41,7 @@ function boardList() {
     },
 	this.searchTagBoard = function(tag){ 
 
-    	movePage(contextPath+"/"+tag);	
+    	movePage(contextPath+"/tag/"+tag);	
 	},
 	this.searchBoard = function(index){
 		var data = {
