@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- main page -->
+
 			<div id="tag">
 				<ul>
 					<c:forEach var="item" items="${hash}" varStatus="idx">

@@ -37,7 +37,7 @@ public class UserController {
 	@Autowired
 	private JwtConfig jwtConfig;
 
-	@GetMapping(value = {"/", "/{word}"})
+	@GetMapping(value = {"/", "/tag/{word}"})
 	public ModelAndView mainViewPage(HttpServletRequest request,
 							   		 HttpServletResponse response,
 									 @PathVariable(required = false) String word) throws Exception {

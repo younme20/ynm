@@ -8,12 +8,12 @@ div ul li{
 }
 
 .navbar{
-    position: fixed;
+    position: fixed !important;
     width: 100%;
     margin: 0 auto;
     padding: 5px 0 3px 0;
     top: 0px;
-    z-index: 10;
+    z-index: 8;
     background: #fff;
     border-top: 1px solid rgb(73 169 93);
     border-bottom: 1px solid rgb(73 169 93);
@@ -34,53 +34,31 @@ div ul li{
    
  }
 
- .navbar.mb{
-   display: none;
-   background: linear-gradient(135deg, #ce4be8 0%, #207ce5 100%);
-}
-.navbar.mb .logo{
-   width: 123px;
-   text-align: center;
-   color: #ffffff;
-   font-size: 21px;
-   background: rgba(0, 0, 0, 0.01);
-}
- .navbar.mb div{
-    position: relative;
-    float: left;
+  .navbar .ibtn{
+   	display: none;
  }
 
- .navbar.mb .logo{
-    display: block;
-    float: left;
- }
-
-
- .navbar.mb .btn{
-    float: right;
- }
-
- .container{
+ .container_y{
    position: relative;
    float: left;
-   float: right;
    width: calc(100% - 200px);
-    margin:62px 0 0 0;
+    margin-top:62px;
+   margin-left: 200px;
     padding:0; 
     max-width: 100%;
-    z-index: 8;
+    z-index: 7;
  }
 
  .left{
    float: left;
    position: fixed;
-   margin-top: 62px;
+   top: 70px;
    height: 100%;
    width: 200px;
    max-width: 200px;
    min-width: 150px;
    background-color: #ffffff;
-   z-index: 9;
+   z-index: 8;
    border-right: 1px solid rgb(73 169 93);
  }
 
@@ -131,6 +109,9 @@ div ul li{
  
 	z-index: 10;
 }
+.main.login{
+	clear: both;
+}
  .main-content{
     position: relative;
     margin: 0 auto;
@@ -140,20 +121,31 @@ div ul li{
 
 
 .main-content div, main-content sectionl{
-	position: relative;
+/* 	position: relative;
 	float: left;
-	width: 100%;
+	width: 100%; */
 }
- main-content label{
+ .main-content label{
  	position: relative;
 	float: left;
 }
 .main-content .meta{
 	text-align: right;
 }
+
+.loginfm{
+	position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin-top: 4rem;
+    display: block;
+    text-align: center;
+}
+
+
  button.new-btn{
     position:relative;
-    width: 55px;
+    font-size: 11px;
     min-width: 23px;
     height: 30px;
     line-height: 30px;
@@ -240,6 +232,7 @@ div ul li{
 	width: 100%;
 }
 
+/*tag*/
 
 #tag{
 	position: relative;
@@ -270,11 +263,44 @@ div ul li{
     background-color:rgb(12, 166, 120);
     color: #fff;
 }
+/*tag*/
+
+
+
+
+
+
+
+/*schedule*/
+.fc .fc-toolbar-title {
+    font-size: 1em !important;
+    margin: 0;
+}
+
+#calendar{
+	margin: 50px auto 10px;
+}
+
+
+.modal-backdrop{
+	z-index: 8 !important;
+}
+
+/*schedule*/
+
+
+
+
+
+
+
+
+
 
 
 @media all and (min-width:767px) { 
 	.main{
-	float: right;
+	/*float: right;*/
 	position: relative;
 	margin-right: 30px;
 	}
@@ -289,26 +315,42 @@ div ul li{
       width: 160px;
    }
 
-   .container{
+   .container_y{
       width: calc(100% - 160px);
+      margin-left: 160px;
    }
     
 }
 
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
-@media all and (max-width:479px) {    
+@media all and (max-width:480px) {    
+   
+   .container_y{
+      margin-left: 0 !important;
+   }
    
    .navbar .hamburger{
       display: block;
    }
-   .navbar.mb{ 
+   
+   
+   .navbar{ 
       display: block;
       padding:4px 0 0px 0;
    }
-   .navbar.mb .logo{
+   .navbar .logo{
       width: 36%;
       font-size: 1.3rem;
+      margin: 0 auto;
    }
+   .navbar .btn{
+   display: none;
+  }
+  
+  .navbar .ibtn{
+   	display: block;
+   }
+  
    .hamburger .line {
       width: 28px;
       height: 4px;
@@ -317,17 +359,23 @@ div ul li{
       display: none;
       width: 150px;
    }
-   .container{
+   .container_y{
       float: left;
       width: 100%;
    }
+   
 }
 
+
+
+
+
+
 @media all and (max-width:283px) {  
-   .navbar.mb{
+   .navbar{
       padding: 1px 0px;
    }
-   .navbar.mb .logo{
+   .navbar .logo{
       width: 36%;
       font-size: 1.3rem;
    }
