@@ -6,7 +6,7 @@
 <!-- 일정관리 모달 -->
 <body>
     <div class="main-wrapper">
-        <div id="calendar" type="date" style="width:50%"></div>
+        <div id="calendar" type="date"></div>
         <div class="new-btn-group">
             <button type="button" id="btnWritePlanModal" class="new-btn">일정 추가</button>
         </div>

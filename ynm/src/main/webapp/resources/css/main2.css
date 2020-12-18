@@ -13,7 +13,7 @@ div ul li{
     margin: 0 auto;
     padding: 5px 0 3px 0;
     top: 0px;
-    z-index: 10;
+    z-index: 8;
     background: #fff;
     border-top: 1px solid rgb(73 169 93);
     border-bottom: 1px solid rgb(73 169 93);
@@ -34,30 +34,8 @@ div ul li{
    
  }
 
- .navbar.mb{
-   display: none;
-   background: linear-gradient(135deg, #ce4be8 0%, #207ce5 100%);
-}
-.navbar.mb .logo{
-   width: 123px;
-   text-align: center;
-   color: #ffffff;
-   font-size: 21px;
-   background: rgba(0, 0, 0, 0.01);
-}
- .navbar.mb div{
-    position: relative;
-    float: left;
- }
-
- .navbar.mb .logo{
-    display: block;
-    float: left;
- }
-
-
- .navbar.mb .btn{
-    float: right;
+  .navbar .ibtn{
+   	display: none;
  }
 
  .container_y{
@@ -68,7 +46,7 @@ div ul li{
    margin-left: 200px;
     padding:0; 
     max-width: 100%;
-    z-index: 8;
+    z-index: 7;
  }
 
  .left{
@@ -80,7 +58,7 @@ div ul li{
    max-width: 200px;
    min-width: 150px;
    background-color: #ffffff;
-   z-index: 9;
+   z-index: 8;
    border-right: 1px solid rgb(73 169 93);
  }
 
@@ -143,11 +121,11 @@ div ul li{
 
 
 .main-content div, main-content sectionl{
-	position: relative;
+/* 	position: relative;
 	float: left;
-	width: 100%;
+	width: 100%; */
 }
- main-content label{
+ .main-content label{
  	position: relative;
 	float: left;
 }
@@ -159,6 +137,7 @@ div ul li{
 	position: relative;
     width: 100%;
     max-width: 250px;
+    margin-top: 4rem;
     display: block;
     text-align: center;
 }
@@ -253,6 +232,7 @@ div ul li{
 	width: 100%;
 }
 
+/*tag*/
 
 #tag{
 	position: relative;
@@ -283,6 +263,39 @@ div ul li{
     background-color:rgb(12, 166, 120);
     color: #fff;
 }
+/*tag*/
+
+
+
+
+
+
+
+/*schedule*/
+.fc .fc-toolbar-title {
+    font-size: 1em !important;
+    margin: 0;
+}
+
+#calendar{
+	margin: 50px auto 10px;
+}
+
+
+.modal-backdrop{
+	z-index: 8 !important;
+}
+
+/*schedule*/
+
+
+
+
+
+
+
+
+
 
 
 @media all and (min-width:767px) { 
@@ -312,7 +325,6 @@ div ul li{
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
 @media all and (max-width:480px) {    
    
-   
    .container_y{
       margin-left: 0 !important;
    }
@@ -320,14 +332,25 @@ div ul li{
    .navbar .hamburger{
       display: block;
    }
-   .navbar.mb{ 
+   
+   
+   .navbar{ 
       display: block;
       padding:4px 0 0px 0;
    }
-   .navbar.mb .logo{
+   .navbar .logo{
       width: 36%;
       font-size: 1.3rem;
+      margin: 0 auto;
    }
+   .navbar .btn{
+   display: none;
+  }
+  
+  .navbar .ibtn{
+   	display: block;
+   }
+  
    .hamburger .line {
       width: 28px;
       height: 4px;
@@ -341,15 +364,18 @@ div ul li{
       width: 100%;
    }
    
-   .btn{
-   display: none;}
 }
 
+
+
+
+
+
 @media all and (max-width:283px) {  
-   .navbar.mb{
+   .navbar{
       padding: 1px 0px;
    }
-   .navbar.mb .logo{
+   .navbar .logo{
       width: 36%;
       font-size: 1.3rem;
    }

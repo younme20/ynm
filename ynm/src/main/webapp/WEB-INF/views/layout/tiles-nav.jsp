@@ -19,21 +19,29 @@
 %>
 <!-- nav page -->
 <div class="navbar">
-    <div class="hamburger" id="hamburger-1">
-        <span class="line"></span>
-        <span class="line"></span>
-        <span class="line"></span>
-    </div>
+ 	<c:if test="${isAuth}">
+	    <div class="hamburger" id="hamburger-1">
+	        <span class="line"></span>
+	        <span class="line"></span>
+	        <span class="line"></span>
+	    </div>
+     </c:if>
     <div class="logo">
         StudyLog
     </div>
-    <div class="btn">
-         <c:if test="${isAuth}">
-               <button type="button" id="btnWritePlan" class="new-btn"><i class="fa fa-calendar-alt"></i> 일정쓰기</button>
-               <button type="button" id="btnWriteFrom" class="new-btn"><i class="fa fa-book-reader"></i> 글쓰기 </button>
-           	   <button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그아웃 </button>
-         </c:if>
-    </div>
+    <c:if test="${isAuth}">
+	    <div class="btn">
+	        <button type="button" id="btnWritePlan" class="new-btn"><i class="fa fa-calendar-alt"></i> 일정쓰기</button>
+	        <button type="button" id="btnWriteFrom" class="new-btn"><i class="fa fa-book-reader"></i> 글쓰기 </button>
+	    	<button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그아웃 </button>
+	    </div>
+	    
+	    <div class="ibtn">
+	        <button type="button" id="btnWritePlan" class="new-btn"><i class="fa fa-calendar-alt"></i></button>
+	        <button type="button" id="btnWriteFrom" class="new-btn"><i class="fa fa-book-reader"></i></button>
+	    	<button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i></button>
+	    </div>
+    </c:if>
 </div>
 
 
