@@ -7,8 +7,9 @@
 	<link href="<c:url value='/resources/css/main2.css' />" rel="stylesheet"/>
 	<link href="<c:url value='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />" rel="stylesheet"   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
 	<link href="<c:url value='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css' />"  rel="stylesheet" integrity="sha512-PMjWzHVtwxdq7m7GIxBot5vdxUY+5aKP9wpKtvnNBZrVv1srI8tU6xvFMzG8crLNcMj/8Xl/WWmo/oAP/40p1g==" crossorigin="anonymous" />
-
-	
+	<link href="<c:url value='https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.css' />"  rel='stylesheet' />
+	<link href="<c:url value='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' />"  rel='stylesheet' />
+					
 
 	<script src="<c:url value='https://code.jquery.com/jquery-3.4.1.min.js'/>" type="text/javascript" ></script>
 	

@@ -6,8 +6,6 @@
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!-- left page -->
 
-
-    
     <div class="left">
 	    <c:forEach items="${list}" var="item">
 	    	<div>
@@ -21,10 +19,8 @@
             </c:when>
             <c:otherwise>
 	                 <div class="mtitle">
-                        <a href="#" class="">${item.TITLE}
-                           <button id="btn_${item.IDX}" aria-label="collapse" class="collapser" onclick="sideBarClick(${item.IDX})">
+                        <a href="#" id="btn_${item.IDX}"  onclick="sideBarClick(${item.IDX})">${item.TITLE}
                                <i class="fa fa-plus"></i>
-                           </button>
                        	</a>
 	                 </div>
             </c:otherwise>
