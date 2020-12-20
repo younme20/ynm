@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- login page -->
-<div class="loginfm">
+<div class="form">
 	<h2>Right now!</h2>
 		<form class="form-signin" method="post" id="myForm">
 			<input type="hidden"  name="${_csrf.parameterName}"   value="${_csrf.token}">
