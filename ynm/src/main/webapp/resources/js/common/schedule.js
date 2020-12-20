@@ -66,6 +66,7 @@ $(document).ready(function(){
 	});
 
 	$("#btnShowPlan").on("click", function(e){
+		console.log("shoPlant");
 		$("#navPlanModal").modal('show');
 		selectSchedule(true);
 	});
