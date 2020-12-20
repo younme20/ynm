@@ -20,18 +20,19 @@ div ul li{
    
  }
  .navbar .logo{
-     position: relative;
-     width: 130px;
-     height: 52px;
-     border: 0;
-     color: rgb(73 169 93);
-     font-weight: 700;
-     font-size: 24px;
-     text-align: center;
-     line-height: 2.2;
-   
+    position: relative;
+    width: 130px;
+    height: 52px;
+    border: 0;
+    text-align: center;
+    line-height: 2.2;
  }
-
+ .navbar .logo a {
+	color: rgb(73, 169, 93);
+	font-size: 24px;
+	font-weight: 700;
+	text-decoration: none;
+}
   .navbar .ibtn{
    	display: none;
  }
@@ -136,10 +137,10 @@ div ul li{
 
  button.new-btn{
     position:relative;
-    font-size: 11px;
     min-width: 23px;
     height: 30px;
-    line-height: 30px;
+    font-size: 11px;
+    line-height:30px;
     border:none;
     cursor:pointer;
     background:#1AAB8A;
@@ -147,6 +148,7 @@ div ul li{
     transition:800ms ease all;
     outline:none;
   }
+  
   button.new-btn:hover{
     background:#fff;
     color:#1AAB8A;
@@ -177,6 +179,21 @@ div ul li{
   	text-align: right;
   }
 
+.btn button.new-btn i{
+	float: left;
+	margin: 0 3px;
+	font-size: 12px;
+	line-height: 27px;
+}
+	
+ .btn button.new-btn p{
+ 	float: left;
+    margin: 0;
+	font-size: 11px;
+	border:none;
+	line-height: 27px;
+	   
+}
   .hamburger{
    margin-left: 4%;
    display: none;
@@ -227,11 +244,11 @@ div ul li{
 
 #tag{
 	position: relative;
-	margin-top: 10px;
+	margin-top: 20px;
 }
 #tag>ul>li{
-	margin-bottom: 0.875rem;
-    background: rgb(241, 243, 245);
+    margin-right: 0.475rem;
+    margin-bottom: 0.475rem;
     padding-left: 1rem;
     padding-right: 1rem;
     height: 2rem;
@@ -239,7 +256,7 @@ div ul li{
     display: inline-flex;
     -webkit-box-align: center;
     align-items: center;
-    margin-right: 0.875rem;
+    background: rgb(241, 243, 245);
     color: rgb(12, 166, 120);
     text-decoration: none;
     font-weight: 500;
@@ -315,44 +332,60 @@ div ul li{
 
 /* 모바일 가로, 테블릿 세로 (해상도 ~ 479px)*/
 @media all and (max-width:480px) {    
+   .main-content{
+   	padding: 0;
+   }
    
+ 
    .container_y{
+      float: left;
       margin-left: 0 !important;
+      width: 100%;
    }
    
-   .navbar .hamburger{
-      display: block;
-   }
-   
+  
    
    .navbar{ 
       display: block;
       padding:4px 0 0px 0;
    }
-   .navbar .logo{
-      width: 36%;
-      font-size: 1.3rem;
-      margin: 0 auto;
+     .navbar .logo{
+    font-size: 1rem;
+    padding-left:calc(100% - 91%);
    }
-   .navbar .btn{
-   display: none;
-  }
-  
-  .navbar .ibtn{
-   	display: block;
+   .navbar .hamburger{
+      display: block;
    }
-  
-   .hamburger .line {
+   
+   .navbar .hamburger .line {
       width: 28px;
       height: 4px;
    }
+    .btn{
+	   margin:0 !important;
+	   padding:0 !important;
+  	}
+   .btn button.new-btn i {
+   	margin: 0;
+   }
+    .btn button.new-btn p{
+ 	   display: none;
+	}
+
    .left{
       display: none;
       width: 150px;
    }
-   .container_y{
-      float: left;
-      width: 100%;
+   
+   .form{
+     margin: 4rem auto;
+   }
+   
+   
+   #navPlanModal .modal-dialog{
+    max-width: 86% !important;
+    margin: 0 auto !important;
+    margin-top: 25% !important;
    }
    
 }
@@ -363,16 +396,34 @@ div ul li{
 
 
 @media all and (max-width:283px) {  
+   .main-content{
+   	 padding: 0;
+   }
+   
+   .form{
+   	 margin: 4rem auto !important;
+   }
    .navbar{
       padding: 1px 0px;
    }
    .navbar .logo{
-      width: 36%;
-      font-size: 1.3rem;
+    font-size: 1rem;
+    padding-left: calc(100% - 91%);
    }
 
    .hamburger .line {
       width: 25px;
       height: 4px;
    }
+   .btn{
+	   margin:0;
+	   padding:0;
+  	}
+   .btn button.new-btn p{
+ 	   display: none;
+	}
+	.btn button.new-btn i {
+   	margin: 0;
+   }
+   
 }

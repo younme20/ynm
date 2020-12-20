@@ -3,6 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 	<title>STUDY LOG</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
 	<link href="<c:url value='/resources/static/fullcalendar/lib/main.css' />"  rel='stylesheet' />
 	<link href="<c:url value='/resources/css/main2.css' />" rel="stylesheet"/>
 	<link href="<c:url value='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' />" rel="stylesheet"   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>

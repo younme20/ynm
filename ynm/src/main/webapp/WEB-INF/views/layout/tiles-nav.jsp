@@ -27,25 +27,39 @@
 	    </div>
      </c:if>
     <div class="logo">
-        StudyLog
+        <a href="/">StudyLog</a>
     </div>
-    <c:if test="${isAuth}">
-	    <div class="btn">
-	        <button type="button" id="btnWritePlan" class="new-btn"><i class="fa fa-calendar-alt"></i> 일정쓰기</button>
-	        <button type="button" id="btnWriteFrom" class="new-btn"><i class="fa fa-book-reader"></i> 글쓰기 </button>
-	    	<button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i> 로그아웃 </button>
-	    </div>
-	    
-	    <div class="ibtn">
-	        <button type="button" id="btnWritePlan" class="new-btn"><i class="fa fa-calendar-alt"></i></button>
-	        <button type="button" id="btnWriteFrom" class="new-btn"><i class="fa fa-book-reader"></i></button>
-	    	<button type="button" id="btnLogout" class="new-btn"><i class="fa fa-sign-out-alt"></i></button>
-	    </div>
-    </c:if>
+
+      <c:choose>
+		<c:when test="${isAuth}">
+			<div class="btn">
+				<button type="button" id="btnWritePlan" class="new-btn">
+					<i class="fa fa-calendar-alt"></i><p> 일정쓰기</p>
+				</button>
+				<button type="button" id="btnWriteFrom" class="new-btn">
+					<i class="fa fa-book-reader"></i> <p>글쓰기</p>
+				</button>
+				<button type="button" id="btnLogout" class="new-btn">
+					<i class="fa fa-sign-out-alt"></i> <p>로그아웃</p>
+				</button>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="btn">
+				<button type="button" id="btnShowPlan" class="new-btn">
+					<i class="fa fa-calendar-alt"></i> <p>일정보기</p>
+				</button>
+				<button type="button" id="btnMoveLoginPage" class="new-btn">
+					<i class="fa fa-sign-in-alt"></i> <p>로그인</p>
+				</button>
+			</div>
+		</c:otherwise>
+	</c:choose>
+            
+            
 </div>
 
 
-<script src="<c:url value='/resources/js/common/schedule.js'/>" charset="utf-8"></script>
 
 <div class="modal fade" id="navPlanModal" role="dialog" aria-labelledby="navPlanModalLabel">
     <div class="modal-dialog modal-sm" role="document" style="max-width: 50%; max-height: 50%; width: auto; height: auto; display: table;" tabindex="-1">
