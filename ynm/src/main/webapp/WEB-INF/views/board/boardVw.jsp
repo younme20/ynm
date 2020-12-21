@@ -2,11 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <meta property="og:title" content="${data.TITLE}"/>
-<html lang="en">
-<head>
-<title>${data.TITLE}</title>
-</head>
-<body>
+
 	<div class="main-wrapper">
 		<section class="section py-5">
 			<div class="container">
@@ -67,6 +63,4 @@
 		</section>
 	</div>
 
-</body>
-<script src="<c:url value='/resources/js/board/boardVw.js'/>" charset="utf-8"></script>
-</html>
+	<script src="<c:url value='/resources/js/board/boardVw.js'/>" charset="utf-8"></script>

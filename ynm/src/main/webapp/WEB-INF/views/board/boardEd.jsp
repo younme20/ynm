@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html lang="en">
-<head>
-</head>
-<body>
-	<div class="main-wrapper">
+
+		<div class="main-wrapper">
 		<article class="post px-3 py-5 p-md-5">
 			<form name="form1" id=form1 method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="MENU_CODE" value="B">  -->
@@ -100,9 +97,8 @@
 				</div>
 			</form>
 		</article>
-	</div>
-</body>
-<script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
-</html>
+		</div>
+
+		<script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
+		<script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>
+		<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
