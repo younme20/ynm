@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- main page -->
 
-			<div id="tag">
+			<div id="tag" class="pt-5">
+				<h3 class="pt-5 ml-5 mb-3">해시 태그</h3>
 				<ul>
 					<c:forEach var="item" items="${hash}" varStatus="idx">
 						<li class="tag" id="${item}">${item}</li>
@@ -12,18 +13,18 @@
 				</ul>
 			</div>
 			<div id="comment">
-				<h3>최신 댓글 (일단 5개만)</h3>
+				<h3 class="pt-5 ml-5 mb-3">최신 댓글</h3>
 			 <c:choose>
 				<c:when test="${fn:length(comment) > 0}">
 					<ul>
 					<c:forEach items="${comment}" var="row" varStatus="status">
 							<li class="titem">
 								 <a href="<c:url value="${row.idx}"/>">
-									 <img src="${row.imgUrl}" style="width:10px;height:10px;" />
+									 <img src="${row.imgUrl}" style="width:30px;height:30px;" />
 									 ${row.comment}
-									 ${row.userName}
-									 ${row.git}
 								 </a>
+								by ${row.userName}
+								${row.git}
 							</li>
 					</c:forEach>
 					</ul>
