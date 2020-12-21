@@ -3,10 +3,21 @@
  */
 $(document).ready(function(){
 	const PARENT_IDX = $("#PARENT_IDX").val();
-
+	
 	if(PARENT_IDX != null){
 		sideBarClick(PARENT_IDX);
 	}
+
+	
+	  $(".hamburger").click(function(){
+	      $(this).toggleClass('is-active');
+	      if($(this).hasClass('is-active')) {
+	          $('.left').addClass('on');
+	      } else {
+	          $('.left').removeClass('on');
+	      }
+	
+	  }); 
 });
 
 function movePage(url) {
@@ -30,6 +41,9 @@ function getContextPath() {
 	const hostIndex = location.href.indexOf(location.host) + location.host.length;
 	return location.href.substring(0, hostIndex);
 }
+
+
+
 
 
 

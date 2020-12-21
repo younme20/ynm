@@ -33,7 +33,7 @@ function userFunction() {
 	},
 	this.insertUser = function(){
 		var data = $("#myForm").serializeObject();
-		alert( JSON.stringify(data));
+		alert(contextPath);
 		$.ajax({
 			type : "POST",
 			url : contextPath+"/join",

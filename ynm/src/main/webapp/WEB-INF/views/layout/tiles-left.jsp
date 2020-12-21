@@ -1,23 +1,35 @@
+<%@ page import="java.util.Arrays" %>
+<%@ page import="com.google.common.net.HttpHeaders" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Insert title here</title>
-</head>
-<body>
-<!-- left page
-		<div id="wrapper">
-			<ul class="nav nav-tabs">
-				<li><a href="/ynm">M</a></li>
-				<li><a href="/ynm/menu/study">G</a></li>
-				<li><a href="/ynm/menu/notice">B</a></li>
-				<li><a href=""></a></li>
-			</ul>
-		</div>
- left page -->
-</body>
-</html>
+<!-- left page -->
 
-
+    <div class="left">
+	    <c:forEach items="${list}" var="item">
+	    	<div>
+           <c:choose>
+            <c:when test="${item.PARENT_IDX != null}">
+                <ul>
+                    <li group="${item.PARENT_IDX}" class="item">
+                        <a href="<c:url value='/board/${item.IDX}'/>">${item.TITLE}</a>
+                    </li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+	                 <div class="mtitle">
+                        <a href="#" id="btn_${item.IDX}"  onclick="sideBarClick(${item.IDX})">${item.TITLE}
+                               <i class="fa fa-plus"></i>
+                       	</a>
+	                 </div>
+            </c:otherwise>
+           </c:choose>
+	      
+          </div>
+	   	</c:forEach>
+    </div>
+    
+<script src="<c:url value='/resources/js/board/boardLs.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/user/userLogin.js'/>" charset="utf-8"></script>
+<!-- left page -->
