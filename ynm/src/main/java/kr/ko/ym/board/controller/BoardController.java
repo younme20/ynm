@@ -173,10 +173,10 @@ public class BoardController {
 		return idx;
 	}
 
-	@RequestMapping(value="/board/delete/{idx}", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/board/delete", method=RequestMethod.POST)
 	@ResponseBody
 	@PreAuthorize("hasRole('USER')")
-	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param, @PathVariable int idx) throws Exception {
+	public void deleteBoard(HttpServletRequest request, @RequestParam Map<String,Object>param) throws Exception {
 		boardService.deleteBoard(param);
 
 	}

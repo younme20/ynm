@@ -7,7 +7,7 @@
 <body>
 	<div class="main-wrapper">
 		<article class="post px-3 py-5 p-md-5">
-			<form name="form1" id=form1 method="post" enctype="multipart/form-data">
+			<form name="form1" id="form1" method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="MENU_CODE" value="B">  -->
 				<input type="hidden" name="FILE_GROUP"  id="FILE_GROUP" value="${FILE_GROUP}">
 				<input type="hidden" name="HASHTAG" id="HASHTAG" value="${HASHTAG}"> 
