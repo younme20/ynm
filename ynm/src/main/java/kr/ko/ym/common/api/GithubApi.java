@@ -31,7 +31,7 @@ public class GithubApi implements Comparator<Map<String,Object>> {
                 for(int i = 0; i < issue.getCommentsCount(); i++){
                     String title = issue.getTitle();
 
-                    boardIdx.add(title.substring(title.length()-title.lastIndexOf("/")));
+                    boardIdx.add(title);
                     allComments.add(issue.getComments().get(i));
                 }
             }
