@@ -74,15 +74,15 @@
 			 
 				 <div class="form-group">
 					<label class="control-label col-sm-2" for="tag">Tags :</label>
-					<div class="col-sm-10">
-						<div id="tlist">
-								<ul>
-									<c:forEach var="item" items="${hash}" varStatus="idx">
-										<li class="titem"><p>${item}</p><span id='delTag' class='as fa-times'></span></li>
-									</c:forEach>
-								</ul>
-							</div>
-						<input type="text" name="tag" id="tag" class="form-control">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div id="tagList">
+							<ul>
+								<c:forEach var="item" items="${hash}" varStatus="idx">
+									<li class="tag"><p>${item}</p><span id='delTag' class='fa fa-times'></span></li>
+								</c:forEach>
+							</ul>
+						</div>
+						<input type="text" name="tag" id="tag" class="form-control" placeholder="해시 태그를 입력하고 Enter 키를 누르세요.">
 					</div>
 				 </div>
 				<div class="form-group">

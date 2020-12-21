@@ -37,10 +37,10 @@
 			</div>
 		</article>
 
-		<div id="tlist">
+		<div id="tagList">
 			<ul>
 				<c:forEach var="item" items="${hash}" varStatus="idx">
-					<li class="titem"><p>${item}</p></li>
+					<li class="tag"><p>${item}</p></li>
 				</c:forEach>
 			</ul>
 		</div>

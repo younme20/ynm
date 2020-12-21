@@ -121,6 +121,7 @@ div ul li{
  .main-content label{
  	position: relative;
 	float: left;
+	margin:0;
 }
 .main-content .meta{
 	text-align: right;
@@ -242,11 +243,15 @@ div ul li{
 
 /*tag*/
 
-#tag{
+#tagList{
 	position: relative;
 	margin-top: 20px;
 }
-#tag>ul>li{
+#tagList ul{
+	padding: 0 !important;
+} 
+
+#tagList>ul>li{
     margin-right: 0.475rem;
     margin-bottom: 0.475rem;
     padding-left: 1rem;
@@ -262,15 +267,17 @@ div ul li{
     font-weight: 500;
     font-size: 1rem;
 }
-#tag>ul>li>p{
+#tagList>ul>li>p{
 	margin: 0;
 }
 
-#tag>ul>li:hover {
+#tagList>ul>li:hover {
     cursor: pointer;
     background-color:rgb(12, 166, 120);
     color: #fff;
 }
+
+
 /*tag*/
 
 

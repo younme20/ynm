@@ -4,9 +4,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!-- main page -->
 
-			<div id="tag" class="pt-5">
+			<div id="tagList" class="pt-5">
 				<h3 class="pt-5 ml-5 mb-3">해시 태그</h3>
-				<ul>
+				<ul class="ml-5">
 					<c:forEach var="item" items="${hash}" varStatus="idx">
 						<li class="tag" id="${item}">${item}</li>
 					</c:forEach>
