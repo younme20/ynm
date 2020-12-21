@@ -24,16 +24,13 @@ $(document).ready(function () {
     //태그 삭제
    $(document).on("click", "#delTag", function(){
     var word = $(this).parents("li");
-    //console.log("삭제할 단어 : "+word);
     var idx = arr_ori.indexOf(word.text());
         if(idx  > -1){
             arr_ori.splice(idx, 1);
             arr_final = arr_ori;
             tagList();
         }
-        alert("선택 된 태그 삭제"+word.text());
-        //console.log("idx : "+idx);
-        //console.log("arr_orui: "+arr_ori);
+        alert("선택 된 태그 삭제 "+word.text());
     });
    
 
@@ -57,14 +54,11 @@ $(document).ready(function () {
 });
 
 var tagList = function(){
-    $("#tlist li").remove();
+    $("#tagList ul li").remove();
     for (var i = 0; i < arr_final.length; i++) {
-            //console.log(arr_final[i]);
-            $("#tlist ul").append("<li class='titem'><p>"+arr_final[i]+"</p><span id='delTag' class='glyphicon glyphicon-remove'></span></li>");
+            $("#tagList ul").append("<li class='tag'><p>"+arr_final[i]+"</p><span id='delTag' class='fa fa-times'></span></li>");
         } 
         $("#tag").val("");
         $("#HASHTAG").val(arr_final.join());
-        console.log("arr_final "+ arr_final.join());
-        arr_ori = arr_final
-        console.log("arr_ori : "+arr_ori.join());
+         arr_ori = arr_final
 }

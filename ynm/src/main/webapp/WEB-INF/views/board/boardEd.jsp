@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<html lang="en">
-<head>
-</head>
-<body>
-	<div class="main-wrapper">
+
+		<div class="main-wrapper">
 		<article class="post px-3 py-5 p-md-5">
 			<form name="form1" id="form1" method="post" enctype="multipart/form-data">
 				<!-- <input type="hidden" name="MENU_CODE" value="B">  -->
@@ -74,15 +71,15 @@
 			 
 				 <div class="form-group">
 					<label class="control-label col-sm-2" for="tag">Tags :</label>
-					<div class="col-sm-10">
-						<div id="tlist">
-								<ul>
-									<c:forEach var="item" items="${hash}" varStatus="idx">
-										<li class="titem"><p>${item}</p><span id='delTag' class='as fa-times'></span></li>
-									</c:forEach>
-								</ul>
-							</div>
-						<input type="text" name="tag" id="tag" class="form-control">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div id="tagList">
+							<ul>
+								<c:forEach var="item" items="${hash}" varStatus="idx">
+									<li class="tag"><p>${item}</p><span id='delTag' class='fa fa-times'></span></li>
+								</c:forEach>
+							</ul>
+						</div>
+						<input type="text" name="tag" id="tag" class="form-control" placeholder="해시 태그를 입력하고 Enter 키를 누르세요.">
 					</div>
 				 </div>
 				<div class="form-group">
@@ -100,9 +97,8 @@
 				</div>
 			</form>
 		</article>
-	</div>
-</body>
-<script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>
-<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
-</html>
+		</div>
+
+		<script src="<c:url value='/resources/js/common/attach.js'/>" charset="utf-8"></script>
+		<script src="<c:url value='/resources/js/hashtag/hashtag.js'/>" charset="utf-8"></script>
+		<script src="<c:url value='/resources/js/board/boardEd.js'/>" charset="utf-8"></script>
