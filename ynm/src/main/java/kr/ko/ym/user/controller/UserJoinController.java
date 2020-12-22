@@ -1,5 +1,6 @@
 package kr.ko.ym.user.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -38,5 +39,12 @@ public class UserJoinController {
 		joinService.insertUser(param);
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/join/usercheck", method = RequestMethod.POST)
+	public Object selectUserNameCheck(HttpServletRequest request,
+			 HttpServletResponse response, Map<String,Object>param) throws Exception {
+	
+		return joinService.selectUserNameCehck(param);
 	}
 }

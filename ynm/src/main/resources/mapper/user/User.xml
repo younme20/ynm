@@ -32,6 +32,14 @@
              ) 
     </insert>
 
+	<!-- 아이디 중복체크  -->
+ 	 <select id="selectUserNameCehck" parameterType="string" resultType="int">
+        
+        SELECT COUNT(*) 
+        	FROM user
+        WHERE USERNAME = #{USERNAME}
+        
+    </select>
 
 
 </mapper>

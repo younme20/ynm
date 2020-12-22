@@ -37,4 +37,10 @@ public class UserJoinServiceImpl implements UserJoinService {
 		
 	}
 
+	@Override
+	public Object selectUserNameCehck(Map<String, Object> param) throws Exception {
+		param.put("isCheck", commonDao.selectCount("user.selectUserNameCehck", param));
+		return param;
+	}
+
 }

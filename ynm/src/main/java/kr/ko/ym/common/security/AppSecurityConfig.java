@@ -65,7 +65,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/tag/{word}",
                         "/board/{idx}", "/schedule", "/schedule/list",
-                        "/userjoin", "/join", "/kakaologin", "/resources/**/**").permitAll()
+                        "/userjoin", "/join","/join/usercheck", "/resources/**/**").permitAll()
                 .anyRequest()
                 .authenticated();
                 //.permitAll();

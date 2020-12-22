@@ -8,6 +8,7 @@
 		<div class="form-group">
 			<div class="col">
 				<input type="text" name="username" id="username" data-name="아이디" placeholder="아이디를 입력하세요" class="form-control">
+				<div id="checkId"></div>
 			</div>
 		</div>
 		<div class="form-group">
