@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.user.service.UserJoinService;
@@ -42,8 +44,8 @@ public class UserJoinController {
 	}
 	
 	@RequestMapping(value = "/join/usercheck", method = RequestMethod.POST)
-	public Object selectUserNameCheck(HttpServletRequest request,
-			 HttpServletResponse response, Map<String,Object>param) throws Exception {
+	@ResponseBody 
+	public Object selectUserNameCheck(@RequestParam Map<String,Object>param) throws Exception {
 	
 		return joinService.selectUserNameCehck(param);
 	}

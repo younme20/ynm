@@ -67,21 +67,28 @@ var userFunction = function() {
 			}
 		});
 	},this.selectUserCheck = function(id){
-		const formData = new FormData();
-		formData.append("USERNAME", id);
-		alert(contextPath+"/join/usercheck");
+		$("#checkId>p").remove();
+	    var data = {
+	    		"USERNAME": id
+		};
 		$.ajax({
 			type : "POST",                               
 			url : contextPath+"/join/usercheck",
-			data: formData, 
-			cache: false, 
-			contentType: false,
-			processData: false,
+			data: data, 
+			json : true,
 			success : function(result, textStatus, jqXHR){
-				alert('사용가능합니다.'+result);
+				if(id != "" && result.USE == 0){
+					 $("#btnJoin").prop("disabled", false);
+					 $("#checkId").append("<p class='gr'>사용 가능</p>");
+
+				}else{
+					 $("#btnJoin").prop("disabled", true);
+					 $("#checkId").append("<p class='rd'>이미 사용중</p>");
+				}
+				console.log('사용가능합니다.'+result.USE);
 			},
 			error   : function(result, textStatus, jqXHR){
-				alert('UserName Check Error.n' + jqXHR.responseText);
+				alert(result+ 'UserName Check Error.n' + jqXHR.responseText);
 			}
 		});
 	}
