@@ -94,7 +94,7 @@ function boardEdit() {
 
 		$.ajax({
 			type : "POST",                               
-			url : contextPath+"/board/insert",
+			url : contextPath+"/user/usercheck",
 			data: formData, 
 			cache: false, 
 			json:true,

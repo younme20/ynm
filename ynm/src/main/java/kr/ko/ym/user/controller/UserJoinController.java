@@ -1,5 +1,6 @@
 package kr.ko.ym.user.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.ko.ym.user.service.UserJoinService;
@@ -38,5 +41,12 @@ public class UserJoinController {
 		joinService.insertUser(param);
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = "/join/usercheck", method = RequestMethod.POST)
+	@ResponseBody 
+	public Object selectUserNameCheck(@RequestParam Map<String,Object>param) throws Exception {
+	
+		return joinService.selectUserNameCehck(param);
 	}
 }

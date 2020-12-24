@@ -38,6 +38,11 @@ public class CommonDao {
 		return sqlSession.selectOne(queryId); 
 	} 
 	
+	public Integer selectCount(String queryId, Object params){
+		//printQueryId(queryId); 
+		return sqlSession.selectOne(queryId, params); 
+	}
+	
 	public Map<String,Object> selectOne(String queryId, Object params){
 		//printQueryId(queryId); 
 		return sqlSession.selectOne(queryId, params); 
