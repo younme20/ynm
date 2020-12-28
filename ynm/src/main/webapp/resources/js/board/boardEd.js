@@ -76,9 +76,23 @@ $(document).ready(function(){
 	});
 	
 	//삭제
-	$("#delete").on("click", function(e){ 
-		var idx = $(this).attr("data");
-		movePage(contextPath+"/board/delete/"+idx);
+	$("#delete").on("click", function(e){
+		var data = {
+			"IDX": $("#IDX").val()
+		};
+		$.ajax({
+			type : "POST",
+			url : contextPath+"/board/delete",
+			json : true,
+			data : data,
+			success : function(result, textStatus, jqXHR){
+				alert('삭제되었습니다.');
+				movePage(contextPath);
+			},
+			error   : function(result, textStatus, jqXHR){
+				movePage(contextPath);
+			}
+		});
 	});
 	 
 	board = new boardEdit();	
@@ -94,7 +108,7 @@ function boardEdit() {
 
 		$.ajax({
 			type : "POST",                               
-			url : contextPath+"/user/usercheck",
+			url : contextPath+"/board/insert",
 			data: formData, 
 			cache: false, 
 			json:true,
